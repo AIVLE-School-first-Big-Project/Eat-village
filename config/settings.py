@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'mypage'
 ]
 
 MIDDLEWARE = [
@@ -78,6 +79,14 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
+    #     'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'Unnamed',
+    #     'USER': 'root',
+    #     'PASSWORD':'12341234',
+    #     'HOST':'34.71.253.5',
+    #     'PORT':3306
+    # }
 }
 
 
