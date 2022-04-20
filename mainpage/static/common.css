@@ -1,0 +1,130 @@
+body {
+    margin: 0;
+}
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.navbar {
+    display:flex;
+    justify-content:space-between;
+    align-items: center;
+    background-color: #263343;
+    padding: 8px 12px;
+    margin-bottom: 50px;
+}
+.navbar_logo {
+    font-size:24px;
+    color: white;
+}
+.navbar_logo img {
+    display:block;
+}
+.navbar_menu {
+    display: flex;
+    list-style: none;
+    padding-left: 0;
+}
+.navbar_menu li {
+    padding: 8px 12px;
+}
+.navbar_menu li:hover {
+    background-color: orange;
+    border-radius: 4px;
+}
+.navbar_right {
+    list-style: none;
+    color: white;
+    padding-left: 0;
+}
+.navbar_togglebtn {
+    display: none;
+    position: absolute;
+    right: 32px;
+    font-size: 24px;
+    color: orange;
+}
+
+.searchbtn {
+    width:50px;
+    height:25px;
+    position:relative;
+}
+
+.weather {
+    float: right;
+}
+
+.temp,
+.icon {
+    display: inline-block;
+    vertical-align:middle;
+}
+
+#container {
+    margin: auto;
+    width: 800px;
+    height: 450px;
+    margin-bottom: 20px;
+}
+#videoElement {
+    width: 100%;
+    height: auto;
+    background-color: #666;
+}
+#button {
+    margin-top: 20px;
+    text-align: center;
+}
+#btn1 {
+    display: inline-block;
+}
+#btn2 {
+    display: inline-block;
+}
+
+@media screen and (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 8px 24px;
+    }
+    .navbar_menu {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    .navbar_menu li {
+        width: 100%;
+        text-align: center;
+    }
+    .navbar_right {
+        display: none;
+        justify-content: center;
+        width: 100%;
+    }
+    .search {
+        text-align: center;
+    }
+    .weather {
+        text-align: center;
+        float:none;
+    }
+    .navbar_togglebtn {
+        display: block;
+    }
+    .navbar_menu.active {
+        display: flex;
+    }
+    .navbar_right.active {
+        display: block;
+    }
+    #container {
+        width: 100%;
+    }
+    #videoElement {
+        width: 100%;
+    }
+}
