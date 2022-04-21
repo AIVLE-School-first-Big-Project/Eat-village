@@ -41,7 +41,7 @@
 2. cd Eat-village
 3. python install -r requirements.txt
 4. python manage.py runsever
-5. Connect http://localhost:8000 or http://127.0.0.1:8000
+5. Connect http://localhost:8000 or http://[본인ip]:8000 
 ```
 ## 9. 팀원 정보
 | Name | Github | Email |
@@ -50,5 +50,5 @@
 |김연우|[@crong22](https://github.com/crong22)|mamen7624@gmail.com|
 |안승훈|[@ahnroy](https://github.com/ahnroy)|쓰도록|
 |정찬호|[@joungch](https://github.com/joungch)|하세요|
-|최수진|[@heeyori](https://github.com/heeyori)|^^|
+|최수진|[@heeyori](https://github.com/heeyori)|sujin.choi100@gmail.com|
 |한인규|[@ikhan94305](https://github.com/ikhan94305)|ikhan94305@gmail.com|
