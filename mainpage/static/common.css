@@ -10,7 +10,7 @@ a {
     display:flex;
     justify-content:space-between;
     align-items: center;
-    background-color: #263343;
+    background-color: mediumaquamarine;
     padding: 8px 12px;
     margin-bottom: 50px;
 }
@@ -43,7 +43,7 @@ a {
     position: absolute;
     right: 32px;
     font-size: 24px;
-    color: orange;
+    color: black;
 }
 
 .searchbtn {
@@ -102,6 +102,7 @@ a {
     }
     .navbar_right {
         display: none;
+        text-align: center;
         justify-content: center;
         width: 100%;
     }
@@ -114,6 +115,9 @@ a {
     }
     .navbar_togglebtn {
         display: block;
+    }
+    .navbar_togglebtn:hover {
+        color: orange;
     }
     .navbar_menu.active {
         display: flex;

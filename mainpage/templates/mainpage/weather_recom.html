@@ -1,13 +1,13 @@
-{% load static%}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <link rel="stylesheet" type="text/css" href='{% static "common.css" %}?after'>
+    <link rel="apple-touch-icon" href="/custom_icon.png"/>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="apple-touch-icon" href="/custom_icon.png"/>
     <script src="https://kit.fontawesome.com/312926fc77.js" crossorigin="anonymous"></script>
-    <title>Main Page</title>
+    <title>Weather Recommendation Page</title>
 </head>
 <body>
     <nav class="navbar">
@@ -34,14 +34,14 @@
             <i class="fas fa-bars"></i>
         </a>
     </nav>
-    <div id="container">
-        <video autoplay="true" id="videoElement">
-        </video>
-        <div id="button">
-            <button id="btn1" onclick="cameraAccess();">영상 촬영</button>
-            <button id="btn2">분석 시작</button>
-        </div>
+
+    <div class="content-title">
+        <h3>추천 레시피</h3>
     </div>
+    <div class="recomm_list">
+
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="{% static 'main.js' %}"></script>
     <script>
@@ -64,6 +64,3 @@
         };
     </script>
 </body>
-
-
-</html>

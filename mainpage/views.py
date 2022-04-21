@@ -5,3 +5,6 @@ from django.http import HttpResponse
 # Create your views here.
 def main(request):
     return render(request, 'mainpage/mainpage.html')
+
+def weather_recomm(request):
+    return render(request, 'mainpage/weather_recom.html')
