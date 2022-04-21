@@ -25,7 +25,7 @@
 - Adobe XD
 ## 3. 서비스 FLOW
 - draw.io
-## 4. 2 Tier Architecture
+## 4. Architecture (2-Tier or 3-Tier)
 -
 ## 5. DB 설계
 - ERD 모델 (EXERD)
