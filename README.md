@@ -41,7 +41,7 @@
 2. cd Eat-village
 3. python install -r requirements.txt
 4. python manage.py runsever
-5. Connect http://[본인외부ip]:8000 /**local로 서버 돌리면 모바일에서 접속 안 됨***/
+5. Connect http://[본인외부ip]:8000 (localhost나 127.0.0.1로 서버 돌리면 타 기기에서 접근 안 됨)
 ```
 ## 9. 팀원 정보
 | Name | Github | Email |
