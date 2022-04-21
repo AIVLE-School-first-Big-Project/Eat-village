@@ -1,0 +1,46 @@
+게시물 내용이 표시됩니다.
+<br><a href="{% url 'recipeboard:recipeboard_index' %}">목록으로돌아가기</a>
+
+<br>제목: {{board.title}}<br>
+
+<br>글쓴이: {{board.userid.nickname}}
+<br>조회수: {{board.view}}
+<br>추천수: {{board.recommended}}
+<br><a href="{% url 'recipeboard:recipeboard_update' board.boardid %}">수정</a>
+<br><a href="{% url 'recipeboard:recipeboard_delete' board.boardid %}">삭제</a>
+{% comment %} 추천버튼만들기 {% endcomment %}
+<br>{{board.time}}<br>
+
+<br>재료: {{board.ingredient}}<br>
+
+<br>내용: {{board.detail}}<br>
+
+<br>{{commentcount}}개의 댓글:
+<br>
+
+{% for comment in comment %}
+    <td>{{comment.userid.nickname}}</td>
+    <td>{{comment.detail}}</td>
+    <td>{{comment.time}}</td>
+    <td><a href="{% url 'recipeboard:recipeboard_comment' board.boardid comment.commentid %}">대댓글달기</a></td>
+    <td><a href="{% url 'recipeboard:recipecomment_delete' comment.commentid %}">댓글삭제하기</a></td>
+    <br>
+    {% for babycomment in babycomment %}
+        {% if babycomment.parentcommentid == comment.commentid %}
+        <td>     |->    </td>
+        <td>{{babycomment.userid.nickname}}</td>
+        <td>{{babycomment.detail}}</td>
+        <td>{{babycomment.time}}</td>
+        <td><a href="{% url 'recipeboard:recipecomment_delete' comment.commentid %}">댓글삭제하기</a></td>
+        <br>
+        {% endif %}
+    {% endfor %}
+{% endfor %}
+
+<div class="container">
+    <form method="post" action="">
+        {% csrf_token %}
+        <td>{{ recipecommentform.as_p }}</td>
+        <td><input type="submit" value="작성완료", name='comment'></td>
+    </form>
+</div>
