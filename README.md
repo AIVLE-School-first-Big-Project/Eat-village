@@ -40,8 +40,9 @@
 1. git clone https://github.com/AIVLE-School-first-Big-Project/Eat-village.git
 2. cd Eat-village
 3. python install -r requirements.txt
-4. python manage.py runsever
-5. Connect http://[본인외부ip]:8000 (localhost나 127.0.0.1로 서버 돌리면 타 기기에서 접근 안 됨)
+4. python manage.py runsever [본인 외부 ip 주소]:8000
+  (localhost나 127.0.0.1로 서버 돌리면 타 기기에서 접근 안 됨, settings- allowed host에 본인 ip 추가)
+5. Connect http://[본인외부ip]:8000
 ```
 ## 9. 팀원 정보
 | Name | Github | Email |
