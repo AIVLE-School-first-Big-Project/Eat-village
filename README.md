@@ -46,7 +46,7 @@
 ## 9. 팀원 정보
 | Name | Github | Email |
 |:---:|:---:|:---:|
-|안지희|[@Jinnny-An](https://github.com/Jinnny-An)|각자|
+|안지희|[@Jinnny-An](https://github.com/Jinnny-An)|syos7462@gamail.com|
 |김연우|[@crong22](https://github.com/crong22)|mamen7624@gmail.com|
 |안승훈|[@ahnroy](https://github.com/ahnroy)|쓰도록|
 |정찬호|[@joungch](https://github.com/joungch)|하세요|
