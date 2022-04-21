@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'mypage',
+    'users', # yeon
 ]
 
 MIDDLEWARE = [
@@ -78,6 +80,14 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
+    #     'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'Unnamed',
+    #     'USER': 'root',
+    #     'PASSWORD':'12341234',
+    #     'HOST':'34.71.253.5',
+    #     'PORT':3306
+    # }
 }
 
 
@@ -103,9 +113,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ko'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
@@ -123,3 +133,31 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+#yeon
+
+import my_setting
+
+EMAIL_HOST = my_setting.EMAIL['EMAIL_HOST']
+EMAIL_PORT = my_setting.EMAIL['EMAIL_PORT']
+EMAIL_HOST_USER = my_setting.EMAIL['EMAIL_HOST_USER']
+EMAIL_USE_TLS = my_setting.EMAIL['EMAIL_USE_TLS']
+EMAIL_HOST_PASSWORD = my_setting.EMAIL['EMAIL_HOST_PASSWORD']
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+AUTH_USER_MODEL = 'users.User'
+
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS=[
+    os.path.join(BASE_DIR, 'static')
+]
+STATIC_ROOT = os.path.join(BASE_DIR, '.static')
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+#
