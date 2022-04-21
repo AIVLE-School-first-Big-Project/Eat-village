@@ -12,7 +12,7 @@
  </p>
 </div>
 
-# Eat-village : Yolov5를 이용한 냉장고 재료 분석 및 레시피 추천 (이미지 다중 분류를 통한 레시피 추천)
+# Eat-village : Yolov5를 이용한 냉장고 재료 분석 및 레시피 추천
 > KT AIVLE 수도권 4반 2조 (9조) <br>
 
 ## 조원 소개
@@ -35,18 +35,19 @@
 ## 7. 개발 일정
 - 
 ## 8. 실행 방법
-$ git clone https://github.com/AIVLE-School-first-Big-Project/Eat-village.git
-$ cd Eat-village
-$ python install -r requirements.txt
-$ python manage.py runsever
-
+``` bash
+1. git clone https://github.com/AIVLE-School-first-Big-Project/Eat-village.git
+2. cd Eat-village
+3. python install -r requirements.txt
+4. python manage.py runsever
+5. Connect http://localhost:8000 or http://127.0.0.1:8000
+```
 ## 9. 팀원 정보
 | Name | Github | Email |
-|:---:|:---:|:---:|:---:|
+|:---:|:---:|:---:|
 |안지희|[@Jinnny-An](https://github.com/Jinnny-An)|각자|
-|김연우||[@crong22](https://github.com/crong22)|이메일|
-|안승훈||[@ahnroy](https://github.com/ahnroy)|쓰도록|
-|정찬호||[@joungch](https://github.com/joungch)|하세요|
-|최수진||[@heeyori](https://github.com/heeyori)|^^|
-|한인규||[@ikhan94305](https://github.com/ikhan94305)|.|
-<br><br><br>
+|김연우|[@crong22](https://github.com/crong22)|이메일|
+|안승훈|[@ahnroy](https://github.com/ahnroy)|쓰도록|
+|정찬호|[@joungch](https://github.com/joungch)|하세요|
+|최수진|[@heeyori](https://github.com/heeyori)|^^|
+|한인규|[@ikhan94305](https://github.com/ikhan94305)|.|
