@@ -44,7 +44,7 @@ def signup(request):
     
             users_user=User.objects.create_user(username,email,password) 
             users_user.first_name=first_name
-            users_user.is_active = True
+            users_user.is_active = False
             users_user.save()
             current_site = get_current_site(request) 
             message = render_to_string('activation.html', {
