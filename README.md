@@ -51,4 +51,4 @@
 |안승훈|[@ahnroy](https://github.com/ahnroy)|쓰도록|
 |정찬호|[@joungch](https://github.com/joungch)|하세요|
 |최수진|[@heeyori](https://github.com/heeyori)|^^|
-|한인규|[@ikhan94305](https://github.com/ikhan94305)|.|
+|한인규|[@ikhan94305](https://github.com/ikhan94305)|ikhan94305@gmail.com|
