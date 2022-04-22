@@ -18,14 +18,17 @@
         </div>
         <ul class="navbar_menu">
             <li><a href=''>마이페이지</a></li>
-            <li><a href=''>게시판</a></li>
+            <li><a href=''>나눔 게시판</a></li>
+            <li><a href=''>레시피 게시판</a></li>
+            <li><a href=''>자유 게시판</a></li>
         </ul>
         <div class="navbar_right">
             <div class="search">
-                <form onsubmit="">
+                <form onsubmit="search_recipe(); return false;">
                     <input id='searchfield' type='text' max_length=255 autocomplete='off'>
                     <button class='searchbtn' type="submit">검색</button>
                 </form>
+            </div>
             <a href="{% url 'mainpage:weather' %}" class="weather">
                 <div class="temp"></div>
                 <div class="icon"></div>
@@ -43,7 +46,7 @@
         <ul class="recipe_list">
             <li class="recipe">
                 <div class="recipe_img">
-                    <img src="https://recipe1.ezmember.co.kr/cache/recipe/2020/08/18/32775e06923a4bef0cb6093ff84d28ef1.jpg" alt="">
+                    <img src="https://recipe1.ezmember.co.kr/cache/recipe/2020/08/18/32775e06923a4bef0cb6093ff84d28ef1.jpg" alt="" onclick="recipe_detail();">
                 </div>
                 <div class="recipe_title">
                     이름
@@ -160,5 +163,15 @@
                 console.log('GPS를 사용할 수 없습니다.');
             };
         };
+        /* 레시피 검색 */
+        function search_recipe() {
+            var food_cate = document.getElementById('searchfield').value;
+            if (food_cate.length == 0) { return false;}
+            location.href = "{% url 'mainpage:search' %}";
+        }
+        /* 레시피 페이지 이동 */
+        function recipe_detail() {
+            location.href = "https://www.10000recipe.com/recipe/6939543";
+        }
     </script>
 </body>

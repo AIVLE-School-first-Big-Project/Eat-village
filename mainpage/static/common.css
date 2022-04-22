@@ -129,9 +129,23 @@ a {
 .recipe_img > img {
     display:block;
     width:100%;
+    cursor: pointer;
 }
 
-@media screen and (max-width: 800px) {
+#ingredient_container {
+    margin: auto;
+    width: 800px;
+    height: 450px;
+    margin-bottom: 20px;
+}
+
+#ingredient_result {
+    width: 100%;
+    height: auto;
+    background-color: white;
+}
+
+@media screen and (max-width: 850px) {
     .navbar {
         flex-direction: column;
         align-items: flex-start;
@@ -180,6 +194,14 @@ a {
     }
     .recomm_list > ul > li {
         width: calc(100% / 5);
+    }
+    #ingredient_container {
+        align-self: center;
+        text-align: center;
+        width: 50%;
+    }
+    #ingredient_result {
+        width: 100%;
     }
 }
 

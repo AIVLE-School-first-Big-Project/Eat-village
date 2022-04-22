@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="apple-touch-icon" href="/custom_icon.png"/>
     <script src="https://kit.fontawesome.com/312926fc77.js" crossorigin="anonymous"></script>
-    <title>Main Page</title>
+    <title>Ingredient Result Page</title>
 </head>
 <body>
     <nav class="navbar">
@@ -38,14 +38,24 @@
             <i class="fas fa-bars"></i>
         </a>
     </nav>
-    <div id="container">
-        <video autoplay="true" id="videoElement">
-        </video>
+
+    <div id='ingredient_container'>
+        <div id='ingredient_result'>
+            <ul>
+                <li>닭고기</li>
+                <li>감자</li>
+                <li>당근</li>
+                <li>양파</li>
+                <li>고추장</li>
+                <li>양배추</li>
+            </ul>
+        </div>
         <div id="button">
-            <button id="btn1" onclick="cameraAccess();">영상 촬영</button>
-            <button id="btn2" onclick="find_ingred();">분석 시작</button>
+            <button id="btn1" onclick="ingred_change();">재료 수정</button>
+            <button id="btn2" onclick="ingred_recipe();">레시피 추천</button>
         </div>
     </div>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="{% static 'main.js' %}"></script>
     <script>
@@ -74,12 +84,15 @@
             location.href = "{% url 'mainpage:search' %}";
         }
 
-        /* 재료 분석 후 레시피 추천 */
-        function find_ingred() {
-            location.href = "{% url 'mainpage:ingredient_result' %}";
+        /* 재료 베이스 레시피 추천 */
+        function ingred_recipe() {
+            location.href = "{% url 'mainpage:ingredient_recom' %}";
+        }
+
+        /* 재료 수정 페이지 이동 */
+        function ingred_change() {
+            location.href = "{% url 'mainpage:ingredient_change' %}";
         }
     </script>
 </body>
-
-
 </html>
