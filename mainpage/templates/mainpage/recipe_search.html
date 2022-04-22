@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/312926fc77.js" crossorigin="anonymous"></script>
-    <title>Weather Recommendation Page</title>
+    <title>Recipe Search Page</title>
 </head>
 <body>
     <nav class="navbar">
@@ -26,7 +26,6 @@
                     <input id='searchfield' type='text' max_length=255 autocomplete='off'>
                     <button class='searchbtn' type="submit">검색</button>
                 </form>
-            </div>
             <a href="{% url 'mainpage:weather' %}" class="weather">
                 <div class="temp"></div>
                 <div class="icon"></div>
@@ -38,7 +37,7 @@
     </nav>
 
     <div class="content-title">
-        <h3>날씨 추천 레시피</h3>
+        <h3>레시피 검색 결과</h3>
     </div>
     <div class="recomm_list">
         <ul class="recipe_list">

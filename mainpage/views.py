@@ -8,3 +8,9 @@ def main(request):
 
 def weather_recomm(request):
     return render(request, 'mainpage/weather_recom.html')
+
+def ingred_recomm(request):
+    return render(request, 'mainpage/recipe_recomm.html')
+
+def recipe_search(request):
+    return render(request, 'mainpage/recipe_search.html')

@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
+import os
 
 from pathlib import Path
 import pymysql
@@ -77,18 +78,22 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+
+    #     'NAME': 'recipe',
+
+    #     'USER': 'root',
+
+    #     'PASSWORD': '12341234',
+
+    #     'HOST': '34.71.253.5',
+
+    #     'PORT': 3306
+    # }
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-
-        'NAME': 'recipe',
-
-        'USER': 'root',
-
-        'PASSWORD': '12341234',
-
-        'HOST': '34.71.253.5',
-
-        'PORT': 3306
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 

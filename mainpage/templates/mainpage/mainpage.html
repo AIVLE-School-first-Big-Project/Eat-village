@@ -22,8 +22,10 @@
         </ul>
         <div class="navbar_right">
             <div class="search">
-                <input id='searchfield' type='text' name='search' max_length=255 value='' autocomplete='off'>
-                <button class='searchbtn'>검색</button>
+                <form onsubmit="">
+                    <input id='searchfield' type='text' max_length=255 autocomplete='off'>
+                    <button class='searchbtn' type="submit">검색</button>
+                </form>
             </div>
             <a href="{% url 'mainpage:weather' %}" class="weather">
                 <div class="temp"></div>
