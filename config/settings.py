@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 import pymysql
 pymysql.install_as_MySQLdb()
 
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'mypage',
+    'users', # yeon
 ]
 
 MIDDLEWARE = [
@@ -134,3 +136,30 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#yeon
+
+import my_setting
+
+EMAIL_HOST = my_setting.EMAIL['EMAIL_HOST']
+EMAIL_PORT = my_setting.EMAIL['EMAIL_PORT']
+EMAIL_HOST_USER = my_setting.EMAIL['EMAIL_HOST_USER']
+EMAIL_USE_TLS = my_setting.EMAIL['EMAIL_USE_TLS']
+EMAIL_HOST_PASSWORD = my_setting.EMAIL['EMAIL_HOST_PASSWORD']
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+AUTH_USER_MODEL = 'users.User'
+
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS=[
+    os.path.join(BASE_DIR, 'static')
+]
+STATIC_ROOT = os.path.join(BASE_DIR, '.static')
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+#
