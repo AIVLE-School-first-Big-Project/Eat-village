@@ -27,7 +27,7 @@
 ## 3. 서비스 FLOW
 - draw.io
 ## 4. Architecture (2-Tier or 3-Tier)
--![architecture](https://user-images.githubusercontent.com/92066565/164601755-e3268f46-44e8-4fbf-a288-24546328d7bd.png)
+-![architecture](https://user-images.githubusercontent.com/92066565/164602627-a2691519-a7b0-4a5e-8281-81bfcd189bbd.png)
 ## 5. DB 설계
 - ERD 모델 (EXERD)
 ## 6. 개발 환경
