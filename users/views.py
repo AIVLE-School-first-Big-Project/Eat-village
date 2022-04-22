@@ -1,3 +1,4 @@
+
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .models import User
@@ -18,7 +19,6 @@ from .token import users_activation_token
 from django.contrib import messages
 from tkinter import Button, messagebox
 
-
 # 홈 #
 
 def home(request):
@@ -34,16 +34,29 @@ def back(request):
 def signup(request):
     if request.method=="POST":
         if User.objects.filter(username=request.POST['username']).exists(): #아이디 중복 체크
-             return render(request, 'member/signup_error.html')
+            messages.warning(request, 'already exists ID')
+            #messages.add_message(self.request, messages.ERROR, 'already exists ID')
+            #messages.info(request, 'already exists ID')
+            #return render(request, 'users/signup_error.html')
         if request.POST['password1'] ==request.POST['password']:   
-            print(request.POST)
             username=request.POST["username"] #아이디
             first_name=request.POST["first_name"] #이름
             password=request.POST["password"] #비밀번호
             email=request.POST["email"] #이메일
-    
+            some_var=request.POST.getlist("test_list") #알레르기 test_list
+            ale = request.POST["ale"] #알레르기 입력
+            postcode = request.POST['postcode'] # 우편번호
+            address = request.POST["address"] # 주소
+            detailAddress = request.POST["detailAddress"] # 상세주소
+
+
             users_user=User.objects.create_user(username,email,password) 
+            users_user.test_list = some_var
+            users_user.ale = ale
             users_user.first_name=first_name
+            users_user.postcode = postcode
+            users_user.address = address
+            users_user.detailAddress = detailAddress
             users_user.is_active = False
             users_user.save()
             current_site = get_current_site(request) 
