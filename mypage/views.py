@@ -2,7 +2,6 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from .models import *
 from .forms import *
-from member.models import *
 
 # Create your views here.
 def home(request):
