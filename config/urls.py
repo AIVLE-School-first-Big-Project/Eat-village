@@ -19,6 +19,12 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+<<<<<<< HEAD
     path('recipe/', include('recipe.urls')),
     # path('mypage/', include('mypageapp.urls'))
+=======
+    path('mypage/', include('mypageapp.urls')),
+    path('users/', include('users.urls')),#yeon
+    
+>>>>>>> 7bdbe9d0091871d047a5c6458de1d8c5f50f2534
 ]
