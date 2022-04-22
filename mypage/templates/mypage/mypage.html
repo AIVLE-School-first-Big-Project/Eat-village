@@ -1,0 +1,48 @@
+{% load static %}
+<!-- 베이스 html -->
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href='{% static "mypage.css"%}'>
+    </head>
+    <body>
+        <!-- 메뉴 삽입 -->
+        {% include "mypage/menu.html" %}
+        <!-- 회원 정보 영역 -->
+        <div id="title_wrap">
+            <div id="title">MY ACCOUNT</div>
+            <a href="{% url 'mypage:write' %}" id="heart">💗</a>
+        </div>
+        <div id="whole">
+            <div class="contents">
+                <form method="POST" class="post-form-info">
+                    {% csrf_token %}
+                    <div id="none_edit" class="info">{{form.name.value}}</div>
+                    <div id="none_edit" class="info">{{form.email.value}}</div>
+                    <div id="edit" class="info">비밀번호</div>
+                    <div id="edit" class="info">닉네임</div>
+                    <div id="edit" class="info">알레르기</div>
+                    <a class="info">
+                        <input type="submit" value="수정" class="btn"></input>
+                    </a>
+                </form>
+            </div>
+            <!-- 내가 쓴 글 목록 영역 -->
+            <div class="contents">
+                <a>
+                    <input type="submit" value="전체보기" class="btn"></input>
+                </a>
+                <br>내가 쓴 글 목록
+            </div>
+            <!-- 북마크한 글 목록 영역 -->
+            <div class="contents">
+                <a>
+                    <input type="submit" value="전체보기" class="btn"></input>
+                </a>
+                <br>북마크한 글 목록
+            </div>
+        </div>
+    </body>
+		
+</html>

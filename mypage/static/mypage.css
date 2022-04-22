@@ -1,0 +1,122 @@
+:root {
+    --main-color:#c9e6c1;
+    --top-shadow:#abc4a4;
+    --bottom-shodow:#e7ffde;
+}
+
+body {
+    background-color: var(--main-color);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 80%;
+    overflow: hidden;
+    margin: 0;
+    padding: 0.6em;
+}
+/* #title_wrap {
+    height: 2.5em;
+    width: 100%;
+    display: flex;
+    padding-top: 4em;
+    text-align: center;
+    line-height: 2.5em;
+    justify-content: center;
+}
+#title {
+    overflow: hidden;
+    font-weight: 800;
+    font-size: 200%;    
+} */
+#title_wrap {
+    height: 2.5em;
+    width: 100%;
+    padding-top: 4em;
+    line-height: 2.5em;
+    position: relative;
+}
+#heart {
+    float: right;
+    margin-right: 10%;
+    font-size: 150%;
+}
+#heart:link, :visited, :hover {
+    text-decoration: none;
+}
+#title {
+    width: inherit;
+    overflow: hidden;
+    font-weight: 800;
+    font-size: 200%;    
+    text-align: center;
+}
+#whole {
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-evenly;
+}
+#whole .contents{
+    border-radius: 15px;
+    background: var(--main-color);
+    box-shadow:  15px 15px 30px var(--top-shadow),
+                -15px -15px 30px var(--bottom-shodow);
+    padding: 2.5em 2em 0.5em 2em;
+    margin-top: 30px;
+
+}
+.info {
+    width: 25em;
+    height: 3em;
+    margin-bottom: 2em;
+    text-align: center;
+    line-height: 3em;
+    justify-content: space-between;
+}
+#none_edit {
+    border-radius: 15px;
+    background: var(--main-color);
+    box-shadow: inset 15px 15px 30px var(--top-shadow),
+                inset -15px -15px 30px var(--bottom-shodow);
+}
+#edit {
+    border-radius: 15px;
+    background: var(--main-color);
+    box-shadow:  15px 15px 30px var(--top-shadow),
+                -15px -15px 30px var(--bottom-shodow);
+}
+
+.btn {
+    background-color: inherit;
+    border-color: var(--main-color);
+    border-radius: 8px;
+    width: 16em;
+    height: 3em;
+    margin-bottom: 2em;
+    pointer-events: stroke;
+}
+
+@media screen and (max-width:560px) {
+    body {
+        overflow: visible;
+    }
+    #whole {
+        height: auto;
+        margin-top: 1em;
+        justify-content: space-evenly;
+    }
+    .info {
+        width: 16em;
+        height: 3em;
+    }
+    #whole > div:nth-child(2) {
+        width: 16em; 
+        border: none;
+        text-size-adjust: 0;
+    }
+    #whole > div:nth-child(3) {
+        width: 16em; 
+        border: none; 
+        text-size-adjust: 0;
+        margin-bottom: 2em;
+    }
+}
