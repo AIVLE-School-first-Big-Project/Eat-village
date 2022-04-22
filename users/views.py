@@ -47,7 +47,7 @@ def signup(request):
             ale = request.POST["ale"] #알레르기 입력
             postcode = request.POST['postcode'] # 우편번호
             address = request.POST["address"] # 주소
-            detailAddress = request.POST["detailAddress"] # 상세주소
+            
 
 
             users_user=User.objects.create_user(username,email,password) 
@@ -56,7 +56,6 @@ def signup(request):
             users_user.first_name=first_name
             users_user.postcode = postcode
             users_user.address = address
-            users_user.detailAddress = detailAddress
             users_user.is_active = False
             users_user.save()
             current_site = get_current_site(request) 
