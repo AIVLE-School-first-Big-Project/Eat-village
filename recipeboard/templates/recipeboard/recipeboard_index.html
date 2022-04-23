@@ -1,20 +1,38 @@
 <br>레시피 게시판 입니다.<br>
 
-
+{% comment %} 정렬순서 {% endcomment %}
+{% if kw %}
+{% comment %} 키워드 검색시 정렬기능 없음 {% endcomment %}
+{% else %}
 <div>
-    <select class="form-select so" onchange="changeSelect(this);">
-        {% comment %} {{ so }} {% endcomment %}
-        <option value="recent" {% if so == 'recent' %}selected{% endif %}>최신순</option>
-        <option value="view" {% if so == 'view' %}selected{% endif %}>조회순</option>
-        <option value="recommended" {% if so == 'recommended' %}selected{% endif %}>추천순</option>
+    <select id="so-select" onchange="location=this.value">
+        {% if so == '' %}
+        <option hidden class="so-date" value="/recipeboard">최신순</option>
+        <option class="so-view" value="?so=view">조회순</option>
+        <option class="so-recommended" value="?so=recommended">추천순</option>
+        {% elif so == 'view' %}
+        <option hidden class="so-view" value="?so=view">조회순</option>
+        <option class="so-date" value="/recipeboard">최신순</option>
+        <option class="so-recommended" value="?so=recommended">추천순</option>
+        {% elif so == 'recommended'%}
+        <option hidden class="so-recommended" value="?so=recommended">추천순</option>
+        <option class="so-date" value="/recipeboard">최신순</option>
+        <option class="so-view" value="?so=view">조회순</option>
+        {% endif %}
     </select>
 </div>
+{% endif %}
 
+{% comment %} 글쓰기버튼 {% endcomment %}
 <div>
     <a href="{% url 'recipeboard:recipeboard_create' %}">글쓰기</a>
 </div>
 
+{% comment %} 게시물 표시되는곳 {% endcomment %}
 <tr>
+    {% if kw %}
+    <br>{{kw}}에 대한 검색결과입니다!<br>
+    {% endif %}
     <td>-</td>
     <td>제목</td>
     <td>작성자</td>
@@ -22,18 +40,38 @@
     <td>추천수</td>
     <td>작성일</td>
     <br>
-    {% for board in board_list%}
-        <td>{{board.boardid}}</a></td>
-        <td><a href="{% url 'recipeboard:recipeboard_detail' board.boardid %}">{{board.title}}</a></td>
-        <td>{{board.name}}</td>
-        <td>{{board.view}}</td>
-        <td>{{board.recommended}}</td>
-        <td>{{board.time}}</td>
-        <br>
-    {% endfor %}
+    {% if board_list %}
+        {% for board in board_list%}
+            <td>{{board.boardid}}</a></td>
+            <td><a href="{% url 'recipeboard:recipeboard_detail' board.boardid %}">{{board.title}}</a></td>
+            <td>{{board.name}}</td>
+            <td>{{board.view}}</td>
+            <td>{{board.recommended}}</td>
+            <td>{{board.time}}</td>
+            <br>
+        {% endfor %}
+        {% else %}
+        <br>표시할 게시물이 없습니다!<br>
+    {% endif %}
 </tr>
 
-<div class="search-box mb-3" style="width:20;">
-    <input id="inputSearch" type="text" class="form-control kw" placeholder="검색어를 입력하세요."
-           value="{{ kw|default_if_none:'' }}">
-</div>
+<form action="{% url 'recipeboard:recipeboard_index' %}" method="get">
+    
+    <div class="pagination">
+        {% if board_list.has_previous %}
+          <a href="?page=1&kw={{kw}}">첫페이지</a>
+          <a href="?page={{board_list.previous_page_number}}&kw={{kw}}">이전페이지</a>
+        {% endif %}
+    
+        <span>{{board_list.number}} / {{board_list.paginator.num_pages}}</span>
+    
+        {% if board_list.has_next %}
+          <a href="?page={{board_list.next_page_number}}&kw={{kw}}">다음페이지</a>
+          <a href="?page={{board_list.paginator.num_pages}}&kw={{kw}}">마지막페이지</a>
+        {% endif %}
+      </div>
+
+    <input type="text" name="kw" value="{{ kw }}">
+    <input type="submit" value="검색">
+
+</form>

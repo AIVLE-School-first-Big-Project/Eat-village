@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
 from django.http import HttpResponseRedirect
-from recipeboard.models import Recipeboard, Recipecomment, User
+from users.models import Recipeboard, Recipecomment, User
 from django.core.paginator import Paginator
 from django.db.models import Q, Count, F
 from recipeboard.forms import Recipeboardform, Recipecommentform
@@ -11,32 +11,31 @@ from django.utils import timezone
 def recipeboard_index(request): #레시피게시글 목록
 
     kw = request.GET.get('kw', '') #키워드 검색기능
-    so = request.GET.get('so', 'recent')
+    so = request.GET.get('so', '')
     page = request.GET.get('page', '1')
 
     if kw:
-        board_list = Recipeboard.objects.filter(
-            Q(title__icontains=kw) |
-            Q(nickname__icontains=kw) |
-            Q(ingredient__icontains=kw) |
-            Q(detail__icontains=kw)
-        ).distinct()
+        board_list = Recipeboard.objects.all().filter(
+            Q(title__contains=kw) |
+            Q(ingredient__contains=kw) |
+            Q(detail__contains=kw)
+        )
     else:
         board_list = Recipeboard.objects.all()
-
+ 
     if so == 'view': #조회순 정렬
-        board_list = board_list.order_by('-view', '-time')
+        board_list = board_list.order_by('-view', '-boardid')
     elif so == 'recommended': #추천순 정렬
-        board_list = board_list.order_by('-recommended', '-time')
-    elif so == 'recent': #기본정렬: 등록순
+        board_list = board_list.order_by('-recommended', '-boardid')
+    else:
         board_list = board_list.order_by('-boardid')
 
-    paginator = Paginator(board_list, 20) #페이징기준
+    paginator = Paginator(board_list, 1) #페이징기준
     page_obj = paginator.get_page(page)
-    last_page = page_obj.paginator.page_range[-1]
+    # last_page = page_obj.paginator.page_range[-1]
 
     context = {'board_list' : page_obj,
-               'last_page':last_page,
+            #    'last_page':last_page,
                'kw':kw,
                'page':page,
                'so':so
