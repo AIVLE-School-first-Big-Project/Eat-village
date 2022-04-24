@@ -6,10 +6,32 @@
 <br>글쓴이: {{board.userid.nickname}}
 <br>조회수: {{board.view}}
 <br>추천수: {{board.recommended}}
-<br><a href="{% url 'recipeboard:recipeboard_update' board.boardid %}">수정</a>
-<br><a href="{% url 'recipeboard:recipeboard_delete' board.boardid %}">삭제</a>
-{% comment %} 추천버튼만들기 {% endcomment %}
+{% if likedata %}
+    <br>
+    <form method = "post", action="{% url 'recipeboard:recipeboard_recommendcancel' board.boardid %}">
+        {% csrf_token %}
+        <button type="submit", name='cancelrecommend'>추천취소</button>
+    </form>
+{% elif likedata.userid == user.userid %}
+    <br><a href="{% url 'recipeboard:recipeboard_update' board.boardid %}">수정</a>
+    <br><a href="{% url 'recipeboard:recipeboard_delete' board.boardid %}">삭제</a> 
+{% else %}
+    <br>
+    <br>
+    <form method = "post", action="{% url 'recipeboard:recipeboard_recommend' board.boardid %}">
+        {% csrf_token %}
+        <button type="submit" name='recommend'>추천</button>
+    </form>
+{% endif %}
+
 <br>{{board.time}}<br>
+
+{% for image in images %}
+    <td><img class = "image-thumbail"
+        src="{{ image.image.url }}" 
+        alt=""></td>
+</div>
+{% endfor %}
 
 <br>재료: {{board.ingredient}}<br>
 
@@ -23,7 +45,10 @@
     <td>{{comment.detail}}</td>
     <td>{{comment.time}}</td>
     <td><a href="{% url 'recipeboard:recipeboard_comment' board.boardid comment.commentid %}">대댓글달기</a></td>
-    <td><a href="{% url 'recipeboard:recipecomment_delete' comment.commentid %}">댓글삭제하기</a></td>
+    <td>
+        {% if babycomment.detail != "삭제된 댓글입니다." %}
+        <a href="{% url 'recipeboard:recipecomment_delete' comment.commentid %}">댓글삭제하기</a></td>
+        {% endif %}
     <br>
     {% for babycomment in babycomment %}
         {% if babycomment.parentcommentid == comment.commentid %}
@@ -31,7 +56,11 @@
         <td>{{babycomment.userid.nickname}}</td>
         <td>{{babycomment.detail}}</td>
         <td>{{babycomment.time}}</td>
-        <td><a href="{% url 'recipeboard:recipecomment_delete' comment.commentid %}">댓글삭제하기</a></td>
+        <td>
+            {% if babycomment.detail != "삭제된 댓글입니다." %}
+            <a href="{% url 'recipeboard:recipecomment_delete' comment.commentid %}">댓글삭제하기</a>
+            {% endif %}
+        </td>
         <br>
         {% endif %}
     {% endfor %}

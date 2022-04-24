@@ -25,8 +25,8 @@ class User(AbstractUser):
     location = models.CharField(max_length=250)
 
 class Communityboard(models.Model):
-    boardid = models.AutoField(db_column='boardID', primary_key=True)  # Field name made lowercase.
-    userid = models.ForeignKey(User, models.DO_NOTHING, db_column='userID')  # Field name made lowercase.
+    boardid = models.AutoField(db_column='boardID', primary_key=True)  
+    userid = models.ForeignKey(User, models.DO_NOTHING, db_column='userID', null=True)  
     header = models.CharField(max_length=50)
     title = models.CharField(max_length=50)
     nickname = models.CharField(max_length=20)
@@ -40,8 +40,8 @@ class Communityboard(models.Model):
 
 
 class Communityboardimage(models.Model):
-    photoid = models.AutoField(db_column='photoID', primary_key=True)  # Field name made lowercase.
-    boardid = models.ForeignKey('Recipeboard', models.DO_NOTHING, db_column='boardID')  # Field name made lowercase.
+    photoid = models.AutoField(db_column='photoID', primary_key=True)  
+    boardid = models.ForeignKey('Recipeboard', db_column='boardID', null=True, on_delete=models.CASCADE)  
     image = models.ImageField(upload_to=upload_image)
     time = models.DateTimeField()
 
@@ -51,10 +51,10 @@ class Communityboardimage(models.Model):
 
 
 class Communitycomment(models.Model):
-    commentid = models.AutoField(db_column='commentID', primary_key=True)  # Field name made lowercase.
-    boardid = models.ForeignKey(Communityboard, models.DO_NOTHING, db_column='boardID')  # Field name made lowercase.
-    userid = models.ForeignKey(User, models.DO_NOTHING, db_column='id')  # Field name made lowercase.
-    parentcommentid = models.IntegerField(db_column='parentcommentID', blank=True, null=True)  # Field name made lowercase.
+    commentid = models.AutoField(db_column='commentID', primary_key=True)  
+    boardid = models.ForeignKey(Communityboard, db_column='boardID', null=True, on_delete=models.CASCADE)  
+    userid = models.ForeignKey(User, models.DO_NOTHING, db_column='userID', null=True)  
+    parentcommentid = models.IntegerField(db_column='parentcommentID', blank=True, null=True)  
     detail = models.CharField(max_length=500)
     time = models.DateTimeField()
 
@@ -64,8 +64,8 @@ class Communitycomment(models.Model):
 
 
 class Recipeboard(models.Model):
-    boardid = models.AutoField(db_column='boardID', primary_key=True)  # Field name made lowercase.
-    userid = models.ForeignKey(User, models.DO_NOTHING, db_column='id')  # Field name made lowercase.
+    boardid = models.AutoField(db_column='boardID', primary_key=True)  
+    userid = models.ForeignKey(User, models.DO_NOTHING, db_column='userID', null=True)  
     title = models.CharField(max_length=50)
     ingredient = models.CharField(max_length=2000)
     detail = models.CharField(max_length=5000)
@@ -77,10 +77,9 @@ class Recipeboard(models.Model):
         managed = True
         db_table = 'RECIPEBOARD'
 
-
 class Recipeboardimage(models.Model):
-    photoid = models.AutoField(db_column='photoID', primary_key=True)  # Field name made lowercase.
-    boardid = models.ForeignKey(Recipeboard, models.DO_NOTHING, db_column='boardID')  # Field name made lowercase.
+    photoid = models.AutoField(db_column='photoID', primary_key=True)  
+    boardid = models.ForeignKey(Recipeboard, db_column='boardID', null=True, on_delete=models.CASCADE)  
     image = models.ImageField(upload_to=upload_image)
     time = models.DateTimeField()
 
@@ -90,10 +89,10 @@ class Recipeboardimage(models.Model):
 
 
 class Recipecomment(models.Model):
-    commentid = models.AutoField(db_column='commentID', primary_key=True)  # Field name made lowercase.
-    boardid = models.ForeignKey(Recipeboard, models.DO_NOTHING, db_column='boardID')  # Field name made lowercase.
-    userid = models.ForeignKey(User, models.DO_NOTHING, db_column='id')  # Field name made lowercase.
-    parentcommentid = models.IntegerField(db_column='parentcommentID', blank=True, null=True)  # Field name made lowercase.
+    commentid = models.AutoField(db_column='commentID', primary_key=True)  
+    boardid = models.ForeignKey(Recipeboard, db_column='boardID', null=True, on_delete=models.CASCADE)  
+    userid = models.ForeignKey(User, models.DO_NOTHING, db_column='userID', null=True)  
+    parentcommentid = models.IntegerField(db_column='parentcommentID', blank=True, null=True)  
     detail = models.CharField(max_length=500)
     time = models.DateTimeField()
 
@@ -103,7 +102,7 @@ class Recipecomment(models.Model):
 
 
 class Recipedata(models.Model):
-    recipeid = models.IntegerField(db_column='recipeID', primary_key=True)  # Field name made lowercase.
+    recipeid = models.IntegerField(db_column='recipeID', primary_key=True)  
     recipeno = models.CharField(max_length=50)
     recipename = models.CharField(max_length=255)
     ingredient = models.CharField(max_length=5000)
@@ -126,8 +125,8 @@ class Recipedata(models.Model):
 
 class Userbookmarkrecipe(models.Model):
     bookmarkid = models.AutoField(primary_key=True)
-    userid = models.ForeignKey(User, models.DO_NOTHING, db_column='id')  # Field name made lowercase.
-    recipeid = models.ForeignKey(Recipedata, models.DO_NOTHING, db_column='recipeID')  # Field name made lowercase.
+    userid = models.ForeignKey(User, models.DO_NOTHING, db_column='userID', null=True)  
+    recipeid = models.ForeignKey(Recipedata, db_column='recipeID', null=True, on_delete=models.CASCADE)  
 
     class Meta:
         managed = True
@@ -136,13 +135,12 @@ class Userbookmarkrecipe(models.Model):
 
 class Userrecommendedcommunity(models.Model):
     likeid = models.AutoField(primary_key=True)
-    userid = models.ForeignKey(User, models.DO_NOTHING, db_column='id')  # Field name made lowercase.
-    boardid = models.ForeignKey(Recipeboard, models.DO_NOTHING, db_column='boardid')
+    userid = models.ForeignKey(User, models.DO_NOTHING, db_column='userID', null=True)  
+    boardid = models.ForeignKey(Recipeboard, db_column='boardid', null=True, on_delete=models.CASCADE)
 
     class Meta:
         managed = True
         db_table = 'USERRECOMMENDEDCOMMUNITY'
-
 
 # class AuthGroup(models.Model):
 #     name = models.CharField(unique=True, max_length=150)

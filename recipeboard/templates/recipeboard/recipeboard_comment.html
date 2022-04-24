@@ -12,7 +12,11 @@
     <td>{{babycomment.userid.nickname}}</td>
     <td>{{babycomment.detail}}</td>
     <td>{{babycomment.time}}</td>
-    <td><a href="{% url 'recipeboard:recipecomment_delete' babycomment.commentid %}">댓글삭제하기</a></td>
+    <td>
+        {% if babycomment.detail != "삭제된 댓글입니다." %}
+        <a href="{% url 'recipeboard:recipecomment_delete' babycomment.commentid %}">댓글삭제하기</a>
+        {% endif %}
+    </td>
     <br>
     {% endif %}
 {% endfor %}

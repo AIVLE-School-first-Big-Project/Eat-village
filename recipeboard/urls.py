@@ -10,5 +10,6 @@ urlpatterns = [
     path('delete/<int:boardid>', recipeboard_delete, name='recipeboard_delete'),
     path('<int:boardid>/<int:commentid>', recipeboard_comment, name='recipeboard_comment'),
     path('commentdelete/<int:commentid>', recipecomment_delete, name='recipecomment_delete'),
-    
-]
+    path('<int:boardid>/recommend', recipeboard_recommend, name='recipeboard_recommend'),
+    path('<int:boardid>/recommendcancel', recipeboard_recommendcancel, name='recipeboard_recommendcancel'),
+]   

@@ -2,10 +2,16 @@
 
 {% block content %}
 <div class="container">
-    <form method="post" action="">
+    <form method="post" action="" enctype="multipart/form-data">
         {% csrf_token %}
         <table>
+
             {{ form.as_table }}
+
+            {% for form in formset %}
+                {{ form }}
+            {% endfor %}
+
         </table>
         <br>
         <input type="submit" value="작성완료">

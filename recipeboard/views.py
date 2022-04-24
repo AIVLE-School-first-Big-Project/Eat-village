@@ -1,10 +1,11 @@
 from django.contrib import messages
+from django.forms import modelformset_factory
 from django.shortcuts import get_object_or_404, redirect, render
 from django.http import HttpResponseRedirect
-from users.models import Recipeboard, Recipecomment, User
+from users.models import Recipeboard, Recipeboardimage, Recipecomment, Userrecommendedcommunity
 from django.core.paginator import Paginator
 from django.db.models import Q, Count, F
-from recipeboard.forms import Recipeboardform, Recipecommentform
+from recipeboard.forms import Recipeboardform, Recipecommentform, Recipeboardimageform
 from django.utils import timezone
 
 
@@ -30,7 +31,7 @@ def recipeboard_index(request): #레시피게시글 목록
     else:
         board_list = board_list.order_by('-boardid')
 
-    paginator = Paginator(board_list, 1) #페이징기준
+    paginator = Paginator(board_list, 10) #페이징기준
     page_obj = paginator.get_page(page)
     # last_page = page_obj.paginator.page_range[-1]
 
@@ -46,10 +47,15 @@ def recipeboard_index(request): #레시피게시글 목록
 
 def recipeboard_detail(request, boardid): # 게시글 내용, 댓글생성
     
+    user = request.user
     board = get_object_or_404(Recipeboard, pk=boardid)
+    images = Recipeboardimage.objects.filter(boardid=boardid)
 
     if request.method == "GET":
         recipecommentform = Recipecommentform()
+
+    board.view += 1 ## 조회수증가
+    board.save()
 
     comment = Recipecomment.objects.filter(
         boardid = boardid,
@@ -61,32 +67,55 @@ def recipeboard_detail(request, boardid): # 게시글 내용, 댓글생성
     )
 
     commentcount = Recipecomment.objects.filter(boardid=boardid).count()
+    likedata = Userrecommendedcommunity.objects.filter(userid=user, boardid=board).first()
 
     if request.method == 'POST':
-        # if request.POST.get('comment'):
+        # if request.POST.get('comment'): #댓글달기
         recipecommentform = Recipecommentform(request.POST)
         if recipecommentform.is_valid():
             newcomment = Recipecomment(**recipecommentform.cleaned_data)
-            # newcomment.userid = request.user
-            newcomment.boardid = boardid
+            newcomment.userid = request.user
+            newcomment.boardid = board
             newcomment.time = timezone.now()
             newcomment.save()
         return redirect('recipeboard:recipeboard_detail', boardid=boardid)
 
     context = {
+        'user' : user,
         'board' : board,
         'comment' : comment,
         'babycomment' : babycomment,
         'recipecommentform' : recipecommentform,
         'commentcount': commentcount,
+        'images' : images,
+        'likedata' : likedata,
     }
     return render(request, 'recipeboard/recipeboard_detail.html', context)
 
+def recipeboard_recommend(request, boardid):
+    user = request.user
+    board = get_object_or_404(Recipeboard, pk=boardid)
+    if request.method == "POST":
+        Userrecommendedcommunity.objects.create(userid=user, boardid=board)
+        board.recommended += 1
+        board.save()
+    return redirect('recipeboard:recipeboard_detail', boardid=boardid)
+
+def recipeboard_recommendcancel(request, boardid):
+    user = request.user
+    board = get_object_or_404(Recipeboard, pk=boardid)
+    likedata = Userrecommendedcommunity.objects.filter(userid=user, boardid=board).first()
+    if request.method == "POST":
+        likedata.delete()
+        board.recommended -= 1
+        board.save()
+    return redirect('recipeboard:recipeboard_detail', boardid=boardid)
 
 def recipeboard_comment(request, boardid, commentid): #댓글자세히보기, 대댓글 내용과 생성
     
     comment = get_object_or_404(Recipecomment, pk=commentid)
-    
+    board = get_object_or_404(Recipeboard, pk=boardid)
+
     babycomment = Recipecomment.objects.filter(
         boardid = boardid,
         parentcommentid = commentid
@@ -99,9 +128,9 @@ def recipeboard_comment(request, boardid, commentid): #댓글자세히보기, �
         recipecommentform = Recipecommentform(request.POST)
         if recipecommentform.is_valid():
             newbabycomment = Recipecomment(**recipecommentform.cleaned_data)
-            # newbabycomment.userid = request.user
+            newbabycomment.userid = request.user
             newbabycomment.parentcommentid = commentid
-            newbabycomment.boardid = boardid
+            newbabycomment.boardid = board
             newbabycomment.time = timezone.now()
             newbabycomment.save()
         return redirect('recipeboard:recipeboard_comment', boardid=boardid, commentid=commentid)
@@ -122,35 +151,47 @@ def recipecomment_delete(request, commentid):
 
     comment = get_object_or_404(Recipecomment, pk=commentid)
 
-    # if 현재유저 != 댓글쓴유저:
-    #    messages.warning(request, '권한없음')
-    # else: 
-    comment.detail = '삭제된 댓글입니다.'
-    comment.save()
-    boardid = comment.boardid
+    deletedcommentmessage = '삭제된 댓글입니다.'
 
-    return redirect('recipeboard:recipeboard_detail', boardid=boardid)
+    if request.user != comment.userid:
+       messages.warning(request, '권한없음')
+    else: 
+        comment.detail = deletedcommentmessage
+        comment.save()
 
+    return redirect('recipeboard:recipeboard_detail', boardid=comment.boardid.boardid)
 
+# from .forms import Imageformset
 def recipeboard_create(request): #게시물생성
+
+    Imageformset = modelformset_factory(Recipeboardimage, form=Recipeboardimageform, extra=3)
 
     if request.method == "POST":
         form = Recipeboardform(request.POST)
-        if form.is_valid():
+        formset = Imageformset(request.POST, request.FILES)
+        if form.is_valid() and formset.is_valid():
             board = Recipeboard(**form.cleaned_data)
-            board.time = timezone.now()
-            '''
-            board.userid = request.user
-            #로그인 유저 정보 받기
-            '''
+            if request.user.is_authenticated:
+                board.userid = request.user
             board.recommended = 0
             board.view = 0
+            board.time = timezone.now()
             board.save()
+            # formset.instance = board
+            # formset.save()
+            for form in formset:
+                image = Recipeboardimage(**form.cleaned_data)
+                image.boardid = board
+                image.time = timezone.now()
+                image.save()
+            # messages.success(request, "작성완료!")
             return redirect('recipeboard:recipeboard_index')
     else:
         form = Recipeboardform()
+        formset = Imageformset(queryset=Recipeboardimage.objects.none())
     
-    context = {'form': form}
+    context = {'form': form,
+               'formset': formset}
 
     return render(request, 'recipeboard/recipeboard_create.html', context)
 
@@ -158,23 +199,31 @@ def recipeboard_create(request): #게시물생성
 def recipeboard_update(request, boardid): #게시물수정
 
     board = get_object_or_404(Recipeboard, pk=boardid)
+    Imageformset = modelformset_factory(Recipeboardimage, form=Recipeboardimageform, extra=0)
 
-    # if request.user != board.userid:
-    #     messages.error(request, '권한없음')
-    #     return redirect('recipeboard:recipeboard_detail', boardid=boardid)
+    if request.user != board.userid:
+        messages.error(request, '권한없음')
+        return redirect('recipeboard:recipeboard_detail', boardid=boardid)
     
     if request.method == "POST":
         form = Recipeboardform(request.POST, instance=board)
-        if form.is_valid():
+        formset = Imageformset(request.POST, request.FILES)
+        if form.is_valid() and formset.is_valid():
             board.title = form.cleaned_data['title']
             board.ingredient = form.cleaned_data['ingredient']
             board.detail = form.cleaned_data['detail']
             board.save()
+            formset.save()
+            # for form in formset:
+            #     image = Recipeboardimage(**form.cleaned_data)
+            #     image.time = timezone.now()
+            #     image.save()
             return redirect('recipeboard:recipeboard_detail', boardid=boardid)
     else:
         form = Recipeboardform(instance=board)
+        formset = Imageformset(queryset=Recipeboardimage.objects.filter(boardid=boardid))
 
-    context = {'form': form}
+    context = {'form': form, 'formset':formset}
 
     return render(request, 'recipeboard/recipeboard_create.html', context)
 
@@ -183,13 +232,23 @@ def recipeboard_delete(request, boardid): #게시물삭제
 
     board = get_object_or_404(Recipeboard, pk=boardid)
 
-    # if request.user != board.userid:
-    #     messages.error(request, '권한없음')
-    #     return redirect('recipeboard:recipeboard_detail', boardid=boardid)
+    if request.user != board.userid:
+        messages.error(request, '권한없음')
+        return redirect('recipeboard:recipeboard_detail', boardid=boardid)
     
     board.delete()
 
     return redirect('recipeboard:recipeboard_index')
+
+# def upload_recipe_img(request, boardid): #이미지 업로드
+
+#     board = Recipeboard.objects.filter(boardid=boardid)
+#     if request.method == 'POST':
+#         image = request.FILES.get('img-file')
+#         time = timezone.now()
+
+#         Recipeboard.objects.create(boardid=board, image=image, time=time)
+    
 
 
 
