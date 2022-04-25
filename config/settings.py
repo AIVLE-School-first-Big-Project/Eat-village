@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-$^v2tl5yf4vcnuz(1czrvvj+f)$9@2ay*7vc!-ybj30nyxq-%*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['b3aa-121-137-131-47.jp.ngrok.io', '127.0.0.1']
+ALLOWED_HOSTS = ['f903-121-137-131-47.jp.ngrok.io', '127.0.0.1']
 
 
 # Application definition
@@ -150,7 +150,7 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 AUTH_USER_MODEL = 'users.User'
 
-
+LOGIN_URL = '/users/login/' # 지희
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 

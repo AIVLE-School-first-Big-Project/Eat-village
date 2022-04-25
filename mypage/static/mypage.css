@@ -4,45 +4,34 @@
     --bottom-shodow:#e7ffde;
 }
 
+html {
+    width:100%;
+}
+
 body {
     background-color: var(--main-color);
     display: flex;
     flex-direction: column;
-    width: 100%;
+    min-width: 100%;
     height: 80%;
     overflow: hidden;
     margin: 0;
     padding: 0.6em;
 }
-/* #title_wrap {
-    height: 2.5em;
-    width: 100%;
+
+form {
     display: flex;
-    padding-top: 4em;
-    text-align: center;
-    line-height: 2.5em;
-    justify-content: center;
+    flex-direction: column;
 }
-#title {
-    overflow: hidden;
-    font-weight: 800;
-    font-size: 200%;    
-} */
+
 #title_wrap {
     height: 2.5em;
     width: 100%;
-    padding-top: 4em;
+    padding-top: 1.5em;
     line-height: 2.5em;
     position: relative;
 }
-#heart {
-    float: right;
-    margin-right: 10%;
-    font-size: 150%;
-}
-#heart:link, :visited, :hover {
-    text-decoration: none;
-}
+
 #title {
     width: inherit;
     overflow: hidden;
@@ -51,21 +40,36 @@ body {
     text-align: center;
 }
 #whole {
+    width: 100%;
+    height: fit-content;
     flex-wrap: wrap;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
 }
+
 #whole .contents{
+    width: 30em;
     border-radius: 15px;
     background: var(--main-color);
     box-shadow:  15px 15px 30px var(--top-shadow),
                 -15px -15px 30px var(--bottom-shodow);
     padding: 2.5em 2em 0.5em 2em;
     margin-top: 30px;
-
+    margin-right: 5em;
+    display:flex;
+    flex-direction: column;
 }
+
+.contents2{
+    width: 30em;
+    justify-content: space-evenly;
+    margin-top: 30px;
+    display:flex;
+    border: var(--main-color);
+}
+
 .info {
-    width: 25em;
+    width: 30em;
     height: 3em;
     margin-bottom: 2em;
     text-align: center;
@@ -88,35 +92,164 @@ body {
 .btn {
     background-color: inherit;
     border-color: var(--main-color);
+    box-shadow:  15px 15px 30px var(--top-shadow),
+                -15px -15px 30px var(--bottom-shodow);
     border-radius: 8px;
     width: 16em;
     height: 3em;
-    margin-bottom: 2em;
-    pointer-events: stroke;
+    cursor: pointer;
+    float: right;
+    z-index: 1;
+    transition-duration: 0.5s;
 }
 
+.btn :focus {
+    box-shadow:  5px 5px 10px var(--top-shadow),
+                -5px -5px 10px var(--bottom-shodow);
+}
+
+.content2-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: fit-content;
+    width: fit-content;
+}
+
+.list-icon {
+    border-radius: 100%;
+    background: var(--main-color);
+    box-shadow:  28px 28px 56px var(--top-shadow),
+                -28px -28px 56px var(--bottom-shodow);
+    width: 5.5em;
+    height: 5.5em;
+    margin-bottom: 2em;
+    text-align: center;
+    line-height: 5.5em;
+    font-size: 20px;
+}
+.list-icon:link, :visited, :hover {
+    text-decoration: none;
+}
+
+/* Check Box */
+.allergy {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 0;
+    width: 100%;
+    background:  inherit;
+    box-shadow:  15px 15px 30px var(--top-shadow),
+                -15px -15px 30px var(--bottom-shodow);
+}
+
+ul {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    justify-content: space-evenly;
+}
+.allergy li {
+    /* position: relative; */
+    justify-content: space-evenly;
+    list-style: none;
+    text-align: center;
+}
+.allergy li label {
+    position: relative;
+    cursor: pointer;
+}
+.allergy li label input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+}
+.allergy li label :checked ~ .icon-box {
+    box-shadow: inset 5px 5px 10px var(--top-shadow),
+                inset -5px -5px 10px var(--bottom-shodow);
+}
+.allergy li label :checked ~ .icon-box .fa {
+    transform: scale(0.95);
+}
+.allergy li label .icon-box {
+    width: 60px;
+    height: 60px;
+    background: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow:  5px 5px 10px var(--top-shadow),
+                -5px -5px 10px var(--bottom-shodow);
+    border-radius: 10px;
+}
+i {
+    font-size: 30px;
+    color: #6a9bd8;
+}
+.icon-img {
+    width:30px;
+    height:30px;
+    filter: invert(75%) sepia(38%) saturate(4303%) hue-rotate(186deg) brightness(91%) contrast(86%);
+}
+#al-etc {
+    display:flex;
+    justify-content:center;
+    border-radius: 15px;
+}
+#al-etc > div {
+    width: 26.5em;
+    margin: 5px 0 11px 0;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px var(--top-shadow), 
+                -5px -5px 10px var(--bottom-shodow);
+}
+.allergy-etc {
+    margin:10px;
+    background: inherit;
+    border: none;
+}
+.allergy-etc:focus {
+    outline: none;
+}
 @media screen and (max-width:560px) {
     body {
+        min-width:100%;
         overflow: visible;
     }
+    
     #whole {
-        height: auto;
+        height: fit-content;
+        width:100%;
         margin-top: 1em;
         justify-content: space-evenly;
     }
+    #whole > div.contents {
+        margin: 0;
+        width: 75%;
+    }
+    
     .info {
-        width: 16em;
+        width: 100%;
         height: 3em;
     }
     #whole > div:nth-child(2) {
-        width: 16em; 
+        width:100%;
         border: none;
         text-size-adjust: 0;
+        flex-direction: row;
+        margin-top: 1em;
     }
-    #whole > div:nth-child(3) {
-        width: 16em; 
-        border: none; 
-        text-size-adjust: 0;
-        margin-bottom: 2em;
+    #whole > div:nth-child(2) > a {
+        margin: 0.5em;
+        height: 5em;
+        width: 5em;
+        line-height: 5em;
+    }
+    .btn {
+        width: 10em;
     }
 }

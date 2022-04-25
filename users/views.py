@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from .models import User
+from users.models import *
 from django.contrib import auth
 from django.utils import timezone
 from django.contrib.auth import get_user_model

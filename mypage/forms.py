@@ -1,8 +1,15 @@
-from msilib.schema import Class
+from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth import get_user_model
 from django import forms
-from .models import *
+from users.models import *
 
 class UserForm(forms.ModelForm):
     class Meta:
-        model = User
+        model = get_user_model()
         fields = '__all__'
+
+class UserUpdateForm(UserChangeForm):
+    class Meta:
+        model = get_user_model()
+        fields = ['nickname', 'allergyinfo']
+        # fields = ['nickname', 'allergyinfo', 'location', 'notpreferred', 'preferredcategory_1', 'preferredcategory_2']

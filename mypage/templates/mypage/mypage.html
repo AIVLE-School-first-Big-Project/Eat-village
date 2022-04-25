@@ -4,44 +4,125 @@
 <html lang="ko">
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" type="text/css" href='{% static "mypage.css"%}'>
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" 
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"/>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet"/>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"/>
+        <link rel="stylesheet" type="text/css" href='{% static "mypage.css"%}?after'>
+        <script src="https://code.jquery.com/jquery-latest.min.js"></script>       
+        <script>
+          $(document).ready(function() {
+            var input = $(".allergy-etc")
+            input.focus(function () {
+                input.parent().css({'box-shadow':'inset 5px 5px 10px var(--top-shadow),inset -5px -5px 10px var(--bottom-shodow)'});
+                // input.css({'outline':'none'});
+            });
+            input.blur(function () {
+                input.parent().css({'box-shadow': '5px 5px 10px var(--top-shadow), -5px -5px 10px var(--bottom-shodow)'});
+            });
+          } );
+        </script>
     </head>
     <body>
         <!-- 메뉴 삽입 -->
         {% include "mypage/menu.html" %}
         <!-- 회원 정보 영역 -->
-        <div id="title_wrap">
-            <div id="title">MY ACCOUNT</div>
-            <a href="{% url 'mypage:write' %}" id="heart">💗</a>
-        </div>
-        <div id="whole">
-            <div class="contents">
-                <form method="POST" class="post-form-info">
-                    {% csrf_token %}
-                    <div id="none_edit" class="info">{{form.name.value}}</div>
-                    <div id="none_edit" class="info">{{form.email.value}}</div>
-                    <div id="edit" class="info">비밀번호</div>
-                    <div id="edit" class="info">닉네임</div>
-                    <div id="edit" class="info">알레르기</div>
-                    <a class="info">
-                        <input type="submit" value="수정" class="btn"></input>
-                    </a>
-                </form>
-            </div>
-            <!-- 내가 쓴 글 목록 영역 -->
-            <div class="contents">
-                <a>
-                    <input type="submit" value="전체보기" class="btn"></input>
+        <form method="POST" class="post-form-info">
+            <div>
+                <a for="btn">
+                    <input type="submit" value="수정" class="btn"></input>
                 </a>
-                <br>내가 쓴 글 목록
             </div>
-            <!-- 북마크한 글 목록 영역 -->
-            <div class="contents">
-                <a>
-                    <input type="submit" value="전체보기" class="btn"></input>
-                </a>
-                <br>북마크한 글 목록
+
+            <div id="title_wrap">
+                <div id="title">MY ACCOUNT</div>
             </div>
+            
+            <div id="whole">
+                <div class="contents">          
+                        {% csrf_token %}
+                        <div id="none_edit" class="info">{{form.first_name.value}}</div>
+                        <div id="none_edit" class="info">{{form.email.value}}</div>
+                        <!-- 비밀번호 -->
+                        <div id="edit" class="info">
+                            <input type="password" value="{{form.password.value}}" name="password" id="password"/>
+                        </div>
+                        <!-- 닉네임 -->
+                        <div id="edit" class="info">
+                            <input type="text" value="{{form.nickname.value}}" name="nickname" id="nickname"/>
+                        </div>
+                        <div id="edit" class="info">알레르기</div>
+                </div>
+
+                <div class="content2-wrap">
+                <!-- 좋아요 목록, 북마크 목록, 내가 쓴 글 목록 영역 -->
+                    <div class="contents2">
+                        <a href="{% url 'mypage:write' %}" class="list-icon">
+                            <i class="bi bi-box2-heart-fill"></i>
+                        </a>
+                        <a href="" class="list-icon">
+                            <i class="bi bi-bookmark-check-fill"></i>
+                        </a>
+                        <a href="" class="list-icon">
+                            <i class="bi bi-pencil-fill"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- 알레르기,  -->
+                    <div class="allergy">
+                        <ul>
+                            <li>
+                            <label>
+                                <input type="checkbox" name="allergyinfo" value="달걀">
+                                <div class="icon-box">
+                                    <i class="fa-solid fa-egg"></i>
+                                </div>
+                            </label>
+                            </li>
+                            <li>
+                            <label>
+                                <input type="checkbox" name="allergyinfo" value="우유">
+                                <div class="icon-box">
+                                    <img src="{% static 'milk.png' %}" class="icon-img"/>
+                                </div>
+                            </label>
+                            </li>
+                            <li>
+                            <label>
+                                <input type="checkbox" name="allergyinfo" value="땅콩">
+                                <div class="icon-box">
+                                    <img src="{% static 'peanut.png' %}" class="icon-img"/>
+                                </div>
+                            </label>
+                            </li>
+                            <li>
+                            <label>
+                                <input type="checkbox" name="allergyinfo" value="생선">
+                                <div class="icon-box">
+                                    <i class="fa-solid fa-fish"></i>
+                                </div>
+                            </label>
+                            </li>
+                            <li>
+                            <label>
+                                <input type="checkbox" name="allergyinfo" value="갑각류">
+                                <div class="icon-box">
+                                    <i class="fa-solid fa-shrimp"></i>
+                                </div>
+                            </label>
+                            </li>
+                        </ul>
+
+                        <div id="al-etc">
+                            <div class="icon-box">
+                                <input class="allergy-etc" type="text" name="allergyinfo" value="{{form.allergyinfo.value}}" style="width: inherit;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
         </div>
     </body>
 		
