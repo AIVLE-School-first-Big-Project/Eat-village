@@ -31,6 +31,8 @@ def back(request):
 
 #회원가입#
 
+#회원가입#
+
 def signup(request):
     if request.method=="POST":
         if User.objects.filter(username=request.POST['username']).exists(): #아이디 중복 체크
@@ -43,19 +45,20 @@ def signup(request):
             first_name=request.POST["first_name"] #이름
             password=request.POST["password"] #비밀번호
             email=request.POST["email"] #이메일
-            some_var=request.POST.getlist("test_list") #알레르기 test_list
-            ale = request.POST["ale"] #알레르기 입력
+            some_var=request.POST.getlist("test_list","ale") #알레르기 test_list
+            #ale = request.POST["ale"] #알레르기 입력
             postcode = request.POST['postcode'] # 우편번호
             address = request.POST["address"] # 주소
-            
+            #detailAddress = request.POST["detailAddress"] # 상세주소
 
 
             users_user=User.objects.create_user(username,email,password) 
             users_user.test_list = some_var
-            users_user.ale = ale
+            # users_user.test_list = ale
             users_user.first_name=first_name
             users_user.postcode = postcode
             users_user.address = address
+            #users_user.detailAddress = detailAddress
             users_user.is_active = False
             users_user.save()
             current_site = get_current_site(request) 
