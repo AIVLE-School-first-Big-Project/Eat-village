@@ -32,6 +32,7 @@ names = model.module.names if hasattr(model, 'module') else model.names
 
 def stream():
     #cap = cv2.VideoCapture(0)
+    #cap = cv2.imdecode()
     cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 
     while True:

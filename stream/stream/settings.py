@@ -25,7 +25,7 @@ SECRET_KEY = 'nk^xiwq-m3110+qd@$h@2a*o-$tb12uai+wy719n!99!5zt$)_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['115.23.160.63','192.168.1.114','127.0.0.1']
+ALLOWED_HOSTS = ['115.23.160.63','192.168.1.114','127.0.0.1','[fd1d:4bf8:5ccf:0:d86a:8d39:f84:109c]']
 
 
 # Application definition
@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'webcam'
+    'webcam',
+    'sslserver'
 ]
 
 MIDDLEWARE = [
@@ -49,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
 
 import os
 ROOT_URLCONF = 'stream.urls'
@@ -120,3 +122,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+    'C:/django/eat-village/stream/static/',
+]
