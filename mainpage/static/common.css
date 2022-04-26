@@ -136,6 +136,7 @@ a {
     margin: auto;
     width: 800px;
     height: 450px;
+    text-align: center;
     margin-bottom: 20px;
 }
 
@@ -143,6 +144,54 @@ a {
     width: 100%;
     height: auto;
     background-color: white;
+}
+
+.ingred-input-box {
+    display:flex;
+    flex-wrap:nowrap;
+    flex-direction:row;
+    height: 3rem;
+    border-bottom: 1px solid #ddd;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.ingred-input {
+    width:100%;
+    text-align: center;
+    border: 0;
+    outline: none;
+    font-size: 1.3rem;
+}
+
+.ingred-item {
+    position:relative;
+    display:flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 3rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.ingred-item:hover .delbtn {
+    opacity: 1;
+}
+
+.ingred {
+    font-size: 1.3rem;
+    padding: 0 1rem;
+    width:100%;
+}
+
+.delbtn {
+    opacity: 1;
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.5rem;
+    font-weight: lighter;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 850px) {

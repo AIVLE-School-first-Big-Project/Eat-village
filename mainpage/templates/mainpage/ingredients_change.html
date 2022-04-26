@@ -39,10 +39,22 @@
         </a>
     </nav>
 
-    <
+    <div id="ingredient_container">
+        <div class="ingred-input-box">
+            <input type="text" class="ingred-input" placeholder="추가할 재료를 입력해주세요">
+        </div>
+
+        <ul class="ingred-list">
+        </ul>
+
+        <div id="button">
+            <button id="btn1" onclick="ingred_change_comp();">재료 수정</button>
+        </div>
+
+
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="{% static 'main.js' %}"></script>
+    <script src="{% static 'ingred.js' %}"></script>
     <script>
         /* 위치기반 현재 날씨 정보 */
         if (navigator.geolocation) {
@@ -67,6 +79,11 @@
             var food_cate = document.getElementById('searchfield').value;
             if (food_cate.length == 0) { return false;}
             location.href = "{% url 'mainpage:search' %}";
+        }
+
+        /* 재료 수정 완료 후 다시 재료 페이지로 이동 */
+        function ingred_change_comp() {
+            location.href = "{% url 'mainpage:ingredient_result' %}";
         }
     </script>
 </body>
