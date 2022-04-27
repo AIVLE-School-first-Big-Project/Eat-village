@@ -11,5 +11,5 @@ class UserForm(forms.ModelForm):
 class UserUpdateForm(UserChangeForm):
     class Meta:
         model = get_user_model()
-        fields = ['nickname', 'allergyinfo']
+        fields = ['nickname', 'allergyinfo', 'location']
         # fields = ['nickname', 'allergyinfo', 'location', 'notpreferred', 'preferredcategory_1', 'preferredcategory_2']

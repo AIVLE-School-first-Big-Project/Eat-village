@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-$^v2tl5yf4vcnuz(1czrvvj+f)$9@2ay*7vc!-ybj30nyxq-%*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['f903-121-137-131-47.jp.ngrok.io', '127.0.0.1']
+ALLOWED_HOSTS = ['0769-121-137-131-47.jp.ngrok.io', '127.0.0.1']
 
 
 # Application definition
@@ -88,7 +88,7 @@ DATABASES = {
     'NAME': 'recipe',
     'USER': 'root',
     'PASSWORD':'12341234',
-    'HOST':'34.71.253.5',
+    'HOST':'35.239.202.128',
     'PORT':3306
     }
 }

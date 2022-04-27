@@ -112,8 +112,7 @@ form {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    height: fit-content;
-    width: fit-content;
+    width: 30em;
 }
 
 .list-icon {
@@ -140,7 +139,7 @@ form {
     justify-content: space-evenly;
     flex-wrap: wrap;
     border-radius: 10px;
-    padding: 20px;
+    padding: 1em;
     margin: 0;
     width: 100%;
     background:  inherit;
@@ -202,20 +201,26 @@ i {
 }
 #al-etc > div {
     width: 26.5em;
-    margin: 5px 0 11px 0;
     border-radius: 10px;
     box-shadow: 5px 5px 10px var(--top-shadow), 
                 -5px -5px 10px var(--bottom-shodow);
+    margin: 5px 0 11px 0;
 }
 .allergy-etc {
     margin:10px;
+}
+input {
     background: inherit;
     border: none;
 }
-.allergy-etc:focus {
+input:focus {
     outline: none;
 }
 @media screen and (max-width:560px) {
+    html {
+        padding:0;
+        widows:100%;
+    }
     body {
         min-width:100%;
         overflow: visible;
