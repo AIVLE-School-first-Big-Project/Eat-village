@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from .models import User
+from users.models import *
 from django.contrib import auth
 from django.utils import timezone
 from django.contrib.auth import get_user_model
@@ -47,7 +47,7 @@ def signup(request):
             users_user.is_active = True
             users_user.save()
             current_site = get_current_site(request) 
-            message = render_to_string('users/activation.html', {
+            message = render_to_string('activation.html', {
                 'user': users_user,
                 'domain': current_site.domain,
                 'uid': urlsafe_base64_encode(force_bytes(users_user.pk)),
@@ -57,11 +57,11 @@ def signup(request):
             mail_to = request.POST["email"]
             email = EmailMessage(mail_title, message, to=[mail_to])
             email.send()
-            return render(request,"users/signup2.html")
+            return render(request,"signup2.html")
         else:
-            return render(request,"users/signup3.html")  
+            return render(request,"signup3.html")  
     
-    return render(request,"users/signup.html")
+    return render(request,"signup.html")
 
 # 이메일 인증 ( 계정 활성화 )
 def activate(request, uid64, token ,*args, **kwargs):
@@ -74,9 +74,9 @@ def activate(request, uid64, token ,*args, **kwargs):
         users_user.is_active = True
         users_user.save()
         auth.login(request, users_user)
-        return redirect("users:login")
+        return redirect("/users/login")
     else:
-        return render(request, 'users/home.html', {'error' : '계정 활성화 오류'})
+        return render(request, 'home.html', {'error' : '계정 활성화 오류'})
     return 
 
 
@@ -102,9 +102,9 @@ def login(request):
             return redirect('/users/home/')
         # 실패
         else:
-            return render(request, 'users/back.html')
+            return render(request, 'back.html')
             #return render(request, 'member/error.html',  {'error': 'username or password is incorrect.'}))
     else:
-        return render(request, 'users/login.html')
+        return render(request, 'login.html')
 
 

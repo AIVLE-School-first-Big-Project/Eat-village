@@ -23,6 +23,9 @@ media
 # C extensions
 *.so
 
+# email
+my_setting.py
+
 # Distribution / packaging
 .Python
 build/

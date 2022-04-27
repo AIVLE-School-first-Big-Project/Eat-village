@@ -1,0 +1,19 @@
+{% load static %}
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href='{% static "sidebar.css"%}?after'>
+<!-- 메뉴 삽입 -->
+<div class="menu">
+    <label for="expand-menu"><div id="menu_l">메뉴</div></label>
+    <input type="checkbox" id="expand-menu" name="expand-menu">
+    <ul>
+        <li><a href="#" class="item"><div>마이페이지</div></a></li>
+        <li><a href="#" class="item"><div>후기 게시판</div></a></li>
+        <li><a href="#" class="item"><div>레시피 공유</div></a></li>
+        <li><a href="#" class="item"><div>로그인</div></a></li>
+        <li><a href="#" class="item"><div>추천목록</div></a></li>
+        <li><a href="#" class="item"><div>설정</div></a></li>
+    </ul>
+</div>

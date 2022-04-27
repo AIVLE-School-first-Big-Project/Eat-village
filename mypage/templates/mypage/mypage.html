@@ -1,0 +1,155 @@
+{% load static %}
+<!-- 베이스 html -->
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" 
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"/>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet"/>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"/>
+        <link rel="stylesheet" type="text/css" href='{% static "mypage.css"%}'>
+        <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+        <script src="https://code.jquery.com/jquery-latest.min.js"></script>       
+        <script>
+          $(document).ready(function() {
+            // 포커스되면 부모태그의 상태가 변함
+            var input = $(".allergy-etc")
+            input.focus(function () {
+                input.parent().css({'box-shadow':'inset 5px 5px 10px var(--top-shadow),inset -5px -5px 10px var(--bottom-shodow)'});
+            });
+            input.blur(function () {
+                input.parent().css({'box-shadow': '5px 5px 10px var(--top-shadow), -5px -5px 10px var(--bottom-shodow)'});
+            });
+            
+            // 주소 변경
+            const addr = $("#location");
+            addr.mousedown(function () {
+                addr.parent().css({'box-shadow':'inset 15px 15px 30px var(--top-shadow),inset -15px -15px 30px var(--bottom-shodow)'});
+            });
+            addr.mouseup(function () {
+                addr.parent().css({'box-shadow': '15px 15px 30px var(--top-shadow), -15px -15px 30px var(--bottom-shodow)'});
+            });
+            addr.click(function () {
+                new daum.Postcode({ 
+                oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+                    
+                    var address = data.jibunAddress; // 지번 주소      
+                    var dong = data.bname; // 법정동/법정리 이름
+                    addr.val(dong);
+                    }
+                }).open();
+            });
+            
+
+          } );
+        </script>
+    </head>
+    <body>
+        <!-- 메뉴 삽입 -->
+        {% include "mypage/menu.html" %}
+        <!-- 회원 정보 영역 -->
+        <form method="POST" class="post-form-info">
+            <div>
+                <a for="btn">
+                    <input type="submit" value="수정" class="btn"></input>
+                </a>
+            </div>
+
+            <div id="title_wrap">
+                <div id="title">MY ACCOUNT</div>
+            </div>
+            
+            <div id="whole">
+                <div class="contents">          
+                        {% csrf_token %}
+                        <div id="none_edit" class="info">{{form.first_name.value}}</div>
+                        <div id="none_edit" class="info">{{form.email.value}}</div>
+                        <!-- 비밀번호 -->
+                        <div id="edit" class="info">
+                            <input type="password" value="{{form.password.value}}" name="password" id="password" style="text-align: center;"/>
+                        </div>
+                        <!-- 닉네임 -->
+                        <div id="edit" class="info">
+                            <input type="text" value="{{form.nickname.value}}" name="nickname" id="nickname" style="text-align: center;"/>
+                        </div>
+                        <!--  -->
+                        <div id="edit" class="info">
+                            <input type="text" value="{{form.address.value}}" name="address" id="address" style="text-align: center;"/>
+                        </div>
+                </div>
+
+                <div class="content2-wrap">
+                <!-- 좋아요 목록, 북마크 목록, 내가 쓴 글 목록 영역 -->
+                    <div class="contents2">
+                        <a href="{% url 'mypage:write' %}" class="list-icon">
+                            <i class="bi bi-box2-heart-fill"></i>
+                        </a>
+                        <a href="" class="list-icon">
+                            <i class="bi bi-bookmark-check-fill"></i>
+                        </a>
+                        <a href="" class="list-icon">
+                            <i class="bi bi-pencil-fill"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- 알레르기,  -->
+                    <div class="allergy">
+                        <ul>
+                            <li>
+                            <label>
+                                <input type="checkbox" name="allergyinfo" id="allergyinfo" value="달걀" {{check_boolean.0}}>
+                                <div class="icon-box">
+                                    <i class="fa-solid fa-egg"></i>
+                                </div>
+                            </label>
+                            </li>
+                            <li>
+                            <label>
+                                <input type="checkbox" name="allergyinfo" id="allergyinfo" value="우유" {{check_boolean.1}}>
+                                <div class="icon-box">
+                                    <img src="{% static 'milk.png' %}" class="icon-img"/>
+                                </div>
+                            </label>
+                            </li>
+                            <li>
+                            <label>
+                                <input type="checkbox" name="allergyinfo" id="allergyinfo" value="땅콩" {{check_boolean.2}}>
+                                <div class="icon-box">
+                                    <img src="{% static 'peanut.png' %}" class="icon-img"/>
+                                </div>
+                            </label>
+                            </li>
+                            <li>
+                            <label>
+                                <input type="checkbox" name="allergyinfo" id="allergyinfo" value="생선" {{check_boolean.3}}>
+                                <div class="icon-box">
+                                    <i class="fa-solid fa-fish"></i>
+                                </div>
+                            </label>
+                            </li>
+                            <li>
+                            <label>
+                                <input type="checkbox" name="allergyinfo" id="allergyinfo" value="갑각류" {{check_boolean.4}}>
+                                <div class="icon-box">
+                                    <i class="fa-solid fa-shrimp"></i>
+                                </div>
+                            </label>
+                            </li>
+                        </ul>
+
+                        <div id="al-etc">
+                            <div class="icon-box">
+                                <input class="allergy-etc" type="text" name="allergyinfo" id="allergyinfo" value="{{allergy|join:', '}}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        </div>
+    </body>
+		
+</html>
