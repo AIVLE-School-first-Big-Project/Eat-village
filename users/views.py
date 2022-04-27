@@ -34,33 +34,26 @@ def back(request):
 #회원가입#
 
 def signup(request):
+    user_db = User.objects.all()
     if request.method=="POST":
-        if User.objects.filter(username=request.POST['username']).exists(): #아이디 중복 체크
-            messages.warning(request, 'already exists ID')
-            #messages.add_message(self.request, messages.ERROR, 'already exists ID')
-            #messages.info(request, 'already exists ID')
-            #return render(request, 'users/signup_error.html')
-        if request.POST['password1'] ==request.POST['password']:   
+        if user_db.filter(username=request.POST['username']).exists(): #아이디 중복 체크
+            messages.warning(request, "ID already exists")
+            return redirect("users:signup")
+        if request.POST['confirm_password'] ==request.POST['password']:   
             username=request.POST["username"] #아이디
             first_name=request.POST["first_name"] #이름
             password=request.POST["password"] #비밀번호
             email=request.POST["email"] #이메일
-            some_var=request.POST.getlist("test_list","ale") #알레르기 test_list
-            #ale = request.POST["ale"] #알레르기 입력
-            postcode = request.POST['postcode'] # 우편번호
+            some_var=request.POST.getlist("test_list","allergy") #알레르기 test_list
             address = request.POST["address"] # 주소
-            #detailAddress = request.POST["detailAddress"] # 상세주소
-
 
             users_user=User.objects.create_user(username,email,password) 
             users_user.test_list = some_var
-            # users_user.test_list = ale
             users_user.first_name=first_name
-            users_user.postcode = postcode
             users_user.address = address
-            #users_user.detailAddress = detailAddress
             users_user.is_active = False
             users_user.save()
+
             current_site = get_current_site(request) 
             message = render_to_string('activation.html', {
                 'user': users_user,
@@ -74,7 +67,9 @@ def signup(request):
             email.send()
             return render(request,"signup2.html")
         else:
-            return render(request,"signup3.html")  
+            messages.warning(request, 'Password do not match.')
+            return redirect("users:signup")
+            #return render(request,"signup3.html")  
     
     return render(request,"signup.html")
 

@@ -137,6 +137,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #yeon
 
+import os
 import my_setting
 
 EMAIL_HOST = my_setting.EMAIL['EMAIL_HOST']

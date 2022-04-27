@@ -9,37 +9,38 @@
          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-         
+         <script src="https://code.jquery.com/jquery-latest.min.js"></script>
          {% load static %}
+         <script src="{% static 'a.js' %}"></script>
          <link rel="stylesheet" href="{% static 'style1.css' %}">
          <html lang = "ko">
-            <head>
-                <meta charset="UTF-8">
-                <title>Signup</title>
-                <link rel = "stylesheet" href = "style1.css">
-                <script src = "jquery-3.4.1.js"></script>
-            </head>         
+         <title>Signup</title>
+           
    
-
 
     
 <body>
-    {% include "layout.html" %} 
      <div class="signup"> 
         <div class="login-form">
-            <form method="POST" >
+            
             {% csrf_token %}
+        <form name="myForm" onsubmit="return fn_validateId()" method="post">
+            {% include "layout.html" %} 
             <div class="login-form">
                     <h1><center>SIGN UP</center></h1>
                     <b><center>EAT VILLAGE</center><b>
                 <div class="int-area">
                     <input name='username' 
+                    id = "username"
                     type="text" 
                     check_result="fail" 
                     autocomplate = "off" required />
                     <label for = "username">ID</label>
+                    
                 </div>
-
+                {% comment %} <p style="text-align:center;">Please enter only English and numbers. (max10)</p> {% endcomment %}
+            
+        
                 <div class="int-area">
                     <input name='email' 
                     type="email" 
@@ -57,19 +58,23 @@
                 </div>
 
                 <div class="int-area">
-                    <input name='password' 
+                    <input name='password'
                     type="password" 
                     check_result="fail" 
+                    minlength = '6'
+                    maxlength = '10' 
                     autocomplate = "off" required />
                     <label for = "password">PASSWORD</label>
                 </div>
 
                 <div class="int-area">
-                    <input name='password1' 
+                    <input name='confirm_password' 
                     type="password" 
                     check_result="fail" 
                     autocomplate = "off" required />
-                    <label for = "password1">CONFIRM PASSWORD</label>
+                    <label for = "confirm_password">CONFIRM PASSWORD</label>             
+                
+                
                 </div>
 
 
@@ -77,8 +82,8 @@
 
                 <div class="int-area">
                     <input type="button" onclick="sample6_execDaumPostcode()" check_result="fail" value="Zip Code (click)" autocomplate = "off" required />
-                    <input name = "postcode" type="text" id="postcode" placeholder="POSTCODE"  autocomplate = "off" required />
-                    <input name = "address" type="text" id="address" placeholder="ADDRESS"  autocomplate = "off" required /><br>
+                    <input name = "postcode" type="text" id="postcode" placeholder="POSTCODE"  required />
+                    <input name = "address" type="text" id="address" placeholder="ADDRESS"   required /><br>
                     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
                     <script>
                         function sample6_execDaumPostcode() {
@@ -120,25 +125,38 @@
 
                 <br>
                 <div>
-                    Please enter an allergy that is not in the checkbox.
-                              <br> (If not, please enter None.)
+                    Enter an allergy that is not in the checkbox.
+                    <br> (If not, please enter none)
+                              
                 </div>
                 <div class="int-area">
-                    <input name='ale' 
+                    <input name='test_list' 
                     type="text" 
                     check_result="fail" 
                     autocomplate = "off" required />
-                    <label for = "ale">ALLERGY</label>
+                    <label for = "test_list">ALLERGY</label>
                 </div>
 
                 <div class="btn-area">
                     <button id="btn" 
-                    value="SIGN UP"
-                    type="submit">SIGN UP</button>    
-            </form>
+                    value="Submit"
+                    type="submit"
+                    onclick="fn_validateId();">SIGN UP</button>    
+                </div>
+
+                
         </div>
     </div>    
-       
+                <script type = "text/javascript">
 
-    </body>
+                    
+                </script>
+
+
+
+
+        </form>
+        </head>  
+        </body>
+
 </html>
