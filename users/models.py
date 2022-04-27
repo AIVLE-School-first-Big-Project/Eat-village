@@ -27,7 +27,7 @@ class User(AbstractUser):
 class Communityboard(models.Model):
     boardid = models.AutoField(db_column='boardID', primary_key=True)  
     userid = models.ForeignKey(User, models.DO_NOTHING, db_column='userID', null=True)  
-    header = models.CharField(max_length=50)
+    header = models.CharField(max_length=50, choices=(('요리재료게시판', '요리재료게시판'), ('자유게시판', '자유게시판')))
     title = models.CharField(max_length=50)
     nickname = models.CharField(max_length=20)
     detail = models.CharField(max_length=5000)
@@ -41,8 +41,8 @@ class Communityboard(models.Model):
 
 class Communityboardimage(models.Model):
     photoid = models.AutoField(db_column='photoID', primary_key=True)  
-    boardid = models.ForeignKey('Recipeboard', db_column='boardID', null=True, on_delete=models.CASCADE)  
-    image = models.ImageField(upload_to=upload_image)
+    boardid = models.ForeignKey('Communityboard', db_column='boardID', null=True, on_delete=models.CASCADE)  
+    image = models.ImageField(upload_to='communityboard/', null=True, verbose_name="")
     time = models.DateTimeField()
 
     class Meta:
@@ -80,8 +80,11 @@ class Recipeboard(models.Model):
 class Recipeboardimage(models.Model):
     photoid = models.AutoField(db_column='photoID', primary_key=True)  
     boardid = models.ForeignKey(Recipeboard, db_column='boardID', null=True, on_delete=models.CASCADE)  
-    image = models.ImageField(upload_to=upload_image)
+    image = models.ImageField(upload_to='recipeboard/', null=True, verbose_name="")
     time = models.DateTimeField()
+
+    def __str__(self):
+        return self.name + ": " + str(self.imagefile)
 
     class Meta:
         managed = True

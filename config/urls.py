@@ -22,6 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('recipeboard/', include('recipeboard.urls')),
     path('', include('users.urls')),
+    path('communityboard/', include('communityboard.urls'))
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

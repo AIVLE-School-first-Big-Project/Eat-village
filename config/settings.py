@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'recipeboard',
+    'communityboard',
     'mypage',
     'users', # yeon
 ]
@@ -62,10 +63,20 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
 ]
+
+from django.contrib import messages
+MESSAGE_TAGS = {
+    messages.DEBUG: 'alert-info',
+    messages.INFO: 'alert-info',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning',
+    messages.ERROR: 'alert-danger',
+}
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
@@ -79,7 +90,7 @@ DATABASES = {
         'NAME': 'recipe',
         'USER': 'root',
         'PASSWORD':'12341234',
-        'HOST':'34.71.253.5',
+        'HOST':'35.239.202.128',
         'PORT':3306,
         'OPTIONS': {
             'charset': 'utf8mb4',
@@ -150,6 +161,8 @@ AUTH_USER_MODEL = 'users.User'
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS=[

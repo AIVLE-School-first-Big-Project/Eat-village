@@ -171,8 +171,7 @@ def recipeboard_create(request): #게시물생성
         formset = Imageformset(request.POST, request.FILES)
         if form.is_valid() and formset.is_valid():
             board = Recipeboard(**form.cleaned_data)
-            if request.user.is_authenticated:
-                board.userid = request.user
+            board.userid = request.user
             board.recommended = 0
             board.view = 0
             board.time = timezone.now()
@@ -184,8 +183,8 @@ def recipeboard_create(request): #게시물생성
                 image.boardid = board
                 image.time = timezone.now()
                 image.save()
-            # messages.success(request, "작성완료!")
-            return redirect('recipeboard:recipeboard_index')
+        # messages.success(request, "작성완료!")
+        return redirect('recipeboard:recipeboard_index')
     else:
         form = Recipeboardform()
         formset = Imageformset(queryset=Recipeboardimage.objects.none())

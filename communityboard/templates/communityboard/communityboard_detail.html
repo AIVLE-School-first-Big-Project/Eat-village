@@ -8,7 +8,7 @@
 {% endfor %}
 
 게시물 내용이 표시됩니다.
-<br><a href="{% url 'recipeboard:recipeboard_index' %}">목록으로돌아가기</a>
+<br><a href="{% url 'communityboard:communityboard_index' %}">목록으로돌아가기</a>
 
 <br>제목: {{board.title}}<br>
 
@@ -17,17 +17,17 @@
 <br>추천수: {{board.recommended}}
 {% if likedata %}
     <br>
-    <form method = "post", action="{% url 'recipeboard:recipeboard_recommendcancel' board.boardid %}">
+    <form method = "post", action="{% url 'communityboard:communityboard_recommendcancel' board.boardid %}">
         {% csrf_token %}
         <button type="submit", name='cancelrecommend'>추천취소</button>
     </form>
 {% elif likedata.userid == user.userid %}
-    <br><a href="{% url 'recipeboard:recipeboard_update' board.boardid %}">수정</a>
-    <br><a href="{% url 'recipeboard:recipeboard_delete' board.boardid %}">삭제</a> 
+    <br><a href="{% url 'communityboard:communityboard_update' board.boardid %}">수정</a>
+    <br><a href="{% url 'communityboard:communityboard_delete' board.boardid %}">삭제</a> 
 {% else %}
     <br>
     <br>
-    <form method = "post", action="{% url 'recipeboard:recipeboard_recommend' board.boardid %}">
+    <form method = "post", action="{% url 'communityboard:communityboard_recommend' board.boardid %}">
         {% csrf_token %}
         <button type="submit" name='recommend'>추천</button>
     </form>
@@ -53,10 +53,10 @@
     <td>{{comment.userid.nickname}}</td>
     <td>{{comment.detail}}</td>
     <td>{{comment.time}}</td>
-    <td><a href="{% url 'recipeboard:recipeboard_comment' board.boardid comment.commentid %}">대댓글달기</a></td>
+    <td><a href="{% url 'communityboard:communityboard_comment' board.boardid comment.commentid %}">대댓글달기</a></td>
     <td>
         {% if babycomment.detail != "삭제된 댓글입니다." %}
-        <a href="{% url 'recipeboard:recipecomment_delete' comment.commentid %}">댓글삭제하기</a></td>
+        <a href="{% url 'communityboard:communitycomment_delete' comment.commentid %}">댓글삭제하기</a></td>
         {% endif %}
     <br>
     {% for babycomment in babycomment %}
@@ -67,7 +67,7 @@
         <td>{{babycomment.time}}</td>
         <td>
             {% if babycomment.detail != "삭제된 댓글입니다." %}
-            <a href="{% url 'recipeboard:recipecomment_delete' comment.commentid %}">댓글삭제하기</a>
+            <a href="{% url 'communityboard:communitycomment_delete' comment.commentid %}">댓글삭제하기</a>
             {% endif %}
         </td>
         <br>
@@ -78,7 +78,7 @@
 <div class="container">
     <form method="post" action="">
         {% csrf_token %}
-        <td>{{ recipecommentform.as_p }}</td>
+        <td>{{ communitycommentform.as_p }}</td>
         <td><input type="submit" value="작성완료", name='comment'></td>
     </form>
 </div>

@@ -6,7 +6,7 @@
     {{ message }}
 </div>
 
-<br><a href="{% url 'recipeboard:recipeboard_detail' boardid %}">게시물로돌아가기</a>
+<br><a href="{% url 'communityboard:communityboard_detail' boardid %}">게시물로돌아가기</a>
 <br>
 
 <td>{{comment.userid.nickname}}</td>
@@ -22,7 +22,7 @@
     <td>{{babycomment.time}}</td>
     <td>
         {% if babycomment.detail != "삭제된 댓글입니다." %}
-        <a href="{% url 'recipeboard:recipecomment_delete' babycomment.commentid %}">댓글삭제하기</a>
+        <a href="{% url 'communityboard:communitycomment_delete' babycomment.commentid %}">댓글삭제하기</a>
         {% endif %}
     </td>
     <br>
@@ -32,7 +32,7 @@
 <div class="container">
     <form method="post" action="">
         {% csrf_token %}
-        <td>{{ recipecommentform.as_p }}</td>
+        <td>{{ communitycommentform.as_p }}</td>
         <td><input type="submit" value="작성완료", name='comment'></td>
     </form>
 </div>
