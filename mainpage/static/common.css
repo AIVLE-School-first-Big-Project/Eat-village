@@ -1,0 +1,279 @@
+body {
+    margin: 0;
+}
+
+ul, li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.navbar {
+    display:flex;
+    justify-content:space-between;
+    align-items: center;
+    background-color: mediumaquamarine;
+    padding: 8px 12px;
+    margin-bottom: 50px;
+}
+.navbar_logo {
+    font-size:24px;
+    color: white;
+}
+.navbar_logo img {
+    display:block;
+}
+.navbar_menu {
+    display: flex;
+    list-style: none;
+    padding-left: 0;
+}
+.navbar_menu li {
+    padding: 8px 12px;
+}
+.navbar_menu li:hover {
+    background-color: orange;
+    border-radius: 4px;
+}
+.navbar_right {
+    list-style: none;
+    color: white;
+    padding-left: 0;
+}
+.navbar_togglebtn {
+    display: none;
+    position: absolute;
+    right: 32px;
+    font-size: 24px;
+    color: black;
+}
+
+.searchbtn {
+    width:50px;
+    height:25px;
+    position:relative;
+}
+
+.weather {
+    float: right;
+}
+
+.temp,
+.icon {
+    display: inline-block;
+    vertical-align:middle;
+}
+
+#container {
+    margin: auto;
+    width: 800px;
+    height: 450px;
+    margin-bottom: 20px;
+}
+#videoElement {
+    width: 100%;
+    height: auto;
+    background-color: #666;
+}
+#button {
+    margin-top: 20px;
+    text-align: center;
+}
+#btn1 {
+    display: inline-block;
+}
+#btn2 {
+    display: inline-block;
+}
+
+.recomm_list {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.recomm_list > ul {
+    margin: 0 -10px;
+}
+
+.recomm_list > ul > li {
+    width: calc(100% / 6);
+    padding: 0 10px;
+}
+
+.recomm_list > ul > li > .recipe_title {
+    text-align: center;
+    font-weight: bold;
+}
+
+.recomm_list > ul > li > .recipe_title:hover {
+    text-decoration: underline;
+}
+
+.recipe {
+    float: left;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+.recipe_list::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.recipe_img > img {
+    display:block;
+    width:100%;
+    cursor: pointer;
+}
+
+#ingredient_container {
+    margin: auto;
+    width: 800px;
+    height: 450px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#ingredient_result {
+    width: 100%;
+    height: auto;
+    background-color: white;
+}
+
+.ingred-input-box {
+    display:flex;
+    flex-wrap:nowrap;
+    flex-direction:row;
+    height: 3rem;
+    border-bottom: 1px solid #ddd;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.ingred-input {
+    width:100%;
+    text-align: center;
+    border: 0;
+    outline: none;
+    font-size: 1.3rem;
+}
+
+.ingred-item {
+    position:relative;
+    display:flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 3rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.ingred-item:hover .delbtn {
+    opacity: 1;
+}
+
+.ingred {
+    font-size: 1.3rem;
+    padding: 0 1rem;
+    width:100%;
+}
+
+.delbtn {
+    opacity: 1;
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.5rem;
+    font-weight: lighter;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 850px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 8px 24px;
+    }
+    .navbar_menu {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    .navbar_menu li {
+        width: 100%;
+        text-align: center;
+    }
+    .navbar_right {
+        display: none;
+        text-align: center;
+        justify-content: center;
+        width: 100%;
+    }
+    .search {
+        text-align: center;
+    }
+    .weather {
+        text-align: center;
+        float:none;
+    }
+    .navbar_togglebtn {
+        display: block;
+    }
+    .navbar_togglebtn:hover {
+        color: orange;
+    }
+    .navbar_menu.active {
+        display: flex;
+    }
+    .navbar_right.active {
+        display: block;
+    }
+    #container {
+        width: 100%;
+    }
+    #videoElement {
+        width: 100%;
+    }
+    .recomm_list > ul > li {
+        width: calc(100% / 5);
+    }
+    #ingredient_container {
+        align-self: center;
+        text-align: center;
+        width: 50%;
+    }
+    #ingredient_result {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .recomm_list > ul > li {
+        width: calc(100% / 4);
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .recomm_list > ul > li {
+        width: calc(100% / 3);
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .recomm_list > ul > li {
+        width: calc(100% / 2);
+    }
+}
+
+@media screen and (max-width: 300px) {
+    .recomm_list > ul > li {
+        width: calc(100% / 1);
+    }
+}

@@ -6,6 +6,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
+import os
 
 from pathlib import Path
 import os
@@ -25,12 +26,13 @@ SECRET_KEY = 'django-insecure-$^v2tl5yf4vcnuz(1czrvvj+f)$9@2ay*7vc!-ybj30nyxq-%*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0769-121-137-131-47.jp.ngrok.io', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'mainpage',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,7 +42,7 @@ INSTALLED_APPS = [
     'mypage',
     'recipeboard',
     'communityboard',
-    'mypage',
+    'mainpage',
     'users', # yeon
 ]
 
