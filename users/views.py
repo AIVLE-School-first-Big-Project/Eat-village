@@ -117,4 +117,9 @@ def login(request):
     else:
         return render(request, 'login.html')
 
+# 로그아웃 #
 
+def logout(request):
+        auth.logout(request)
+        # 메인
+        return redirect('/users/home/')
