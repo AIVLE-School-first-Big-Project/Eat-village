@@ -48,7 +48,7 @@ def signup(request):
             address = request.POST["address"] # 주소
 
             users_user=User.objects.create_user(username,email,password) 
-            users_user.test_list = some_var
+            users_user.allergyinfo = some_var
             users_user.first_name=first_name
             users_user.address = address
             users_user.is_active = False
