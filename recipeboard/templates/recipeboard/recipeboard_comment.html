@@ -1,0 +1,39 @@
+{% for message in messages %}
+<div class="alert {{ message.tags }} alert-auto-dismissible alert-dismissible notification-container text-center" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    {{ message }}
+</div>
+{% endfor %}
+
+<br><a href="{% url 'recipeboard:recipeboard_detail' boardid %}">게시물로돌아가기</a>
+<br>
+
+<td>{{comment.userid.nickname}}</td>
+<td>{{comment.detail}}</td>
+<td>{{comment.time}}</td>
+<br>
+<br>대댓글
+<br>
+{% for babycomment in babycomment %}
+    {% if babycomment.parentcommentid == comment.commentid %}
+    <td>{{babycomment.userid.nickname}}</td>
+    <td>{{babycomment.detail}}</td>
+    <td>{{babycomment.time}}</td>
+    <td>
+        {% if babycomment.detail != "삭제된 댓글입니다." %}
+        <a href="{% url 'recipeboard:recipecomment_delete' babycomment.commentid %}">댓글삭제하기</a>
+        {% endif %}
+    </td>
+    <br>
+    {% endif %}
+{% endfor %}
+
+<div class="container">
+    <form method="post" action="">
+        {% csrf_token %}
+        <td>{{ recipecommentform.as_p }}</td>
+        <td><input type="submit" value="작성완료", name='comment'></td>
+    </form>
+</div>

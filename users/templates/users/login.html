@@ -1,0 +1,160 @@
+{% comment %} <html lang="en">
+   <head>
+       
+        <title>EAT VILLAGE login</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'style2.css' %}">
+
+</head>
+<body>
+   <div class ="login">
+         <div class="account-login">
+            
+            <form method="post" action="{% url 'users:login' %}">
+               {% csrf_token %}
+               <div class="login-form">
+                  <h1><center>EAT VILLAGE</center></h1>
+                  <br>
+                  <div class="form-group">
+                     
+
+                     <label for="username"></label>
+                     <input type="text" class="form-control" name="username" id="username" placeholder="User ID"
+                        value="{{ form.user_email.value | default_if_none:'' }}">
+                  </div>
+                  <div class="form-group">
+                  
+                     <input type="password" class="form-control" name="password" 
+                        id="password" placeholder="Password" value="{{ form.password.value | default_if_none:'' }}">
+                  </div>
+                  <div class="remember">
+                     <label class="custom-checkbox">Remember me
+                     <input type="checkbox" name="remember_session"/>
+                     <span class="checkmark"></span>
+                     </label>
+                     
+                  </div>
+                  <b><button type="submit" class="btn btn-primary">LOGIN</button></b>
+                  <p>Welcome to the 'EAT VILLAGE'   <a href="/users/signup">Sign up</a></p>
+               
+               </div>   
+               </form>
+         
+         </div>
+   </div>
+</body>
+
+</html>  {% endcomment %}
+
+
+
+
+{% comment %} 
+
+style 
+
+{% endcomment %}
+
+
+
+
+   <head>
+       
+        <title>EAT VILLAGE login</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'style.css' %}">
+        <html lang = "ko">
+        <head>
+            <meta charset="UTF-8">
+            <title>Login</title>
+            <link rel = "stylesheet" href = "style.css">
+            <script src = "jquery-3.4.1.js"></script>
+        </head>
+    </head>
+<body>
+    <section class ="login-form">
+            <h1>EAT VILLAGE</h1>
+            <form method="post" action="{% url 'users:login' %}">
+               {% csrf_token %}
+               <div class="int-area">
+                   <input type="text" 
+                    
+                   name="username" 
+                   id="username" 
+                   
+                   value="{{ form.user_email.value | default_if_none:'' }}"
+                   autocomplate = "off" required>
+                   <label for = "username">ID</label>
+                </div>
+                <div class="int-area">
+                    <input type="password" 
+                     
+                    name="password" 
+                    id="password" 
+                    
+                    value="{{ form.password.value | default_if_none:'' }}"
+                    autocomplate = "off" required>
+                    <label for = "password">PASSWORD</label>
+                </div>
+
+                {% comment %} <div class="remember">
+                     <label class="custom-checkbox">Remember me
+                     <input type="checkbox" name="remember_session"/>
+                     <span class="checkmark"></span>
+                </label> {% endcomment %}
+                <div class="btn-area">    
+                  <b><button type="submit" class="btn btn-primary">LOGIN</button></b>
+                </div> 
+            </form>
+            <div class="caption">  
+                <p>Welcome to the 'EAT VILLAGE'   
+                <br><a href="{% url 'users:signup' %}">Sign up</a></p>
+            </div>   
+    </section>
+
+    <script>
+        let id = $('#username');
+        let pw = $('#password');
+        let btn = $('#btn');
+
+        $(btn).on('click', function(){
+            if($(id).val() =="") {
+                $(id).next('label').addClass('warning');
+                setTimeout(function() {
+                    $('label').removeClass('warning');
+                },1500);
+            }
+            else if($(pw).val() == "") {
+                $(pw).next('label').addClass('warning');
+                setTimeout(function(){
+                    $('label').removeClass('warning');
+                },1500);
+            }
+        });
+    </script>
+</body>
+
+
+
+
+
+
+</body>
+
+</html> 
+
+
+
+

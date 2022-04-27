@@ -1,0 +1,41 @@
+{% comment %} 회원가입 비밀번호 일치 안할 때 {% endcomment %}
+<html lang="en">
+   <head>
+       
+        <title>Pet dada signup error</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'style3.css' %}">
+
+</head>
+<body>
+   <div class ="login">
+      
+         <div class="account-login">
+            
+            <form method="post" class="login-form" action="{% url 'users:login' %}">
+               <h1><center>Eat Village</h1>
+               
+               <br> <br>
+               <div style="color: #57422D;"
+
+               <h1><font size = '5.5'><center>Password is Incorrect.
+                  
+               <div class="form-group">
+               </div>
+               </div>
+               <div class="form-group">
+               
+               <h2><p> <center> <font size = '5'>  <a href="{% url 'users:signup' %}">Sign up</a></p></h2>
+               </div>
+
+
+                  
+               </div>
+
+

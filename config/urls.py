@@ -15,9 +15,16 @@ Including another URLconf
 """
 from xml.etree.ElementInclude import include
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('mypage/', include('mypageapp.urls'))
+    path('mypage/', include('mypageapp.urls')),
+    path('recipeboard/', include('recipeboard.urls')),
+    path('', include('users.urls')),
+    path('communityboard/', include('communityboard.urls'))
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
