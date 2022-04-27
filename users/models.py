@@ -10,11 +10,11 @@ class User(AbstractUser):
     nickname = models.CharField(max_length=20)
     allergyinfo = models.CharField(max_length=250, blank=True, null=True)
     notpreferred = models.CharField(max_length=250, blank=True, null=True)
-    cookingmethod = models.CharField(max_length=250, blank=True, null=True)
-    preferredcategory_1 = models.CharField(max_length=250, blank=True, null=True)
-    preferredcategory_2 = models.CharField(max_length=250, blank=True, null=True)
-    cookingtime = models.CharField(max_length=250, blank=True, null=True)
-    location = models.CharField(max_length=250)
+    cookingmethod = models.CharField(max_length=250, blank=True, null=True) # 안씀
+    preferredcategory_1 = models.CharField(max_length=250, blank=True, null=True) # 안씀
+    preferredcategory_2 = models.CharField(max_length=250, blank=True, null=True) # 안씀
+    cookingtime = models.CharField(max_length=250, blank=True, null=True) # 안씀
+    address = models.CharField(max_length=250)
 
     class Meat:
         managed = False
