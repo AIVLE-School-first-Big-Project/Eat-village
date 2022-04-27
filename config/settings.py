@@ -41,10 +41,6 @@ INSTALLED_APPS = [
     'mypage',
     'recipeboard',
     'communityboard',
-<<<<<<< HEAD
-=======
-    'mainpage',
->>>>>>> d3935bb8e40d4d1691ed5bb788f34f13f47b7c3e
     'users', # yeon
 ]
 
