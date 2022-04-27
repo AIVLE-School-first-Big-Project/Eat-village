@@ -9,7 +9,7 @@
     padding: 10px;
     box-sizing: border-box;
     position: absolute;
-    /* z-index: 2; */
+    z-index: 1;
 }
 .menu ul {
     list-style: none;
@@ -76,6 +76,7 @@
     .menu #expand-menu:not(:checked) ~ ul {
         display: none;
     }
+    
     #menu_l {
         font-size: 0;
     }
