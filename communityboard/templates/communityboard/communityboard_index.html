@@ -1,7 +1,7 @@
 <br>커뮤니티 게시판 입니다.<br>
 
 {% comment %} 정렬순서 {% endcomment %}
-{% if kw or header %}
+{% if kw or header or address %}
 {% comment %} 키워드 검색시 정렬기능 없음 {% endcomment %}
 {% else %}
 <div>
@@ -23,7 +23,7 @@
 </div>
 {% endif %}
 
-{% if kw or so %}
+{% if kw or so or address%}
 {% else %}
 <div>
     <select id="header-select" onchange="location=this.value">
@@ -44,6 +44,11 @@
 </div>
 {% endif %}
 
+<form action="" method="post">
+    {% csrf_token %}
+    <button type="submit" name = "address" value="my">내 지역 보기</button>
+</form>
+
 {% comment %} 글쓰기버튼 {% endcomment %}
 <div>
     <a href="{% url 'communityboard:communityboard_create' %}">글쓰기</a>
@@ -53,6 +58,8 @@
 <tr>
     {% if kw %}
     <br>{{kw}}에 대한 검색결과입니다!<br>
+    {% elif address %}
+    <br> 내 지역에 대한 검색결과입니다!<br>
     {% endif %}
     <td>-</td>
     <td>제목</td>

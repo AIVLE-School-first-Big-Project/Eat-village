@@ -15,6 +15,7 @@ def communityboard_index(request): #레시피게시글 목록
     so = request.GET.get('so', '')
     page = request.GET.get('page', '1')
     header = request.GET.get('header', '')
+    address = request.GET.get('address', '')
 
     if kw:
         board_list = Communityboard.objects.all().filter(
@@ -37,15 +38,22 @@ def communityboard_index(request): #레시피게시글 목록
     elif header == '':
         board_list = board_list.order_by('-boardid')
 
+    user = request.user
+
+    if address == 'my':
+        board_list = board_list.filter(user__address = user.address)
+    
     paginator = Paginator(board_list, 10) #페이징기준
     page_obj = paginator.get_page(page)
     # last_page = page_obj.paginator.page_range[-1]
 
-    context = {'board_list' : page_obj,
+    context = {'user':user,
+               'board_list' : page_obj,
             #    'last_page':last_page,
                'kw':kw,
                'page':page,
                'so':so,
+               'address':address,
                'header':header,
                }
 

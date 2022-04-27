@@ -22,7 +22,8 @@ class User(AbstractUser):
     preferredcategory_1 = models.CharField(max_length=250, blank=True, null=True)
     preferredcategory_2 = models.CharField(max_length=250, blank=True, null=True)
     cookingtime = models.CharField(max_length=250, blank=True, null=True)
-    location = models.CharField(max_length=250)
+    address = models.CharField(max_length=250, null=True) # 주소
+    confirm_password = models.CharField(max_length=200, blank=True, null=True)
 
 class Communityboard(models.Model):
     boardid = models.AutoField(db_column='boardID', primary_key=True)  
