@@ -6,6 +6,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
+import os
 
 from pathlib import Path
 import os
@@ -25,7 +26,7 @@ SECRET_KEY = 'django-insecure-$^v2tl5yf4vcnuz(1czrvvj+f)$9@2ay*7vc!-ybj30nyxq-%*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0769-121-137-131-47.jp.ngrok.io', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -40,6 +41,10 @@ INSTALLED_APPS = [
     'mypage',
     'recipeboard',
     'communityboard',
+<<<<<<< HEAD
+=======
+    'mainpage',
+>>>>>>> d3935bb8e40d4d1691ed5bb788f34f13f47b7c3e
     'users', # yeon
 ]
 
@@ -180,3 +185,23 @@ STATIC_ROOT = os.path.join(BASE_DIR, '.static')
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+
+from django.contrib.messages import constants as message_constants
+
+MESSAGE_LEVEL = message_constants.DEBUG
+
+MESSAGE_LEVEL = 10  # DEBUG
+
+from django.contrib.messages import constants as messages
+
+
+MESSAGE_TAGS = {
+    messages.DEBUG: 'alert-info',
+    messages.INFO: 'alert-info',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning',
+    messages.ERROR: 'alert-danger',
+}
+#
