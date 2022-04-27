@@ -1,0 +1,21 @@
+<br><a href="{% url 'communityboard:communityboard_index' %}">목록으로돌아가기</a>
+
+{% block content %}
+<div class="container">
+    <form method="post" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table>
+
+            {{ form.as_table }}
+            
+            {{ formset.management_form }}
+            {% for form in formset %}
+                {{ form }}
+            {% endfor %}
+
+        </table>
+        <br>
+        <input type="submit" value="작성완료">
+    </form>
+</div>
+{% endblock %}
