@@ -173,6 +173,7 @@ MESSAGE_LEVEL = 10  # DEBUG
 
 from django.contrib.messages import constants as messages
 
+
 MESSAGE_TAGS = {
     messages.DEBUG: 'alert-info',
     messages.INFO: 'alert-info',
