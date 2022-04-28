@@ -17,14 +17,18 @@ from django.contrib import admin
 from django.urls import path, include
 # from recipe import views
 
+
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-<<<<<<< HEAD
+    path('mypage/', include('mypage.urls')),
     path('recipe/', include('recipe.urls')),
-    # path('mypage/', include('mypageapp.urls'))
-=======
-    path('mypage/', include('mypageapp.urls')),
-    path('users/', include('users.urls')),#yeon
-    
->>>>>>> 7bdbe9d0091871d047a5c6458de1d8c5f50f2534
+    path('recipeboard/', include('recipeboard.urls')),
+    path('', include('users.urls')),
+    path('communityboard/', include('communityboard.urls')),
+    path('mainpage/', include('mainpage.urls')), 
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

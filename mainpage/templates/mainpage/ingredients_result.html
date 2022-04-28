@@ -1,0 +1,98 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href='{% static "common.css" %}?after'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" href="/custom_icon.png"/>
+    <script src="https://kit.fontawesome.com/312926fc77.js" crossorigin="anonymous"></script>
+    <title>Ingredient Result Page</title>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar_logo">
+            <a href="{% url 'mainpage:mainpage' %}">
+                <img src="{% static 'logo.png' %}">
+            </a>
+        </div>
+        <ul class="navbar_menu">
+            <li><a href=''>마이페이지</a></li>
+            <li><a href=''>나눔 게시판</a></li>
+            <li><a href=''>레시피 게시판</a></li>
+            <li><a href=''>자유 게시판</a></li>
+        </ul>
+        <div class="navbar_right">
+            <div class="search">
+                <form onsubmit="search_recipe(); return false;">
+                    <input id='searchfield' type='text' max_length=255 autocomplete='off'>
+                    <button class='searchbtn' type="submit">검색</button>
+                </form>
+            </div>
+            <a href="{% url 'mainpage:weather' %}" class="weather">
+                <div class="temp"></div>
+                <div class="icon"></div>
+            </a>
+        </div>
+        <a href='#' class="navbar_togglebtn">
+            <i class="fas fa-bars"></i>
+        </a>
+    </nav>
+
+    <div id='ingredient_container'>
+        <div id='ingredient_result'>
+            <ul>
+                <li>닭고기</li>
+                <li>감자</li>
+                <li>당근</li>
+                <li>양파</li>
+                <li>고추장</li>
+                <li>양배추</li>
+            </ul>
+        </div>
+        <div id="button">
+            <button id="btn1" onclick="ingred_change();">재료 수정</button>
+            <button id="btn2" onclick="ingred_recipe();">레시피 추천</button>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="{% static 'main.js' %}"></script>
+    <script>
+        /* 위치기반 현재 날씨 정보 */
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((pos) => {
+                let lat = pos.coords.latitude;
+                let lon = pos.coords.longitude;
+                console.log(lat, lon);
+                $.getJSON(
+                    'https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&appid=7d5fba451f0f0e3d56dc8bfbd6263516&units=metric&lang=ko',
+                    function(result) {
+                    $('.temp').append(result.main.temp + '℃');
+                    var weathericon = '<img src="http://openweathermap.org/img/wn/' + result.weather[0].icon + '.png" alt="' + result.weather[0].description + '">';
+                    $('.icon').html(weathericon);
+                });
+            }), (err) => {
+                console.log('GPS를 사용할 수 없습니다.');
+            };
+        };
+
+        /* 레시피 검색 */
+        function search_recipe() {
+            var food_cate = document.getElementById('searchfield').value;
+            if (food_cate.length == 0) { return false;}
+            location.href = "{% url 'mainpage:search' %}";
+        }
+
+        /* 재료 베이스 레시피 추천 */
+        function ingred_recipe() {
+            location.href = "{% url 'mainpage:ingredient_recom' %}";
+        }
+
+        /* 재료 수정 페이지 이동 */
+        function ingred_change() {
+            location.href = "{% url 'mainpage:ingredient_change' %}";
+        }
+    </script>
+</body>
+</html>
