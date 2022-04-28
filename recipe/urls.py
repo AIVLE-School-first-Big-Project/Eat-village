@@ -7,8 +7,6 @@ urlpatterns = [
     # path('main/',views.main),
     path('insert/',views.insert),
     path('show/',views.show),
-    path('recommend/',views.recoommend),
+    # path('recommend/',views.recoommend),
     path('video_feed/',views.video_feed, name='video_feed'),
-    
-    # path('mypage/', include('mypageapp.urls'))
 ]

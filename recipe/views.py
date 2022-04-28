@@ -1,11 +1,15 @@
 import re
+
 from django.http import HttpResponse
 from django.shortcuts import render
-from .recommend_ml import find_recipe
+from numpy import rec
 # Create your views here.
-
+from recipe import recommend_ml
+# import recommend_ml as rc
 import recipe.models as models
 from .models import recipe_data, user_ingre
+
+
 
 def insert(request):
     # # 1. create()
@@ -21,9 +25,11 @@ def insert(request):
 
     # 4-django 입력
     recipe_data(name="테스트4",method="장고는 싫다",category_1="중식",category_2 ="튀김", 
-                mgt="존맛탱구리",igd="새우,고구마,감자,김말이", serv="2인분", cook_time="30분이내").save()
+                mgt="존맛탱구리",igd="두부,달걀,양파,감자,소금,후추,표고가루,참기름,통깨", serv="2인분", cook_time="30분이내").save()
+    recipe_data(name="테스트1",method="장고 싫어",category_1="한식",category_2 ="볶음", 
+                mgt="존맛탱구리",igd="두부,달걀,양파,감자,소금,후추,표고가루,참기름,통깨", serv="1인분", cook_time="20분이내").save()
     
-    user_ingre.objects.create(ingre="양파,새우,감자,고구마,상추,꿀,고추가루,고추,사과")
+    user_ingre.objects.create(ingre="청국장,두부,호박,홍고추,멸치,생수,간마늘,대파,표고버섯,고춧가루")
     
     return HttpResponse('데이터 입력 완료')
 
@@ -37,31 +43,10 @@ def insert(request):
 def show(request):
     re_data = recipe_data.objects.all()
     user_data = user_ingre.objects.all()
-    return render(request, 'recipe/show.html',{'data' : re_data, 'user' : user_data})
+    test_data = recommend_ml.recommend_recipe(user_ingre,recipe_data)
+    return render(request, 'recipe/show.html',{'data' : re_data, 'user' : user_data, 'test' : test_data})
 
-# from sklearn.feature_extraction.text import CountVectorizer
-# vect = CountVectorizer() # Counter Vectorizer 객체 생성
-# docs = []
-# # 문장을 Counter Vectorizer 형태로 변형 
-# countvect = vect.fit_transform(docs) 
-# countvect # 4x9 : 4개의 문서에 9개의 단어 
 
-# # toarray()를 통해서 문장이 Vector 형태의 값을 얻을 수 있음 
-# # 하지만, 각 인덱스와 컬럼이 무엇을 의미하는지에 대해서는 알 수가 없음 
-# countvect.toarray()
-# vect.vocabulary_
-# sorted(vect.vocabulary_)
-# import pandas as pd
-# countvect_df = pd.DataFrame(countvect.toarray(), columns = sorted(vect.vocabulary_))
-# countvect_df.index = ['문서3', '문서4']
-# countvect_df
-def recoommend(request):
-    # user_data = user_ingre.objects.all()
-    re_data = recipe_data.objects.all().get(id="1").name
-    # result = ''
-    # for r in re_data:
-    #     docs.append(r.igd)
-    return HttpResponse(re_data)
 
 from django.shortcuts import render
 from django.http import StreamingHttpResponse
