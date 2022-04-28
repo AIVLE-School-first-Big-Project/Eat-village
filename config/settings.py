@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'mypage',
+    'recipe',
     'recipeboard',
     'communityboard',
     'users', # yeon
@@ -95,6 +96,7 @@ DATABASES = {
     # }
     'default': {
         'ENGINE': 'django.db.backends.mysql',
+
         'NAME': 'recipe',
         'USER': 'root',
         'PASSWORD':'12341234',
