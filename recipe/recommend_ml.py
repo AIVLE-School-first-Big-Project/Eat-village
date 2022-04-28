@@ -18,7 +18,7 @@ def recommend_recipe(user_model, recipe_model):
     user_ingres = list(user.ingre for user in user_data)
     
     # 2. 레시피 id 값과 재료를 받는다.
-    recipe_ids = list(recipe.recipe_id for recipe in re_data)
+    recipe_ids = list(recipe.recipe_id - 1 for recipe in re_data) # id -1 이 index
     recipe_names = list(recipe.title for recipe in re_data)
     recipe_igds = list(recipe.ingre for recipe in re_data)
     
@@ -48,14 +48,15 @@ def recommend_recipe(user_model, recipe_model):
     # 가장 유사한 10개의 영화의 제목을 리턴한다.
     # title_to_index[recipe_idx]
     recommend_recipe_name = []
-    for i in recipe_idx:
+    
+    for i in recipe_idx: # [1,0,2]
         recommend_recipe_name.append(title_to_index[i])
-    
-    
+
+    # recommend_recipe_name.append(title_to_index[1])
     # return(feature_vect_simple.shape,similarity_simple_pair) : 코사인유사도 매트릭스 shape와 각 매트릭스 별 유사도
     
     # return(recommend_recipe_name) # #코사인유사도 결과 레시피
-    return (recipe_idx)
+    return (recommend_recipe_name)
     
     
     

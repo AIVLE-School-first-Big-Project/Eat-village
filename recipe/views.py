@@ -81,7 +81,7 @@ deepsort = DeepSort('osnet_x0_25',
 names = model.module.names if hasattr(model, 'module') else model.names
 
 def stream():
-    cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+    cap = cv2.VideoCapture(1, cv2.CAP_DSHOW)
     model.conf = 0.45
     model.iou = 0.5
     model.classes = [0,64,39]
