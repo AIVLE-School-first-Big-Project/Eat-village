@@ -66,3 +66,12 @@ def user_info(request):
         'allergy':form_allergy,
         'check_boolean': checkbox_boolean,
         })
+
+# 회원 인증 후 탈퇴
+def user_delete(request):
+    id = request.session['id']
+    if request.method == "POST":
+        password_form = CheckPasswordForm(request.user, request.POST)
+
+        if password_form.is_valid():
+            form = User.objects.get(id=id)

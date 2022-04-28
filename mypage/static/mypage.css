@@ -147,7 +147,7 @@ form {
                 -15px -15px 30px var(--bottom-shodow);
 }
 
-ul {
+.allergy > ul {
     display: flex;
     flex-wrap: wrap;
     padding: 0;
