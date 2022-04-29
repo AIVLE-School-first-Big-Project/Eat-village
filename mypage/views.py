@@ -67,7 +67,7 @@ def user_info(request):
 
         if "bt_delete" in request.POST:
             # 비밀번호 확인해서 유저를 인증하는 로직 만들기
-            # password_form = CheckPasswordForm(request.user, request.POST)
+            password_form = CheckPasswordForm(request.user, request.POST)
             # 문자를 정확히 입력하면 탈퇴가 가능하도록 만들기
 
             if password_form.is_valid():
@@ -84,3 +84,9 @@ def user_info(request):
         'check_boolean': checkbox_boolean,
         'password_form':password_form,
         })
+
+@login_required
+def show_writeList(request):
+    id = request.session['id']
+    user_get = Userrecommendedcommunity.objects.get(userid=id)
+    

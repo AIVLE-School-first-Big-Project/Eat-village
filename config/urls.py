@@ -22,7 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('mypage/', include('mypage.urls')),
     path('recipeboard/', include('recipeboard.urls')),
-    path('', include('users.urls')),
+    path('users/', include('users.urls')),
     path('communityboard/', include('communityboard.urls')),
     path('mainpage/', include('mainpage.urls')), 
 ]
