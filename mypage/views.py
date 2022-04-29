@@ -82,7 +82,7 @@ def user_info(request):
         'form':form,
         'allergy':form_allergy,
         'check_boolean': checkbox_boolean,
-        'password_form':password_form,
+        # 'password_form':password_form,
         })
 
 @login_required
