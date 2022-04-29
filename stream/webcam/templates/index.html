@@ -25,9 +25,11 @@
 
 <div id="container">
     <img src="{% url 'video_feed' %}" alt="">yolov5 </img>
-    <video id="gum-local" autoplay playsinline></video>
+    <!--<video id="gum-local" autoplay playsinline></video>-->
+    <video id="leftVideo" playsinline autoplay controls></video>
     <button id="showVideo">Open camera</button>
-
+    <video id="rightVideo" autoplay playsinline></video>
+    
     <div id="errorMsg"></div>
 
     <p class="warning"><strong>Warning:</strong> if you're not using headphones, pressing play will cause feedback.</p>

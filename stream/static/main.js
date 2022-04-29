@@ -1,14 +1,16 @@
 'use strict';
 
+
 // Put variables in global scope to make them available to the browser console.
 const constraints = window.constraints = {
   audio: false,
-  //video: true
-  video: { facingMode: { exact: "environment" } }
+  //video: { facingMode: { exact: "environment" } }
+  video: true
 };
 
+
 function handleSuccess(stream) {
-  const video = document.querySelector('video');
+  const video = document.getElementById('video');
   const videoTracks = stream.getVideoTracks();
   console.log('Got stream with constraints:', constraints);
   console.log(`Using video device: ${videoTracks[0].label}`);
@@ -47,3 +49,6 @@ async function init(e) {
 }
 
 document.querySelector('#showVideo').addEventListener('click', e => init(e));
+
+
+
