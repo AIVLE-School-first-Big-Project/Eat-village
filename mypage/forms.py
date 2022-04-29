@@ -16,8 +16,12 @@ class UserUpdateForm(UserChangeForm):
         # fields = ['nickname', 'allergyinfo', 'address', 'notpreferred', 'preferredcategory_1', 'preferredcategory_2']
 
 class CheckPasswordForm(forms.Form):
-    password = forms.CharField(label='비밀번호', widget=forms.PasswordInput(
-        attrs={'class':'form-control',}),
+    password = forms.CharField(label='비밀번호', 
+        widget=forms.PasswordInput(
+            attrs={
+                'class':'form-control',
+            }
+        ),
     )
     def __init__(self, user, *args, **kwargs):
         super().__init__(*args, **kwargs)

@@ -4,8 +4,15 @@ from users.models import *
 from .forms import *
 from django.contrib.auth.decorators import login_required
 import json
+from django.contrib import auth
 
 # Create your views here.
+def test(request):
+    tmp = {
+        'tmp':'탈퇴'
+    }
+    return render(request, 'mypage/withdrawal.html', {'tmp':tmp})
+
 def home(request):
     form = UserForm(request.POST)
     return render(request, 'mypage/mywrite_page.html', {'form':form})
@@ -37,25 +44,35 @@ def user_info(request):
             checkbox_boolean[idx] = 'checked'
 
     if request.method == 'POST':
-        print("POST 동작")
+        print("POST 동작", request.POST)
         # 닉네임 설정
         form = UserUpdateForm(request.POST, instance=request.user)
         print('닉네임: ', request.user.nickname)
-        
-        # 알레르기 설정
-        allergy_list = request.POST.getlist('allergyinfo')
-        try:
-            allergy_list.remove('None')
-        except:
-            pass
-        print('알레르기: ', allergy_list)
 
-        print("valid: ", form.is_valid())
-        if form.is_valid():
-            print("데이터 수정")
-            temp = form.save(commit=False)
-            temp.allergyinfo = json.dumps(allergy_list, ensure_ascii = False)
-            temp.save()
+        if "update" in request.POST:
+            # 알레르기 설정
+            allergy_list = request.POST.getlist('allergyinfo')
+            try:
+                allergy_list.remove('None')
+            except:
+                pass
+            print('알레르기: ', allergy_list)
+
+            print("valid: ", form.is_valid())
+            if form.is_valid():
+                print("데이터 수정")
+                temp = form.save(commit=False)
+                temp.allergyinfo = json.dumps(allergy_list, ensure_ascii = False)
+                temp.save()
+
+        if "bt_delete" in request.POST:
+            # 비밀번호 확인해서 유저를 인증하는 로직 만들기
+            # password_form = CheckPasswordForm(request.user, request.POST)
+            # 문자를 정확히 입력하면 탈퇴가 가능하도록 만들기
+
+            if password_form.is_valid():
+                temp = form.save(commit=False) 
+                temp.nickname = "탈퇴한 회원"   
     
     form = UserForm(instance=request.user)
     return render(
@@ -65,13 +82,5 @@ def user_info(request):
         'form':form,
         'allergy':form_allergy,
         'check_boolean': checkbox_boolean,
+        'password_form':password_form,
         })
-
-# 회원 인증 후 탈퇴
-def user_delete(request):
-    id = request.session['id']
-    if request.method == "POST":
-        password_form = CheckPasswordForm(request.user, request.POST)
-
-        if password_form.is_valid():
-            form = User.objects.get(id=id)

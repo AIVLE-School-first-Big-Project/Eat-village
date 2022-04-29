@@ -7,5 +7,5 @@ app_name = 'mypage'
 urlpatterns = [
     path('main/', views.user_info),
     path('test/', views.home, name='write'),
-
+    # path('userDelete/', views.user_delete, name='profile_delete'),
 ]
