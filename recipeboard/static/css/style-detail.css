@@ -1,0 +1,64 @@
+div.container {
+    width:100%;
+    margin:0 auto;
+}
+a {
+    text-decoration: none;
+    color:none;
+}
+div.title {
+    display:flex;
+    align-items: center;
+    font-size: 30;
+    height:80px;
+}
+#time{
+    font-size:5;
+}
+#rec {
+    background-color: white;
+    border: none;
+}
+div.subtitle {
+    font-size: 30;
+}
+div.info {
+    vertical-align:middle;
+}
+div.info1{
+    float:left;
+}
+div.info2{
+    margin-left:auto;
+}
+div.comment1{
+    display:flex;
+}
+div.comment1-1{
+    float:left;
+    font-size: 20;
+}
+div.comment1-2{
+    margin-left:auto;
+}
+div.comment3 {
+    font-size:4;
+}
+div.bcomment1{
+    display:flex;
+    margin-left:10%;
+}
+div.bcomment1-1{
+    float:left;
+    font-size: 20;
+}
+div.bcomment1-2{
+    margin-left:auto;
+}
+div.bcomment2{
+    margin-left:10%;
+}
+div.bcomment3 {
+    font-size:4;
+    margin-left:10%;
+}

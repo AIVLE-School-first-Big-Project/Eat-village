@@ -31,7 +31,7 @@ def recipeboard_index(request): #레시피게시글 목록
     else:
         board_list = board_list.order_by('-boardid')
 
-    paginator = Paginator(board_list, 2) #페이징기준
+    paginator = Paginator(board_list,10) #페이징기준
     page_obj = paginator.get_page(page)
     # last_page = page_obj.paginator.page_range[-1]
 
