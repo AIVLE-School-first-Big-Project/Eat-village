@@ -185,7 +185,7 @@ form {
                 -5px -5px 10px var(--bottom-shodow);
     border-radius: 10px;
 }
-i {
+.post-form-info i {
     font-size: 30px;
     color: #6a9bd8;
 }

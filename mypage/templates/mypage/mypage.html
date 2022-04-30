@@ -4,6 +4,7 @@
 <html lang="ko">
     <head>
         <meta charset="UTF-8">
+        <title>EAT VILLAGE</title>
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" 
         integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"/>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet"/>
@@ -56,7 +57,7 @@
         <form method="POST" class="post-form-info">
             <div>
                 <a for="btn">
-                    <input type="submit" name="update" value="수정" class="btn"></input>
+                    <input type="submit" name="update" value="수정" class="btn_update"></input>
                 </a>
             </div>
 
@@ -86,13 +87,13 @@
                 <div class="content2-wrap">
                 <!-- 좋아요 목록, 북마크 목록, 내가 쓴 글 목록 영역 -->
                     <div class="contents2">
-                        <a href="{% url 'mypage:write' %}" class="list-icon">
+                        <a href="" class="list-icon">
                             <i class="bi bi-box2-heart-fill"></i>
                         </a>
                         <a href="" class="list-icon">
                             <i class="bi bi-bookmark-check-fill"></i>
                         </a>
-                        <a href="" class="list-icon">
+                        <a href="{% url 'mypage:write' %}" class="list-icon">
                             <i class="bi bi-pencil-fill"></i>
                         </a>
                     </div>
@@ -149,14 +150,11 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- 회원 탈퇴 : 모달 -->
-            <div class="withdrawal">
-                {% include "mypage/withdrawal.html" %}
-            </div>
-            
+            </div>            
         </form>
+        <!-- 회원 탈퇴 : 모달 -->
+        <div class="withdrawal">
+            {% include "mypage/withdrawal.html" %}
         </div>
     </body>
 		

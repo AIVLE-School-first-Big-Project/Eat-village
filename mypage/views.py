@@ -34,7 +34,11 @@ def user_info(request):
         4:'unchecked',
         5:'unchecked'
     }
-    tmp = json.loads(user_get.allergyinfo)
+    try:
+        tmp = json.loads(user_get.allergyinfo)
+    except:
+        tmp = []
+
     form_allergy = []
     for i in tmp:
         if i not in checkbox_allergy:
@@ -43,16 +47,15 @@ def user_info(request):
             idx = checkbox_allergy.index(i)
             print(i, idx)
             checkbox_boolean[idx] = 'checked'
-
     if request.method == 'POST':
         print("POST 동작", request.POST)
         # 닉네임 설정
-        form = UserUpdateForm(request.POST, instance=request.user)
         print('닉네임: ', request.user.nickname)
 
         # 정보 수정
         if "update" in request.POST:
             # 알레르기 설정
+            form = UserUpdateForm(request.POST, instance=request.user)
             allergy_list = request.POST.getlist('allergyinfo')
             try:
                 allergy_list.remove('None')
@@ -66,22 +69,20 @@ def user_info(request):
                 temp = form.save(commit=False)
                 temp.allergyinfo = json.dumps(allergy_list, ensure_ascii = False)
                 temp.save()
-
         # 회원 탈퇴
         if "bt_delete" in request.POST:
-            print(request.POST)
-            password_form = CheckPasswordForm(request.user, request.POST)
-            print("회원탈퇴")
-            if password_form.is_valid():     
-                messages.success(request, "회원탈퇴가 완료되었습니다.")
-            return redirect('/users/login/')
+            user_get.is_active = False
+            user_get.first_name = 'Unknown'
+            user_get.nickname = '탈퇴한 회원'
+            user_get.allergyinfo = 'Unknown'
+            user_get.email = 'Unknown@Unknown'
+            user_get.address = 'Unknown'
+            user_get.save()
+            messages.success(request, "회원탈퇴가 완료되었습니다.")
 
-            # if password_form.is_valid():
-            #     temp = form.save(commit=False) 
-            #     temp.nickname = "탈퇴한 회원"   
+            return redirect('/users/login/')
     
     form = UserForm(instance=request.user)
-    password_form = CheckPasswordForm(request.user)
     return render(
         request, 
         'mypage/mypage.html', 
@@ -89,7 +90,6 @@ def user_info(request):
         'form':form,
         'allergy':form_allergy,
         'check_boolean': checkbox_boolean,
-        'password_form':password_form,
         })
 
 # 내가 쓴 글 목록

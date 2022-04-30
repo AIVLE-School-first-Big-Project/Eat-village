@@ -1,31 +1,4 @@
-.modal_overlay {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(1.5px);
-    -webkit-backdrop-filter: blur(1.5px);
-}
-
-.modal_window {
-    background: white;
-    backdrop-filter: blur(13.5px);
-    -webkit-backdrop-filter: blur(13.5px);
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    width: 800px;
-    height: 600px;
-    position: relative;
-    padding: 10px;
-}
-
-#delete_check,
+[type="checkbox"],
 [type="radio"] {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -33,14 +6,14 @@
 }
 
 
-#delete_check:not(:checked),
-#delete_check:checked {
+[type="checkbox"]:not(:checked),
+[type="checkbox"]:checked {
     position: absolute;
     opacity: 0;
     pointer-events: none
 }
 
-#delete_check+span:not(.lever) {
+[type="checkbox"]+span:not(.lever) {
     position: relative;
     padding-left: 25px;
     cursor: pointer;
@@ -54,8 +27,8 @@
     user-select: none
 }
 
-#delete_check+span:not(.lever):before,
-#delete_check:not(.filled-in)+span:not(.lever):after {
+[type="checkbox"]+span:not(.lever):before,
+[type="checkbox"]:not(.filled-in)+span:not(.lever):after {
     content: '';
     position: absolute;
     top: 0;
@@ -70,18 +43,18 @@
     transition: .2s
 }
 
-#delete_check:not(.filled-in)+span:not(.lever):after {
+[type="checkbox"]:not(.filled-in)+span:not(.lever):after {
     border: 0;
     -webkit-transform: scale(0);
     transform: scale(0)
 }
 
-#delete_check:not(:checked):disabled+span:not(.lever):before {
+[type="checkbox"]:not(:checked):disabled+span:not(.lever):before {
     border: none;
     background-color: rgba(0, 0, 0, 0.42)
 }
 
-#delete_check.tabbed:focus+span:not(.lever):after {
+[type="checkbox"].tabbed:focus+span:not(.lever):after {
     -webkit-transform: scale(1);
     transform: scale(1);
     border: 0;
@@ -91,7 +64,7 @@
     background-color: rgba(0, 0, 0, 0.1)
 }
 
-#delete_check:checked+span:not(.lever):before {
+[type="checkbox"]:checked+span:not(.lever):before {
     top: -4px;
     left: -5px;
     width: 12px;
@@ -108,12 +81,12 @@
     transform-origin: 100% 100%
 }
 
-#delete_check:checked:disabled+span:before {
+[type="checkbox"]:checked:disabled+span:before {
     border-right: 2px solid rgba(0, 0, 0, 0.42);
     border-bottom: 2px solid rgba(0, 0, 0, 0.42)
 }
 
-#delete_check:indeterminate+span:not(.lever):before {
+[type="checkbox"]:indeterminate+span:not(.lever):before {
     top: -11px;
     left: -12px;
     width: 10px;
@@ -130,17 +103,17 @@
     transform-origin: 100% 100%
 }
 
-#delete_check:indeterminate:disabled+span:not(.lever):before {
+[type="checkbox"]:indeterminate:disabled+span:not(.lever):before {
     border-right: 2px solid rgba(0, 0, 0, 0.42);
     background-color: transparent
 }
 
-#delete_check.filled-in+span:not(.lever):after {
+[type="checkbox"].filled-in+span:not(.lever):after {
     border-radius: 2px
 }
 
-#delete_check.filled-in+span:not(.lever):before,
-#delete_check.filled-in+span:not(.lever):after {
+[type="checkbox"].filled-in+span:not(.lever):before,
+[type="checkbox"].filled-in+span:not(.lever):after {
     content: '';
     left: 0;
     position: absolute;
@@ -149,7 +122,7 @@
     z-index: 1
 }
 
-#delete_check.filled-in:not(:checked)+span:not(.lever):before {
+[type="checkbox"].filled-in:not(:checked)+span:not(.lever):before {
     width: 0;
     height: 0;
     border: 3px solid transparent;
@@ -161,7 +134,7 @@
     transform-origin: 100% 100%
 }
 
-#delete_check.filled-in:not(:checked)+span:not(.lever):after {
+[type="checkbox"].filled-in:not(:checked)+span:not(.lever):after {
     height: 20px;
     width: 20px;
     background-color: transparent;
@@ -170,7 +143,7 @@
     z-index: 0
 }
 
-#delete_check.filled-in:checked+span:not(.lever):before {
+[type="checkbox"].filled-in:checked+span:not(.lever):before {
     top: 0;
     left: 1px;
     width: 8px;
@@ -185,7 +158,7 @@
     transform-origin: 100% 100%
 }
 
-#delete_check.filled-in:checked+span:not(.lever):after {
+[type="checkbox"].filled-in:checked+span:not(.lever):after {
     top: 0;
     width: 20px;
     height: 20px;
@@ -194,81 +167,81 @@
     z-index: 0
 }
 
-#delete_check.filled-in.tabbed:focus+span:not(.lever):after {
+[type="checkbox"].filled-in.tabbed:focus+span:not(.lever):after {
     border-radius: 2px;
     border-color: #5a5a5a;
     background-color: rgba(0, 0, 0, 0.1)
 }
 
-#delete_check.filled-in.tabbed:checked:focus+span:not(.lever):after {
+[type="checkbox"].filled-in.tabbed:checked:focus+span:not(.lever):after {
     border-radius: 2px;
     background-color: #a00303f2;
     border-color: #a00303f2
 }
 
-#delete_check.filled-in:disabled:not(:checked)+span:not(.lever):before {
+[type="checkbox"].filled-in:disabled:not(:checked)+span:not(.lever):before {
     background-color: transparent;
     border: 2px solid transparent
 }
 
-#delete_check.filled-in:disabled:not(:checked)+span:not(.lever):after {
+[type="checkbox"].filled-in:disabled:not(:checked)+span:not(.lever):after {
     border-color: transparent;
     background-color: #949494
 }
 
-#delete_check.filled-in:disabled:checked+span:not(.lever):before {
+[type="checkbox"].filled-in:disabled:checked+span:not(.lever):before {
     background-color: transparent
 }
 
-#delete_check.filled-in:disabled:checked+span:not(.lever):after {
+[type="checkbox"].filled-in:disabled:checked+span:not(.lever):after {
     background-color: #949494;
     border-color: #949494
 }
 
 
 
-.switch label #delete_check {
+.switch label input[type=checkbox] {
     opacity: 0;
     width: 0;
     height: 0
 }
 
-.switch label #delete_check:checked+.lever {
+.switch label input[type=checkbox]:checked+.lever {
     background-color: #84c7c1
 }
 
-.switch label #delete_check:checked+.lever:before,
-.switch label #delete_check:checked+.lever:after {
+.switch label input[type=checkbox]:checked+.lever:before,
+.switch label input[type=checkbox]:checked+.lever:after {
     left: 18px
 }
 
-.switch label #delete_check:checked+.lever:after {
+.switch label input[type=checkbox]:checked+.lever:after {
     background-color: #a00303f2
 }
 
 
 
-#delete_check:checked:not(:disabled)~.lever:active::before,
-#delete_check:checked:not(:disabled).tabbed:focus~.lever::before {
+input[type=checkbox]:checked:not(:disabled)~.lever:active::before,
+input[type=checkbox]:checked:not(:disabled).tabbed:focus~.lever::before {
     -webkit-transform: scale(2.4);
     transform: scale(2.4);
     background-color: rgba(38, 166, 154, 0.15)
 }
 
-#delete_check:not(:disabled)~.lever:active:before,
-#delete_check:not(:disabled).tabbed:focus~.lever::before {
+input[type=checkbox]:not(:disabled)~.lever:active:before,
+input[type=checkbox]:not(:disabled).tabbed:focus~.lever::before {
     -webkit-transform: scale(2.4);
     transform: scale(2.4);
     background-color: rgba(0, 0, 0, 0.08)
 }
 
-.switch #delete_check[disabled]+.lever {
+.switch input[type=checkbox][disabled]+.lever {
     cursor: default;
     background-color: rgba(0, 0, 0, 0.12)
 }
 
-.switch label #delete_check[disabled]+.lever:after,
-.switch label #delete_check[disabled]:checked+.lever:after {
+.switch label input[type=checkbox][disabled]+.lever:after,
+.switch label input[type=checkbox][disabled]:checked+.lever:after {
     background-color: #949494
 }
 
@@ -283,7 +256,7 @@ to {
 color: #666;
 background: transparent; } }
 
-.card-body input:-webkit-autofill {
+input:-webkit-autofill {
 -webkit-animation-name: autofill;
 animation-name: autofill;
 -webkit-animation-fill-mode: both;
