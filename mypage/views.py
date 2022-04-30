@@ -5,6 +5,7 @@ from .forms import *
 from django.contrib.auth.decorators import login_required
 import json
 from django.contrib import auth
+from django.contrib import messages
 
 # Create your views here.
 def test(request):
@@ -49,6 +50,7 @@ def user_info(request):
         form = UserUpdateForm(request.POST, instance=request.user)
         print('닉네임: ', request.user.nickname)
 
+        # 정보 수정
         if "update" in request.POST:
             # 알레르기 설정
             allergy_list = request.POST.getlist('allergyinfo')
@@ -65,16 +67,21 @@ def user_info(request):
                 temp.allergyinfo = json.dumps(allergy_list, ensure_ascii = False)
                 temp.save()
 
+        # 회원 탈퇴
         if "bt_delete" in request.POST:
-            # 비밀번호 확인해서 유저를 인증하는 로직 만들기
+            print(request.POST)
             password_form = CheckPasswordForm(request.user, request.POST)
-            # 문자를 정확히 입력하면 탈퇴가 가능하도록 만들기
+            print("회원탈퇴")
+            if password_form.is_valid():     
+                messages.success(request, "회원탈퇴가 완료되었습니다.")
+            return redirect('/users/login/')
 
-            if password_form.is_valid():
-                temp = form.save(commit=False) 
-                temp.nickname = "탈퇴한 회원"   
+            # if password_form.is_valid():
+            #     temp = form.save(commit=False) 
+            #     temp.nickname = "탈퇴한 회원"   
     
     form = UserForm(instance=request.user)
+    password_form = CheckPasswordForm(request.user)
     return render(
         request, 
         'mypage/mypage.html', 
@@ -82,11 +89,22 @@ def user_info(request):
         'form':form,
         'allergy':form_allergy,
         'check_boolean': checkbox_boolean,
-        # 'password_form':password_form,
+        'password_form':password_form,
         })
 
+# 내가 쓴 글 목록
 @login_required
 def show_writeList(request):
     id = request.session['id']
-    user_get = Userrecommendedcommunity.objects.get(userid=id)
+    write = Communityboard.objects.filter(userid=id)
+    print(request.user.first_name)
+    context = {
+        "write":write,
+    }
+
+    return render(
+        request,
+        'mypage/mywrite_page.html',
+        context
+    )
     

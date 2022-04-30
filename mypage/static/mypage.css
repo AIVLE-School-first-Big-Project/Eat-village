@@ -89,7 +89,7 @@ form {
                 -15px -15px 30px var(--bottom-shodow);
 }
 
-.btn {
+.btn_update {
     background-color: inherit;
     border-color: var(--main-color);
     box-shadow:  15px 15px 30px var(--top-shadow),
@@ -103,7 +103,7 @@ form {
     transition-duration: 0.5s;
 }
 
-.btn :focus {
+.btn_update :focus {
     box-shadow:  5px 5px 10px var(--top-shadow),
                 -5px -5px 10px var(--bottom-shodow);
 }
@@ -283,7 +283,7 @@ input:focus {
         width: 5em;
         line-height: 5em;
     }
-    .btn {
+    .btn_update {
         width: 10em;
     }
 }
