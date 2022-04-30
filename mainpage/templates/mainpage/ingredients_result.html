@@ -10,7 +10,7 @@
     <title>Ingredient Result Page</title>
 </head>
 <body>
-    <nav class="navbar">
+    <nav class="navbar fixed-top">
         <div class="navbar_logo">
             <a href="{% url 'mainpage:mainpage' %}">
                 <img src="{% static 'logo.png' %}">
@@ -41,7 +41,7 @@
 
     <div id='ingredient_container'>
         <div id='ingredient_result'>
-            <ul>
+            <ul id='ingredient_list'>
                 <li>닭고기</li>
                 <li>감자</li>
                 <li>당근</li>
@@ -91,7 +91,14 @@
 
         /* 재료 수정 페이지 이동 */
         function ingred_change() {
-            location.href = "{% url 'mainpage:ingredient_change' %}";
+
+            const ingred_list = document.getElementById('ingredient_list');
+            const list_a = ingred_list.getElementsByTagName('li');
+            for (let i = 0; i < list_a.length; i++) {
+                const ing = list_a[i].innerText;
+                window.localStorage.setItem(i, ing);
+            };
+            location.href = '{% url "mainpage:ingredient_change" %}';
         }
     </script>
 </body>

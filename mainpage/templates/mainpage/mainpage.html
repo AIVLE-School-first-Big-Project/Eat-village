@@ -10,7 +10,7 @@
     <title>Main Page</title>
 </head>
 <body>
-    <nav class="navbar">
+    <nav class="navbar fixed-top">
         <div class="navbar_logo">
             <a href="{% url 'mainpage:mainpage' %}">
                 <img src="{% static 'logo.png' %}">
@@ -24,10 +24,8 @@
         </ul>
         <div class="navbar_right">
             <div class="search">
-                <form onsubmit="search_recipe(); return false;">
-                    <input id='searchfield' type='text' max_length=255 autocomplete='off'>
-                    <button class='searchbtn' type="submit">검색</button>
-                </form>
+                <input id='searchfield' type='text' max_length=255 autocomplete='off'>
+                <button class='searchbtn' onclick="search_recipe(); return false;"">검색</button>
             </div>
             <a href="{% url 'mainpage:weather' %}" class="weather">
                 <div class="temp"></div>

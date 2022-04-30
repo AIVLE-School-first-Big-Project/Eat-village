@@ -10,7 +10,7 @@
     <title>Ingredient Change Page</title>
 </head>
 <body>
-    <nav class="navbar">
+    <nav class="navbar fixed-top">
         <div class="navbar_logo">
             <a href="{% url 'mainpage:mainpage' %}">
                 <img src="{% static 'logo.png' %}">
@@ -54,7 +54,6 @@
 
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="{% static 'ingred.js' %}"></script>
     <script>
         /* 위치기반 현재 날씨 정보 */
         if (navigator.geolocation) {
@@ -83,8 +82,93 @@
 
         /* 재료 수정 완료 후 다시 재료 페이지로 이동 */
         function ingred_change_comp() {
-            location.href = "{% url 'mainpage:ingredient_result' %}";
+            const final_ingred_list = document.getElementById('ingred_list');
+            console.log(final_ingred_list);
+            //location.href = "{% url 'mainpage:ingredient_result' %}";
         }
+
+        let ingreds = [];
+        const ingredList = document.querySelector('.ingred-list');
+            
+            
+        for (let i = 0; i < window.localStorage.length; i++) {
+            const ingredItem = document.createElement('li');
+            ingredItem.classList.add('ingred-item');
+
+            const ingredName = document.createElement('div');
+            ingredName.classList.add('ingred');
+            ingredName.innerText = window.localStorage.getItem(i);
+            ingreds = ingreds.concat({content: window.localStorage.getItem(i)});
+
+            const delBtn = document.createElement('button');
+            delBtn.classList.add('delbtn');
+            delBtn.addEventListener('click', () => deleteIngred(window.localStorage.getItem(i)));
+            delBtn.innerHTML = 'X';
+
+            ingredItem.appendChild(ingredName);
+            ingredItem.appendChild(delBtn);
+            ingredList.appendChild(ingredItem);
+        };
+        window.localStorage.clear();
+        console.log(ingreds);
+
+        /* 재료 수정 페이지에서 재료 추가, 삭제 기능 */
+        const ingredInput = document.querySelector('.ingred-input');
+
+        const setIngreds = (newIngreds) => {
+            ingreds = newIngreds;
+        }
+
+        const getAllIngreds = () => {
+            return ingreds;
+        }
+
+        const appendIngreds = (text) => {
+            const newIngreds = getAllIngreds().concat({content: text});
+            setIngreds(newIngreds);
+            paintIngreds();
+        }
+
+        const deleteIngred = (ingredContent) => {
+            const newIngreds = getAllIngreds().filter(ingred => ingred.content !== ingredContent);
+            setIngreds(newIngreds);
+            paintIngreds();
+        }
+
+        const paintIngreds = () => {
+            ingredList.innerHTML = null;
+            const allIngreds = getAllIngreds();
+
+            allIngreds.forEach(ingred => {
+                const ingredItem = document.createElement('li');
+                ingredItem.classList.add('ingred-item');
+
+                const ingredName = document.createElement('div');
+                ingredName.classList.add('ingred');
+                ingredName.innerText = ingred.content;
+
+                const delBtn = document.createElement('button');
+                delBtn.classList.add('delbtn');
+                delBtn.addEventListener('click', () => deleteIngred(ingred.content));
+                delBtn.innerHTML = 'X';
+
+                ingredItem.appendChild(ingredName);
+                ingredItem.appendChild(delBtn);
+                ingredList.appendChild(ingredItem);
+            })
+        }
+
+        const init = () => {
+            ingredInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    appendIngreds(e.target.value);
+                    ingredInput.value = '';
+                }
+            })
+        }
+
+        init();
     </script>
+    <script src="{% static 'ingred.js' %}"></script>
 </body>
 </html>
