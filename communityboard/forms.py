@@ -7,15 +7,21 @@ class Communityboardform(forms.ModelForm):
         fields = ['header', 'title', 'detail']
 
         labels = {
-            'header': '게시판선택',
-            'title' : '제목',
-            'detail' : '내용',
+            'header': '',
+            'title' : '',
+            'detail' : '',
         }
 
         widgets = {
             'header': forms.Select,
-            'title' : forms.TextInput(attrs={'class':'form-control'}),
-            'detail' : forms.Textarea(attrs={'class':'form-control', 'rows':10}),
+            'title' : forms.TextInput(
+                attrs={'placeholder':'제목을 입력해주세요!',
+                    'class':'form-control'}
+                ),
+            'detail' : forms.Textarea(
+                attrs={'placeholder':'내용을 입력해주세요!',
+                    'class':'form-control', 'rows':10}
+                ),
         }
 
 class Communityboardimageform(forms.ModelForm):
@@ -23,7 +29,7 @@ class Communityboardimageform(forms.ModelForm):
         model = Communityboardimage
         fields = ['image']
 
-        labels = {'image' : '사진'}
+        labels = {'image' : ''}
 
 # Imageformset = forms.inlineformset_factory(Communityboard, Communityboardimage, form=Communityboardimageform, extra=3)
 
@@ -32,8 +38,10 @@ class Communitycommentform(forms.ModelForm):
         model = Communitycomment
         fields= ['detail']
         labels = {
-            'detail': '댓글'
+            'detail': ''
         }
         widgets = {
-            'detail': forms.Textarea(attrs={'class':'form-control','rows':3})
+            'detail': forms.Textarea(
+                attrs={'placeholder':'댓글을 달아주세요!',
+                    'class':'form-control','rows':3})
         }

@@ -1,89 +1,171 @@
-<br>커뮤니티 게시판 입니다.<br>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=0.7">
 
-{% comment %} 정렬순서 {% endcomment %}
-{% if kw or header or address %}
-{% comment %} 키워드 검색시 정렬기능 없음 {% endcomment %}
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+    <!-- custom CSS -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style-cindex.css' %}">
+
+    <!-- Font -->
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <script src="https://kit.fontawesome.com/22dc6176d9.js" crossorigin="anonymous"></script>
+</head>
+
+<main>
+
+{% comment %} {% if kw or header or address %}
 {% else %}
 <div>
     <select id="so-select" onchange="location=this.value">
         {% if so == '' %}
         <option hidden class="so-date" value="/communityboard">최신순</option>
         <option class="so-view" value="?so=view">조회순</option>
-        {% comment %} <option class="so-recommended" value="?so=recommended">추천순</option> {% endcomment %}
         {% elif so == 'view' %}
         <option hidden class="so-view" value="?so=view">조회순</option>
         <option class="so-date" value="/communityboard">최신순</option>
-        {% comment %} <option class="so-recommended" value="?so=recommended">추천순</option> {% endcomment %}
-        {% comment %} {% elif so == 'recommended'%}
-        <option hidden class="so-recommended" value="?so=recommended">추천순</option>
-        <option class="so-date" value="/communityboard">최신순</option>
-        <option class="so-view" value="?so=view">조회순</option> {% endcomment %}
         {% endif %}
     </select>
 </div>
-{% endif %}
+{% endif %} {% endcomment %}
 
-{% if kw or so or address%}
-{% else %}
-<div>
-    <select id="header-select" onchange="location=this.value">
-        {% if header == '' %}
-        <option hidden class="header-all" value="/communityboard">전체</option>
-        <option class="header-h1" value="?header=h1">요리재료게시판</option>
-        <option class="header-h2" value="?header=h2">자유게시판</option>
-        {% elif header == 'h1' %}
-        <option hidden class="header-h1" value="?header=h1">요리재료게시판</option>
-        <option class="header-all" value="/communityboard">전체</option>
-        <option class="header-h2" value="?header=h2">자유게시판</option>
-        {% elif header == 'h2' %}
-        <option hidden class="header-h2" value="?header=h2">자유게시판</option>
-        <option class="header-all" value="/communityboard">전체</option>
-        <option class="header-h1" value="?header=h1">요리재료게시판</option>
-        {% endif %}
-    </select>
+<div class="container" id="bar">
+    {% if kw %}
+    <div id="selector">
+        <a href="{% url 'communityboard:communityboard_index' %}"> <i class="fa-solid fa-arrow-left fa-2x"></i> </a>
+    </div>
+    {% else %}
+    <div id="selector">
+        <select id="header-select" onchange="location=this.value">
+            {% if header == '' %}
+                <option hidden class="header-all" value="/communityboard">전체</option>
+                <option class="header-h1" value="?header=h1">요리재료게시판</option>
+                <option class="header-h2" value="?header=h2">자유게시판</option>
+                <option class="header-h3" value="?header=h3">우리동네보기</option>
+            {% elif header == 'h1' %}
+                <option hidden class="header-h1" value="?header=h1">요리재료게시판</option>
+                <option class="header-all" value="/communityboard">전체</option>
+                <option class="header-h2" value="?header=h2">자유게시판</option>
+                <option class="header-h3" value="?header=h3">우리동네보기</option>
+            {% elif header == 'h2' %}
+                <option hidden class="header-h2" value="?header=h2">자유게시판</option>
+                <option class="header-all" value="/communityboard">전체</option>
+                <option class="header-h1" value="?header=h1">요리재료게시판</option>
+                <option class="header-h3" value="?header=h3">우리동네보기</option>
+            {% elif header == 'h3' %}
+                <option hidden class="header-h3" value="?header=h3">우리동네보기</option>
+                <option class="header-all" value="/communityboard">전체</option>
+                <option class="header-h2" value="?header=h2">자유게시판</option>
+                <option class="header-h1" value="?header=h1">요리재료게시판</option>
+            {% endif %}
+        </select>
+    </div>
+    <div id="searchbox">
+        <form action="{% url 'communityboard:communityboard_index' %}" method="get">
+            <input type="text" name="kw" value="{{ kw }}">
+            <input type="submit" value="검색">
+            <span>&nbsp;</span>
+            <a href="{% url 'communityboard:communityboard_create' %}"> <i class="fa-solid fa-pencil fa-2x"></i></a>
+        </form>
+    </div>
+    {% endif %}
+</div>
+
+<br>
+<br>
+<hr>
+
+{% if kw %}
+<div class="container" id=kwresult>
+    <br>{{kw}}에 대한 검색결과입니다!<br>
 </div>
 {% endif %}
 
-<form action="" method="post">
+{% comment %} <form action="" method="post">
+    {% if address != "my" %}
     {% csrf_token %}
     <button type="submit" name = "address" value="my">내 지역 보기</button>
-</form>
-
-{% comment %} 글쓰기버튼 {% endcomment %}
-<div>
-    <a href="{% url 'communityboard:communityboard_create' %}">글쓰기</a>
-</div>
+    {% else %}
+    {% csrf_token %}
+    <button><a href="{% url 'communityboard:communityboard_index' %}">돌아가기</a></button>
+    {% endif %}
+</form> {% endcomment %}
 
 {% comment %} 게시물 표시되는곳 {% endcomment %}
-<tr>
-    {% if kw %}
-    <br>{{kw}}에 대한 검색결과입니다!<br>
-    {% elif address %}
-    <br> 내 지역에 대한 검색결과입니다!<br>
-    {% endif %}
-    <td>-</td>
-    <td>제목</td>
-    <td>작성자</td>
-    <td>조회수</td>
-    <td>추천수</td>
-    <td>작성일</td>
-    <br>
+<div class="container">
     {% if board_list %}
         {% for board in board_list%}
-            <td>{{board.boardid}}</a></td>
-            <td><a href="{% url 'communityboard:communityboard_detail' board.boardid %}">{{board.title}}</a></td>
-            <td>{{board.name}}</td>
-            <td>{{board.view}}</td>
-            <td>{{board.recommended}}</td>
-            <td>{{board.time}}</td>
-            <br>
+            <div class="c1">
+                <div class="c1-1">
+                    <a href="{% url 'communityboard:communityboard_detail' board.boardid %}">{{board.title|truncatechars:25}}</a>
+                </div>
+                <div class="c1-2">
+                    <span><i class="fa-solid fa-location-dot"></i> {{board.userid.address}}</span>
+                </div>
+            </div>
+            <div class="c2">
+                {{board.detail|truncatechars:30}}
+                <br>
+            </div>
+            <div class="c3">
+                <div class="c3-1">
+                    {{board.header}} | {{board.userid.nickname}}
+                </div>
+                <div class="c3-2">
+                    {% load humanize %}
+                    {{board.time|naturaltime}}
+                </div>
+            </div>
+            <hr>
         {% endfor %}
         {% else %}
-        <br>표시할 게시물이 없습니다!<br>
+        <div>
+            표시할 게시물이 없습니다!
+        </div>
     {% endif %}
-</tr>
+</div>
 
-<form action="{% url 'communityboard:communityboard_index' %}" method="get">
+<hr>
+
+    <div class="container" id="pcontain">
+        <form action="{% url 'communityboard:communityboard_index' %}" method="get">
+            <div class="pagination" id="paginator">
+                {% if board_list.has_previous and board_list.has_next %}
+                    <li><a href="?page=1&kw={{kw}}"> <i class="fa-solid fa-angles-left fa-2x"></i></a></li>
+                    <li><span>&nbsp;&nbsp;</span><a href="?page={{board_list.previous_page_number}}&kw={{kw}}"> <i class="fa-solid fa-angle-left fa-2x"></i></a></li>
+                    <span>&nbsp;&nbsp;{{board_list.number}} / {{board_list.paginator.num_pages}}</span>
+                    <li><span>&nbsp;&nbsp;</span><a href="?page={{board_list.next_page_number}}&kw={{kw}}"> <i class="fa-solid fa-angle-right fa-2x"></i> </a></li>
+                    <li><span>&nbsp;&nbsp;</span><a href="?page={{board_list.paginator.num_pages}}&kw={{kw}}"> <i class="fa-solid fa-angles-right fa-2x"></i></a></li>
+                {% elif board_list.has_previous %}
+                    <li><a href="?page=1&kw={{kw}}"> <i class="fa-solid fa-angles-left fa-2x"></i></a></li>
+                    <li><span>&nbsp;&nbsp;</span><a href="?page={{board_list.previous_page_number}}&kw={{kw}}"> <i class="fa-solid fa-angle-left fa-2x"></i></a></li>
+                    <span>&nbsp;&nbsp;{{board_list.number}} / {{board_list.paginator.num_pages}}</span>
+                    <li><span>&nbsp;&nbsp;</span> <i class="fa-solid fa-angle-right fa-2x"></i> </li>
+                    <li><span>&nbsp;&nbsp;</span> <i class="fa-solid fa-angles-right fa-2x"></i></li>
+                {% elif board_list.has_next %}
+                    <li> <i class="fa-solid fa-angles-left fa-2x"></i></li>
+                    <li><span>&nbsp;&nbsp;</span> <i class="fa-solid fa-angle-left fa-2x"></i></li>
+                    <span>&nbsp;&nbsp;{{board_list.number}} / {{board_list.paginator.num_pages}}</span>
+                    <li><span>&nbsp;&nbsp;</span><a href="?page={{board_list.next_page_number}}&kw={{kw}}"> <i class="fa-solid fa-angle-right fa-2x"></i> </a></li>
+                    <li><span>&nbsp;&nbsp;</span><a href="?page={{board_list.paginator.num_pages}}&kw={{kw}}"> <i class="fa-solid fa-angles-right fa-2x"></i></a></li>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+
+{% comment %} <form action="{% url 'communityboard:communityboard_index' %}" method="get">
     
     <div class="pagination">
         {% if board_list.has_previous %}
@@ -100,6 +182,8 @@
       </div>
 
     <input type="text" name="kw" value="{{ kw }}">
-    <input type="submit" value="검색">
+    <input type="submit" value="검색"> {% endcomment %}
 
 </form>
+
+</main>

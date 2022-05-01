@@ -1,0 +1,58 @@
+body{
+    display:flex;
+    flex-direction: column;
+}
+a {
+    text-decoration: none;
+    color:black;
+}
+#bar {
+    width:100%;
+    margin:0 auto;
+}
+.container {
+    width:100%;
+    margin:0 auto;
+}
+#selector {
+    float:left;
+}
+#searchbox {
+    float: right;
+}
+
+#pcontain{
+    width:100%;
+    justify-content: center;
+}
+#paginator {
+    align-items: center;
+    justify-content: center;
+}
+
+div.c1 {
+    display:flex;
+    height:3%;
+}
+div.c1-1 {
+    float:left;
+    font-size: 25px;
+}
+div.c1-2{
+    margin-left:auto;
+}
+div.c2{
+    font-size: 16px;
+    height:3%;
+}
+div.c3 {
+    display:flex;
+}
+div.c3-1 {
+    float:left;
+    font-size: 14px;
+    text-align: center;
+}
+div.c3-2 {
+    margin-left:auto;
+}

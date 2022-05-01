@@ -1,3 +1,31 @@
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=0.7">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+    <!-- custom CSS -->
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style-cdetail.css' %}?after">
+
+    <!-- Font -->
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://kit.fontawesome.com/22dc6176d9.js" crossorigin="anonymous"></script>
+</head>
+
+<main>
+
 {% for message in messages %}
 <div class="alert {{ message.tags }} alert-auto-dismissible alert-dismissible notification-container text-center" role="alert">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -7,15 +35,30 @@
 </div>
 {% endfor %}
 
-게시물 내용이 표시됩니다.
-<br><a href="{% url 'communityboard:communityboard_index' %}">목록으로돌아가기</a>
+<div class="container">
+    
+    <hr>
+    <div>
+        <a href="{% url 'communityboard:communityboard_index' %}"><i class="fa-solid fa-arrow-left fa-2x"></i></a>
+    </div>
 
-<br>제목: {{board.title}}<br>
+    <hr>
 
-<br>글쓴이: {{board.userid.nickname}}
-<br>조회수: {{board.view}}
-<br>추천수: {{board.recommended}}
-{% if likedata %}
+    <div id="header"><i class="fa-solid fa-note-sticky"></i>&nbsp;{{board.header}}</div>
+    <div id="title">{{board.title}}</div>
+    
+    <hr>
+    <div class="info">
+        <div>
+            <span>글쓴이 {{board.userid.nickname}}  |</span>
+            <span>조회수 {{board.view}}  |</span>
+            <span>댓글수 {{commentcount}}  |</span>
+            <span id="time">{{board.time|date:"Y-m-d H:i:s"}}</span>
+        </div>
+    </div>
+
+
+{% comment %} {% if likedata %}
     <br>
     <form method = "post", action="{% url 'communityboard:communityboard_recommendcancel' board.boardid %}">
         {% csrf_token %}
@@ -31,54 +74,84 @@
         {% csrf_token %}
         <button type="submit" name='recommend'>추천</button>
     </form>
-{% endif %}
+{% endif %} {% endcomment %}
 
-<br>{{board.time}}<br>
-
-{% for image in images %}
-    <td><img class = "image-thumbail"
-        src="{{ MEDIA_URL }}{{ image.image }}" 
-        alt=""></td>
-</div>
-{% endfor %}
-
-<br>재료: {{board.ingredient}}<br>
-
-<br>내용: {{board.detail}}<br>
-
-<br>{{commentcount}}개의 댓글:
-<br>
-
-{% for comment in comment %}
-    <td>{{comment.userid.nickname}}</td>
-    <td>{{comment.detail}}</td>
-    <td>{{comment.time}}</td>
-    <td><a href="{% url 'communityboard:communityboard_comment' board.boardid comment.commentid %}">대댓글달기</a></td>
-    <td>
-        {% if babycomment.detail != "삭제된 댓글입니다." %}
-        <a href="{% url 'communityboard:communitycomment_delete' comment.commentid %}">댓글삭제하기</a></td>
-        {% endif %}
+{% comment %} <br>{{board.time}}<br> {% endcomment %}
+    <hr>
+    <div>
+        {% for image in images %}
+            {% if image.image %}
+            <img class = "image-thumbail"
+                src="{{ MEDIA_URL }}{{ image.image }}" 
+                alt=""
+                style="width:500px;height:auto;">
+            {%endif%}
+        {% endfor %}
+    </div>
+    
     <br>
-    {% for babycomment in babycomment %}
-        {% if babycomment.parentcommentid == comment.commentid %}
-        <td>     |->    </td>
-        <td>{{babycomment.userid.nickname}}</td>
-        <td>{{babycomment.detail}}</td>
-        <td>{{babycomment.time}}</td>
-        <td>
-            {% if babycomment.detail != "삭제된 댓글입니다." %}
-            <a href="{% url 'communityboard:communitycomment_delete' comment.commentid %}">댓글삭제하기</a>
+    <div class="detail">
+        {{board.detail}}
+    </div>
+    <br><br><br>
+    <hr>
+    <div>
+        댓글({{commentcount}})
+    </div>
+    <hr>
+    {% for comment in comment %}
+        <div class="comment1">
+            <div class="comment1-1">
+                {{comment.userid.nickname}}
+            </div>
+            <div class="comment1-2">
+                <span><a href="{% url 'communityboard:communityboard_comment' board.boardid comment.commentid %}"><i class="fa-solid fa-message"></i></a></span>
+                <span>|
+                {% if comment.userid == user and comment.detail != "삭제된 댓글입니다." %}
+                    <a href="{% url 'communityboard:communitycomment_delete' comment.commentid %}"><i class="fa-solid fa-x"></i></a>
+                {% endif %}
+                </span>
+            </div>
+        </div>
+        <div class="comment2">
+            {{comment.detail}}
+        </div>
+        <div class="comment3">
+            {{comment.time|date:"Y-m-d H:i:s"}}
+        </div>
+        <hr>
+        {% for babycomment in babycomment %}
+            {% if babycomment.parentcommentid == comment.commentid %}
+            <div class="bcomment1">
+                <div class="bcomment1-1">
+                    <span>{{babycomment.userid.nickname}}</span>
+                </div>
+                <div class="bcomment1-2">
+                    <span>
+                        {% if babycomment.userid == user and babycomment.detail != "삭제된 댓글입니다." %}
+                        <a href="{% url 'communityboard:communitycomment_delete' comment.commentid %}"><i class="fa-solid fa-x"></i></a>
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+            <div class="bcomment2">
+                <span>{{babycomment.detail}}</span>
+            </div>
+            <div class="bcomment3">
+                <span id>{{babycomment.time|date:"Y-m-d H:i:s"}}</span>
+            </div>
+            <hr>
             {% endif %}
-        </td>
-        <br>
-        {% endif %}
+        {% endfor %}
     {% endfor %}
-{% endfor %}
+    <br><br>
+    <div class="container">
+        <form method="post" action="">
+            {% csrf_token %}
+            <span>{{ communitycommentform.as_p }}</span>
+            <span><input type="submit" value="작성완료", name='comment'></span>
+        </form>
+    </div>
 
-<div class="container">
-    <form method="post" action="">
-        {% csrf_token %}
-        <td>{{ communitycommentform.as_p }}</td>
-        <td><input type="submit" value="작성완료", name='comment'></td>
-    </form>
 </div>
+</main>
