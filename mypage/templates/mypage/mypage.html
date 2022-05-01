@@ -56,7 +56,7 @@
         <!-- 회원 정보 영역 -->
         <form method="POST" class="post-form-info">
             <div>
-                <a for="btn">
+                <a for="btn_update">
                     <input type="submit" name="update" value="수정" class="btn_update"></input>
                 </a>
             </div>
@@ -154,8 +154,8 @@
         </form>
         <!-- 회원 탈퇴 : 모달 -->
         <div class="withdrawal">
-            {% include "mypage/withdrawal.html" %}
         </div>
+        {% include "mypage/withdrawal.html" %}
     </body>
 		
 </html>

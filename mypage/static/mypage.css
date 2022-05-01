@@ -12,8 +12,8 @@ body {
     background-color: var(--main-color);
     display: flex;
     flex-direction: column;
-    min-width: 100%;
-    height: 80%;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
     margin: 0;
     padding: 0.6em;
@@ -23,7 +23,9 @@ form {
     display: flex;
     flex-direction: column;
 }
-
+input {
+    width: 90%;
+}
 #title_wrap {
     height: 2.5em;
     width: 100%;
@@ -90,6 +92,7 @@ form {
 }
 
 .btn_update {
+    margin-right: 1em;
     background-color: inherit;
     border-color: var(--main-color);
     box-shadow:  15px 15px 30px var(--top-shadow),
@@ -152,6 +155,7 @@ form {
     flex-wrap: wrap;
     padding: 0;
     justify-content: space-evenly;
+    width: 100%;
 }
 .allergy li {
     /* position: relative; */
@@ -231,6 +235,7 @@ input:focus {
     background: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(1.5px);
     -webkit-backdrop-filter: blur(1.5px);
+    z-index:1;
 }
 
 .modal_window {
@@ -239,16 +244,27 @@ input:focus {
     -webkit-backdrop-filter: blur(13.5px);
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.18);
-    width: 800px;
-    height: 600px;
+    width: 32rem;
+    height: fit-content;
     position: relative;
-    padding: 10px;
+}
+
+#add_feed {
+    width:fit-content;
+    margin: 2rem 0 0.8rem 1rem;
+    border-radius: 5px;
+    box-shadow: inset 5px 5px 10px var(--top-shadow),
+                inset -5px -5px 10px var(--bottom-shodow);
+    padding: 0.6rem;
+}
+#add_feed > i {
+    color:gray;
 }
 
 @media screen and (max-width:560px) {
     html {
         padding:0;
-        widows:100%;
+        width :100%;
     }
     body {
         min-width:100%;
@@ -263,7 +279,9 @@ input:focus {
     }
     #whole > div.contents {
         margin: 0;
-        width: 75%;
+        padding-right: 1.5em;
+        padding-left: 1.5em;
+        width: 82%;
     }
     
     .info {
@@ -283,7 +301,29 @@ input:focus {
         width: 5em;
         line-height: 5em;
     }
+    .content2-wrap{
+        justify-content: center;
+    }
+    .allergy{
+        width: 85%;
+    }
+    .allergy > ul {
+        justify-content: space-between;
+    }
+    .allergy li label .icon-box {
+        width: 55px;
+        height: 55px;
+    }
+    #al-etc {
+        width:100%;
+    }
     .btn_update {
         width: 10em;
+    }
+
+    /* membership withdrawal */
+    .modal_window {
+        width: 70%;
+        height: 25rem;
     }
 }
