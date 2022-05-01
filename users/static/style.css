@@ -7,7 +7,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 100em;
     background-color: #e4c9fb; /*bbbbdd */
     background: url("bg.jpg") no-repeat center;
     background-size: cover;
