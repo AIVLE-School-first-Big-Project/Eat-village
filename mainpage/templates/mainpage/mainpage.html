@@ -9,8 +9,8 @@
     <script src="https://kit.fontawesome.com/312926fc77.js" crossorigin="anonymous"></script>
     <title>Main Page</title>
 </head>
-<body>
-    <nav class="navbar fixed-top">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <div class="navbar_logo">
             <a href="{% url 'mainpage:mainpage' %}">
                 <img src="{% static 'logo.png' %}">
@@ -36,6 +36,7 @@
             <i class="fas fa-bars"></i>
         </a>
     </nav>
+
     <div id="container">
         <video autoplay="true" id="videoElement">
         </video>
@@ -44,6 +45,24 @@
             <button id="btn2" onclick="find_ingred();">분석 시작</button>
         </div>
     </div>
+
+    <section>
+        날씨 추천 레시피
+        <div id="slideShow">
+            <ul class="slides">
+                <li><img src="https://recipe1.ezmember.co.kr/cache/recipe/2020/08/18/32775e06923a4bef0cb6093ff84d28ef1.jpg" alt=""></li>
+                <li><img src="https://recipe1.ezmember.co.kr/cache/recipe/2020/08/18/32775e06923a4bef0cb6093ff84d28ef1.jpg" alt=""></li>
+                <li><img src="https://recipe1.ezmember.co.kr/cache/recipe/2020/08/18/32775e06923a4bef0cb6093ff84d28ef1.jpg" alt=""></li>
+                <li><img src="https://recipe1.ezmember.co.kr/cache/recipe/2020/08/18/32775e06923a4bef0cb6093ff84d28ef1.jpg" alt=""></li>
+                <li><img src="https://recipe1.ezmember.co.kr/cache/recipe/2020/08/18/32775e06923a4bef0cb6093ff84d28ef1.jpg" alt=""></li>
+                <li><img src="https://recipe1.ezmember.co.kr/cache/recipe/2020/08/18/32775e06923a4bef0cb6093ff84d28ef1.jpg" alt=""></li>
+            </ul>
+            <p class="controller">
+                <span class="prev">&lang;</span>
+                <span class="next">&rang;</span>
+            </p>
+        </div>
+    </section>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="{% static 'main.js' %}"></script>
     <script>
@@ -76,8 +95,31 @@
         function find_ingred() {
             location.href = "{% url 'mainpage:ingredient_result' %}";
         }
+
+        /* 날씨 레시피 추천 리스트 슬라이드*/
+        const slides = document.querySelector('.slides');
+        const slideImg = document.querySelectorAll('.slides li');
+        let currentIdx = 0;
+        const slideCount = slideImg.length;
+        const prev = document.querySelector('.prev');
+        const next = document.querySelector('.next');
+        const slideWidth = 300;
+        const slideMargin = 100;
+        slides.style.width = (slideWidth + slideMargin) * slideCount + 'px';
+        function moveSlide(num) {
+            slides.style.left = -num * 400 + 'px';
+            currentIdx = num;
+        }
+        prev.addEventListener('click', function () {
+            if (currentIdx !== 0) moveSlide(currentIdx - 1);
+        });
+        next.addEventListener('click', function () {
+            if (currentIdx !== slideCount - 1) {
+                moveSlide(currentIdx + 1);
+            }
+        });
+
     </script>
-</body>
 
 
 </html>

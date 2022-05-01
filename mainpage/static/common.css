@@ -10,7 +10,17 @@ ul, li {
 
 a {
     text-decoration: none;
-    color: white;
+    color: black;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+.bg-light {
+    background-color: yellow !important;
 }
 
 .fixed-top {
@@ -25,8 +35,10 @@ a {
     display:flex;
     justify-content:space-between;
     align-items: center;
-    background-color: mediumaquamarine;
-    padding: 8px 12px;
+    padding-top: 0.5rem;
+    padding-right: 1rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1rem;
     margin-bottom: 50px;
 }
 
@@ -89,9 +101,11 @@ a {
 
 #container {
     margin: auto;
+    margin-top: 100px;
     width: 800px;
-    height: 450px;
+    height: 650px;
     margin-bottom: 20px;
+    background-image: url("mainpage\static\logo2.jpg");
 }
 #videoElement {
     width: 100%;
@@ -211,12 +225,69 @@ a {
     font-weight: lighter;
     cursor: pointer;
 }
+#slideShow{
+    width: 500px;
+    height: 300px;
+    position: relative;
+    margin: 50px auto;
+    overflow: hidden;
+}
+
+.slides{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 2500px;
+    transition: left 0.5s ease-out;
+}
+.slides li:first-child{
+    margin-left: 100px;
+}
+.slides li:not(:last-child){
+    float: left;
+    margin-right: 100px;
+}
+.slides li{
+    float: left;
+}
+.controller span{
+    position:absolute;
+    background-color: transparent;
+    color: black;
+    text-align: center;
+    border-radius: 50%;
+    padding: 10px 20px;
+    top: 50%; 
+    font-size: 1.3em;
+    cursor: pointer;
+}
+.controller span:hover{
+    background-color: rgba(128, 128, 128, 0.11);
+}
+.prev{
+    left: 10px;
+}
+.prev:hover{
+    transform: translateX(-10px);
+}
+.next{
+    right: 10px;
+}
+.next:hover{
+    transform: translateX(10px);
+}
+
 
 @media screen and (max-width: 850px) {
     .navbar {
         flex-direction: column;
         align-items: flex-start;
         padding: 8px 24px;
+    }
+    .navbar-expand-lg {
+        flex-wrap: nowrap;
+        -webkit-box-pack: start;
+        justify-content: flex-start;
     }
     .navbar_menu {
         display: none;
@@ -255,6 +326,7 @@ a {
     }
     #container {
         width: 100%;
+        height: 350px;
     }
     #videoElement {
         width: 100%;
