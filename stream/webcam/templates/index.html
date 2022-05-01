@@ -26,11 +26,17 @@
 <div id="container">
     <img src="{% url 'video_feed' %}" alt="">yolov5 </img>
     <!--<video id="gum-local" autoplay playsinline></video>-->
-    <video id="leftVideo" playsinline autoplay controls></video>
-    <button id="showVideo">Open camera</button>
-    <video id="rightVideo" autoplay playsinline></video>
+    <video id="localVideo" playsinline autoplay muted></video>
+    <video id="remoteVideo" playsinline autoplay></video>
+
+    <div>
+        <button id="startButton">연결 생성</button>
+        <button id="callButton">받는 쪽 카메라 스트리밍</button>
+        <button id="upgradeButton">보내는 쪽 카메라 켜기</button>
+        <button id="hangupButton">연결 끊기</button>
+    </div>
     
-    <div id="errorMsg"></div>
+   
 
     <p class="warning"><strong>Warning:</strong> if you're not using headphones, pressing play will cause feedback.</p>
 
