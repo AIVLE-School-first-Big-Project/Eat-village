@@ -1,3 +1,4 @@
+from glob import glob
 import re
 
 from django.http import HttpResponse
@@ -9,28 +10,26 @@ from recipe import recommend_ml
 import recipe.models as models
 from .models import recipe_data, user_ingre
 
+user_ingre = []
 
+
+def recommend(request):
+    return render(request,'recipe/recommend_recipe.html',{'user_ingre' : user_ingre})    
+    # return HttpResponse('데이터 입력 완료')
+
+def test(request):
+    user_data = list(set(user_ingre))
+    # 당근,사과,오이,양파
+    user_data.append('당근')
+    user_data.append('사과')
+    user_data.append('오이')
+    user_data.append('양파')
+    re_data = recipe_data.objects.all()
+    recommend_data = recommend_ml.recommend_recipe(user_data,recipe_data)
+    
+    return render(request,'recipe/test.html',{'data' : re_data, 'user' : user_data, 'recommend' : recommend_data})     
 
 def insert(request):
-    # # 1. create()
-    # recipe_data.objects.create(name="테스트",method="튀김은 옳다",category_1="일식",
-    #                            category_2 ="튀김", igd="새우,고구마,감자,김말이")
-    # # 2. save()
-    # r = recipe_data(name="테스트2",method="치킨은 옳다",category_1="한식",
-    #                            category_2 ="튀김", igd="새우,고구마,감자,김말이")
-    # r.save()
-    # # 3-html/css/js 입력
-    # recipe_data(name="테스트3",method="구운건 옳다",category_1="양식",
-    #                            category_2 ="튀김", igd="새우,고구마,감자,김말이").save()
-
-    # 4-django 입력
-    recipe_data(name="테스트4",method="장고는 싫다",category_1="중식",category_2 ="튀김", 
-                mgt="존맛탱구리",igd="두부,달걀,양파,감자,소금,후추,표고가루,참기름,통깨", serv="2인분", cook_time="30분이내").save()
-    recipe_data(name="테스트1",method="장고 싫어",category_1="한식",category_2 ="볶음", 
-                mgt="존맛탱구리",igd="두부,달걀,양파,감자,소금,후추,표고가루,참기름,통깨", serv="1인분", cook_time="20분이내").save()
-    
-    user_ingre.objects.create(ingre="청국장,두부,호박,홍고추,멸치,생수,간마늘,대파,표고버섯,고춧가루")
-    
     return HttpResponse('데이터 입력 완료')
 
 # def show(request):
@@ -48,6 +47,9 @@ def show(request):
 
 
 
+
+
+# ------------------------------------------------------------------------------
 from django.shortcuts import render
 from django.http import StreamingHttpResponse
 import yolov5,torch
@@ -57,12 +59,14 @@ from yolov5.utils.torch_utils import select_device, time_sync
 from yolov5.utils.plots import Annotator, colors
 from deep_sort.deep_sort import DeepSort
 from deep_sort.utils.parser import get_config
+from time import time
 
 import cv2
 from PIL import Image as im
 # Create your views here.
 def index(request):
     return render(request,'index.html')
+
 print(torch.cuda.is_available())
 #load model
 model = yolov5.load('yolov5s.pt')
@@ -81,16 +85,26 @@ deepsort = DeepSort('osnet_x0_25',
 names = model.module.names if hasattr(model, 'module') else model.names
 
 def stream():
-    cap = cv2.VideoCapture(1, cv2.CAP_DSHOW)
-    model.conf = 0.45
-    model.iou = 0.5
-    model.classes = [0,64,39]
+    # re_data = recipe_data.objects.all()
+    # user_data = user_ingre.objects.all()
+    # test_data = recommend_ml.recommend_recipe(user_ingre,recipe_data)
+    # return render(request, 'recipe/show.html',{'data' : re_data, 'user' : user_data, 'test' : test_data})
+    # print(user_data)
+    global user_ingre
+    
+    cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+    # cap = cv2.VideoCapture(1)
+    # model.conf = 0.65
+    # model.iou = 0.5
+    # model.classes = [1,2,3,4,6,7,8,10,11]
+    
+    
     while True:
         ret, frame = cap.read()
         if not ret:
             print("Error: failed to capture image")
             break
-
+        
         results = model(frame, augment=True)
         # proccess
         annotator = Annotator(frame, line_width=2, pil=not ascii) 
@@ -110,14 +124,49 @@ def stream():
                     c = int(cls)  # integer class
                     label = f'{id} {names[c]} {conf:.2f}'
                     annotator.box_label(bboxes, label, color=colors(c, True))
-
+                    # print(c,label) # set 형식으로 받아야한다. 그래야 중복데이터가 안들어 오기 때문이다.
+                    
+                    label = label.split(' ')
+                    # print(label[1])
+                    user_ingre.append(label[1]) # user_ingre 데이터에 인식된 값을 추가한다. 이걸로 추천시스템 구현
+                    
+                    # user_ingre_set = list(set(user_ingre))
+                    user_ingre = list(set(user_ingre))
+                    print(user_ingre)
         else:
             deepsort.increment_ages()
 
+        # print(det)
         im0 = annotator.result()    
         image_bytes = cv2.imencode('.jpg', im0)[1].tobytes()
         yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + image_bytes + b'\r\n')  
+               b'Content-Type: image/jpeg\r\n\r\n' + image_bytes + b'\r\n')
+    
 
+    
 def video_feed(request):
-    return StreamingHttpResponse(stream(), content_type='multipart/x-mixed-replace; boundary=frame') 
+    # re_data = recipe_data.objects.all()
+    # user_data = user_ingre.objects.all()
+    # test_data = recommend_ml.recommend_recipe(user_ingre,recipe_data)
+    return StreamingHttpResponse(stream(), content_type='multipart/x-mixed-replace; boundary=frame')
+            # render(request, 'recipe/recommend_recipe.html',{'data' : re_data, 'user' : user_data, 'test' : test_data})
+    
+    
+    
+    # return render(request, 'recipe/test.html', {'test' : stream()})
+    # def show(request):
+    #     re_data = recipe_data.objects.all()
+    # user_data = user_ingre.objects.all()
+    # test_data = recommend_ml.recommend_recipe(user_ingre,recipe_data)
+    # return render(request, 'recipe/show.html',{'data' : re_data, 'user' : user_data, 'test' : test_data})
+# 5초에 한번씩 데이터를 보내주는 방식으로 진행한다.
+
+# 해야될거.
+# 1. 모델링 학습 
+# 2. 받은 데이터로 레시피 추천 페이지
+# 3. 
+# 웹캠에서 데이터를 받는다
+# -> 
+# 로컬 set으로 저장
+
+    
