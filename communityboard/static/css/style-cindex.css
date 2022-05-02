@@ -33,7 +33,6 @@ a {
 
 div.c1 {
     display:flex;
-    height:4%;
 }
 div.c1-1 {
     float:left;
@@ -46,7 +45,9 @@ div.c2{
     display:flex;
     font-size: 16px;
     text-align: center;
-    height:3%;
+}
+div.blank {
+    font-size:3px;
 }
 div.c3 {
     display:flex;
@@ -68,18 +69,24 @@ div.c3-2 {
     width:40px;
     height: 40px;
     font-size:23;
-    color:black;
+    color:white;
     text-align:center;
     border-radius:10px;
-    background-color: white;
-    border:2px solid black;
+    background-color: aquamarine;
+    border:3px solid aquamarine;
 }
 #num {
     width:40px;
     height: 40px;
     font-size:23;
-    color:white;
+    color: black;
     text-align:center;
     border-radius:10px;
-    background-color: black;
+    background-color: none;
+    border:3px solid black;
+}
+#num:hover {
+    color:white;
+    background-color: aquamarine;
+    border:3px solid aquamarine;
 }

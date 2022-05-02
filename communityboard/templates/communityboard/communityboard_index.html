@@ -11,7 +11,7 @@
 
     <!-- custom CSS -->
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/style-cindex.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style-cindex.css' %}?after">
 
     <!-- Font -->
     <link rel="stylesheet" type="text/css"
@@ -105,8 +105,14 @@
                     <span><i class="fa-solid fa-location-dot"></i> {{board.userid.address}}</span>
                 </div>
             </div>
+            <div class="blank">
+                <br>
+            </div>
             <div class="c2">
                 {{board.detail|truncatechars:30}}
+                <br>
+            </div>
+            <div class="blank">
                 <br>
             </div>
             <div class="c3">
@@ -135,14 +141,24 @@
             <div class="pagination" id="paginator">
                 {% if board_list.has_previous and board_list.has_next %}
                     <div><a href="?page=1&kw={{kw}}"> <i class="fa-solid fa-angles-left fa-2x"></i></a></div>
-                    <div>&nbsp;&nbsp;<a href="?page={{board_list.previous_page_number}}&kw={{kw}}"> <i class="fa-solid fa-angle-left fa-2x"></i></a></div>
-                    <div>&nbsp;&nbsp;{{board_list.number}} / {{board_list.paginator.num_pages}}</div>
+                    <div>&nbsp;&nbsp;<a href="?page={{board_list.previous_page_number}}&kw={{kw}}"> <i class="fa-solid fa-angle-left fa-2x"></i></a>&nbsp;&nbsp;&nbsp;</div>
+                    <a href="?page={{board_list.number|add:-1}}&kw={{kw}}"><div id="num">{{board_list.number|add:-1}}</div></a>
+                    <div>&nbsp;&nbsp;</div>
+                    <div id="num_now">{{board_list.number}}</div>
+                    <div>&nbsp;&nbsp;</div>
+                    <a href="?page={{board_list.number|add:1}}&kw={{kw}}"><div id="num">{{board_list.number|add:1}}</div></a>
                     <div>&nbsp;&nbsp;<a href="?page={{board_list.next_page_number}}&kw={{kw}}"> <i class="fa-solid fa-angle-right fa-2x"></i> </a></div>
                     <div>&nbsp;&nbsp;<a href="?page={{board_list.paginator.num_pages}}&kw={{kw}}"> <i class="fa-solid fa-angles-right fa-2x"></i></a></div>
                 {% elif board_list.has_previous %}
                     <div><a href="?page=1&kw={{kw}}"> <i class="fa-solid fa-angles-left fa-2x"></i></a></div>
-                    <div>&nbsp;&nbsp;<a href="?page={{board_list.previous_page_number}}&kw={{kw}}"> <i class="fa-solid fa-angle-left fa-2x"></i></a></div>
-                    <div>&nbsp;&nbsp;{{board_list.number}} / {{board_list.paginator.num_pages}}</div>
+                    <div>&nbsp;&nbsp;<a href="?page={{board_list.previous_page_number}}&kw={{kw}}"> <i class="fa-solid fa-angle-left fa-2x"></i></a>&nbsp;&nbsp;&nbsp;</div>
+                    {% if board_list.paginator.num_pages != 2 %}
+                    <a href="?page={{board_list.number|add:-2}}&kw={{kw}}"><div id="num">{{board_list.number|add:-2}}</div></a>
+                    <div>&nbsp;&nbsp;</div>
+                    {% endif %}
+                    <a href="?page={{board_list.number|add:-1}}&kw={{kw}}"><div id="num">{{board_list.number|add:-1}}</div></a>
+                    <div>&nbsp;&nbsp;</div>
+                    <div id="num_now">{{board_list.number}}</div>
                     <div>&nbsp;&nbsp; <i id="nolink" class="fa-solid fa-angle-right fa-2x"></i> </div>
                     <div>&nbsp;&nbsp; <i id="nolink" class="fa-solid fa-angles-right fa-2x"></i></div>
                 {% elif board_list.has_next %}
@@ -151,9 +167,9 @@
                     <div id="num_now">{{board_list.number}}</div>
                     <div>&nbsp;&nbsp;</div>
                     <a href="?page={{board_list.number|add:1}}&kw={{kw}}"><div id="num">{{board_list.number|add:1}}</div></a>
-                    {% if board_list.next.has_next %}
+                    {% if board_list.paginator.num_pages != 2 %}
                     <div>&nbsp;&nbsp;</div>
-                    <a href="?page={{board_list.number|add:1}}&kw={{kw}}"><div id="num">{{board_list.number|add:2}}</div></a>
+                    <a href="?page={{board_list.number|add:2}}&kw={{kw}}"><div id="num">{{board_list.number|add:2}}</div></a>
                     {% endif %}
                     <div>&nbsp;&nbsp;<a href="?page={{board_list.next_page_number}}&kw={{kw}}"> <i class="fa-solid fa-angle-right fa-2x"></i> </a></div>
                     <div>&nbsp;&nbsp;<a href="?page={{board_list.paginator.num_pages}}&kw={{kw}}"> <i class="fa-solid fa-angles-right fa-2x"></i></a></div>
