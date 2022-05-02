@@ -13,6 +13,7 @@ a {
 .container {
     width:100%;
     margin:0 auto;
+    height:auto;
 }
 #selector {
     float:left;
@@ -32,7 +33,7 @@ a {
 
 div.c1 {
     display:flex;
-    height:3%;
+    height:4%;
 }
 div.c1-1 {
     float:left;
@@ -42,7 +43,9 @@ div.c1-2{
     margin-left:auto;
 }
 div.c2{
+    display:flex;
     font-size: 16px;
+    text-align: center;
     height:3%;
 }
 div.c3 {
@@ -55,4 +58,28 @@ div.c3-1 {
 }
 div.c3-2 {
     margin-left:auto;
+}
+
+
+#nolink {
+    color:gray;
+}
+#num_now {
+    width:40px;
+    height: 40px;
+    font-size:23;
+    color:black;
+    text-align:center;
+    border-radius:10px;
+    background-color: white;
+    border:2px solid black;
+}
+#num {
+    width:40px;
+    height: 40px;
+    font-size:23;
+    color:white;
+    text-align:center;
+    border-radius:10px;
+    background-color: black;
 }

@@ -209,7 +209,8 @@ def recipeboard_update(request, boardid): #게시물수정
     if request.method == "POST":
         form = Recipeboardform(request.POST, instance=board)
         formset = Imageformset(request.POST, request.FILES)
-        if form.is_valid() and formset.is_valid():
+        if form.is_valid():
+        # and formset.is_valid():
             board.title = form.cleaned_data['title']
             board.ingredient = form.cleaned_data['ingredient']
             board.detail = form.cleaned_data['detail']

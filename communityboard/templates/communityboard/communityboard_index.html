@@ -26,21 +26,6 @@
 
 <main>
 
-{% comment %} {% if kw or header or address %}
-{% else %}
-<div>
-    <select id="so-select" onchange="location=this.value">
-        {% if so == '' %}
-        <option hidden class="so-date" value="/communityboard">최신순</option>
-        <option class="so-view" value="?so=view">조회순</option>
-        {% elif so == 'view' %}
-        <option hidden class="so-view" value="?so=view">조회순</option>
-        <option class="so-date" value="/communityboard">최신순</option>
-        {% endif %}
-    </select>
-</div>
-{% endif %} {% endcomment %}
-
 <div class="container" id="bar">
     {% if kw %}
     <div id="selector">
@@ -85,13 +70,12 @@
 
 <br>
 <br>
-<hr>
 
-{% if kw %}
+{% comment %} {% if kw %}
 <div class="container" id=kwresult>
     <br>{{kw}}에 대한 검색결과입니다!<br>
 </div>
-{% endif %}
+{% endif %} {% endcomment %}
 
 {% comment %} <form action="" method="post">
     {% if address != "my" %}
@@ -105,6 +89,12 @@
 
 {% comment %} 게시물 표시되는곳 {% endcomment %}
 <div class="container">
+    {% if kw %}
+        <div id=kwresult>
+            <br>{{kw}}에 대한 검색결과입니다!<br>
+        </div>
+    {% endif %}
+    <hr>
     {% if board_list %}
         {% for board in board_list%}
             <div class="c1">
@@ -134,56 +124,45 @@
         <div>
             표시할 게시물이 없습니다!
         </div>
+        <hr>
+        <br>
     {% endif %}
 </div>
-
-<hr>
+<br>
 
     <div class="container" id="pcontain">
         <form action="{% url 'communityboard:communityboard_index' %}" method="get">
             <div class="pagination" id="paginator">
                 {% if board_list.has_previous and board_list.has_next %}
-                    <li><a href="?page=1&kw={{kw}}"> <i class="fa-solid fa-angles-left fa-2x"></i></a></li>
-                    <li><span>&nbsp;&nbsp;</span><a href="?page={{board_list.previous_page_number}}&kw={{kw}}"> <i class="fa-solid fa-angle-left fa-2x"></i></a></li>
-                    <span>&nbsp;&nbsp;{{board_list.number}} / {{board_list.paginator.num_pages}}</span>
-                    <li><span>&nbsp;&nbsp;</span><a href="?page={{board_list.next_page_number}}&kw={{kw}}"> <i class="fa-solid fa-angle-right fa-2x"></i> </a></li>
-                    <li><span>&nbsp;&nbsp;</span><a href="?page={{board_list.paginator.num_pages}}&kw={{kw}}"> <i class="fa-solid fa-angles-right fa-2x"></i></a></li>
+                    <div><a href="?page=1&kw={{kw}}"> <i class="fa-solid fa-angles-left fa-2x"></i></a></div>
+                    <div>&nbsp;&nbsp;<a href="?page={{board_list.previous_page_number}}&kw={{kw}}"> <i class="fa-solid fa-angle-left fa-2x"></i></a></div>
+                    <div>&nbsp;&nbsp;{{board_list.number}} / {{board_list.paginator.num_pages}}</div>
+                    <div>&nbsp;&nbsp;<a href="?page={{board_list.next_page_number}}&kw={{kw}}"> <i class="fa-solid fa-angle-right fa-2x"></i> </a></div>
+                    <div>&nbsp;&nbsp;<a href="?page={{board_list.paginator.num_pages}}&kw={{kw}}"> <i class="fa-solid fa-angles-right fa-2x"></i></a></div>
                 {% elif board_list.has_previous %}
-                    <li><a href="?page=1&kw={{kw}}"> <i class="fa-solid fa-angles-left fa-2x"></i></a></li>
-                    <li><span>&nbsp;&nbsp;</span><a href="?page={{board_list.previous_page_number}}&kw={{kw}}"> <i class="fa-solid fa-angle-left fa-2x"></i></a></li>
-                    <span>&nbsp;&nbsp;{{board_list.number}} / {{board_list.paginator.num_pages}}</span>
-                    <li><span>&nbsp;&nbsp;</span> <i class="fa-solid fa-angle-right fa-2x"></i> </li>
-                    <li><span>&nbsp;&nbsp;</span> <i class="fa-solid fa-angles-right fa-2x"></i></li>
+                    <div><a href="?page=1&kw={{kw}}"> <i class="fa-solid fa-angles-left fa-2x"></i></a></div>
+                    <div>&nbsp;&nbsp;<a href="?page={{board_list.previous_page_number}}&kw={{kw}}"> <i class="fa-solid fa-angle-left fa-2x"></i></a></div>
+                    <div>&nbsp;&nbsp;{{board_list.number}} / {{board_list.paginator.num_pages}}</div>
+                    <div>&nbsp;&nbsp; <i id="nolink" class="fa-solid fa-angle-right fa-2x"></i> </div>
+                    <div>&nbsp;&nbsp; <i id="nolink" class="fa-solid fa-angles-right fa-2x"></i></div>
                 {% elif board_list.has_next %}
-                    <li> <i class="fa-solid fa-angles-left fa-2x"></i></li>
-                    <li><span>&nbsp;&nbsp;</span> <i class="fa-solid fa-angle-left fa-2x"></i></li>
-                    <span>&nbsp;&nbsp;{{board_list.number}} / {{board_list.paginator.num_pages}}</span>
-                    <li><span>&nbsp;&nbsp;</span><a href="?page={{board_list.next_page_number}}&kw={{kw}}"> <i class="fa-solid fa-angle-right fa-2x"></i> </a></li>
-                    <li><span>&nbsp;&nbsp;</span><a href="?page={{board_list.paginator.num_pages}}&kw={{kw}}"> <i class="fa-solid fa-angles-right fa-2x"></i></a></li>
+                    <div> <i id="nolink" class="fa-solid fa-angles-left fa-2x"></i></div>
+                    <div>&nbsp;&nbsp; <i id="nolink" class="fa-solid fa-angle-left fa-2x"></i>&nbsp;&nbsp;&nbsp;</div>
+                    <div id="num_now">{{board_list.number}}</div>
+                    <div>&nbsp;&nbsp;</div>
+                    <a href="?page={{board_list.number|add:1}}&kw={{kw}}"><div id="num">{{board_list.number|add:1}}</div></a>
+                    {% if board_list.next.has_next %}
+                    <div>&nbsp;&nbsp;</div>
+                    <a href="?page={{board_list.number|add:1}}&kw={{kw}}"><div id="num">{{board_list.number|add:2}}</div></a>
+                    {% endif %}
+                    <div>&nbsp;&nbsp;<a href="?page={{board_list.next_page_number}}&kw={{kw}}"> <i class="fa-solid fa-angle-right fa-2x"></i> </a></div>
+                    <div>&nbsp;&nbsp;<a href="?page={{board_list.paginator.num_pages}}&kw={{kw}}"> <i class="fa-solid fa-angles-right fa-2x"></i></a></div>
                 {% endif %}
             </div>
         </form>
     </div>
 
-{% comment %} <form action="{% url 'communityboard:communityboard_index' %}" method="get">
-    
-    <div class="pagination">
-        {% if board_list.has_previous %}
-          <a href="?page=1&kw={{kw}}">첫페이지</a>
-          <a href="?page={{board_list.previous_page_number}}&kw={{kw}}">이전페이지</a>
-        {% endif %}
-    
-        <span>{{board_list.number}} / {{board_list.paginator.num_pages}}</span>
-    
-        {% if board_list.has_next %}
-          <a href="?page={{board_list.next_page_number}}&kw={{kw}}">다음페이지</a>
-          <a href="?page={{board_list.paginator.num_pages}}&kw={{kw}}">마지막페이지</a>
-        {% endif %}
-      </div>
+<br>
 
-    <input type="text" name="kw" value="{{ kw }}">
-    <input type="submit" value="검색"> {% endcomment %}
-
-</form>
 
 </main>

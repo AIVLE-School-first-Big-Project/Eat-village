@@ -30,6 +30,7 @@ div.info1{
 }
 div.info2{
     margin-left:auto;
+    font-size:16;
 }
 div.comment1{
     display:flex;

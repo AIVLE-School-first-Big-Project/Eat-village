@@ -11,7 +11,7 @@
 
     <!-- custom CSS -->
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style-cdetail.css' %}?after">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style-cdetail.css' %}">
 
     <!-- Font -->
     <link rel="stylesheet" type="text/css"
@@ -45,8 +45,18 @@
     <hr>
 
     <div id="header"><i class="fa-solid fa-note-sticky"></i>&nbsp;{{board.header}}</div>
-    <div id="title">{{board.title}}</div>
-    
+    <div class="title">
+        <div class="title-1">
+            {{board.title}}
+        </div>
+        <div class="title-2">
+            {% if board.userid == user %}
+            <span><a href="{% url 'communityboard:communityboard_update' board.boardid %}"><button>수정</button></a></span>
+            <span>  |  </span>
+            <span><a href="{% url 'communityboard:communityboard_delete' board.boardid %}"><button>삭제</button></a></span>
+            {% endif %}
+        </div>
+    </div>
     <hr>
     <div class="info">
         <div>
