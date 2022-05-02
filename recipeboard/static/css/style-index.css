@@ -6,6 +6,12 @@ a {
     text-decoration: none;
     color:black;
 }
+
+#colcontent:hover {
+    background-color: aquamarine;
+    color:white;
+    font-weight: bold;
+}
 #colname {
     font-size: 4;
 }
@@ -50,4 +56,34 @@ a {
 #paginator {
     align-items: center;
     justify-content: center;
+}
+
+
+#nolink {
+    color:gray;
+}
+#num_now {
+    width:40px;
+    height: 40px;
+    font-size:23;
+    color:white;
+    text-align:center;
+    border-radius:10px;
+    background-color: aquamarine;
+    border:3px solid aquamarine;
+}
+#num {
+    width:40px;
+    height: 40px;
+    font-size:23;
+    color: black;
+    text-align:center;
+    border-radius:10px;
+    background-color: none;
+    border:3px solid black;
+}
+#num:hover {
+    color:white;
+    background-color: aquamarine;
+    border:3px solid aquamarine;
 }
