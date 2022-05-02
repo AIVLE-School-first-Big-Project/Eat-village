@@ -10,6 +10,7 @@ from django.utils import timezone
 
 # Create your views here.
 def communityboard_index(request): #레시피게시글 목록
+    user = request.user
 
     kw = request.GET.get('kw', '') #키워드 검색기능
     so = request.GET.get('so', '')
@@ -35,13 +36,16 @@ def communityboard_index(request): #레시피게시글 목록
         board_list = board_list.filter(header='요리재료게시판')
     elif header == 'h2' : #자유게시판
         board_list = board_list.filter(header='자유게시판')
+    elif header == 'h3': #우리동네보기
+        board_list = board_list.filter(userid__address__contains = user.address)
     elif header == '':
         board_list = board_list.order_by('-boardid')
 
-    user = request.user
-
     if address == 'my':
-        board_list = board_list.filter(user__address = user.address)
+        board_list = board_list.filter(userid__address__contains = user.address)
+    else:
+        board_list = board_list.order_by('-boardid')
+
     
     paginator = Paginator(board_list, 10) #페이징기준
     page_obj = paginator.get_page(page)
@@ -59,6 +63,8 @@ def communityboard_index(request): #레시피게시글 목록
 
     return render(request, 'communityboard/communityboard_index.html', context)
 
+def myaddress(request):
+    return
 
 def communityboard_detail(request, boardid): # 게시글 내용, 댓글생성
     

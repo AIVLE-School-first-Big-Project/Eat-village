@@ -7,7 +7,7 @@ from django.core.paginator import Paginator
 from django.db.models import Q, Count, F
 from recipeboard.forms import Recipeboardform, Recipecommentform, Recipeboardimageform
 from django.utils import timezone
-
+from datetime import date
 
 def recipeboard_index(request): #레시피게시글 목록
 
@@ -31,15 +31,17 @@ def recipeboard_index(request): #레시피게시글 목록
     else:
         board_list = board_list.order_by('-boardid')
 
-    paginator = Paginator(board_list, 10) #페이징기준
+    paginator = Paginator(board_list,10) #페이징기준
     page_obj = paginator.get_page(page)
     # last_page = page_obj.paginator.page_range[-1]
 
+    today = timezone.now().date
     context = {'board_list' : page_obj,
             #    'last_page':last_page,
                'kw':kw,
                'page':page,
-               'so':so
+               'so':so,
+               'today':today,
                }
 
     return render(request, 'recipeboard/recipeboard_index.html', context)
@@ -207,7 +209,8 @@ def recipeboard_update(request, boardid): #게시물수정
     if request.method == "POST":
         form = Recipeboardform(request.POST, instance=board)
         formset = Imageformset(request.POST, request.FILES)
-        if form.is_valid() and formset.is_valid():
+        if form.is_valid():
+        # and formset.is_valid():
             board.title = form.cleaned_data['title']
             board.ingredient = form.cleaned_data['ingredient']
             board.detail = form.cleaned_data['detail']

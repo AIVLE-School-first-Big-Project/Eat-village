@@ -10,4 +10,5 @@ urlpatterns = [
     path('delete/<int:boardid>', communityboard_delete, name='communityboard_delete'),
     path('<int:boardid>/<int:commentid>', communityboard_comment, name='communityboard_comment'),
     path('commentdelete/<int:commentid>', communitycomment_delete, name='communitycomment_delete'),
-]   
+    
+    ]   
