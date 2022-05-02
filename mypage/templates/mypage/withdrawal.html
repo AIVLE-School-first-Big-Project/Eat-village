@@ -1,0 +1,93 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href='{% static "withdrawal.css"%}?after'>
+<div id="add_feed"><i class="fa-solid fa-user-slash"></i></div>
+<div id="model_add_feed" class="modal_overlay">
+    <div class="modal_window">
+        <div class="card">
+            <div class="card-header">
+                <strong><i class="fas fa-user-slash"></i>&nbsp;&nbsp;회원탈퇴</strong>
+            </div>
+            <div class="card-body">
+                <form method="POST" novalidate>
+                    {% csrf_token %}
+                    <p><strong>{{ form.first_name.value }}</strong> 님의 계정이 삭제됩니다.<br><br>
+                        탈퇴시 개인정보가 삭제되며 복구할 수 없고 <br>게시글은 자동 삭제되지 않습니다. <br><br>
+                        아래의 문장을 똑같이 입력한 후 하단의 유의사항 동의에 체크하세요.
+                    </p>
+                    <div class="mb-4 md-form">
+                        <div>
+                            <span><strong>흙에서 자란 내 마음 파아란 하늘빛</strong></span>
+                        </div>
+                        <div id="check_sector">
+                            <input type="text" name="sentence" class="form-control" id="id_sentence" required >
+                        </div>
+                        <small id="check_warning">문장이 일치하지 않습니다.</small>
+                    </div>
+
+                    <label>
+                        <input type="checkbox" name="ck" onClick="checkDisable(this.form)">
+                        <span style="color:#d14040f2; font-weight: bold;"> 유의사항 동의</span>
+                    </label>
+                    <p><i class="fas fa-exclamation-triangle"></i>&nbsp;{{ form.username.value }} 계정이 삭제됩니다.</p>
+                    <div class="wrap-btn">
+                        <a class="btn_btn-sm" id="back_btn"><i class="fa fa-reply"></i>&nbsp; 돌아가기</a>
+
+                        <button type="submit" class="btn_btn-sm" name="bt_delete" id="detail_btn" disabled="true" >
+                            <i class="fas fa-check"></i>&nbsp; 탈퇴하기
+                        </button>
+
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    const scroll_block = document.getElementsByTagName('body');
+    const btn = document.getElementById("add_feed");
+    const addModal = document.getElementById("model_add_feed");
+    btn.addEventListener("click", e => {
+        addModal.style.display = 'flex';
+    });
+
+    const closeBtn = document.getElementById("back_btn");
+    closeBtn.addEventListener("click", e => {
+        addModal.style.display = "none";
+    });
+    
+    const sentence = '흙에서 자란 내 마음 파아란 하늘빛';
+    var oldVal = '';
+    var currentVal = '';
+    $("#id_sentence").on("propertychange change keyup paste input", function() {
+        try {
+            currentVal = $(this).val();
+            if(currentVal == oldVal && sentence == currentVal) {
+                $("#check_warning").css('color', 'blue');
+                $("#check_warning").text('문장이 일치합니다.');
+
+                return;
+            }
+            else{
+                $("#check_warning").css('color', 'red');
+                $("#check_warning").text('문장이 일치하지 않습니다.');
+            }
+            oldVal = currentVal;
+        } catch (error) {
+            console.log(error)
+        }
+        
+    });
+
+    function checkDisable(form) {
+        if (form.ck.checked == true && sentence == currentVal) {
+            form.bt_delete.disabled = false;
+            form.bt_delete.style.backgroundColor = '#a00303f2';
+            form.bt_delete.style.cursor = 'pointer';
+        } else {
+            form.bt_delete.disabled = true;
+            form.bt_delete.style.backgroundColor = '#9c5151f2';
+            form.bt_delete.style.cursor = '';
+        }
+    };
+</script>

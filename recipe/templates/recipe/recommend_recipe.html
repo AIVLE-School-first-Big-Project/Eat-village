@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang='ko'>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>yolo5 작동</title>
+    </head>
+    <body>
+    <table>
+        <tr>
+            <td width="50%">
+                <div id="popup_layer" onClick="close()">
+                    <div id="popup">
+                        <iframe src="http://127.0.0.1:8000/recipe/video_feed/" width="600" height="400"> 
+                    </div>
+                </div>
+            </td>
+        
+            <td>
+                <div id="pop">
+                    <iframe src="" name="popupframe"></iframe>
+                    </div>
+                    {% comment %} <button type="button" onclick="openPop(팝업으로 띄울 자식 페이지 주소, 너비값, 높이값);">팝업창 열기</button>
+                    <button onclick="href='index.html'">text</button > {% endcomment %}
+                    <button type="button" onclick="find_ingred()">재료분석</button>
+            </td>
+            <td>
+                {% comment %} {% for item in user %}
+                    <h3>{{ user_ingre }} / {{ item.ingre }} </h3>
+                    --------------------------------------------------------------------------------------------------
+                {% endfor %}    {% endcomment %}
+                {{user_ingre}}
+            </td>
+
+        </tr>
+    </table>
+
+    <script type="text/javascript">
+        function close_cam(){  // 끄는거
+            var cam_ori = document.getElementById("cam_ori")
+            var cam_img = document.getElementById("cam_img")
+                
+            if(cam_ori.style.display=='block'){
+                cam_ori.style.display = 'none';
+                cam_img.style.display = 'block';
+            }
+            else{// if(cam_ori.style.display=='none'){
+                cam_ori.style.display = 'block';
+                cam_img.style.display = 'none';
+            }
+        }
+        function find_ingred() {
+            location.href = "{% url 'test' %}";
+        }
+    </script>
+    </body>
+
+</html>
