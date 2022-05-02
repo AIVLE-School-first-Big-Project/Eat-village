@@ -10,12 +10,15 @@ from recipe.models import user_ingre
 
 def recommend_recipe(user_model, recipe_model):
     # 매개변수를 통한 데이터 모델.
-    user_data = user_model.objects.all()
+    # user_data = user_model.objects.all()
     re_data = recipe_model.objects.all()
-        
+    
+    # 당근,사과,오이,양파
     # 1. 유저 id와 재료를 받는다.
-    user_ids = list(user.id for user in user_data)
-    user_ingres = list(user.ingre for user in user_data)
+    # user_ids = list(user.id for user in user_data)
+    # user_ingres = list(user.ingre for user in user_data)
+    
+    user_ingres = user_model
     
     # 2. 레시피 id 값과 재료를 받는다.
     recipe_ids = list(recipe.recipe_id - 1 for recipe in re_data) # id -1 이 index
@@ -24,7 +27,9 @@ def recommend_recipe(user_model, recipe_model):
     
     # 3. 유저 재료와 레시피 재료를 코사인 유사도 검사 후 정렬 테이블 생성
     # 유저의 재료 데이터를 레시피 리스트 마지막에 추가
-    recipe_igds.insert(len(recipe_igds),user_ingres[0])
+    result = ','.join(s for s in user_ingres)
+    
+    recipe_igds.insert(len(recipe_igds),result)
     
     tfidf_vect_simple = TfidfVectorizer()
     feature_vect_simple = tfidf_vect_simple.fit_transform(recipe_igds)
