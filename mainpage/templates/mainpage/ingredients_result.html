@@ -10,44 +10,38 @@
     <title>Ingredient Result Page</title>
 </head>
 <body>
-    <nav class="navbar fixed-top">
-        <div class="navbar_logo">
-            <a href="{% url 'mainpage:mainpage' %}">
-                <img src="{% static 'logo.png' %}">
-            </a>
-        </div>
-        <ul class="navbar_menu">
-            <li><a href=''>마이페이지</a></li>
-            <li><a href=''>나눔 게시판</a></li>
-            <li><a href=''>레시피 게시판</a></li>
-            <li><a href=''>자유 게시판</a></li>
-        </ul>
-        <div class="navbar_right">
-            <div class="search">
-                <form onsubmit="search_recipe(); return false;">
-                    <input id='searchfield' type='text' max_length=255 autocomplete='off'>
-                    <button class='searchbtn' type="submit">검색</button>
-                </form>
+    <div style="height:100px;">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+            <div class="navbar_logo">
+                <a href="{% url 'mainpage:mainpage' %}">
+                    <img src="{% static 'logo.png' %}">
+                </a>
             </div>
-            <a href="{% url 'mainpage:weather' %}" class="weather">
-                <div class="temp"></div>
-                <div class="icon"></div>
+            <ul class="navbar_menu">
+                <li><a href=''>마이페이지</a></li>
+                <li><a href=''>나눔 게시판</a></li>
+                <li><a href=''>레시피 게시판</a></li>
+                <li><a href=''>자유 게시판</a></li>
+            </ul>
+            <div class="navbar_right">
+                <div class="search">
+                    <input id='searchfield' type='text' max_length=255 autocomplete='off'>
+                    <button class='searchbtn' onclick="search_recipe(); return false;"">검색</button>
+                </div>
+                <a href="{% url 'mainpage:weather' %}" class="weather">
+                    <div class="temp"></div>
+                    <div class="icon"></div>
+                </a>
+            </div>
+            <a href='#' class="navbar_togglebtn">
+                <i class="fas fa-bars"></i>
             </a>
-        </div>
-        <a href='#' class="navbar_togglebtn">
-            <i class="fas fa-bars"></i>
-        </a>
-    </nav>
+        </nav>
+    </div>
 
     <div id='ingredient_container'>
         <div id='ingredient_result'>
             <ul id='ingredient_list'>
-                <li>닭고기</li>
-                <li>감자</li>
-                <li>당근</li>
-                <li>양파</li>
-                <li>고추장</li>
-                <li>양배추</li>
             </ul>
         </div>
         <div id="button">
@@ -96,10 +90,23 @@
             const list_a = ingred_list.getElementsByTagName('li');
             for (let i = 0; i < list_a.length; i++) {
                 const ing = list_a[i].innerText;
-                window.localStorage.setItem(i, ing);
+                window.localStorage.setItem(ing, 1);
             };
             location.href = '{% url "mainpage:ingredient_change" %}';
         }
+
+        /* 재료 수정후 로드 될 때*/
+        if (window.localStorage.length > 0) {
+            const revised_ingred_list = document.getElementById('ingredient_list');
+            revised_ingred_list.innerHTML = null;
+            for (let i = 0; i < window.localStorage.length; i++) {
+                const ingredItem = document.createElement('li');
+                ingredItem.innerText = window.localStorage.key(i);
+
+                revised_ingred_list.appendChild(ingredItem);
+            };
+            window.localStorage.clear();
+        };
     </script>
 </body>
 </html>

@@ -10,34 +10,34 @@
     <title>Ingredient Change Page</title>
 </head>
 <body>
-    <nav class="navbar fixed-top">
-        <div class="navbar_logo">
-            <a href="{% url 'mainpage:mainpage' %}">
-                <img src="{% static 'logo.png' %}">
-            </a>
-        </div>
-        <ul class="navbar_menu">
-            <li><a href=''>마이페이지</a></li>
-            <li><a href=''>나눔 게시판</a></li>
-            <li><a href=''>레시피 게시판</a></li>
-            <li><a href=''>자유 게시판</a></li>
-        </ul>
-        <div class="navbar_right">
-            <div class="search">
-                <form onsubmit="search_recipe(); return false;">
-                    <input id='searchfield' type='text' max_length=255 autocomplete='off'>
-                    <button class='searchbtn' type="submit">검색</button>
-                </form>
+    <div style="height:100px;">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+            <div class="navbar_logo">
+                <a href="{% url 'mainpage:mainpage' %}">
+                    <img src="{% static 'logo.png' %}">
+                </a>
             </div>
-            <a href="{% url 'mainpage:weather' %}" class="weather">
-                <div class="temp"></div>
-                <div class="icon"></div>
+            <ul class="navbar_menu">
+                <li><a href=''>마이페이지</a></li>
+                <li><a href=''>나눔 게시판</a></li>
+                <li><a href=''>레시피 게시판</a></li>
+                <li><a href=''>자유 게시판</a></li>
+            </ul>
+            <div class="navbar_right">
+                <div class="search">
+                    <input id='searchfield' type='text' max_length=255 autocomplete='off'>
+                    <button class='searchbtn' onclick="search_recipe(); return false;"">검색</button>
+                </div>
+                <a href="{% url 'mainpage:weather' %}" class="weather">
+                    <div class="temp"></div>
+                    <div class="icon"></div>
+                </a>
+            </div>
+            <a href='#' class="navbar_togglebtn">
+                <i class="fas fa-bars"></i>
             </a>
-        </div>
-        <a href='#' class="navbar_togglebtn">
-            <i class="fas fa-bars"></i>
-        </a>
-    </nav>
+        </nav>
+    </div>
 
     <div id="ingredient_container">
         <div class="ingred-input-box">
@@ -84,7 +84,7 @@
         function ingred_change_comp() {
             const final_ingred_list = document.getElementById('ingred_list');
             console.log(final_ingred_list);
-            //location.href = "{% url 'mainpage:ingredient_result' %}";
+            location.href = "{% url 'mainpage:ingredient_result' %}";
         }
 
         let ingreds = [];
@@ -97,19 +97,18 @@
 
             const ingredName = document.createElement('div');
             ingredName.classList.add('ingred');
-            ingredName.innerText = window.localStorage.getItem(i);
-            ingreds = ingreds.concat({content: window.localStorage.getItem(i)});
+            ingredName.innerText = window.localStorage.key(i);
+            ingreds = ingreds.concat({content: window.localStorage.key(i)});
 
             const delBtn = document.createElement('button');
             delBtn.classList.add('delbtn');
-            delBtn.addEventListener('click', () => deleteIngred(window.localStorage.getItem(i)));
+            delBtn.addEventListener('click', () => deleteIngred(window.localStorage.key(i)));
             delBtn.innerHTML = 'X';
 
             ingredItem.appendChild(ingredName);
             ingredItem.appendChild(delBtn);
             ingredList.appendChild(ingredItem);
         };
-        window.localStorage.clear();
         console.log(ingreds);
 
         /* 재료 수정 페이지에서 재료 추가, 삭제 기능 */
@@ -125,12 +124,18 @@
 
         const appendIngreds = (text) => {
             const newIngreds = getAllIngreds().concat({content: text});
+            window.localStorage.setItem(text, text);
             setIngreds(newIngreds);
             paintIngreds();
         }
 
         const deleteIngred = (ingredContent) => {
             const newIngreds = getAllIngreds().filter(ingred => ingred.content !== ingredContent);
+            for (let k = 0; k < window.localStorage.length; k++) {
+                if (window.localStorage.key(k) === ingredContent) {
+                    window.localStorage.removeItem(ingredContent);
+                }
+            };
             setIngreds(newIngreds);
             paintIngreds();
         }

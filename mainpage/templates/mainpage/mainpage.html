@@ -3,67 +3,83 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" type="text/css" href='{% static "common.css" %}?after'>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="apple-touch-icon" href="/custom_icon.png"/>
     <script src="https://kit.fontawesome.com/312926fc77.js" crossorigin="anonymous"></script>
     <title>Main Page</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-        <div class="navbar_logo">
-            <a href="{% url 'mainpage:mainpage' %}">
-                <img src="{% static 'logo.png' %}">
-            </a>
-        </div>
-        <ul class="navbar_menu">
-            <li><a href=''>마이페이지</a></li>
-            <li><a href=''>나눔 게시판</a></li>
-            <li><a href=''>레시피 게시판</a></li>
-            <li><a href=''>자유 게시판</a></li>
-        </ul>
-        <div class="navbar_right">
-            <div class="search">
-                <input id='searchfield' type='text' max_length=255 autocomplete='off'>
-                <button class='searchbtn' onclick="search_recipe(); return false;"">검색</button>
+    <div style="height: 100px; background-color: #FFB30E;">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+            <div class="navbar_logo">
+                <a href="{% url 'mainpage:mainpage' %}">
+                    <img src="{% static 'logo.png' %}">
+                </a>
             </div>
-            <a href="{% url 'mainpage:weather' %}" class="weather">
-                <div class="temp"></div>
-                <div class="icon"></div>
+            <ul class="navbar_menu">
+                <li><a href=''>마이페이지</a></li>
+                <li><a href=''>나눔 게시판</a></li>
+                <li><a href=''>레시피 게시판</a></li>
+                <li><a href=''>자유 게시판</a></li>
+            </ul>
+            <div class="navbar_right">
+                <div class="search">
+                    <input id='searchfield' type='text' max_length=255 autocomplete='off'>
+                    <button class='searchbtn' onclick="search_recipe(); return false;"">검색</button>
+                </div>
+                <a href="{% url 'mainpage:weather' %}" class="weather">
+                    <div class="temp"></div>
+                    <div class="icon"></div>
+                </a>
+            </div>
+            <a href='#' class="navbar_togglebtn">
+                <i class="fas fa-bars"></i>
             </a>
-        </div>
-        <a href='#' class="navbar_togglebtn">
-            <i class="fas fa-bars"></i>
-        </a>
-    </nav>
-
-    <div id="container">
-        <video autoplay="true" id="videoElement">
-        </video>
-        <div id="button">
-            <button id="btn1" onclick="cameraAccess();">영상 촬영</button>
-            <button id="btn2" onclick="find_ingred();">분석 시작</button>
-        </div>
+        </nav>
     </div>
+    <section class="bg-primary py-5">
+        <div id="container">
+            <div class="fridge-img">
+                <a>
+                    <img src="{% static 'fridge.png' %}">
+                </a>
+            </div>
+            <div class="to-do-text">
+                <h1 class="title">
+                    자네 요리사가 될 생각은 없나?
+                </h1>
+                <h3 class="subtitle">
+                    너의 냉장고를 보여줘!
+                    <br>
+                    나머진 내가 알아서 할게!
+                </h3>
+            </div>
+            <video autoplay="true" id="videoElement">
+            </video>
+            <div id="button">
+                <button id="btn1" onclick="cameraAccess();">영상 촬영</button>
+                <button id="btn2" onclick="find_ingred();">분석 시작</button>
+            </div>
+        </div>
+    </section>
 
     <section>
         날씨 추천 레시피
         <div id="slideShow">
-            <ul class="slides">
-                <li><img src="https://recipe1.ezmember.co.kr/cache/recipe/2020/08/18/32775e06923a4bef0cb6093ff84d28ef1.jpg" alt=""></li>
-                <li><img src="https://recipe1.ezmember.co.kr/cache/recipe/2020/08/18/32775e06923a4bef0cb6093ff84d28ef1.jpg" alt=""></li>
-                <li><img src="https://recipe1.ezmember.co.kr/cache/recipe/2020/08/18/32775e06923a4bef0cb6093ff84d28ef1.jpg" alt=""></li>
-                <li><img src="https://recipe1.ezmember.co.kr/cache/recipe/2020/08/18/32775e06923a4bef0cb6093ff84d28ef1.jpg" alt=""></li>
-                <li><img src="https://recipe1.ezmember.co.kr/cache/recipe/2020/08/18/32775e06923a4bef0cb6093ff84d28ef1.jpg" alt=""></li>
-                <li><img src="https://recipe1.ezmember.co.kr/cache/recipe/2020/08/18/32775e06923a4bef0cb6093ff84d28ef1.jpg" alt=""></li>
+            <ul class="slider">
+                <li><img src="https://recipe1.ezmember.co.kr/cache/recipe/2020/08/18/32775e06923a4bef0cb6093ff84d28ef1.jpg" alt="" title="토스트"></li>
+                <li><img src="https://recipe1.ezmember.co.kr/cache/recipe/2020/08/18/32775e06923a4bef0cb6093ff84d28ef1.jpg" alt="" title="토스트"></li>
+                <li><img src="https://recipe1.ezmember.co.kr/cache/recipe/2020/08/18/32775e06923a4bef0cb6093ff84d28ef1.jpg" alt="" title="토스트"></li>
+                <li><img src="https://recipe1.ezmember.co.kr/cache/recipe/2020/08/18/32775e06923a4bef0cb6093ff84d28ef1.jpg" alt="" title="토스트"></li>
+                <li><img src="https://recipe1.ezmember.co.kr/cache/recipe/2020/08/18/32775e06923a4bef0cb6093ff84d28ef1.jpg" alt="" title="토스트"></li>
+                <li><img src="https://recipe1.ezmember.co.kr/cache/recipe/2020/08/18/32775e06923a4bef0cb6093ff84d28ef1.jpg" alt="" title="토스트"></li>
             </ul>
-            <p class="controller">
-                <span class="prev">&lang;</span>
-                <span class="next">&rang;</span>
-            </p>
         </div>
     </section>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="{% static 'main.js' %}"></script>
     <script>
         /* 위치기반 현재 날씨 정보 */
@@ -95,30 +111,14 @@
         function find_ingred() {
             location.href = "{% url 'mainpage:ingredient_result' %}";
         }
-
-        /* 날씨 레시피 추천 리스트 슬라이드*/
-        const slides = document.querySelector('.slides');
-        const slideImg = document.querySelectorAll('.slides li');
-        let currentIdx = 0;
-        const slideCount = slideImg.length;
-        const prev = document.querySelector('.prev');
-        const next = document.querySelector('.next');
-        const slideWidth = 300;
-        const slideMargin = 100;
-        slides.style.width = (slideWidth + slideMargin) * slideCount + 'px';
-        function moveSlide(num) {
-            slides.style.left = -num * 400 + 'px';
-            currentIdx = num;
-        }
-        prev.addEventListener('click', function () {
-            if (currentIdx !== 0) moveSlide(currentIdx - 1);
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('.slider').bxSlider({
+                captions: true,
+                slideWidth: 500
+            });
         });
-        next.addEventListener('click', function () {
-            if (currentIdx !== slideCount - 1) {
-                moveSlide(currentIdx + 1);
-            }
-        });
-
     </script>
 
 </body>
