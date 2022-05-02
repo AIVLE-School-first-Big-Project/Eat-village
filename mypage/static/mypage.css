@@ -322,8 +322,10 @@ input:focus {
     }
 
     /* membership withdrawal */
+    .modal_overlay {
+        height: 66rem;
+    }
     .modal_window {
         width: 70%;
-        height: 25rem;
     }
 }

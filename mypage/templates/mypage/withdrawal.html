@@ -1,5 +1,5 @@
 {% load static %}
-<link rel="stylesheet" type="text/css" href='{% static "withdrawal.css"%}'>
+<link rel="stylesheet" type="text/css" href='{% static "withdrawal.css"%}?after'>
 <div id="add_feed"><i class="fa-solid fa-user-slash"></i></div>
 <div id="model_add_feed" class="modal_overlay">
     <div class="modal_window">
@@ -16,7 +16,7 @@
                     </p>
                     <div class="mb-4 md-form">
                         <div>
-                            <span>흙에서 자란 내 마음 파아란 하늘빛</span>
+                            <span><strong>흙에서 자란 내 마음 파아란 하늘빛</strong></span>
                         </div>
                         <div id="check_sector">
                             <input type="text" name="sentence" class="form-control" id="id_sentence" required >
@@ -44,6 +44,7 @@
     </div>
 </div>
 <script>
+    const scroll_block = document.getElementsByTagName('body');
     const btn = document.getElementById("add_feed");
     const addModal = document.getElementById("model_add_feed");
     btn.addEventListener("click", e => {
