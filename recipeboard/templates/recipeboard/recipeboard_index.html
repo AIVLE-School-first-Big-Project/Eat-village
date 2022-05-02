@@ -1,11 +1,38 @@
-<br>레시피 게시판 입니다.<br>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=0.7">
 
-{% comment %} 정렬순서 {% endcomment %}
-{% if kw %}
-{% comment %} 키워드 검색시 정렬기능 없음 {% endcomment %}
-{% else %}
-<div>
-    <select id="so-select" onchange="location=this.value">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+    <!-- custom CSS -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style-index.css' %}?after">
+
+    <!-- Font -->
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <script src="https://kit.fontawesome.com/22dc6176d9.js" crossorigin="anonymous"></script>
+</head>
+
+<main>
+
+<div class="container-sm p-2 user-select-none" id="bar">
+    {% if kw %}
+    <div id="selector">
+        <a href="{% url 'recipeboard:recipeboard_index' %}"> <i class="fa-solid fa-arrow-left fa-2x"></i> </a>
+    </div>
+    {% else %}
+    <div id="selector"><select id="so-select" onchange="location=this.value">
         {% if so == '' %}
         <option hidden class="so-date" value="/recipeboard">최신순</option>
         <option class="so-view" value="?so=view">조회순</option>
@@ -19,60 +46,81 @@
         <option class="so-date" value="/recipeboard">최신순</option>
         <option class="so-view" value="?so=view">조회순</option>
         {% endif %}
-    </select>
+    </select></div>
+    <div id="searchbox"><form action="{% url 'recipeboard:recipeboard_index' %}" method="get">
+        <input type="text" name="kw" value="{{ kw }}">
+        <input type="submit" value="검색">
+        <span>&nbsp;</span>
+        <a href="{% url 'recipeboard:recipeboard_create' %}"> <i class="fa-solid fa-pencil fa-2x"></i></a>
+    </form></div>
 </div>
 {% endif %}
-
-{% comment %} 글쓰기버튼 {% endcomment %}
-<div>
-    <a href="{% url 'recipeboard:recipeboard_create' %}">글쓰기</a>
+<br>
+{% if kw %}
+<div class="container" id=kwresult>
+    <br>{{kw}}에 대한 검색결과입니다!<br>
+</div>
+{% endif %}
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr id="colname">
+                {% comment %} <th scope="col" class="col">#</th> {% endcomment %}
+                <th scope="col" class="col-5" id="col0">제목</th>
+                <th scope="col" class="col-2" id="col1">작성자</th>
+                <th scope="col" class="col-2" id="col1">날짜</th>
+                <th scope="col" class="col-1" id="col1">조회수</th>
+                <th scope="col" class="col-1" id="col1">추천수</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if board_list %}
+                {% for board in board_list%}
+                <tr>
+                    {% comment %} <td>{{board.boardid}}</td> {% endcomment %}
+                    <td id="col2"><a style="text-decoration-line:none" href="{% url 'recipeboard:recipeboard_detail' board.boardid %}">{{board.title}}</a></td>
+                    <td id="col3">{{board.userid.nickname}}</td>
+                    {% if board.time.date == today %}
+                    <td id="col3">{{board.time|time:'H:i'}}</td>
+                    {% else %}
+                    <td id="col3">{{board.time|date:'m-d'}}</td>
+                    {% endif %}
+                    <td id="col3">{{board.view}}</td>
+                    <td id="col3">{{board.recommended}}</td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                 <br>표시할 게시물이 없습니다!<br>
+            {% endif %}
+        </tbody>
+    </table>
 </div>
 
-{% comment %} 게시물 표시되는곳 {% endcomment %}
-<tr>
-    {% if kw %}
-    <br>{{kw}}에 대한 검색결과입니다!<br>
-    {% endif %}
-    <td>-</td>
-    <td>제목</td>
-    <td>작성자</td>
-    <td>조회수</td>
-    <td>추천수</td>
-    <td>작성일</td>
-    <br>
-    {% if board_list %}
-        {% for board in board_list%}
-            <td>{{board.boardid}}</a></td>
-            <td><a href="{% url 'recipeboard:recipeboard_detail' board.boardid %}">{{board.title}}</a></td>
-            <td>{{board.name}}</td>
-            <td>{{board.view}}</td>
-            <td>{{board.recommended}}</td>
-            <td>{{board.time}}</td>
-            <br>
-        {% endfor %}
-        {% else %}
-        <br>표시할 게시물이 없습니다!<br>
-    {% endif %}
-</tr>
+<div class="container" id="pcontain">
+    <form action="{% url 'recipeboard:recipeboard_index' %}" method="get">
+        <div class="pagination" id="paginator">
+            {% if board_list.has_previous and board_list.has_next %}
+                <li><a href="?page=1&kw={{kw}}"> <i class="fa-solid fa-angles-left fa-2x"></i></a></li>
+                <li><span>&nbsp;&nbsp;</span><a href="?page={{board_list.previous_page_number}}&kw={{kw}}"> <i class="fa-solid fa-angle-left fa-2x"></i></a></li>
+                <span>&nbsp;&nbsp;{{board_list.number}} / {{board_list.paginator.num_pages}}</span>
+                <li><span>&nbsp;&nbsp;</span><a href="?page={{board_list.next_page_number}}&kw={{kw}}"> <i class="fa-solid fa-angle-right fa-2x"></i> </a></li>
+                <li><span>&nbsp;&nbsp;</span><a href="?page={{board_list.paginator.num_pages}}&kw={{kw}}"> <i class="fa-solid fa-angles-right fa-2x"></i></a></li>
+            {% elif board_list.has_previous %}
+                <li><a href="?page=1&kw={{kw}}"> <i class="fa-solid fa-angles-left fa-2x"></i></a></li>
+                <li><span>&nbsp;&nbsp;</span><a href="?page={{board_list.previous_page_number}}&kw={{kw}}"> <i class="fa-solid fa-angle-left fa-2x"></i></a></li>
+                <span>&nbsp;&nbsp;{{board_list.number}} / {{board_list.paginator.num_pages}}</span>
+                <li><span>&nbsp;&nbsp;</span> <i class="fa-solid fa-angle-right fa-2x"></i> </li>
+                <li><span>&nbsp;&nbsp;</span> <i class="fa-solid fa-angles-right fa-2x"></i></li>
+            {% elif board_list.has_next %}
+                <li> <i class="fa-solid fa-angles-left fa-2x"></i></li>
+                <li><span>&nbsp;&nbsp;</span> <i class="fa-solid fa-angle-left fa-2x"></i></li>
+                <span>&nbsp;&nbsp;{{board_list.number}} / {{board_list.paginator.num_pages}}</span>
+                <li><span>&nbsp;&nbsp;</span><a href="?page={{board_list.next_page_number}}&kw={{kw}}"> <i class="fa-solid fa-angle-right fa-2x"></i> </a></li>
+                <li><span>&nbsp;&nbsp;</span><a href="?page={{board_list.paginator.num_pages}}&kw={{kw}}"> <i class="fa-solid fa-angles-right fa-2x"></i></a></li>
+            {% endif %}
+        </div>
+    </form>
+</div>
 
-<form action="{% url 'recipeboard:recipeboard_index' %}" method="get">
-    
-    <div class="pagination">
-        {% if board_list.has_previous %}
-          <a href="?page=1&kw={{kw}}">첫페이지</a>
-          <a href="?page={{board_list.previous_page_number}}&kw={{kw}}">이전페이지</a>
-        {% endif %}
-    
-        <span>{{board_list.number}} / {{board_list.paginator.num_pages}}</span>
-    
-        {% if board_list.has_next %}
-          <a href="?page={{board_list.next_page_number}}&kw={{kw}}">다음페이지</a>
-          <a href="?page={{board_list.paginator.num_pages}}&kw={{kw}}">마지막페이지</a>
-        {% endif %}
-      </div>
-
-    <input type="text" name="kw" value="{{ kw }}">
-    <input type="submit" value="검색">
-
-</form>
-
+</main>
+</html>
