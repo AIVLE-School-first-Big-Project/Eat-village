@@ -1,0 +1,184 @@
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=0.7">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+    <!-- custom CSS -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style-cindex.css' %}?after">
+
+    <!-- Font -->
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <script src="https://kit.fontawesome.com/22dc6176d9.js" crossorigin="anonymous"></script>
+</head>
+
+<main>
+
+<div class="container" id="bar">
+    {% if kw %}
+    <div id="selector">
+        <a href="{% url 'communityboard:communityboard_index' %}"> <i class="fa-solid fa-arrow-left fa-2x"></i> </a>
+    </div>
+    {% else %}
+    <div id="selector">
+        <select id="header-select" onchange="location=this.value">
+            {% if header == '' %}
+                <option hidden class="header-all" value="/communityboard">전체</option>
+                <option class="header-h1" value="?header=h1">요리재료게시판</option>
+                <option class="header-h2" value="?header=h2">자유게시판</option>
+                <option class="header-h3" value="?header=h3">우리동네보기</option>
+            {% elif header == 'h1' %}
+                <option hidden class="header-h1" value="?header=h1">요리재료게시판</option>
+                <option class="header-all" value="/communityboard">전체</option>
+                <option class="header-h2" value="?header=h2">자유게시판</option>
+                <option class="header-h3" value="?header=h3">우리동네보기</option>
+            {% elif header == 'h2' %}
+                <option hidden class="header-h2" value="?header=h2">자유게시판</option>
+                <option class="header-all" value="/communityboard">전체</option>
+                <option class="header-h1" value="?header=h1">요리재료게시판</option>
+                <option class="header-h3" value="?header=h3">우리동네보기</option>
+            {% elif header == 'h3' %}
+                <option hidden class="header-h3" value="?header=h3">우리동네보기</option>
+                <option class="header-all" value="/communityboard">전체</option>
+                <option class="header-h2" value="?header=h2">자유게시판</option>
+                <option class="header-h1" value="?header=h1">요리재료게시판</option>
+            {% endif %}
+        </select>
+    </div>
+    <div id="searchbox">
+        <form action="{% url 'communityboard:communityboard_index' %}" method="get">
+            <input type="text" name="kw" value="{{ kw }}">
+            <input type="submit" value="검색">
+            <span>&nbsp;</span>
+            <a href="{% url 'communityboard:communityboard_create' %}"> <i class="fa-solid fa-pencil fa-2x"></i></a>
+        </form>
+    </div>
+    {% endif %}
+</div>
+
+<br>
+<br>
+
+{% comment %} {% if kw %}
+<div class="container" id=kwresult>
+    <br>{{kw}}에 대한 검색결과입니다!<br>
+</div>
+{% endif %} {% endcomment %}
+
+{% comment %} <form action="" method="post">
+    {% if address != "my" %}
+    {% csrf_token %}
+    <button type="submit" name = "address" value="my">내 지역 보기</button>
+    {% else %}
+    {% csrf_token %}
+    <button><a href="{% url 'communityboard:communityboard_index' %}">돌아가기</a></button>
+    {% endif %}
+</form> {% endcomment %}
+
+{% comment %} 게시물 표시되는곳 {% endcomment %}
+<div class="container">
+    {% if kw %}
+        <div id=kwresult>
+            <br>{{kw}}에 대한 검색결과입니다!<br>
+        </div>
+    {% endif %}
+    <hr>
+    {% if board_list %}
+        {% for board in board_list%}
+            <div class="c1">
+                <div class="c1-1">
+                    <a href="{% url 'communityboard:communityboard_detail' board.boardid %}">{{board.title|truncatechars:25}}</a>
+                </div>
+                <div class="c1-2">
+                    <span><i class="fa-solid fa-location-dot"></i> {{board.userid.address}}</span>
+                </div>
+            </div>
+            <div class="blank">
+                <br>
+            </div>
+            <div class="c2">
+                {{board.detail|truncatechars:30}}
+                <br>
+            </div>
+            <div class="blank">
+                <br>
+            </div>
+            <div class="c3">
+                <div class="c3-1">
+                    {{board.header}} | {{board.userid.nickname}}
+                </div>
+                <div class="c3-2">
+                    {% load humanize %}
+                    {{board.time|naturaltime}}
+                </div>
+            </div>
+            <hr>
+        {% endfor %}
+        {% else %}
+        <div>
+            표시할 게시물이 없습니다!
+        </div>
+        <hr>
+        <br>
+    {% endif %}
+</div>
+<br>
+
+    <div class="container" id="pcontain">
+        <form action="{% url 'communityboard:communityboard_index' %}" method="get">
+            <div class="pagination" id="paginator">
+                {% if board_list.has_previous and board_list.has_next %}
+                    <div><a href="?page=1&kw={{kw}}"> <i class="fa-solid fa-angles-left fa-2x"></i></a></div>
+                    <div>&nbsp;&nbsp;<a href="?page={{board_list.previous_page_number}}&kw={{kw}}"> <i class="fa-solid fa-angle-left fa-2x"></i></a>&nbsp;&nbsp;&nbsp;</div>
+                    <a href="?page={{board_list.number|add:-1}}&kw={{kw}}"><div id="num">{{board_list.number|add:-1}}</div></a>
+                    <div>&nbsp;&nbsp;</div>
+                    <div id="num_now">{{board_list.number}}</div>
+                    <div>&nbsp;&nbsp;</div>
+                    <a href="?page={{board_list.number|add:1}}&kw={{kw}}"><div id="num">{{board_list.number|add:1}}</div></a>
+                    <div>&nbsp;&nbsp;<a href="?page={{board_list.next_page_number}}&kw={{kw}}"> <i class="fa-solid fa-angle-right fa-2x"></i> </a></div>
+                    <div>&nbsp;&nbsp;<a href="?page={{board_list.paginator.num_pages}}&kw={{kw}}"> <i class="fa-solid fa-angles-right fa-2x"></i></a></div>
+                {% elif board_list.has_previous %}
+                    <div><a href="?page=1&kw={{kw}}"> <i class="fa-solid fa-angles-left fa-2x"></i></a></div>
+                    <div>&nbsp;&nbsp;<a href="?page={{board_list.previous_page_number}}&kw={{kw}}"> <i class="fa-solid fa-angle-left fa-2x"></i></a>&nbsp;&nbsp;&nbsp;</div>
+                    {% if board_list.paginator.num_pages != 2 %}
+                    <a href="?page={{board_list.number|add:-2}}&kw={{kw}}"><div id="num">{{board_list.number|add:-2}}</div></a>
+                    <div>&nbsp;&nbsp;</div>
+                    {% endif %}
+                    <a href="?page={{board_list.number|add:-1}}&kw={{kw}}"><div id="num">{{board_list.number|add:-1}}</div></a>
+                    <div>&nbsp;&nbsp;</div>
+                    <div id="num_now">{{board_list.number}}</div>
+                    <div>&nbsp;&nbsp; <i id="nolink" class="fa-solid fa-angle-right fa-2x"></i> </div>
+                    <div>&nbsp;&nbsp; <i id="nolink" class="fa-solid fa-angles-right fa-2x"></i></div>
+                {% elif board_list.has_next %}
+                    <div> <i id="nolink" class="fa-solid fa-angles-left fa-2x"></i></div>
+                    <div>&nbsp;&nbsp; <i id="nolink" class="fa-solid fa-angle-left fa-2x"></i>&nbsp;&nbsp;&nbsp;</div>
+                    <div id="num_now">{{board_list.number}}</div>
+                    <div>&nbsp;&nbsp;</div>
+                    <a href="?page={{board_list.number|add:1}}&kw={{kw}}"><div id="num">{{board_list.number|add:1}}</div></a>
+                    {% if board_list.paginator.num_pages != 2 %}
+                    <div>&nbsp;&nbsp;</div>
+                    <a href="?page={{board_list.number|add:2}}&kw={{kw}}"><div id="num">{{board_list.number|add:2}}</div></a>
+                    {% endif %}
+                    <div>&nbsp;&nbsp;<a href="?page={{board_list.next_page_number}}&kw={{kw}}"> <i class="fa-solid fa-angle-right fa-2x"></i> </a></div>
+                    <div>&nbsp;&nbsp;<a href="?page={{board_list.paginator.num_pages}}&kw={{kw}}"> <i class="fa-solid fa-angles-right fa-2x"></i></a></div>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+
+<br>
+
+
+</main>

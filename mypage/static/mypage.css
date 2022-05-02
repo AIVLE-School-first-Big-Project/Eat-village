@@ -1,0 +1,331 @@
+:root {
+    --main-color:#c9e6c1;
+    --top-shadow:#abc4a4;
+    --bottom-shodow:#e7ffde;
+}
+
+html {
+    width:100%;
+}
+
+body {
+    background-color: var(--main-color);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+    padding: 0.6em;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+input {
+    width: 90%;
+}
+#title_wrap {
+    height: 2.5em;
+    width: 100%;
+    padding-top: 1.5em;
+    line-height: 2.5em;
+    position: relative;
+}
+
+#title {
+    width: inherit;
+    overflow: hidden;
+    font-weight: 800;
+    font-size: 200%;    
+    text-align: center;
+}
+#whole {
+    width: 100%;
+    height: fit-content;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+}
+
+#whole .contents{
+    width: 30em;
+    border-radius: 15px;
+    background: var(--main-color);
+    box-shadow:  15px 15px 30px var(--top-shadow),
+                -15px -15px 30px var(--bottom-shodow);
+    padding: 2.5em 2em 0.5em 2em;
+    margin-top: 30px;
+    margin-right: 5em;
+    display:flex;
+    flex-direction: column;
+}
+
+.contents2{
+    width: 30em;
+    justify-content: space-evenly;
+    margin-top: 30px;
+    display:flex;
+    border: var(--main-color);
+}
+
+.info {
+    width: 30em;
+    height: 3em;
+    margin-bottom: 2em;
+    text-align: center;
+    line-height: 3em;
+    justify-content: space-between;
+}
+#none_edit {
+    border-radius: 15px;
+    background: var(--main-color);
+    box-shadow: inset 15px 15px 30px var(--top-shadow),
+                inset -15px -15px 30px var(--bottom-shodow);
+}
+#edit {
+    border-radius: 15px;
+    background: var(--main-color);
+    box-shadow:  15px 15px 30px var(--top-shadow),
+                -15px -15px 30px var(--bottom-shodow);
+}
+
+.btn_update {
+    margin-right: 1em;
+    background-color: inherit;
+    border-color: var(--main-color);
+    box-shadow:  15px 15px 30px var(--top-shadow),
+                -15px -15px 30px var(--bottom-shodow);
+    border-radius: 8px;
+    width: 16em;
+    height: 3em;
+    cursor: pointer;
+    float: right;
+    z-index: 1;
+    transition-duration: 0.5s;
+}
+
+.btn_update :focus {
+    box-shadow:  5px 5px 10px var(--top-shadow),
+                -5px -5px 10px var(--bottom-shodow);
+}
+
+.content2-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 30em;
+}
+
+.list-icon {
+    border-radius: 100%;
+    background: var(--main-color);
+    box-shadow:  28px 28px 56px var(--top-shadow),
+                -28px -28px 56px var(--bottom-shodow);
+    width: 5.5em;
+    height: 5.5em;
+    margin-bottom: 2em;
+    text-align: center;
+    line-height: 5.5em;
+    font-size: 20px;
+}
+.list-icon:link, :visited, :hover {
+    text-decoration: none;
+}
+
+/* Check Box */
+.allergy {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    border-radius: 10px;
+    padding: 1em;
+    margin: 0;
+    width: 100%;
+    background:  inherit;
+    box-shadow:  15px 15px 30px var(--top-shadow),
+                -15px -15px 30px var(--bottom-shodow);
+}
+
+.allergy > ul {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    justify-content: space-evenly;
+    width: 100%;
+}
+.allergy li {
+    /* position: relative; */
+    justify-content: space-evenly;
+    list-style: none;
+    text-align: center;
+}
+.allergy li label {
+    position: relative;
+    cursor: pointer;
+}
+.allergy li label input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+}
+.allergy li label :checked ~ .icon-box {
+    box-shadow: inset 5px 5px 10px var(--top-shadow),
+                inset -5px -5px 10px var(--bottom-shodow);
+}
+.allergy li label :checked ~ .icon-box .fa {
+    transform: scale(0.95);
+}
+.allergy li label .icon-box {
+    width: 60px;
+    height: 60px;
+    background: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow:  5px 5px 10px var(--top-shadow),
+                -5px -5px 10px var(--bottom-shodow);
+    border-radius: 10px;
+}
+.post-form-info i {
+    font-size: 30px;
+    color: #6a9bd8;
+}
+.icon-img {
+    width:30px;
+    height:30px;
+    filter: invert(75%) sepia(38%) saturate(4303%) hue-rotate(186deg) brightness(91%) contrast(86%);
+}
+#al-etc {
+    display:flex;
+    justify-content:center;
+    border-radius: 15px;
+}
+#al-etc > div {
+    width: 26.5em;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px var(--top-shadow), 
+                -5px -5px 10px var(--bottom-shodow);
+    margin: 5px 0 11px 0;
+}
+.allergy-etc {
+    margin:10px;
+}
+input {
+    background: inherit;
+    border: none;
+}
+input:focus {
+    outline: none;
+}
+
+/* membership withdrawal */
+.modal_overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(1.5px);
+    -webkit-backdrop-filter: blur(1.5px);
+    z-index:1;
+}
+
+.modal_window {
+    background: white;
+    backdrop-filter: blur(13.5px);
+    -webkit-backdrop-filter: blur(13.5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    width: 32rem;
+    height: fit-content;
+    position: relative;
+}
+
+#add_feed {
+    width:fit-content;
+    margin: 2rem 0 0.8rem 1rem;
+    border-radius: 5px;
+    box-shadow: inset 5px 5px 10px var(--top-shadow),
+                inset -5px -5px 10px var(--bottom-shodow);
+    padding: 0.6rem;
+}
+#add_feed > i {
+    color:gray;
+}
+
+@media screen and (max-width:560px) {
+    html {
+        padding:0;
+        width :100%;
+    }
+    body {
+        min-width:100%;
+        overflow: visible;
+    }
+    
+    #whole {
+        height: fit-content;
+        width:100%;
+        margin-top: 1em;
+        justify-content: space-evenly;
+    }
+    #whole > div.contents {
+        margin: 0;
+        padding-right: 1.5em;
+        padding-left: 1.5em;
+        width: 82%;
+    }
+    
+    .info {
+        width: 100%;
+        height: 3em;
+    }
+    #whole > div:nth-child(2) {
+        width:100%;
+        border: none;
+        text-size-adjust: 0;
+        flex-direction: row;
+        margin-top: 1em;
+    }
+    #whole > div:nth-child(2) > a {
+        margin: 0.5em;
+        height: 5em;
+        width: 5em;
+        line-height: 5em;
+    }
+    .content2-wrap{
+        justify-content: center;
+    }
+    .allergy{
+        width: 85%;
+    }
+    .allergy > ul {
+        justify-content: space-between;
+    }
+    .allergy li label .icon-box {
+        width: 55px;
+        height: 55px;
+    }
+    #al-etc {
+        width:100%;
+    }
+    .btn_update {
+        width: 10em;
+    }
+
+    /* membership withdrawal */
+    .modal_overlay {
+        height: 66rem;
+    }
+    .modal_window {
+        width: 70%;
+    }
+}
