@@ -11,7 +11,7 @@
 
     <!-- custom CSS -->
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style-detail.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style-detail.css' %}?after">
 
     <!-- Font -->
     <link rel="stylesheet" type="text/css"
@@ -52,7 +52,7 @@
             {% if likedata %}
                 <form method = "post", action="{% url 'recipeboard:recipeboard_recommendcancel' board.boardid %}">
                     {% csrf_token %}
-                    <button type="submit", name='cancelrecommend' id="rec"><i class="fa-solid fa-heart-circle-minus fa-2x"></i></button>
+                    <button type="submit", name='cancelrecommend' id="rec"><i id="recommend" class="fa-solid fa-heart-circle-minus fa-2x"></i></button>
                 </form>
             {% elif board.userid == user %}
                 <span><a href="{% url 'recipeboard:recipeboard_update' board.boardid %}"><button>수정</button></a></span>
