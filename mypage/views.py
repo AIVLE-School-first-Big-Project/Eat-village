@@ -26,7 +26,7 @@ def user_info(request):
     user_get = User.objects.get(id=id)
     print(user_get.first_name)
 
-    checkbox_allergy = ["달걀", "우유", "땅콩", "생선", "갑각류"]
+    checkbox_allergy = ["달걀", "우유", "땅콩", "생선", "새우"]
     checkbox_boolean = {
         0:'unchecked',
         1:'unchecked',
@@ -34,10 +34,8 @@ def user_info(request):
         4:'unchecked',
         5:'unchecked'
     }
-    try:
-        tmp = json.loads(user_get.allergyinfo)
-    except:
-        tmp = []
+
+    tmp = json.loads(user_get.allergyinfo)
 
     form_allergy = []
     for i in tmp:
@@ -78,7 +76,6 @@ def user_info(request):
             user_get.email = 'Unknown@Unknown'
             user_get.address = 'Unknown'
             user_get.save()
-            messages.success(request, "회원탈퇴가 완료되었습니다.")
 
             return redirect('/users/login/')
     
@@ -87,10 +84,11 @@ def user_info(request):
         request, 
         'mypage/mypage.html', 
         {
-        'form':form,
-        'allergy':form_allergy,
-        'check_boolean': checkbox_boolean,
-        })
+            'form':form,
+            'allergy':form_allergy,
+            'check_boolean': checkbox_boolean,
+        }
+    )
 
 # 내가 쓴 글 목록
 @login_required
