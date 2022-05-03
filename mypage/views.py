@@ -107,4 +107,19 @@ def show_writeList(request):
         'mypage/mywrite_page.html',
         context
     )
+
+# 내가 좋아요한 레시피글 목록
+@login_required
+def show_likeList(request):
+    id = request.session['id']
+    like = Userrecommendedcommunity.objects.filter(userid=id)
+    print(request.user.first_name)
+    context = {
+        "like":like,
+    }
+    return render(
+        request,
+        'mypage/like_page.html',
+        context
+    )
     
