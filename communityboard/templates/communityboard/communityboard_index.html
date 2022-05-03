@@ -57,12 +57,14 @@
             {% endif %}
         </select>
     </div>
+    <div id="write">
+        <a href="{% url 'communityboard:communityboard_create' %}"> <i id="writeicon" class="fa-solid fa-square-plus fa-3x"></i></a>
+    </div>
     <div id="searchbox">
         <form action="{% url 'communityboard:communityboard_index' %}" method="get">
-            <input type="text" name="kw" value="{{ kw }}">
-            <input type="submit" value="검색">
+            <input class="searchbox1" type="text" name="kw" value="{{ kw }}">
+            <input class="searchbox2" type="submit" value="검색">
             <span>&nbsp;</span>
-            <a href="{% url 'communityboard:communityboard_create' %}"> <i class="fa-solid fa-pencil fa-2x"></i></a>
         </form>
     </div>
     {% endif %}
@@ -71,23 +73,6 @@
 <br>
 <br>
 
-{% comment %} {% if kw %}
-<div class="container" id=kwresult>
-    <br>{{kw}}에 대한 검색결과입니다!<br>
-</div>
-{% endif %} {% endcomment %}
-
-{% comment %} <form action="" method="post">
-    {% if address != "my" %}
-    {% csrf_token %}
-    <button type="submit" name = "address" value="my">내 지역 보기</button>
-    {% else %}
-    {% csrf_token %}
-    <button><a href="{% url 'communityboard:communityboard_index' %}">돌아가기</a></button>
-    {% endif %}
-</form> {% endcomment %}
-
-{% comment %} 게시물 표시되는곳 {% endcomment %}
 <div class="container">
     {% if kw %}
         <div id=kwresult>
@@ -97,9 +82,14 @@
     <hr>
     {% if board_list %}
         {% for board in board_list%}
+        <div class="c0">
+        <div class="c0-1">
+            <div class="blank">
+                <br>
+            </div>
             <div class="c1">
                 <div class="c1-1">
-                    <a href="{% url 'communityboard:communityboard_detail' board.boardid %}">{{board.title|truncatechars:25}}</a>
+                    <a class="title" href="{% url 'communityboard:communityboard_detail' board.boardid %}">{{board.title|truncatechars:25}}</a>
                 </div>
                 <div class="c1-2">
                     <span><i class="fa-solid fa-location-dot"></i> {{board.userid.address}}</span>
@@ -124,7 +114,12 @@
                     {{board.time|naturaltime}}
                 </div>
             </div>
-            <hr>
+            <div class="blank">
+                <br>
+            </div>
+        </div>
+        </div>
+        <br>
         {% endfor %}
         {% else %}
         <div>

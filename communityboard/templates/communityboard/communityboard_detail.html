@@ -11,7 +11,7 @@
 
     <!-- custom CSS -->
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style-cdetail.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style-cdetail.css' %}?after">
 
     <!-- Font -->
     <link rel="stylesheet" type="text/css"
@@ -67,40 +67,21 @@
         </div>
     </div>
 
-
-{% comment %} {% if likedata %}
-    <br>
-    <form method = "post", action="{% url 'communityboard:communityboard_recommendcancel' board.boardid %}">
-        {% csrf_token %}
-        <button type="submit", name='cancelrecommend'>추천취소</button>
-    </form>
-{% elif likedata.userid == user.userid %}
-    <br><a href="{% url 'communityboard:communityboard_update' board.boardid %}">수정</a>
-    <br><a href="{% url 'communityboard:communityboard_delete' board.boardid %}">삭제</a> 
-{% else %}
-    <br>
-    <br>
-    <form method = "post", action="{% url 'communityboard:communityboard_recommend' board.boardid %}">
-        {% csrf_token %}
-        <button type="submit" name='recommend'>추천</button>
-    </form>
-{% endif %} {% endcomment %}
-
-{% comment %} <br>{{board.time}}<br> {% endcomment %}
     <hr>
-    <div>
-        {% for image in images %}
-            {% if image.image %}
-            <img class = "image-thumbail"
-                src="{{ MEDIA_URL }}{{ image.image }}" 
-                alt=""
-                style="width:500px;height:auto;">
-            {%endif%}
-        {% endfor %}
-    </div>
     
     <br>
     <div class="detail">
+        <div>
+            {% for image in images %}
+                {% if image.image %}
+                <img class = "image-thumbail"
+                    src="{{ MEDIA_URL }}{{ image.image }}" 
+                    alt=""
+                    style="width:500px;height:auto;">
+                {% endif %}
+            {% endfor %}
+        </div>
+        <br>
         {{board.detail}}
     </div>
     <br><br><br>

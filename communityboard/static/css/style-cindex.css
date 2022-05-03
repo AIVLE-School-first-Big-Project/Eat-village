@@ -4,7 +4,7 @@ body{
 }
 a {
     text-decoration: none;
-    color:black;
+    color:#F7713A;
 }
 #bar {
     width:100%;
@@ -15,11 +15,34 @@ a {
     margin:0 auto;
     height:auto;
 }
+
+select {
+    border-radius: 5px;
+    height:35pt;
+    text-align: center;
+    font-weight: bold;
+}  
 #selector {
     float:left;
+    position:relative;
+    top:10px;
 }
 #searchbox {
     float: right;
+    position:relative;
+    top:13px;
+}
+#searchbox1 {
+    border-radius:10px;
+}
+#searchbox2 {
+    border-radius: 10px;
+    background-color: white;
+}
+#write {
+    float:right;
+    position:relative;
+    top:5px;
 }
 
 #pcontain{
@@ -31,15 +54,31 @@ a {
     justify-content: center;
 }
 
+div.c0 {
+    border-radius:10px;
+    background-color: #F2D99E;
+    border: 5px solid transparent;
+    box-shadow: 1px 1px 1px 1px gray;
+    color:#4e5227;
+}
+div.c0-1 {
+    width:95%;
+    margin:0 auto;
+}
 div.c1 {
     display:flex;
 }
 div.c1-1 {
     float:left;
     font-size: 25px;
+    font-weight: bold;
+}
+a.title {
+    color:#00311F;
 }
 div.c1-2{
     margin-left:auto;
+    font-weight: bold;
 }
 div.c2{
     display:flex;
@@ -56,6 +95,7 @@ div.c3-1 {
     float:left;
     font-size: 14px;
     text-align: center;
+    font-weight: bold;
 }
 div.c3-2 {
     margin-left:auto;
@@ -72,21 +112,21 @@ div.c3-2 {
     color:white;
     text-align:center;
     border-radius:10px;
-    background-color: aquamarine;
-    border:3px solid aquamarine;
+    background-color: #F7713A;
+    border:3px solid #F7713A;
 }
 #num {
     width:40px;
     height: 40px;
     font-size:23;
-    color: black;
+    color: #4e5227;
     text-align:center;
     border-radius:10px;
     background-color: none;
-    border:3px solid black;
+    border:3px solid #4e5227;
 }
 #num:hover {
     color:white;
-    background-color: aquamarine;
-    border:3px solid aquamarine;
+    background-color: #F7713A;
+    border:3px solid #F7713A;
 }
