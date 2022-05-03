@@ -6,6 +6,13 @@ a {
     text-decoration: none;
     color:#A4C454;
 }
+hr {
+    border-radius:5pt;
+    border-top: solid 4px #4e5227;
+}
+hr.level1 {
+    border-top: solid 2px #4e5227;
+}
 div.title {
     display:flex;
     align-items: center;
