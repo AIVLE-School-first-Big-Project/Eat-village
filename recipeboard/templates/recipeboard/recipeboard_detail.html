@@ -52,7 +52,7 @@
             {% if likedata %}
                 <form method = "post", action="{% url 'recipeboard:recipeboard_recommendcancel' board.boardid %}">
                     {% csrf_token %}
-                    <button type="submit", name='cancelrecommend' id="rec"><i class="fa-solid fa-heart-circle-minus fa-2x"></i></button>
+                    <button type="submit", name='cancelrecommend' id="rec"><i id="recommend" class="fa-solid fa-heart-circle-minus fa-2x"></i></button>
                 </form>
             {% elif board.userid == user %}
                 <span><a href="{% url 'recipeboard:recipeboard_update' board.boardid %}"><button>수정</button></a></span>
@@ -61,7 +61,7 @@
             {% else %}
                 <form method = "post", action="{% url 'recipeboard:recipeboard_recommend' board.boardid %}">
                     {% csrf_token %}
-                    <button type="submit" name='recommend' id="rec"><i class="fa-solid fa-heart-circle-plus fa-2x"></i></button>
+                    <button type="submit" name='recommend' id="rec"><i id="recommend" class="fa-solid fa-heart-circle-plus fa-2x"></i></button>
                 </form>
             {% endif %}
         </div>
@@ -110,8 +110,8 @@
     <div>
         댓글({{commentcount}})
     </div>
-    <hr>
     {% for comment in comment %}
+    <hr>
         <div class="comment1">
             <div class="comment1-1">
                 {{comment.userid.nickname}}
@@ -131,9 +131,10 @@
         <div class="comment3">
             {{comment.time|date:"Y-m-d H:i:s"}}
         </div>
-        <hr>
+        
         {% for babycomment in babycomment %}
             {% if babycomment.parentcommentid == comment.commentid %}
+            <hr class="level1">
             <div class="bcomment1">
                 <div class="bcomment1-1">
                     <span>{{babycomment.userid.nickname}}</span>
@@ -152,10 +153,10 @@
             <div class="bcomment3">
                 <span id>{{babycomment.time|date:"Y-m-d H:i:s"}}</span>
             </div>
-            <hr>
             {% endif %}
         {% endfor %}
     {% endfor %}
+    <hr>
     <br><br>
     <div class="container">
         <form method="post" action="">

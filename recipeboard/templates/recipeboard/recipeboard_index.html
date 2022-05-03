@@ -11,7 +11,7 @@
 
     <!-- custom CSS -->
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/style-index.css' %}?after">
+    <link rel="stylesheet" href="{% static 'css/style-index.css' %}">
 
     <!-- Font -->
     <link rel="stylesheet" type="text/css"
@@ -26,59 +26,71 @@
 
 <main>
 
-<div class="container-sm p-2 user-select-none" id="bar">
+<div class="container" id="bar">
     {% if kw %}
     <div id="selector">
         <a href="{% url 'recipeboard:recipeboard_index' %}"> <i class="fa-solid fa-arrow-left fa-2x"></i> </a>
     </div>
     {% else %}
-    <div id="selector"><select id="so-select" onchange="location=this.value">
-        {% if so == '' %}
-        <option hidden class="so-date" value="/recipeboard">최신순</option>
-        <option class="so-view" value="?so=view">조회순</option>
-        <option class="so-recommended" value="?so=recommended">추천순</option>
-        {% elif so == 'view' %}
-        <option hidden class="so-view" value="?so=view">조회순</option>
-        <option class="so-date" value="/recipeboard">최신순</option>
-        <option class="so-recommended" value="?so=recommended">추천순</option>
-        {% elif so == 'recommended'%}
-        <option hidden class="so-recommended" value="?so=recommended">추천순</option>
-        <option class="so-date" value="/recipeboard">최신순</option>
-        <option class="so-view" value="?so=view">조회순</option>
-        {% endif %}
-    </select></div>
-    <div id="searchbox"><form action="{% url 'recipeboard:recipeboard_index' %}" method="get">
-        <input type="text" name="kw" value="{{ kw }}">
-        <input type="submit" value="검색">
-        <span>&nbsp;</span>
-        <a href="{% url 'recipeboard:recipeboard_create' %}"> <i class="fa-solid fa-pencil fa-2x"></i></a>
-    </form></div>
+    <div id="selector">
+        <select id="so-select" onchange="location=this.value">
+            {% if so == '' %}
+                <option hidden class="so-date" value="/recipeboard">최신순</option>
+                <option class="so-view" value="?so=view">조회순</option>
+                <option class="so-recommended" value="?so=recommended">추천순</option>
+            {% elif so == 'view' %}
+                <option hidden class="so-view" value="?so=view">조회순</option>
+                <option class="so-date" value="/recipeboard">최신순</option>
+                <option class="so-recommended" value="?so=recommended">추천순</option>
+            {% elif so == 'recommended'%}
+                <option hidden class="so-recommended" value="?so=recommended">추천순</option>
+                <option class="so-date" value="/recipeboard">최신순</option>
+                <option class="so-view" value="?so=view">조회순</option>
+            {% endif %}
+        </select>
+    </div>
+    <div id="write">
+        <a href="{% url 'recipeboard:recipeboard_create' %}"> <i id="writeicon" class="fa-solid fa-pencil fa-3x"></i></a>
+    </div>
+    <div id="searchbox">
+        <form action="{% url 'recipeboard:recipeboard_index' %}" method="get">
+            <input class="searchbox1" type="text" name="kw" value="{{ kw }}">
+            <input class="searchbox2" type="submit" value="검색">
+            <span>&nbsp;&nbsp;&nbsp;</span>
+        </form>
+    </div>
+    {% endif %}
 </div>
-{% endif %}
+
 <br>
+
+
 {% if kw %}
 <div class="container" id=kwresult>
     <br>{{kw}}에 대한 검색결과입니다!<br>
+    <br><br>
 </div>
 {% endif %}
+<br>
+<br>
 <div class="container">
     <table class="table table-hover">
-        <thead>
-            <tr id="colname">
-                {% comment %} <th scope="col" class="col">#</th> {% endcomment %}
-                <th scope="col" class="col-5" id="col0">제목</th>
-                <th scope="col" class="col-2" id="col1">작성자</th>
-                <th scope="col" class="col-2" id="col1">날짜</th>
-                <th scope="col" class="col-1" id="col1">조회수</th>
-                <th scope="col" class="col-1" id="col1">추천수</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% if board_list %}
-                {% for board in board_list%}
-                <tr>
+        {% if board_list %}
+            <thead>
+                <tr id="colname">
+                    {% comment %} <th scope="col" class="col">#</th> {% endcomment %}
+                    <th scope="col" class="col-6" id="col0">제목</th>
+                    <th scope="col" class="col-2" id="col1">작성자</th>
+                    <th scope="col" class="col-1" id="col1">날짜</th>
+                    <th scope="col" class="col-1" id="col1">조회수</th>
+                    <th scope="col" class="col-1" id="col1">추천수</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for board in board_list%}
+                <tr id="colcontent">
                     {% comment %} <td>{{board.boardid}}</td> {% endcomment %}
-                    <td id="col2"><a style="text-decoration-line:none" href="{% url 'recipeboard:recipeboard_detail' board.boardid %}">{{board.title}}</a></td>
+                    <td id="col2"><a style="text-decoration-line:none" href="{% url 'recipeboard:recipeboard_detail' board.boardid %}">{{board.title|truncatechars:30}}</a></td>
                     <td id="col3">{{board.userid.nickname}}</td>
                     {% if board.time.date == today %}
                     <td id="col3">{{board.time|time:'H:i'}}</td>
@@ -88,35 +100,52 @@
                     <td id="col3">{{board.view}}</td>
                     <td id="col3">{{board.recommended}}</td>
                 </tr>
-                {% endfor %}
-            {% else %}
-                 <br>표시할 게시물이 없습니다!<br>
-            {% endif %}
-        </tbody>
+            {% endfor %}
+            </tbody>
+        {% else %}
+                <br>표시할 게시물이 없습니다!<br>
+        {% endif %}
     </table>
 </div>
+<br>
 
 <div class="container" id="pcontain">
-    <form action="{% url 'recipeboard:recipeboard_index' %}" method="get">
+    <form action="{% url 'communityboard:communityboard_index' %}" method="get">
         <div class="pagination" id="paginator">
             {% if board_list.has_previous and board_list.has_next %}
-                <li><a href="?page=1&kw={{kw}}"> <i class="fa-solid fa-angles-left fa-2x"></i></a></li>
-                <li><span>&nbsp;&nbsp;</span><a href="?page={{board_list.previous_page_number}}&kw={{kw}}"> <i class="fa-solid fa-angle-left fa-2x"></i></a></li>
-                <span>&nbsp;&nbsp;{{board_list.number}} / {{board_list.paginator.num_pages}}</span>
-                <li><span>&nbsp;&nbsp;</span><a href="?page={{board_list.next_page_number}}&kw={{kw}}"> <i class="fa-solid fa-angle-right fa-2x"></i> </a></li>
-                <li><span>&nbsp;&nbsp;</span><a href="?page={{board_list.paginator.num_pages}}&kw={{kw}}"> <i class="fa-solid fa-angles-right fa-2x"></i></a></li>
+                <div><a href="?page=1&kw={{kw}}"> <i id="link" class="fa-solid fa-angles-left fa-2x"></i></a></div>
+                <div>&nbsp;&nbsp;<a href="?page={{board_list.previous_page_number}}&kw={{kw}}"> <i id="link" class="fa-solid fa-angle-left fa-2x"></i></a>&nbsp;&nbsp;&nbsp;</div>
+                <a href="?page={{board_list.number|add:-1}}&kw={{kw}}"><div id="num">{{board_list.number|add:-1}}</div></a>
+                <div>&nbsp;&nbsp;</div>
+                <div id="num_now">{{board_list.number}}</div>
+                <div>&nbsp;&nbsp;</div>
+                <a href="?page={{board_list.number|add:1}}&kw={{kw}}"><div id="num">{{board_list.number|add:1}}</div></a>
+                <div>&nbsp;&nbsp;<a href="?page={{board_list.next_page_number}}&kw={{kw}}"> <i id="link" class="fa-solid fa-angle-right fa-2x"></i> </a></div>
+                <div>&nbsp;&nbsp;<a href="?page={{board_list.paginator.num_pages}}&kw={{kw}}"> <i id="link" class="fa-solid fa-angles-right fa-2x"></i></a></div>
             {% elif board_list.has_previous %}
-                <li><a href="?page=1&kw={{kw}}"> <i class="fa-solid fa-angles-left fa-2x"></i></a></li>
-                <li><span>&nbsp;&nbsp;</span><a href="?page={{board_list.previous_page_number}}&kw={{kw}}"> <i class="fa-solid fa-angle-left fa-2x"></i></a></li>
-                <span>&nbsp;&nbsp;{{board_list.number}} / {{board_list.paginator.num_pages}}</span>
-                <li><span>&nbsp;&nbsp;</span> <i class="fa-solid fa-angle-right fa-2x"></i> </li>
-                <li><span>&nbsp;&nbsp;</span> <i class="fa-solid fa-angles-right fa-2x"></i></li>
+                <div><a href="?page=1&kw={{kw}}"> <i id="link" class="fa-solid fa-angles-left fa-2x"></i></a></div>
+                <div>&nbsp;&nbsp;<a href="?page={{board_list.previous_page_number}}&kw={{kw}}"> <i id="link" class="fa-solid fa-angle-left fa-2x"></i></a>&nbsp;&nbsp;&nbsp;</div>
+                {% if board_list.paginator.num_pages != 2 %}
+                <a href="?page={{board_list.number|add:-2}}&kw={{kw}}"><div id="num">{{board_list.number|add:-2}}</div></a>
+                <div>&nbsp;&nbsp;</div>
+                {% endif %}
+                <a href="?page={{board_list.number|add:-1}}&kw={{kw}}"><div id="num">{{board_list.number|add:-1}}</div></a>
+                <div>&nbsp;&nbsp;</div>
+                <div id="num_now">{{board_list.number}}</div>
+                <div>&nbsp;&nbsp; <i id="nolink" class="fa-solid fa-angle-right fa-2x"></i> </div>
+                <div>&nbsp;&nbsp; <i id="nolink" class="fa-solid fa-angles-right fa-2x"></i></div>
             {% elif board_list.has_next %}
-                <li> <i class="fa-solid fa-angles-left fa-2x"></i></li>
-                <li><span>&nbsp;&nbsp;</span> <i class="fa-solid fa-angle-left fa-2x"></i></li>
-                <span>&nbsp;&nbsp;{{board_list.number}} / {{board_list.paginator.num_pages}}</span>
-                <li><span>&nbsp;&nbsp;</span><a href="?page={{board_list.next_page_number}}&kw={{kw}}"> <i class="fa-solid fa-angle-right fa-2x"></i> </a></li>
-                <li><span>&nbsp;&nbsp;</span><a href="?page={{board_list.paginator.num_pages}}&kw={{kw}}"> <i class="fa-solid fa-angles-right fa-2x"></i></a></li>
+                <div> <i id="nolink" class="fa-solid fa-angles-left fa-2x"></i></div>
+                <div>&nbsp;&nbsp; <i id="nolink" class="fa-solid fa-angle-left fa-2x"></i>&nbsp;&nbsp;&nbsp;</div>
+                <div id="num_now">{{board_list.number}}</div>
+                <div>&nbsp;&nbsp;</div>
+                <a href="?page={{board_list.number|add:1}}&kw={{kw}}"><div id="num">{{board_list.number|add:1}}</div></a>
+                {% if board_list.paginator.num_pages != 2 %}
+                <div>&nbsp;&nbsp;</div>
+                <a href="?page={{board_list.number|add:2}}&kw={{kw}}"><div id="num">{{board_list.number|add:2}}</div></a>
+                {% endif %}
+                <div>&nbsp;&nbsp;<a href="?page={{board_list.next_page_number}}&kw={{kw}}"> <i id="link" class="fa-solid fa-angle-right fa-2x"></i> </a></div>
+                <div>&nbsp;&nbsp;<a href="?page={{board_list.paginator.num_pages}}&kw={{kw}}"> <i id="link" class="fa-solid fa-angles-right fa-2x"></i></a></div>
             {% endif %}
         </div>
     </form>

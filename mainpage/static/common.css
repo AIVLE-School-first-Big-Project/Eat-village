@@ -10,7 +10,25 @@ ul, li {
 
 a {
     text-decoration: none;
-    color: white;
+    color: black;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+.bg-light {
+    background-color: white !important;
+}
+
+.fixed-top {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
 }
 
 .fixed-top {
@@ -29,10 +47,13 @@ a {
     display:flex;
     justify-content:space-between;
     align-items: center;
-    background-color: mediumaquamarine;
-    padding: 8px 12px;
+    padding-top: 0.5rem;
+    padding-right: 1rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1rem;
     margin-bottom: 50px;
 }
+
 .navbar_logo {
     font-size:24px;
     color: white;
@@ -69,6 +90,11 @@ a {
     width:50px;
     height:25px;
     position:relative;
+    font-size:10px;
+}
+
+#searchfield {
+    height:19px;
 }
 
 .weather {
@@ -84,7 +110,7 @@ a {
 #container {
     margin: auto;
     width: 800px;
-    height: 450px;
+    height: auto;
     margin-bottom: 20px;
 }
 #videoElement {
@@ -146,7 +172,7 @@ a {
 
 #ingredient_container {
     margin: auto;
-    width: 800px;
+    width: 50%;
     height: 450px;
     text-align: center;
     margin-bottom: 20px;
@@ -205,12 +231,59 @@ a {
     font-weight: lighter;
     cursor: pointer;
 }
+#slideShow{
+    width: 500px;
+    height: auto;
+    position: relative;
+    margin: 50px auto;
+    overflow: hidden;
+    text-align: center;
+    align-items: center;
+    align-content: center;
+}
+
+.bg-primary {
+    background-color: #FFB30E !important;
+}
+
+.py-5 {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+}
+
+.fridge-img {
+    text-align: center;
+}
+
+.to-do-text {
+    text-align: center;
+}
+
+.title {
+    color: #F9FAFD !important;
+}
+
+.subtitle {
+    color: #616161 !important;
+}
+
+ul#ingredient_list li {
+    padding: 5px 0px 5px 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #efefef;
+    font-size: 12px;
+}
 
 @media screen and (max-width: 850px) {
     .navbar {
         flex-direction: column;
         align-items: flex-start;
         padding: 8px 24px;
+    }
+    .navbar-expand-lg {
+        flex-wrap: nowrap;
+        -webkit-box-pack: start;
+        justify-content: flex-start;
     }
     .navbar_menu {
         display: none;
@@ -259,10 +332,17 @@ a {
     #ingredient_container {
         align-self: center;
         text-align: center;
-        width: 50%;
     }
     #ingredient_result {
         width: 100%;
+    }
+    #slideShow{
+        width: 100%;
+        height: auto;
+        margin-left: auto;
+    }
+    .bx-wrapper {
+        margin: auto;
     }
 }
 

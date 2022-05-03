@@ -56,8 +56,8 @@ def recipeboard_detail(request, boardid): # 게시글 내용, 댓글생성
     if request.method == "GET":
         recipecommentform = Recipecommentform()
 
-    board.view += 1 ## 조회수증가
-    board.save()
+    # board.view += 1 ## 조회수증가
+    # board.save()
 
     comment = Recipecomment.objects.filter(
         boardid = boardid,
@@ -92,6 +92,26 @@ def recipeboard_detail(request, boardid): # 게시글 내용, 댓글생성
         'images' : images,
         'likedata' : likedata,
     }
+
+    response = render(request, 'communityboard/communityboard_detail.html', context)
+    if board.userid != user:
+        cookie_name = f'view:{request.user.id}'
+        tomorrow = timezone.now().replace(hour=23, minute=59, second=0)
+        expires = tomorrow
+        if request.COOKIES.get(cookie_name) is not None:
+            cookies = request.COOKIES.get(cookie_name)
+            cookies_list = cookies.split('|')
+            if str(boardid) not in cookies_list:
+                response.set_cookie(cookie_name, cookies + f'|{boardid}', expires =expires)
+                board.view += 1
+                board.save()
+                return response
+        else:
+            response.set_cookie(cookie_name, boardid, expires =expires)
+            board.view += 1
+            board.save()
+            return response
+
     return render(request, 'recipeboard/recipeboard_detail.html', context)
 
 def recipeboard_recommend(request, boardid):

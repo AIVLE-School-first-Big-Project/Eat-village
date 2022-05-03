@@ -6,6 +6,58 @@ a {
     text-decoration: none;
     color:black;
 }
+#bar {
+    width:100%;
+    margin:0 auto;
+}
+.container {
+    width:100%;
+    margin:0 auto;
+    height:auto;
+}
+
+select {
+    border-radius: 5px;
+    width:80pt;
+    height:35pt;
+    text-align: center;
+    font-weight: bold;
+}
+#selector {
+    float:left;
+    position:relative;
+    top:10px;
+}
+#searchbox {
+    float: right;
+    position:relative;
+    top:13px;
+}
+#searchbox1 {
+    border-radius:10px;
+}
+#searchbox2 {
+    border-radius: 10px;
+    background-color: white;
+}
+#write {
+    float:right;
+    position:relative;
+    top:5px;
+}
+#writeicon {
+    border: 5px solid #A4C454;
+    color:#A4C454;
+}
+tr {
+    height:70px;
+    vertical-align: middle;
+}
+#colcontent:hover {
+    background-color: #A4C454;
+    color:white;
+    font-weight: bold;
+}
 #colname {
     font-size: 4;
 }
@@ -28,20 +80,6 @@ a {
     font-size: 15;
 }
 
-#bar {
-    width:100%;
-    margin:0 auto;
-}
-.container {
-    width:100%;
-    margin:0 auto;
-}
-#selector {
-    float:left;
-}
-#searchbox {
-    float: right;
-}
 
 #pcontain{
     width:100%;
@@ -50,4 +88,36 @@ a {
 #paginator {
     align-items: center;
     justify-content: center;
+}
+
+#link{
+    color:#A4C454;
+}
+#nolink {
+    color:gray;
+}
+#num_now {
+    width:40px;
+    height: 40px;
+    font-size:23;
+    color:white;
+    text-align:center;
+    border-radius:10px;
+    background-color: #A4C454;
+    border:3px solid #A4C454;
+}
+#num {
+    width:40px;
+    height: 40px;
+    font-size:23;
+    color: black;
+    text-align:center;
+    border-radius:10px;
+    background-color: none;
+    border:3px solid black;
+}
+#num:hover {
+    color:white;
+    background-color: #A4C454;
+    border:3px solid #A4C454;
 }

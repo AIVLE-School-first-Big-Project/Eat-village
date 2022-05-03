@@ -1,7 +1,6 @@
 from django.contrib import messages
 from django.forms import modelformset_factory
 from django.shortcuts import get_object_or_404, redirect, render
-from django.http import HttpResponseRedirect
 from users.models import Communityboard, Communitycomment, Communityboardimage
 from django.core.paginator import Paginator
 from django.db.models import Q, Count, F
@@ -67,16 +66,13 @@ def myaddress(request):
     return
 
 def communityboard_detail(request, boardid): # 게시글 내용, 댓글생성
-    
+
     user = request.user
     board = get_object_or_404(Communityboard, pk=boardid)
     images = Communityboardimage.objects.filter(boardid=boardid)
 
     if request.method == "GET":
         communitycommentform = Communitycommentform()
-
-    board.view += 1 ## 조회수증가
-    board.save()
 
     comment = Communitycomment.objects.filter(
         boardid = boardid,
@@ -109,6 +105,26 @@ def communityboard_detail(request, boardid): # 게시글 내용, 댓글생성
         'commentcount': commentcount,
         'images' : images,
     }
+
+    response = render(request, 'communityboard/communityboard_detail.html', context)
+    if board.userid != user:
+        cookie_name = f'view:{request.user.id}'
+        tomorrow = timezone.now().replace(hour=23, minute=59, second=0)
+        expires = tomorrow
+        if request.COOKIES.get(cookie_name) is not None:
+            cookies = request.COOKIES.get(cookie_name)
+            cookies_list = cookies.split('|')
+            if str(boardid) not in cookies_list:
+                response.set_cookie(cookie_name, cookies + f'|{boardid}', expires =expires)
+                board.view += 1
+                board.save()
+                return response
+        else:
+            response.set_cookie(cookie_name, boardid, expires =expires)
+            board.view += 1
+            board.save()
+            return response
+
     return render(request, 'communityboard/communityboard_detail.html', context)
 
 # def communityboard_recommend(request, boardid):
