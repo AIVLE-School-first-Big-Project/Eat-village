@@ -1,6 +1,7 @@
 from django.forms import ValidationError
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from requests import request
 from users.models import *
 from django.contrib import auth
 from django.utils import timezone
@@ -29,6 +30,41 @@ def home(request):
 
 def back(request):
     return HttpResponse('<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><font size ="10"><p><hi><center><b><u>아래 사이트를 클릭 후 재로그인해주세요.</u><br> -Petdada- <br> <font size ="15"><a href="/member/login/">LOGIN</a>')   
+
+
+
+from django.views.generic import View
+
+# 회원가입 약관동의
+
+# class AgreementView(View):
+#     def get(self, request, *args, **kwargs):
+#         request.session['agreement'] = False
+#         return render(request, 'users/agreement.html')
+
+#     def post(self, request, *args, **kwarg):
+#         if request.POST.get('agreement1', False) and request.POST.get('agreement2', False):
+#             request.session['agreement'] = True
+#             if request.POST.get('register') == 'register':       
+#                 return redirect("users:signup")
+#         else:
+#             messages.info(request, "약관에 모두 동의해주세요.")
+#             return render(request, 'users/agreement.html')   
+
+class AgreementView(View):
+    def get(self, request, *args, **kwargs):
+        request.POST['agreement'] = False
+        return render(request, 'users/agreement.html')
+   
+    # def post(self, request, *args, **kwarg):
+    #     if request.POST['agreement1'] ==request.POST['agreement2']:   
+    #         request.POST['agreement'] = True
+    #         if request.POST.get('register') == 'register':       
+    #             return redirect("users:signup")
+    #     else:
+    #         messages.info(request, "약관에 모두 동의해주세요.")
+    #         return render(request, 'users/agreement.html')   
+
 
 #회원가입#
 
