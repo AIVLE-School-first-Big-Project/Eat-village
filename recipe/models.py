@@ -6,6 +6,7 @@ from django.db import models
 class recipe_data(models.Model):
     recipe_id = models.AutoField(primary_key=True)
     num =  models.BigIntegerField()
+    explan = models.TextField(null=True) # 레시피 조리순서
     title = models.CharField(max_length=255) # 레시피 이름
     ingre = models.TextField() # 식재료
     amount = models.CharField(max_length=10) # 레시피 양
@@ -16,7 +17,7 @@ class recipe_data(models.Model):
     category_1 = models.CharField(max_length=20) # 카테고리_1
     category_2 = models.CharField(max_length=20) # 카테고리_2
     method = models.CharField(max_length=20) # 조리방법
-    # img_url = models.TextField() # 이미지 url
+    
     
 
         
