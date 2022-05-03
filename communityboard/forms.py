@@ -20,7 +20,7 @@ class Communityboardform(forms.ModelForm):
                 ),
             'detail' : forms.Textarea(
                 attrs={'placeholder':'내용을 입력해주세요!',
-                    'class':'form-control', 'rows':10}
+                    'class':'form-control', 'rows':20}
                 ),
         }
 
