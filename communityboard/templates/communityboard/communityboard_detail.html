@@ -51,9 +51,9 @@
         </div>
         <div class="title-2">
             {% if board.userid == user %}
-            <span><a href="{% url 'communityboard:communityboard_update' board.boardid %}"><button>수정</button></a></span>
+            <span><a href="{% url 'communityboard:communityboard_update' board.boardid %}"><button class="mod">수정</button></a></span>
             <span>  |  </span>
-            <span><a href="{% url 'communityboard:communityboard_delete' board.boardid %}"><button>삭제</button></a></span>
+            <span><a href="{% url 'communityboard:communityboard_delete' board.boardid %}"><button class="mod">삭제</button></a></span>
             {% endif %}
         </div>
     </div>

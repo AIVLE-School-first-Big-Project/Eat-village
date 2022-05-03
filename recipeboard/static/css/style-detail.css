@@ -13,6 +13,13 @@ hr {
 hr.level1 {
     border-top: solid 2px #4e5227;
 }
+button.mod {
+    border-radius: 5pt;
+    background-color: #A4C454;
+    height:30px;
+    color: white;
+    border: none;
+}
 div.title {
     display:flex;
     align-items: center;
