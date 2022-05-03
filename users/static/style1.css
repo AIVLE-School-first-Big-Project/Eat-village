@@ -77,7 +77,7 @@ body::before{
 
 .btn-area {margin-top : 5px;}
 .btn-area button {
-    width: 100%; height: 50px;
+    width: 100%; height: 40px;
     background: #166cea;
     color: #fff;
     font-size: 20px;
