@@ -29,21 +29,26 @@
     <video id="localVideo" playsinline autoplay muted></video>
     <video id="remoteVideo" playsinline autoplay></video>
 
+    <video id="gum" playsinline autoplay muted></video>
+    <video id="recorded" playsinline loop></video>
+
+    <video id="gum" playsinline autoplay muted></video>
+    <video id="recorded" playsinline loop></video>
+
     <div>
-        <button id="startButton">연결 생성</button>
-        <button id="callButton">받는 쪽 카메라 스트리밍</button>
-        <button id="upgradeButton">보내는 쪽 카메라 켜기</button>
-        <button id="hangupButton">연결 끊기</button>
+        <button id="start">Start camera</button>
+        <button id="record" disabled>Start Recording</button>
+        <!--<button id="play" disabled>Play</button>-->
+        <button id="download" disabled>Download</button>
+    </div>
+
+    <div>
+        Recording format: <select id="codecPreferences" disabled></select>
     </div>
     
-   
-
-    <p class="warning"><strong>Warning:</strong> if you're not using headphones, pressing play will cause feedback.</p>
-
-    <p>Display the video stream from <code>getUserMedia()</code> in a video element.</p>
-
-    <p>The <code>MediaStream</code> object <code>stream</code> passed to the <code>getUserMedia()</code> callback is in
-        global scope, so you can inspect it from the console.</p>
+    <div>
+        <span id="errorMsg"></span>
+    </div>
 
 </div>
 
