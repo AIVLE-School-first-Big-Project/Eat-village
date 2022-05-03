@@ -113,10 +113,11 @@ def login(request):
         if user is not None:
             auth.login(request, user)
             request.session['id'] = user.id
-            return redirect('/users/home/')
+            return redirect('/mainpage/mainpage/')
         # 실패
         else:
-            return render(request, 'back.html')
+            messages.warning(request, 'Please check your ID and password or check your email. ')
+            return redirect("users:login")
             #return render(request, 'member/error.html',  {'error': 'username or password is incorrect.'}))
     else:
         return render(request, 'login.html')
