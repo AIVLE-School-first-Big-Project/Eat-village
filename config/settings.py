@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'mypage',
+    'mainpage',
     'recipe',
     'recipeboard',
     'communityboard',

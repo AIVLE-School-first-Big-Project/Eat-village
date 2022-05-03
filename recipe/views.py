@@ -69,7 +69,7 @@ def index(request):
 
 print(torch.cuda.is_available())
 #load model
-model = yolov5.load('yolov5s.pt')
+model = yolov5.load('yolov5l_0502.pt')
 # model = torch.hub.load('ultralytics/yolov5', 'yolov5s')
 device = select_device('') # 0 for gpu, '' for cpu
 # initialize deepsort
@@ -92,10 +92,10 @@ def stream():
     # print(user_data)
     global user_ingre
     
-    cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+    cap = cv2.VideoCapture(2, cv2.CAP_DSHOW)
     # cap = cv2.VideoCapture(1)
-    # model.conf = 0.65
-    # model.iou = 0.5
+    model.conf = 0.3
+    model.iou = 0.5
     # model.classes = [1,2,3,4,6,7,8,10,11]
     
     
