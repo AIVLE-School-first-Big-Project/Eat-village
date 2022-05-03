@@ -1,6 +1,7 @@
 body{
     display:flex;
     flex-direction: column;
+    background-color: #F9E1A3;
 }
 a {
     text-decoration: none;
@@ -52,6 +53,9 @@ select {
 tr {
     height:70px;
     vertical-align: middle;
+}
+#colcontent {
+    background-color: white;
 }
 #colcontent:hover {
     background-color: #A4C454;
