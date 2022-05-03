@@ -6,9 +6,6 @@ from django.http import HttpResponse
 def main(request):
     return render(request, 'mainpage/mainpage.html')
 
-def weather_recomm(request):
-    return render(request, 'mainpage/weather_recom.html')
-
 def ingred_recomm(request):
     return render(request, 'mainpage/recipe_recom.html')
 

@@ -13,7 +13,13 @@ hr {
 hr.level1 {
     border-top: solid 2px #4e5227;
 }
-
+button.mod {
+    border-radius: 5pt;
+    background-color: #F2D99E;
+    height:30px;
+    color: white;
+    border: none;
+}
 div#header{
     font-size:15;
     display:flex;
