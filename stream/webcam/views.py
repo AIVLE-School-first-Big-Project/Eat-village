@@ -30,10 +30,12 @@ deepsort = DeepSort('osnet_x0_25',
 names = model.module.names if hasattr(model, 'module') else model.names
 
 
-def stream():
+
+def stream(request):
     #cap = cv2.VideoCapture(0)
     #cap = cv2.imdecode()
-    cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+    #cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+    cap = request.files['image']
 
     while True:
         ret, frame = cap.read()

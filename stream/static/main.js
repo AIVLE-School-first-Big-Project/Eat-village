@@ -73,8 +73,9 @@ function start() {
   navigator.mediaDevices
       .getUserMedia({
         audio: false,
-        video: true
-      })
+      //  video: { facingMode: { exact: "environment" }}
+        video : true
+    })
       .then(gotStream)
       .catch(e => alert(`getUserMedia() error: ${e.name}`));
 }
@@ -175,6 +176,7 @@ function onIceStateChange(pc, event) {
   }
 }
 
+
 function upgrade() {
   upgradeButton.disabled = true;
   navigator.mediaDevices
@@ -195,6 +197,38 @@ function upgrade() {
       .then(() => pc2.createAnswer())
       .then(answer => pc2.setLocalDescription(answer))
       .then(() => pc1.setRemoteDescription(pc2.localDescription));
+
+          //Set options as form data
+
+      let formdata = new FormData();
+      formdata.append("image", navigator.mediaDevices.getUserMedia({video : true}).stream.getVideoTracks());
+      //formdata.append("threshold", scoreThreshold);
+
+      let xhr = new XMLHttpRequest();
+      xhr.open('POST', apiServer, true);
+      xhr.onload = function () {
+          if (this.status === 200) {
+              let objects = JSON.parse(this.response);
+              //console.log(objects);
+
+              //draw the boxes
+              drawBoxes(objects);
+
+              //dispatch an event
+              let event = new CustomEvent('objectDetection', {detail: objects});
+              document.dispatchEvent(event);
+
+              //start over
+              sendImageFromCanvas();
+          }
+          else {
+              console.error(xhr);
+          }
+      };
+      xhr.send(formdata);
+
+    
+
 }
 
 function hangup() {
