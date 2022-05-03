@@ -10,7 +10,7 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet"/>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"/>
-        <link rel="stylesheet" type="text/css" href='{% static "mypage.css"%}?after'>
+        <link rel="stylesheet" type="text/css" href='{% static "mypage.css"%}'>
         <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
         <script src="https://code.jquery.com/jquery-latest.min.js"></script>       
         <script>
@@ -45,14 +45,12 @@
             });
           } );
 
-        //  회원 탈퇴
-        const modal_btn = $("#")
 
         </script>
     </head>
     <body>
         <!-- 메뉴 삽입 -->
-        {% include "mypage/menu.html" %}
+        {% include "mainpage/header.html" %}
         <!-- 회원 정보 영역 -->
         <form method="POST" class="post-form-info">
             <div>
@@ -135,7 +133,7 @@
                             </li>
                             <li>
                             <label>
-                                <input type="checkbox" name="allergyinfo" id="allergyinfo" value="갑각류" {{check_boolean.4}}>
+                                <input type="checkbox" name="allergyinfo" id="allergyinfo" value="새우" {{check_boolean.4}}>
                                 <div class="icon-box">
                                     <i class="fa-solid fa-shrimp"></i>
                                 </div>

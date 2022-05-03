@@ -5,6 +5,7 @@ from users.models import *
 from django.contrib import auth
 from django.utils import timezone
 from django.contrib.auth import get_user_model
+import json
 
 # SMTP 관련 인증
 from django.contrib.sites.shortcuts import get_current_site
@@ -47,7 +48,7 @@ def signup(request):
             address = request.POST["address"] # 주소
 
             users_user=User.objects.create_user(username,email,password) 
-            users_user.allergyinfo = allergyinfo
+            users_user.allergyinfo = json.dumps(allergyinfo, ensure_ascii = False)
             users_user.first_name=first_name
             users_user.address = address
             users_user.is_active = False

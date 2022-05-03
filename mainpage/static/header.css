@@ -1,0 +1,164 @@
+body {
+    margin: 0;
+}
+
+ul, li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+.bg-light {
+    background-color: white !important;
+}
+
+.fixed-top {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+}
+
+.fixed-top {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+}
+
+.content-title {
+    padding-top: 100px;
+}
+
+.navbar {
+    display:flex;
+    justify-content:space-between;
+    align-items: center;
+    padding-top: 0.5rem;
+    padding-right: 1rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1rem;
+    margin-bottom: 50px;
+}
+#navbar_wrap {
+    display:flex;
+}
+
+.navbar_logo {
+    font-size:24px;
+    color: white;
+}
+.navbar_logo img {
+    display:block;
+    height: 3.5rem;
+}
+.navbar_menu {
+    display: flex;
+    list-style: none;
+    padding-left: 0;
+}
+.navbar_menu li {
+    padding: 8px 12px;
+}
+.navbar_menu li:hover {
+    background-color: orange;
+    border-radius: 4px;
+}
+.navbar_right {
+    list-style: none;
+    color: white;
+    padding-left: 0;
+}
+.navbar_togglebtn {
+    display: none;
+    position: absolute;
+    right: 32px;
+    font-size: 24px;
+    color: black;
+}
+
+.searchbtn {
+    width:50px;
+    height:25px;
+    position:relative;
+    font-size:10px;
+}
+
+#searchfield {
+    height:19px;
+}
+
+.weather {
+    float: right;
+}
+
+.temp,
+.icon {
+    display: inline-block;
+    vertical-align:middle;
+}
+
+.bg-primary {
+    background-color: #FFB30E !important;
+}
+
+@media screen and (max-width: 850px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 8px 24px;
+    }
+    .navbar-expand-lg {
+        flex-wrap: nowrap;
+        -webkit-box-pack: start;
+        justify-content: flex-start;
+    }
+    .navbar_menu {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    .navbar_menu li {
+        width: 100%;
+        text-align: center;
+    }
+    .navbar_right {
+        display: none;
+        text-align: center;
+        justify-content: center;
+        width: 100%;
+    }
+    .search {
+        text-align: center;
+    }
+    .weather {
+        text-align: center;
+        float:none;
+    }
+    .navbar_togglebtn {
+        display: block;
+    }
+    .navbar_togglebtn:hover {
+        color: orange;
+    }
+    .navbar_menu.active {
+        display: flex;
+    }
+    .navbar_right.active {
+        display: block;
+    }
+}
