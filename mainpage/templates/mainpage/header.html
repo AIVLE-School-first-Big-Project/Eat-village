@@ -1,0 +1,29 @@
+{% load static %}
+<div style="height: 100px; background-color: #FFB30E;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="navbar_logo">
+            <a href="{% url 'mainpage:mainpage' %}">
+                <img src="{% static 'logo.png' %}">
+            </a>
+        </div>
+        <ul class="navbar_menu">
+            <li><a href=''>마이페이지</a></li>
+            {% comment %} <li><a href=''>나눔 게시판</a></li> {% endcomment %}
+            <li><a href="{% url 'recipeboard:recipeboard_index' %}">레시피 게시판</a></li>
+            <li><a href="{% url 'communityboard:communityboard_index' %}">커뮤니티 게시판</a></li>
+        </ul>
+        <div class="navbar_right">
+            <div class="search">
+                <input id='searchfield' type='text' max_length=255 autocomplete='off'>
+                <button class='searchbtn' onclick="search_recipe(); return false;">검색</button>
+            </div>
+            <a href="{% url 'mainpage:weather' %}" class="weather">
+                <div class="temp"></div>
+                <div class="icon"></div>
+            </a>
+        </div>
+        <a href='#' class="navbar_togglebtn">
+            <i class="fas fa-bars"></i>
+        </a>
+    </nav>
+</div>
