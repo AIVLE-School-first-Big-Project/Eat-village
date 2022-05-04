@@ -12,4 +12,5 @@ urlpatterns = [
     path('video_feed/',views.video_feed, name='video_feed'),
     # path('test/',views.test, name='test'),
     # path('recipeDetail/', views.recipe_detail, name='recipe_detail'),
+    path('recipeDetail/<int:recipe_id>', views.recipe_detail, name='recipe_detail'),
 ]

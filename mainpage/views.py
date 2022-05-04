@@ -150,3 +150,37 @@ def stream():
     
 def video_feed(request):
     return StreamingHttpResponse(stream(), content_type='multipart/x-mixed-replace; boundary=frame')
+# 레시피 상세페이지
+def recipe_detail(request, recipe_id):
+    cookTime = {
+        "1":"5",
+        "2":"10",
+        "3":"15",
+        "4":"20",
+        "5":"30",
+        "6":"60"
+    }
+    id = request.session['id']
+    recipe = recipe_data.objects.filter(recipe_id=recipe_id)[0]
+    cook_time = cookTime[recipe.cook_time]
+    explain = []
+    tmp = recipe.explan
+    tmp = tmp.strip('[]').split(',')
+    for x in tmp:
+        x = x.rstrip("'")
+        x = x.lstrip("'")
+        x = x.replace(".", "\n")
+        print(x)
+        explain.append(x)
+
+    context = {
+        "recipe":recipe,
+        "cook_time":cook_time,
+        'explain':explain,
+    }
+
+    return render(
+        request,
+        'mainpage/recipe_detail.html',
+        context
+    )
