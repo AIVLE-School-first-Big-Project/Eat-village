@@ -100,13 +100,13 @@ def signup(request):
             mail_to = request.POST["email"]
             email = EmailMessage(mail_title, message, to=[mail_to])
             email.send()
-            #return render(request,"signup2.html")
+            return render(request,"login.html")
         else:
             messages.warning(request, 'Password do not match.')
             return redirect("users:signup")
             
     
-    return render(request,"login.html")
+    return render(request,"signup.html")
 
 
 def validate_email(email):
