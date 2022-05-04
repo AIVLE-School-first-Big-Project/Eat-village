@@ -233,14 +233,14 @@ a {
 #ingredient_result {
     width: 100%;
     height: auto;
-    background-color: white;
+    background-color: red;
 }
 
 .ingred-input-box {
     display:flex;
     flex-wrap:nowrap;
     flex-direction:row;
-    height: 3rem;
+    height: 5rem;
     border-bottom: 1px solid #ddd;
     justify-content: flex-start;
     align-items: center;
@@ -249,7 +249,7 @@ a {
 .ingred-input {
     width:100%;
     text-align: center;
-    border: 0;
+    border: 1;
     outline: none;
     font-size: 1.3rem;
 }
@@ -323,7 +323,7 @@ ul#ingredient_list li {
     padding: 5px 0px 5px 5px;
     margin-bottom: 5px;
     border-bottom: 1px solid #efefef;
-    font-size: 12px;
+    font-size: 15px;
 }
 
 @media screen and (max-width: 850px) {
@@ -356,6 +356,9 @@ ul#ingredient_list li {
     .search {
         text-align: center;
     }
+    /* .my_info {
+        text-align: center;
+    } */
     .weather {
         text-align: center;
         float:none;
@@ -395,6 +398,12 @@ ul#ingredient_list li {
     }
     .bx-wrapper {
         margin: auto;
+    }
+
+    .main_common{
+        display: inline;
+        /* width: 2rem;
+        height: 2rem; */
     }
 }
 

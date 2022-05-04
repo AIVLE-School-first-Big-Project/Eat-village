@@ -18,33 +18,33 @@ a {
 }
 
 select {
-    border-radius: 5px;
-    width:80pt;
-    height:35pt;
+    border-radius: 0.3125em;
+    width:5em;
+    height:2.1875em;
     text-align: center;
     font-weight: bold;
 }
 #selector {
     float:left;
     position:relative;
-    top:10px;
+    top:0.625em;
 }
 #searchbox {
     float: right;
     position:relative;
-    top:13px;
+    top:0.8125em;
 }
 #searchbox1 {
-    border-radius:10px;
+    border-radius:0.625em;
 }
 #searchbox2 {
-    border-radius: 10px;
+    border-radius: 0.625em;
     background-color: white;
 }
 #write {
     float:right;
     position:relative;
-    top:5px;
+    top:0.3125em;
 }
 #writeicon {
     /* border: 5px solid #A4C454; */
@@ -63,7 +63,7 @@ tr {
     font-weight: bold;
 }
 #colname {
-    font-size: 4;
+    font-size: 20px;
 }
 
 #col0 {

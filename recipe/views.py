@@ -8,7 +8,8 @@ from numpy import rec
 from recipe import recommend_ml
 # import recommend_ml as rc
 import recipe.models as models
-from .models import recipe_data, user_ingre
+from .models import recipe_data
+from users.models import *
 
 user_ingre = []
 
@@ -20,14 +21,15 @@ def recommend(request):
 def test(request):
     user_data = list(set(user_ingre))
     # 당근,사과,오이,양파
-    user_data.append('당근')
-    user_data.append('사과')
-    user_data.append('오이')
-    user_data.append('양파')
-    re_data = recipe_data.objects.all()
-    recommend_data = recommend_ml.recommend_recipe(user_data,recipe_data)
+    # user_data.append('당근')
+    # user_data.append('사과')
+    # user_data.append('오이')
+    # user_data.append('양파')
+    # re_data = recipe_data.objects.all()
+    # recommend_data = recommend_ml.recommend_recipe(user_data,recipe_data)
     
-    return render(request,'recipe/test.html',{'data' : re_data, 'user' : user_data, 'recommend' : recommend_data})     
+    # return render(request,'recipe/test.html',{'user' : user_data, 'recommend' : recommend_data})
+    # return render(request,'mainpage/ingred_result.html',{'data' : re_data, 'user' : user_data, 'recommend' : recommend_data, 'user_ingre' : user_ingre})     
 
 def insert(request):
     return HttpResponse('데이터 입력 완료')
@@ -39,11 +41,11 @@ def insert(request):
 #         result += r.method + '<br>'
 #     return HttpResponse(result)
 
-def show(request):
-    re_data = recipe_data.objects.all()
-    user_data = user_ingre.objects.all()
-    test_data = recommend_ml.recommend_recipe(user_ingre,recipe_data)
-    return render(request, 'recipe/show.html',{'data' : re_data, 'user' : user_data, 'test' : test_data})
+# def show(request):
+#     re_data = recipe_data.objects.all()
+#     user_data = user_ingre.objects.all()
+#     test_data = recommend_ml.recommend_recipe(user_ingre,recipe_data)
+#     return render(request, 'recipe/show.html',{'data' : re_data, 'user' : user_data, 'test' : test_data})
 
 
 
@@ -69,7 +71,7 @@ def index(request):
 
 print(torch.cuda.is_available())
 #load model
-model = yolov5.load('yolov5s.pt')
+model = yolov5.load('yolov5l_0502.pt')
 # model = torch.hub.load('ultralytics/yolov5', 'yolov5s')
 device = select_device('') # 0 for gpu, '' for cpu
 # initialize deepsort
@@ -92,10 +94,10 @@ def stream():
     # print(user_data)
     global user_ingre
     
-    cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+    cap = cv2.VideoCapture(2, cv2.CAP_DSHOW)
     # cap = cv2.VideoCapture(1)
-    # model.conf = 0.65
-    # model.iou = 0.5
+    model.conf = 0.3
+    model.iou = 0.5
     # model.classes = [1,2,3,4,6,7,8,10,11]
     
     
