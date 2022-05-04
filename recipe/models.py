@@ -1,4 +1,5 @@
 import re
+from users.models import *
 from django.db import models
 
 # Create your models here.
@@ -18,11 +19,8 @@ class recipe_data(models.Model):
     category_2 = models.CharField(max_length=20) # 카테고리_2
     method = models.CharField(max_length=20) # 조리방법
     
-    
-
-        
     # def __str__(self):
         # return self.title
-class user_ingre(models.Model):
-    # recipe_id = models.AutoField(primary_key=True)
-    ingre = models.TextField()
+# class user_ingre(models.Model):
+#     # recipe_id = models.AutoField(primary_key=True)
+#     ingre = models.TextField()

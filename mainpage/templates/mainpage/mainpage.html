@@ -41,6 +41,22 @@
             </a>
         </nav>
     </div>
+
+    {% comment %} {% if login_session %}
+    <a><button> 로그아웃 </button> </a>
+    {% else %}
+    <a><button> 로그인 </button> </a>
+    {% endif %} {% endcomment %}
+
+    {% if user.is_authenticated %}
+        <p>{{request.user.first_name}}님은 현재 {{request.user.allergyinfo}} 대한 알러지가 있습니다 </p>
+        <a href="{% url 'users:logout' %}"><button> 로그아웃 </button> </a>
+        
+    {% else %}
+        <p> 로그인 해야 이용 가능합니다 </p>
+        <a href="{% url 'users:login' %}"><button> 로그인 </button> </a>
+    {% endif %}
+    
     <section class="bg-primary py-5">
         <div id="container">
             <div class="fridge-img">
@@ -58,8 +74,10 @@
                     나머진 내가 알아서 할게!
                 </h3>
             </div>
-            <video autoplay="true" id="videoElement">
-            </video>
+            <div id="popup_layer" onClick="close()">
+                <div id="popup">
+                    <iframe src="http://127.0.0.1:8000/mainpage/video_feed" width=640 height=480> </iframe>
+            </div> 
             <div id="button">
                 <button id="btn1" onclick="cameraAccess();">영상 촬영</button>
                 <button id="btn2" onclick="find_ingred();">분석 시작</button>
@@ -107,10 +125,15 @@
             location.href = "{% url 'mainpage:search' %}";
         }
 
-        /* 재료 분석 후 레시피 추천 */
+        /* 재료 분석 후 레시피 추천 */ //분석 시작 버튼 (이동)
         function find_ingred() {
             location.href = "{% url 'mainpage:ingredient_result' %}";
         }
+
+        //cameraAccess 카메라 접근 이벤트 
+
+
+
     </script>
     <script>
         $(document).ready(function() {
@@ -119,6 +142,10 @@
                 slideWidth: 500
             });
         });
+
+
+
+
     </script>
 
 </body>

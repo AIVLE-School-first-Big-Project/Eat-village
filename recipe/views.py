@@ -8,7 +8,8 @@ from numpy import rec
 from recipe import recommend_ml
 # import recommend_ml as rc
 import recipe.models as models
-from .models import recipe_data, user_ingre
+from .models import recipe_data
+from users.models import *
 
 user_ingre = []
 
@@ -20,14 +21,15 @@ def recommend(request):
 def test(request):
     user_data = list(set(user_ingre))
     # 당근,사과,오이,양파
-    user_data.append('당근')
-    user_data.append('사과')
-    user_data.append('오이')
-    user_data.append('양파')
-    re_data = recipe_data.objects.all()
-    recommend_data = recommend_ml.recommend_recipe(user_data,recipe_data)
+    # user_data.append('당근')
+    # user_data.append('사과')
+    # user_data.append('오이')
+    # user_data.append('양파')
+    # re_data = recipe_data.objects.all()
+    # recommend_data = recommend_ml.recommend_recipe(user_data,recipe_data)
     
-    return render(request,'recipe/test.html',{'data' : re_data, 'user' : user_data, 'recommend' : recommend_data})     
+    # return render(request,'recipe/test.html',{'user' : user_data, 'recommend' : recommend_data})
+    # return render(request,'mainpage/ingred_result.html',{'data' : re_data, 'user' : user_data, 'recommend' : recommend_data, 'user_ingre' : user_ingre})     
 
 def insert(request):
     return HttpResponse('데이터 입력 완료')
@@ -39,11 +41,11 @@ def insert(request):
 #         result += r.method + '<br>'
 #     return HttpResponse(result)
 
-def show(request):
-    re_data = recipe_data.objects.all()
-    user_data = user_ingre.objects.all()
-    test_data = recommend_ml.recommend_recipe(user_ingre,recipe_data)
-    return render(request, 'recipe/show.html',{'data' : re_data, 'user' : user_data, 'test' : test_data})
+# def show(request):
+#     re_data = recipe_data.objects.all()
+#     user_data = user_ingre.objects.all()
+#     test_data = recommend_ml.recommend_recipe(user_ingre,recipe_data)
+#     return render(request, 'recipe/show.html',{'data' : re_data, 'user' : user_data, 'test' : test_data})
 
 
 

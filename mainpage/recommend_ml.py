@@ -44,10 +44,10 @@ def recommend_recipe(user_model, recipe_model):
     sim_scores = list(enumerate(cosine_sim[idx]))
     # 유사도에 따라 레시피들을 정렬한다.
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
-    # 가장 유사한 3개의 영화를 받아온다.
+    # 가장 유사한 4개의 영화를 받아온다.
     sim_scores = sim_scores[1:5]
     
-    # 가장 유사한 3개의 레시피의 인덱스를 얻는다.
+    # 가장 유사한 4개의 레시피의 인덱스를 얻는다.
     recipe_idx = [idx[0] for idx in sim_scores]
     # 가장 유사한 10개의 영화의 제목을 리턴한다.
     # title_to_index[recipe_idx]

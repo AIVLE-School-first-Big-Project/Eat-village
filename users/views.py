@@ -122,4 +122,9 @@ def login(request):
     else:
         return render(request, 'login.html')
 
-
+def logout(request):
+    if request.session.get('user'):
+        del(request.session['user'])
+    
+    # request.session.flush()
+    return redirect("users:login")

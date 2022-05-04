@@ -38,17 +38,33 @@
             </a>
         </nav>
     </div>
-
+    
     <div id='ingredient_container'>
+        <div style="width:100%; height:20%; background-color:#CF0">
+            {% if user.is_authenticated %}
+                <p>{{request.user.first_name}}님은 현재 {{request.user.allergyinfo}} 대한 알러지가 있습니다 </p>
+            {% else %}
+                <p> 로그인 해야 이용 가능합니다 </p>
+            {% endif %}
+        </div>
+
+        <div style="width:100%; height:20%; background-color:#BC0">
+            <p> yolov5를 통해 detect된 재료 : {{ user_data }}<p>
+            <h2> {{ recommend }} </h2>
+        </div>
+
         <div id='ingredient_result'>
             <ul id='ingredient_list'>
             </ul>
         </div>
+
         <div id="button">
             <button id="btn1" onclick="ingred_change();">재료 수정</button>
             <button id="btn2" onclick="ingred_recipe();">레시피 추천</button>
         </div>
     </div>
+
+
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="{% static 'main.js' %}"></script>

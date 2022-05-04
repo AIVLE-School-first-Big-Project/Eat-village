@@ -16,6 +16,7 @@ class User(AbstractUser):
     cookingtime = models.CharField(max_length=250, blank=True, null=True)
     address = models.CharField(max_length=250, null=True) # 주소
     confirm_password = models.CharField(max_length=200, blank=True, null=True)
+    ingre = models.TextField(null=True)
 
 class Communityboard(models.Model):
     boardid = models.AutoField(db_column='boardID', primary_key=True)  
@@ -119,14 +120,14 @@ class Recipedata(models.Model):
         db_table = 'RECIPEDATA'
 
 
-class Userbookmarkrecipe(models.Model):
-    bookmarkid = models.AutoField(primary_key=True)
-    userid = models.ForeignKey(User, models.DO_NOTHING, db_column='userID', null=True)  
-    recipeid = models.ForeignKey(Recipedata, db_column='recipeID', null=True, on_delete=models.CASCADE)  
+# class Userbookmarkrecipe(models.Model):
+#     bookmarkid = models.AutoField(primary_key=True)
+#     userid = models.ForeignKey(User, models.DO_NOTHING, db_column='userID', null=True)  
+#     recipeid = models.ForeignKey(Recipedata, db_column='recipeID', null=True, on_delete=models.CASCADE)  
 
-    class Meta:
-        managed = True
-        db_table = 'USERBOOKMARKRECIPE'
+#     class Meta:
+#         managed = True
+#         db_table = 'USERBOOKMARKRECIPE'
 
 
 class Userrecommendedcommunity(models.Model):
