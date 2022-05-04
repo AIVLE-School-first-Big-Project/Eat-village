@@ -1,7 +1,7 @@
 import re
 from django.db import models
+from users.models import *
 
-# Create your models here.
 
 class recipe_data(models.Model):
     recipe_id = models.AutoField(primary_key=True)
@@ -18,11 +18,21 @@ class recipe_data(models.Model):
     category_2 = models.CharField(max_length=20) # 카테고리_2
     method = models.CharField(max_length=20) # 조리방법
     
-    
-
-        
+# class           
     # def __str__(self):
         # return self.title
+
 class user_ingre(models.Model):
     # recipe_id = models.AutoField(primary_key=True)
     ingre = models.TextField()
+
+
+class Userbookmarkrecipe(models.Model):
+    bookmarkid = models.IntegerField(primary_key=True)
+    userid = models.ForeignKey(User, models.DO_NOTHING, db_column='userid', blank=True, null=True)
+    recipeid = models.ForeignKey(recipe_data, models.DO_NOTHING, db_column='recipeid', blank=True, null=True)
+    is_active = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = True
+        db_table = 'userbookmarkrecipe'
