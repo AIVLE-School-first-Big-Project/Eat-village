@@ -30,12 +30,12 @@
                 <li><a href="{% url 'recipeboard:recipeboard_index' %}">레시피 게시판</a></li>
                 <li><a href="{% url 'communityboard:communityboard_index' %}">커뮤니티 게시판</a></li>
             </ul>
-            <div class="navbar_right">
+            {% comment %} <div class="navbar_right">
                 <div class="search">
                     <input id='searchfield' type='text' max_length=255 autocomplete='off'>
                     <button class='searchbtn' onclick="search_recipe(); return false;">검색</button>
                 </div>
-            </div>
+            </div> {% endcomment %}
             <a href='#' class="navbar_togglebtn">
                 <i class="fas fa-bars"></i>
             </a>

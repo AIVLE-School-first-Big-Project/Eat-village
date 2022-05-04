@@ -11,7 +11,6 @@ ul, li {
 a {
     text-decoration: none;
     color: black;
-    line-height: 2rem;
 }
 
 *,
@@ -54,10 +53,6 @@ a {
     padding-left: 1rem;
     margin-bottom: 50px;
 }
-#navbar_wrap {
-    display:flex;
-    justify-content:space-between;
-}
 
 .navbar_logo {
     font-size:24px;
@@ -65,24 +60,20 @@ a {
 }
 .navbar_logo img {
     display:block;
-    height: 3.5rem;
-    margin-right : auto;
 }
 .navbar_menu {
     display: flex;
     list-style: none;
-    height: 2rem;
+    padding-left: 0;
 }
 .navbar_menu li {
-    padding: 0 1rem;
+    padding: 8px 12px;
 }
 .navbar_menu li:hover {
     background-color: orange;
     border-radius: 4px;
 }
 .navbar_right {
-    display:flex;
-    flex-direction:column;
     list-style: none;
     color: white;
     padding-left: 0;
@@ -93,9 +84,6 @@ a {
     right: 32px;
     font-size: 24px;
     color: black;
-}
-.search {
-    display:flex;
 }
 
 .searchbtn {
@@ -111,7 +99,6 @@ a {
 
 .weather {
     float: right;
-    margin-left : auto;
 }
 
 .temp,
@@ -317,6 +304,9 @@ ul#ingredient_list li {
     .search {
         text-align: center;
     }
+    /* .my_info {
+        text-align: center;
+    } */
     .weather {
         text-align: center;
         float:none;
@@ -356,6 +346,12 @@ ul#ingredient_list li {
     }
     .bx-wrapper {
         margin: auto;
+    }
+
+    .main_common{
+        display: inline;
+        /* width: 2rem;
+        height: 2rem; */
     }
 }
 
