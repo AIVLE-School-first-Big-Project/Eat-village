@@ -46,7 +46,7 @@ class Communityboardimage(models.Model):
 
 class Communitycomment(models.Model):
     commentid = models.AutoField(db_column='commentID', primary_key=True)  
-    boardid = models.ForeignKey(Communityboard, db_column='boardID', null=True, on_delete=models.CASCADE)  
+    boardid = models.ForeignKey(Communityboard, related_name='comments', db_column='boardID', null=True, on_delete=models.CASCADE)  
     userid = models.ForeignKey(User, models.DO_NOTHING, db_column='userID', null=True)  
     parentcommentid = models.IntegerField(db_column='parentcommentID', blank=True, null=True)  
     detail = models.CharField(max_length=500)
@@ -87,7 +87,7 @@ class Recipeboardimage(models.Model):
 
 class Recipecomment(models.Model):
     commentid = models.AutoField(db_column='commentID', primary_key=True)  
-    boardid = models.ForeignKey(Recipeboard, db_column='boardID', null=True, on_delete=models.CASCADE)  
+    boardid = models.ForeignKey(Recipeboard, related_name='comments', db_column='boardID', null=True, on_delete=models.CASCADE)  
     userid = models.ForeignKey(User, models.DO_NOTHING, db_column='userID', null=True)  
     parentcommentid = models.IntegerField(db_column='parentcommentID', blank=True, null=True)  
     detail = models.CharField(max_length=500)

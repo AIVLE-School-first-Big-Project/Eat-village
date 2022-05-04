@@ -83,8 +83,15 @@ div.c1-2{
 }
 div.c2{
     display:flex;
+}
+div.c2-1 {
+    float:left;
     font-size: 16px;
     text-align: center;
+}
+div.c2-2 {
+    margin-left: auto;
+    font-weight: bold;
 }
 div.blank {
     font-size:3px;

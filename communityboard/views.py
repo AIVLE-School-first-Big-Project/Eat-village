@@ -196,8 +196,10 @@ def communityboard_create(request): #게시물생성
                 image.boardid = board
                 image.time = timezone.now()
                 image.save()
-            # messages.success(request, "작성완료!")
+                # messages.success(request, "작성완료!")            
             return redirect('communityboard:communityboard_index')
+        else:
+            messages.warning(request, '필수 항목을 모두 작성해주세요!')
     else:
         form = Communityboardform()
         formset = Imageformset(queryset=Communityboardimage.objects.none())

@@ -47,8 +47,8 @@ select {
     top:0.3125em;
 }
 #writeicon {
-    border: 5px solid #A4C454;
-    color:#A4C454;
+    /* border: 5px solid #A4C454; */
+    color: green;
 }
 tr {
     height:70px;
@@ -77,6 +77,9 @@ tr {
 #col2 {
     text-align: left;
     font-size: 20;
+}
+#col2-1 {
+    color:orange;
 }
 
 #col3 {
