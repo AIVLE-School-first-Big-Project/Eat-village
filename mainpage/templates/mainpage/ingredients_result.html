@@ -11,6 +11,7 @@
     <title>Ingredient Result Page</title>
 </head>
 <body>
+    {% include "mainpage/header.html" %}
 
     {% comment %} <div style="height:100px;">
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
@@ -46,8 +47,7 @@
                 <i class="fas fa-bars"></i>
             </a>
         </nav>
-    </div>
-    {% endcomment %}
+    </div> {% endcomment %}
 
     {% addtoblock "css" %}
         <link rel="stylesheet" href="{% static 'mainpage/header.css' %}"/>
