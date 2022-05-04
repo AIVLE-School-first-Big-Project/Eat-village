@@ -106,7 +106,7 @@ def signup(request):
             return redirect("users:signup")
             
     
-    return render(request,"signup.html")
+    return render(request,"login.html")
 
 
 def validate_email(email):
