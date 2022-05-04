@@ -2,7 +2,7 @@ div.container {
     width:100%;
     margin:0 auto;
 }
-a {
+#icon {
     text-decoration: none;
     color:#F2D99E;
 }
@@ -25,7 +25,7 @@ div#header{
     display:flex;
     align-items: center;
 }
-div.title {
+div.ctitle {
     font-size: 30;
     display:flex;
     align-items: center;

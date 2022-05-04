@@ -7,6 +7,9 @@ a {
     text-decoration: none;
     color:#F7713A;
 }
+#writeicon {
+    color:#F7713A;
+}
 #bar {
     width:100%;
     margin:0 auto;
@@ -70,12 +73,10 @@ div.c1 {
     display:flex;
 }
 div.c1-1 {
+    color:#4e5227;
     float:left;
     font-size: 25px;
     font-weight: bold;
-}
-a.title {
-    color:#00311F;
 }
 div.c1-2{
     margin-left:auto;
