@@ -48,7 +48,7 @@
                     <input id='searchfield' type='text' max_length=255 autocomplete='off'>
                     <button class='searchbtn' onclick="search_recipe(); return false;">검색</button>
                 </div>
-                <a href="{% url 'mainpage:weather' %}" class="weather">
+                {% comment %} <a href="{% url 'mainpage:weather' %}" class="weather"> {% endcomment %}
                     <div class="temp"></div>
                     <div class="icon"></div>
                 </a>
