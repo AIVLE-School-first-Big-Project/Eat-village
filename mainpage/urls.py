@@ -11,5 +11,5 @@ urlpatterns = [
     path('ingred_change/', views.ingred_change  , name='ingredient_change'),
     path('video_feed/',views.video_feed, name='video_feed'),
     # path('test/',views.test, name='test'),
-    path('recipeDetail/', views.recipe_detail, name='recipe_detail'),
+    # path('recipeDetail/', views.recipe_detail, name='recipe_detail'),
 ]

@@ -1,3 +1,4 @@
+{% load static%}
 <html lang="en">
 <head>
     <!-- Required meta tags -->
@@ -12,6 +13,7 @@
     <!-- custom CSS -->
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/style-index.css' %}">
+    <script src="{% static 'mainpage/header.css' %}"></script>
 
     <!-- Font -->
     <link rel="stylesheet" type="text/css"
@@ -22,9 +24,13 @@
 
     <!-- Icons -->
     <script src="https://kit.fontawesome.com/22dc6176d9.js" crossorigin="anonymous"></script>
+    
 </head>
 
 <main>
+    
+{% include "mainpage/header.html" %} 
+
 
 <div class="container" id="bar">
     {% if kw %}
@@ -150,6 +156,7 @@
         </div>
     </form>
 </div>
-
+    {% comment %} <script src="{% static 'mainpage/ingred.js' %}"></script> {% endcomment %}
 </main>
+
 </html>

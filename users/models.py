@@ -98,39 +98,6 @@ class Recipecomment(models.Model):
         db_table = 'RECIPECOMMENT'
 
 
-# class Recipedata(models.Model):
-#     recipeid = models.IntegerField(db_column='recipeID', primary_key=True)  
-#     recipeno = models.CharField(max_length=50)
-#     recipename = models.CharField(max_length=255)
-#     ingredient = models.CharField(max_length=5000)
-#     amount = models.CharField(max_length=20)
-#     cooktime = models.CharField(max_length=20)
-#     level = models.CharField(max_length=20)
-#     url = models.CharField(max_length=500)
-#     tag = models.CharField(max_length=1000)
-#     cookingmethod = models.CharField(max_length=255)
-#     category_1 = models.CharField(max_length=255)
-#     foodtype = models.CharField(max_length=255)
-#     category_2 = models.CharField(max_length=255)
-#     detail = models.CharField(max_length=5000)
-#     time = models.CharField(max_length=20)
-
-#     class Meta:
-#         managed = True
-#         db_table = 'RECIPEDATA'
-
-
-# class Userbookmarkrecipe(models.Model):
-#     bookmarkid = models.AutoField(primary_key=True)
-#     userid = models.ForeignKey(User, models.DO_NOTHING, db_column='userID', null=True)  
-#     userid = models.ForeignKey(User, models.DO_NOTHING, related_name="dummyuserid", db_column='userID', null=True)  
-#     recipeid = models.ForeignKey(Recipedata, db_column='recipeID', null=True, on_delete=models.CASCADE)  
-
-#     class Meta:
-#         managed = True
-#         db_table = 'USERBOOKMARKRECIPE'
-
-
 class Userrecommendedcommunity(models.Model):
     likeid = models.AutoField(primary_key=True)
     userid = models.ForeignKey(User, models.DO_NOTHING, db_column='userID', null=True)  

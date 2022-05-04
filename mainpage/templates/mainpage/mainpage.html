@@ -20,13 +20,6 @@
                     <img src="{% static 'logo.png' %}">
                 </a>
             </div>
-            {% if user.is_authenticated %}
-                <p>{{request.user.first_name}}님 환영합니다.</p>
-                <a href="{% url 'users:logout' %}"><button> 로그아웃 </button> </a>
-            {% else %}
-                <p> 로그인 해야 이용 가능합니다 </p>
-                <a href="{% url 'users:login' %}"><button> 로그인 </button> </a>
-            {% endif %}
             <ul class="navbar_menu">
                 <li><a href="{% url 'mypage:main' %}">마이페이지</a></li>
                 {% comment %} <li><a href=''>나눔 게시판</a></li> {% endcomment %}
@@ -69,7 +62,7 @@
             </div>
             <div id="popup_layer" onClick="close()">
                 <div id="popup">
-                    <iframe src="http://127.0.0.1:8000/mainpage/video_feed" width=640 height=480> </iframe>
+                    {% comment %} <iframe src="http://127.0.0.1:8000/mainpage/video_feed" width=640 height=480> </iframe> {% endcomment %}
             </div> 
             <div id="button">
                 <button id="btn1" onclick="cameraAccess();">영상 촬영</button>
