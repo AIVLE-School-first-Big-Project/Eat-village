@@ -11,7 +11,7 @@
 
     <!-- custom CSS -->
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/style-cindex.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style-cindex.css' %}?after">
 
     <!-- Font -->
     <link rel="stylesheet" type="text/css"
@@ -109,7 +109,14 @@
                 <br>
             </div>
             <div class="c2">
-                {{board.detail|truncatechars:30}}
+                <div class="c2-1">
+                    {{board.detail|truncatechars:30}}
+                </div>
+                <div class="c2-2">
+                    <span><i class="fa-solid fa-message"></i>&nbsp;
+                    {% load humanize %}
+                    {{board.comments.count|intword}}</span>
+                </div>
                 <br>
             </div>
             <div class="blank">
@@ -120,7 +127,6 @@
                     {{board.header}} | {{board.userid.nickname}}
                 </div>
                 <div class="c3-2">
-                    {% load humanize %}
                     {{board.time|naturaltime}}
                 </div>
             </div>
