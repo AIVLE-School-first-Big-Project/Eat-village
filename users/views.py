@@ -6,6 +6,7 @@ from users.models import *
 from django.contrib import auth
 from django.utils import timezone
 from django.contrib.auth import get_user_model
+import json
 
 # SMTP 관련 인증
 from django.contrib.sites.shortcuts import get_current_site
@@ -76,17 +77,16 @@ def signup(request):
             return redirect("users:signup")
         if request.POST['confirm_password'] ==request.POST['password']:   
             username=request.POST["username"] #아이디
-            first_name=request.POST["first_name"] #이름
             password=request.POST["password"] #비밀번호
             email=request.POST["email"] #이메일
             allergyinfo=request.POST.getlist("test_list","allergy") #알레르기 test_list
             address = request.POST["address"] # 주소
 
             users_user=User.objects.create_user(username,email,password) 
-            users_user.allergyinfo = allergyinfo
-            users_user.first_name=first_name
+            users_user.allergyinfo = json.dumps(allergyinfo, ensure_ascii = False)
             users_user.address = address
             users_user.is_active = False
+            users_user.nickname = username
             users_user.save()
 
             current_site = get_current_site(request) 
@@ -152,7 +152,7 @@ def login(request):
             return redirect('/mainpage/mainpage/')
         # 실패
         else:
-            messages.warning(request, 'Please check your ID and password or check your email. ')
+            messages.warning(request, "Please check your ID and password or check your email.")
             return redirect("users:login")
             #return render(request, 'member/error.html',  {'error': 'username or password is incorrect.'}))
     else:
