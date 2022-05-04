@@ -34,28 +34,28 @@ def ingred_result(request): # 여기가 추가 데이터 처리하는 페이지
     user_data.append('오이')
     user_data.append('양파')
     # re_data = recipe_data.objects.all()
-    # recommend_data = recommend_ml.recommend_recipe(user_data,recipe_data)
+    recommend_data = recommend_ml.recommend_recipe(user_data,recipe_data)
     
-    return render(request,'mainpage/ingredients_result.html',{'user_data' : user_data})
-   
+    # return render(request,'mainpage/ingredients_result.html',{'user' : user_data, 'recommend' : recommend_data})
+    return render(request,'mainpage/ingredients_result.html',{'user_data' : user_data,'recommend' : recommend_data,})
     # return render(request, 'mainpage/ingredients_result.html')
 
 def ingred_change(request):
     return render(request, 'mainpage/ingredients_change.html')
 
 
-def test(request):
-    user_data = list(set(user_ingre))
-    # 당근,사과,오이,양파
-    user_data.append('당근')
-    user_data.append('사과')
-    user_data.append('오이')
-    user_data.append('양파')
-    re_data = recipe_data.objects.all()
-    recommend_data = recommend_ml.recommend_recipe(user_data,recipe_data)
+# def test(request):
+#     user_data = list(set(user_ingre))
+#     # 당근,사과,오이,양파
+#     user_data.append('당근')
+#     user_data.append('사과')
+#     user_data.append('오이')
+#     user_data.append('양파')
+#     re_data = recipe_data.objects.all()
+#     recommend_data = recommend_ml.recommend_recipe(user_data,recipe_data)
     
-    return render(request,'recipe/test.html',{'data' : re_data, 'user' : user_data, 'recommend' : recommend_data})
-    # return render(request,'mainpage/ingred_result.html',{'data' : re_data, 'user' : user_data, 'recommend' : recommend_data, 'user_ingre' : user_ingre})     
+#     # return render(request,'recipe/test.html',{'data' : re_data, 'user' : user_data, 'recommend' : recommend_data})
+#     return render(request,'mainpage/ingred_result.html',{'data' : re_data, 'user' : user_data, 'recommend' : recommend_data, 'user_ingre' : user_ingre})     
 # ------------------------------------------------------------------------------
 from django.shortcuts import render
 from django.http import StreamingHttpResponse
