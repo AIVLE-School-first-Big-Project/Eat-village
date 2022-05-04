@@ -152,7 +152,7 @@ def login(request):
             return redirect('/mainpage/mainpage/')
         # 실패
         else:
-            messages.warning(request, 'Please check your ID and password or check your email. ')
+            messages.warning(request, "Please check your ID and password or check your email.")
             return redirect("users:login")
             #return render(request, 'member/error.html',  {'error': 'username or password is incorrect.'}))
     else:
