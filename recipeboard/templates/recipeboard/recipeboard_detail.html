@@ -11,7 +11,7 @@
 
     <!-- custom CSS -->
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style-detail.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style-detail.css' %}?after">
 
     <!-- Font -->
     <link rel="stylesheet" type="text/css"
@@ -55,9 +55,9 @@
                     <button type="submit", name='cancelrecommend' id="rec"><i id="recommend" class="fa-solid fa-heart-circle-minus fa-2x"></i></button>
                 </form>
             {% elif board.userid == user %}
-                <span><a href="{% url 'recipeboard:recipeboard_update' board.boardid %}"><button>수정</button></a></span>
+                <span><a href="{% url 'recipeboard:recipeboard_update' board.boardid %}"><button class="mod">수정</button></a></span>
                 <span>  |  </span>
-                <span><a href="{% url 'recipeboard:recipeboard_delete' board.boardid %}"><button>삭제</button></a></span>
+                <span><a href="{% url 'recipeboard:recipeboard_delete' board.boardid %}"><button class="mod">삭제</button></a></span>
             {% else %}
                 <form method = "post", action="{% url 'recipeboard:recipeboard_recommend' board.boardid %}">
                     {% csrf_token %}
@@ -118,11 +118,11 @@
             </div>
             <div class="comment1-2">
                 <span><a href="{% url 'recipeboard:recipeboard_comment' board.boardid comment.commentid %}"><i class="fa-solid fa-message"></i></a></span>
-                <span>|
                 {% if comment.userid == user and comment.detail != "삭제된 댓글입니다." %}
-                    <a href="{% url 'recipeboard:recipecomment_delete' comment.commentid %}"><i class="fa-solid fa-x"></i></a>
+                    <span>|</span>
+                    <span><a href="{% url 'recipeboard:recipecomment_delete' comment.commentid %}"><i class="fa-solid fa-x"></i></a></span>
                 {% endif %}
-                </span>
+                <span>&nbsp;&nbsp;&nbsp;</span>
             </div>
         </div>
         <div class="comment2">

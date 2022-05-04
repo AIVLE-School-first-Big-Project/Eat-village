@@ -90,7 +90,13 @@
             {% for board in board_list%}
                 <tr id="colcontent">
                     {% comment %} <td>{{board.boardid}}</td> {% endcomment %}
-                    <td id="col2"><a style="text-decoration-line:none" href="{% url 'recipeboard:recipeboard_detail' board.boardid %}">{{board.title|truncatechars:30}}</a></td>
+                    <td id="col2">
+                        <a style="text-decoration-line:none" href="{% url 'recipeboard:recipeboard_detail' board.boardid %}">{{board.title|truncatechars:30}}</a>
+                        <span id="col2-1">
+                            {% load humanize %}
+                            [{{board.comments.count|intword}}]
+                        </span>
+                    </td>
                     <td id="col3">{{board.userid.nickname}}</td>
                     {% if board.time.date == today %}
                     <td id="col3">{{board.time|time:'H:i'}}</td>

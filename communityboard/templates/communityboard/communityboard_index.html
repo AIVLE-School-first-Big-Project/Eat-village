@@ -36,24 +36,34 @@
         <select id="header-select" onchange="location=this.value">
             {% if header == '' %}
                 <option hidden class="header-all" value="/communityboard">전체</option>
-                <option class="header-h1" value="?header=h1">요리재료게시판</option>
-                <option class="header-h2" value="?header=h2">자유게시판</option>
-                <option class="header-h3" value="?header=h3">우리동네보기</option>
+                <option class="header-h1" value="?header=h1">자유게시판</option>
+                <option class="header-h2" value="?header=h2">리뷰게시판</option>
+                <option class="header-h3" value="?header=h3">재료나눔게시판</option>
+                <option class="header-h4" value="?header=h4">우리동네만 보기</option>
             {% elif header == 'h1' %}
-                <option hidden class="header-h1" value="?header=h1">요리재료게시판</option>
+                <option hidden class="header-h1" value="?header=h1">자유게시판</option>
                 <option class="header-all" value="/communityboard">전체</option>
-                <option class="header-h2" value="?header=h2">자유게시판</option>
-                <option class="header-h3" value="?header=h3">우리동네보기</option>
+                <option class="header-h2" value="?header=h2">리뷰게시판</option>
+                <option class="header-h3" value="?header=h3">재료나눔게시판</option>
+                <option class="header-h4" value="?header=h4">우리동네만 보기</option>
             {% elif header == 'h2' %}
-                <option hidden class="header-h2" value="?header=h2">자유게시판</option>
+                <option hidden class="header-h2" value="?header=h2">리뷰게시판</option>
                 <option class="header-all" value="/communityboard">전체</option>
-                <option class="header-h1" value="?header=h1">요리재료게시판</option>
-                <option class="header-h3" value="?header=h3">우리동네보기</option>
+                <option class="header-h1" value="?header=h1">자유게시판</option>
+                <option class="header-h3" value="?header=h3">재료나눔게시판</option>
+                <option class="header-h4" value="?header=h4">우리동네만 보기</option>
             {% elif header == 'h3' %}
-                <option hidden class="header-h3" value="?header=h3">우리동네보기</option>
+                <option hidden class="header-h3" value="?header=h3">재료나눔게시판</option>
                 <option class="header-all" value="/communityboard">전체</option>
-                <option class="header-h2" value="?header=h2">자유게시판</option>
-                <option class="header-h1" value="?header=h1">요리재료게시판</option>
+                <option class="header-h1" value="?header=h1">자유게시판</option>
+                <option class="header-h2" value="?header=h2">리뷰게시판</option>
+                <option class="header-h4" value="?header=h4">우리동네만 보기</option>
+            {% elif header == 'h4' %}
+                <option hidden class="header-h4" value="?header=h4">우리동네만 보기</option>
+                <option class="header-all" value="/communityboard">전체</option>
+                <option class="header-h1" value="?header=h1">자유게시판</option>
+                <option class="header-h2" value="?header=h2">리뷰게시판</option>
+                <option class="header-h3" value="?header=h3">재료나눔게시판</option>
             {% endif %}
         </select>
     </div>
@@ -99,7 +109,14 @@
                 <br>
             </div>
             <div class="c2">
-                {{board.detail|truncatechars:30}}
+                <div class="c2-1">
+                    {{board.detail|truncatechars:30}}
+                </div>
+                <div class="c2-2">
+                    <span><i class="fa-solid fa-message"></i>&nbsp;
+                    {% load humanize %}
+                    {{board.comments.count|intword}}</span>
+                </div>
                 <br>
             </div>
             <div class="blank">
@@ -110,7 +127,6 @@
                     {{board.header}} | {{board.userid.nickname}}
                 </div>
                 <div class="c3-2">
-                    {% load humanize %}
                     {{board.time|naturaltime}}
                 </div>
             </div>

@@ -12,7 +12,7 @@
          <script src="https://code.jquery.com/jquery-latest.min.js"></script>
          {% load static %}
          <script src="{% static 'a.js' %}"></script>
-         <link rel="stylesheet" href="{% static 'style1.css' %}">
+         <link rel="stylesheet" href="{% static 'style1.css' %}? after">
          <html lang = "ko">
          <title>Signup</title>
     </head>   
@@ -45,14 +45,6 @@
                         check_result="fail" 
                         autocomplate = "off" required />
                         <label for = "email">EMAIL</label>
-                    </div>
-
-                    <div class="int-area">
-                        <input name='first_name' 
-                        type="text" 
-                        check_result="fail" 
-                        autocomplate = "off" required />
-                        <label for = "first_name">NAME</label>
                     </div>
 
                     <div class="int-area">
@@ -125,7 +117,7 @@
                         <input name='test_list' 
                         type="text" 
                         check_result="fail" 
-                        autocomplate = "off"/>
+                        autocomplate = "off" required/>
                         <label for = "test_list">ALLERGY</label>
                     </div>
 
