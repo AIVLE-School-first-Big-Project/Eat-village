@@ -74,6 +74,7 @@ style
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
         
         {% load static %}
+        <script src="{% static 'a.js' %}"></script>
         <link rel="stylesheet" href="{% static 'style.css' %}? after">
         <html lang = "ko">
         <head>
@@ -86,6 +87,7 @@ style
 <body>
     <section class ="login-form">
             <h1>EAT VILLAGE</h1>
+            {% include "layout.html" %}
             <form method="post" action="{% url 'users:login' %}">
                {% csrf_token %}
                <div class="int-area">

@@ -7,6 +7,12 @@ import re
 from numpy import rec
 # Create your views here.
 # import recommend_ml as rc
+from recipe.models import *
+from users.models import *
+from django.contrib.auth.decorators import login_required
+import json
+from django.contrib import auth
+from django.contrib import messages
 
 
 user_ingre = []

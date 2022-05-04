@@ -22,14 +22,14 @@ body {
 form {
     display: flex;
     flex-direction: column;
+    margin-top: 5rem;
 }
 input {
     width: 90%;
 }
 #title_wrap {
-    height: 2.5em;
     width: 100%;
-    padding-top: 1.5em;
+    padding-top: 0.5em;
     line-height: 2.5em;
     position: relative;
 }
@@ -281,7 +281,7 @@ input:focus {
         margin: 0;
         padding-right: 1.5em;
         padding-left: 1.5em;
-        width: 82%;
+        width: 95%;
     }
     
     .info {
@@ -305,7 +305,7 @@ input:focus {
         justify-content: center;
     }
     .allergy{
-        width: 85%;
+        width: 95%;
     }
     .allergy > ul {
         justify-content: space-between;
@@ -316,6 +316,9 @@ input:focus {
     }
     #al-etc {
         width:100%;
+    }
+    #al-etc > .icon-box{
+        margin: 0.8rem 0 0 0;
     }
     .btn_update {
         width: 10em;

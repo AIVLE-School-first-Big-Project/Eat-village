@@ -1,0 +1,61 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href='{% static "header.css" %}'>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+<script>
+    /* 위치기반 현재 날씨 정보 */
+    if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition((pos) => {
+        let lat = pos.coords.latitude;
+        let lon = pos.coords.longitude;
+        console.log(lat, lon);
+        $.getJSON(
+            'https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&appid=7d5fba451f0f0e3d56dc8bfbd6263516&units=metric&lang=ko',
+            function(result) {
+                $('.temp').append(result.main.temp + '℃');
+                var weathericon = '<img src="http://openweathermap.org/img/wn/' + result.weather[0].icon + '.png" alt="' + result.weather[0].description + '">';
+                $('.icon').html(weathericon);
+            });
+        }), (err) => {
+                console.log('GPS를 사용할 수 없습니다.');
+            };
+    };
+    /* 레시피 검색 */
+    function search_recipe() {
+        var food_cate = document.getElementById('searchfield').value;
+        if (food_cate.length == 0) { return false;}
+        location.href = "{% url 'mainpage:search' %}";
+    }
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+<div class="header-wrap">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="navbar_logo">
+            <a href="{% url 'mainpage:mainpage' %}">
+                <img src="{% static 'logo.png' %}">
+            </a>
+        </div>
+        <div id="navbar_wrap">
+            <ul class="navbar_menu">
+                <li><a href="{% url 'mypage:main' %}">마이페이지</a></li>
+                {% comment %} <li><a href=''>나눔 게시판</a></li> {% endcomment %}
+                <li><a href="{% url 'recipeboard:recipeboard_index' %}">레시피 게시판</a></li>
+                <li><a href="{% url 'communityboard:communityboard_index' %}">커뮤니티 게시판</a></li>
+            </ul>
+            <div class="navbar_right">
+                <div class="search">
+                    <input id='searchfield' type='text' max_length=255 autocomplete='off'>
+                    <button class='searchbtn' onclick="search_recipe(); return false;">검색</button>
+                </div>
+                <a href="{% url 'mainpage:weather' %}" class="weather">
+                    <div class="temp"></div>
+                    <div class="icon"></div>
+                </a>
+            </div>
+            <a href='#' class="navbar_togglebtn">
+                <i class="fas fa-bars"></i>
+            </a>
+        </div>
+    </nav>
+</div>
