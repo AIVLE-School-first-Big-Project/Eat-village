@@ -11,6 +11,7 @@ ul, li {
 a {
     text-decoration: none;
     color: black;
+    line-height: 2rem;
 }
 
 *,
@@ -55,6 +56,7 @@ a {
 }
 #navbar_wrap {
     display:flex;
+    justify-content:space-between;
 }
 
 .navbar_logo {
@@ -64,20 +66,23 @@ a {
 .navbar_logo img {
     display:block;
     height: 3.5rem;
+    margin-right : auto;
 }
 .navbar_menu {
     display: flex;
     list-style: none;
-    padding-left: 0;
+    height: 2rem;
 }
 .navbar_menu li {
-    padding: 8px 12px;
+    padding: 0 1rem;
 }
 .navbar_menu li:hover {
     background-color: orange;
     border-radius: 4px;
 }
 .navbar_right {
+    display:flex;
+    flex-direction:column;
     list-style: none;
     color: white;
     padding-left: 0;
@@ -88,6 +93,9 @@ a {
     right: 32px;
     font-size: 24px;
     color: black;
+}
+.search {
+    display:flex;
 }
 
 .searchbtn {
@@ -103,6 +111,7 @@ a {
 
 .weather {
     float: right;
+    margin-left : auto;
 }
 
 .temp,
