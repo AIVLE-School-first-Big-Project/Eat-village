@@ -24,6 +24,7 @@
     <script src="https://kit.fontawesome.com/22dc6176d9.js" crossorigin="anonymous"></script>
 </head>
 <main>
+    {% include "mainpage/header.html" %}
     {% for message in messages %}
     <div class="alert {{ message.tags }} alert-auto-dismissible alert-dismissible notification-container text-center" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">

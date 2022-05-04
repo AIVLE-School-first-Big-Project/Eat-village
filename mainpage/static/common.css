@@ -304,6 +304,9 @@ ul#ingredient_list li {
     .search {
         text-align: center;
     }
+    /* .my_info {
+        text-align: center;
+    } */
     .weather {
         text-align: center;
         float:none;
@@ -343,6 +346,12 @@ ul#ingredient_list li {
     }
     .bx-wrapper {
         margin: auto;
+    }
+
+    .main_common{
+        display: inline;
+        /* width: 2rem;
+        height: 2rem; */
     }
 }
 
