@@ -12,7 +12,7 @@
          <script src="https://code.jquery.com/jquery-latest.min.js"></script>
          {% load static %}
          <script src="{% static 'a.js' %}"></script>
-         <link rel="stylesheet" href="{% static 'style1.css' %}? after">
+         <link rel="stylesheet" href="{% static 'style1.css' %}">
          <html lang = "ko">
          <title>Signup</title>
     </head>   
@@ -22,7 +22,7 @@
 <body>
      <div class="signup"> 
         <div class="login-form">
-            <form name="myForm" onsubmit="return fn_validateId()" method="post">
+        <form name="myForm" onsubmit="return fn_validateId()" method="post">
                 {% include "layout.html" %}
                 {% csrf_token %}
                 <div class="login-form">
@@ -67,7 +67,7 @@
                     
                     </div>
 
-                    <div class="int-area">
+                    <div class="int-area2">
                         <input type="button" onclick="sample6_execDaumPostcode()" check_result="fail" value="Zip Code (click)" autocomplate = "off" required />
                         <input name = "postcode" type="text" id="postcode" placeholder="POSTCODE"  required />
                         <input name = "address" type="text" id="address" placeholder="ADDRESS"   required /><br>
@@ -104,7 +104,7 @@
                         <input type="checkbox" name="test_list" value="우유">우유 
                         <input type="checkbox" name="test_list" value="견과류">견과류
                         <input type="checkbox" name="test_list" value="생선">생선 
-                        <input type="checkbox" name="test_list" value="새우">갑각류(새우,게,랍스터) 
+                        <input type="checkbox" name="test_list" value="새우">갑각류(새우,게등등) 
                     </div>
 
                     <br>

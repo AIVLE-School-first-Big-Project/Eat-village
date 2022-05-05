@@ -67,13 +67,13 @@ tr {
 }
 
 #col0 {
+    font-size:12px;
     text-align: left;
 }
-
 #col1 {
+    font-size:12px;
     text-align: center;
 }
-
 #col2 {
     text-align: left;
     font-size: 20;
@@ -81,12 +81,13 @@ tr {
 #col2-1 {
     color:orange;
 }
-
 #col3 {
     text-align:center;
     font-size: 15;
 }
-
+#col4 {
+    text-align:center;
+}
 
 #pcontain{
     width:100%;

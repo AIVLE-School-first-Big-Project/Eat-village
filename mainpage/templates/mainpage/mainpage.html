@@ -80,10 +80,39 @@
                     나머진 내가 알아서 할게!
                 </h3>
             </div>
+<<<<<<< HEAD
             <div id="popup_layer">
                 <div id="popup">
                     <iframe id="camera" src="" width=640 height=480> </iframe>
+=======
+            <div class="cam_area">
+                <iframe id="video" src=""> </iframe>
+                    {% comment %} <video src="http://127.0.0.1:8000/mainpage/video_feed" style="width:82%; height:480px"></video> {% endcomment %}
+
+                    {% comment %} 
+                        <video id="video" width="320" height="240" autoplay></video>
+                        <canvas id="canvas" width="960" height="720"></canvas>
+                        <button type="button" id="webcamBtn">캡쳐하기</button>
+                        <script>
+                        if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                            navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+                                var video = document.getElementById('video');
+                                video.srcObject = stream;
+                                video.play();
+                            });
+                        }
+
+                        var canvas = document.getElementById('canvas');
+                        var context = canvas.getContext('2d');
+                        var video = document.getElementById('video');
+                        document.getElementById("webcamBtn").addEventListener("click",function() {
+                            context.drawImage(video,0,0,960,720);
+                        });
+                        </script>
+                    {% endcomment %}
+>>>>>>> 325e48b9c3dec1d6afb46b4e31f24b1359feeb8f
             </div> 
+
             <div id="button">
                 <button id="btn1" onclick="cameraAccess();">카메라 켜기/끄기</button>
                 <button id="btn2" onclick="find_ingred();">분석 시작</button>
@@ -124,12 +153,20 @@
                         function(result) {
                         $('.temp').append(result.main.temp + '℃');
                         var weathericon = '<img src="http://openweathermap.org/img/wn/' + result.weather[0].icon + '.png" alt="' + result.weather[0].description + '">';
+<<<<<<< HEAD
                         var weather = 'a';
+=======
+                        var weather = result.weather[0].main;
+>>>>>>> 325e48b9c3dec1d6afb46b4e31f24b1359feeb8f
                         $('.icon').html(weathericon);
 
                         let cnt = 0;
                         let li_cnt = 1;
+<<<<<<< HEAD
                         if(weather=='Snow'){
+=======
+                        if (weather == 'Snow') {
+>>>>>>> 325e48b9c3dec1d6afb46b4e31f24b1359feeb8f
                             for (let i = 0; i < recipes.length; i++) {
                                 if (cnt==10) {
                                     break;
@@ -149,12 +186,20 @@
                                     recipe_slide.appendChild(recipe_img);
                                 };
                             };
+<<<<<<< HEAD
                         } else if (['Rain', 'Thunderstorm', 'Drizzle'].includes(weather)){
+=======
+                        } else if (['Rain', 'Thunderstorm', 'Drizzle'].includes(weather)) {
+>>>>>>> 325e48b9c3dec1d6afb46b4e31f24b1359feeb8f
                             for (let i = 0; i < recipes.length; i++) {
                                 if (cnt==10) {
                                     break;
                                 };
+<<<<<<< HEAD
                                 if (recipes[i].category1 == '양식'){
+=======
+                                if (recipes[i].category1 == '양식') {
+>>>>>>> 325e48b9c3dec1d6afb46b4e31f24b1359feeb8f
                                     const recipe_slide = ul.item(0).getElementsByTagName('li')[li_cnt];
                                     const recipe_img = document.createElement('img');
                                     const caption = document.createElement('div');
@@ -171,9 +216,15 @@
                             };
                         } else if (weather == 'Clear') {
                             for (let i = 0; i < recipes.length; i++) {
+<<<<<<< HEAD
                                 if (cnt == 10) {
                                     break;
                                 }
+=======
+                                if (cnt==10) {
+                                    break;
+                                };
+>>>>>>> 325e48b9c3dec1d6afb46b4e31f24b1359feeb8f
                                 if (recipes[i].category2 == '일상') {
                                     const recipe_slide = ul.item(0).getElementsByTagName('li')[li_cnt];
                                     const recipe_img = document.createElement('img');
@@ -187,8 +238,13 @@
                                     li_cnt++;
                                     recipe_slide.appendChild(caption);
                                     recipe_slide.appendChild(recipe_img);
+<<<<<<< HEAD
                                 }
                             }
+=======
+                                };
+                            };
+>>>>>>> 325e48b9c3dec1d6afb46b4e31f24b1359feeb8f
                         } else {
                             const random_list = [];
                             let num_cnt = 0;
@@ -197,8 +253,11 @@
                                 if (random_list.includes(number)) {
                                     continue;
                                 }
+<<<<<<< HEAD
                                 random_list.push(number);
                                 num_cnt++;
+=======
+>>>>>>> 325e48b9c3dec1d6afb46b4e31f24b1359feeb8f
                             }
                             random_list.forEach(function(ind) {
                                 const recipe_slide = ul.item(0).getElementsByTagName('li')[li_cnt];
@@ -209,6 +268,10 @@
                                 recipe_img.title = recipes[ind].name;
                                 recipe_img.style = "object-fit: fill; height:100%;";
                                 caption.innerText = recipes[ind].name;
+<<<<<<< HEAD
+=======
+                                cnt++;
+>>>>>>> 325e48b9c3dec1d6afb46b4e31f24b1359feeb8f
                                 li_cnt++;
                                 recipe_slide.appendChild(caption);
                                 recipe_slide.appendChild(recipe_img);
@@ -220,8 +283,13 @@
                 };
             };
             $('.slider').bxSlider({
+<<<<<<< HEAD
                 captions:true,
                 slideWidth:500
+=======
+                captions: true,
+                slideWidth: 500
+>>>>>>> 325e48b9c3dec1d6afb46b4e31f24b1359feeb8f
             });
         });
 
@@ -237,6 +305,7 @@
             location.href = "{% url 'mainpage:ingredient_result' %}";
         }
 
+<<<<<<< HEAD
         /* 카메라 On & Off */
         function cameraAccess() {
             if (document.getElementById('camera').src == "http://127.0.0.1:8000/mainpage/video_feed") {
@@ -245,6 +314,18 @@
                 document.getElementById('camera').src = "http://127.0.0.1:8000/mainpage/video_feed";
             };
         }
+=======
+        /* 카메라 On & Off*/
+        function cameraAccess() {
+            if (document.getElementById('video').src == "http://127.0.0.1:8000/mainpage/video_feed") {
+                document.getElementById('video').src = "";
+            } else {
+                document.getElementById('video').src = "http://127.0.0.1:8000/mainpage/video_feed";
+            }
+        }
+
+
+>>>>>>> 325e48b9c3dec1d6afb46b4e31f24b1359feeb8f
 
     </script>
 
