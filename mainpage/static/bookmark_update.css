@@ -26,9 +26,8 @@
 }
 
 .add_feed {
-    position: absolute;
-    left: 17rem;
-    margin-top: 5px;
+    margin-right: 5rem; 
+    cursor: pointer;
 }
 
 .card-wrap {
@@ -78,7 +77,12 @@
         padding: 0;
         font-size: 1.3rem;
         font-weight: 900;
-}
+    }
+    .add_feed {
+        position: absolute;
+        left: 17rem;
+        margin-top: 5px;
+    }
 }
 
 #back_btn {
