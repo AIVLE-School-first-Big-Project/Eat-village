@@ -78,11 +78,12 @@
             <button id="btn1" onclick="ingred_change();">재료 수정</button>
             <button id="btn2" onclick="ingred_recipe();">레시피 추천</button>
         </div>
+
         <form id="contents" name="contents" method="get" action="{% url 'mainpage:ingredient_recom' %}">
             {% csrf_token %}
             {% comment %} view.py로 어떤 정보를 넘길지 (스토리지, 알러지 ) {% endcomment %}
             storage : <input name="storage" type="text">
-            user_allergy : 
+            data : <input id="data" value="list">
             <button type="button" onclick="send();">전송</button>
         </form>
 
@@ -118,6 +119,7 @@
         if (window.localStorage.length > 0) {
             const revised_ingred_list = document.getElementById('ingredient_list');
             revised_ingred_list.innerHTML = null;
+
             for (let i = 0; i < window.localStorage.length; i++) {
                 const ingredItem = document.createElement('li');
                 ingredItem.innerText = window.localStorage.key(i);
@@ -125,6 +127,7 @@
                 revised_ingred_list.appendChild(ingredItem);
             };
             window.localStorage.clear();
+
         };
 
 
