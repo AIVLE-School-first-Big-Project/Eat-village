@@ -137,6 +137,13 @@ a {
     font-size: 24px;
     color: black;
 }
+.navbar-update {
+    display: none;
+    position: absolute;
+    right: 70px;
+    font-size: 24px;
+    color: black;
+}
 
 .searchbtn {
     width:50px;
@@ -382,6 +389,9 @@ ul#ingredient_list li {
     }
     .navbar_togglebtn:hover {
         color: orange;
+    }
+    .navbar-update {
+        display: block;
     }
     .navbar_menu.active {
         display: flex;

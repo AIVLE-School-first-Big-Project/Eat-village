@@ -56,6 +56,9 @@
                     {% endif %}
                 </div> {% endcomment %}
             </div>
+            <!-- 북마크 알림 -->
+            <div id="navbar-update" class="add_feed"><i class="fa-solid fa-bell"></i></div>
+            {% include "mainpage/bookmark_update.html" %}
             <a href='#' class="navbar_togglebtn">
                 <i class="fas fa-bars"></i>
             </a>
@@ -81,7 +84,7 @@
                 </h3>
             </div>
             <div class="cam_area">
-                <iframe id="video" src="http://127.0.0.1:8000/mainpage/video_feed"> </iframe>
+                <!-- <iframe id="video" src="http://127.0.0.1:8000/mainpage/video_feed"> </iframe> -->
                     {% comment %} <video src="http://127.0.0.1:8000/mainpage/video_feed" style="width:82%; height:480px"></video> {% endcomment %}
 
                     {% comment %} 
@@ -159,11 +162,20 @@
             location.href = "{% url 'mainpage:ingredient_result' %}";
         }
 
-        //cameraAccess 카메라 접근 이벤트 
+        //cameraAccess 카메라 접근 이벤트
 
-
-
+        
     </script>
+    <!-- <script>
+        // 알림 modal 열기
+        window.onload = function () {
+            const modalbtn = document.getElementById("add_feed");
+            const addModal = document.getElementById("model_add_feed");
+            modalbtn.addEventListener("click", e => {
+                addModal.style.display = 'flex';
+            });
+        }
+    </script> -->
     <script>
         $(document).ready(function() {
             $('.slider').bxSlider({
