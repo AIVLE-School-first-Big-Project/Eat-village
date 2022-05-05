@@ -184,3 +184,8 @@ def recipe_detail(request, recipe_id):
         'mainpage/recipe_detail.html',
         context
     )
+
+
+
+def loading(request): #should be deleted
+    return render(request, 'mainpage/loading.html')

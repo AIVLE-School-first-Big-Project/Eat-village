@@ -34,20 +34,7 @@ img {
 .sblank {
     padding-bottom: 10%;
 }
-@media (min-width: 700px ) {
-    .list {
-        margin:0 auto;
-    }
-    .card {
-        width: 60%;
-        margin:0 auto;
-    }
-    img {
-        display:block;
-        margin:0 auto;
-        width:80%;
-    }
-}
+
 /* ul {
     list-style: none;
     padding: 0;
