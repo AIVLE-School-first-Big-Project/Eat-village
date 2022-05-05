@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href='{% static "common.css" %}?after'>
+    <link rel="stylesheet" type="text/css" href='{% static "aa.css" %}? after'>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="apple-touch-icon" href="/custom_icon.png"/>
@@ -49,44 +49,40 @@
         </nav>
     </div> {% endcomment %}
 
+
+
     {% include "mainpage/header.html" %}
     
-    <div id='ingredient_container'>
-        <div style="width:100%; height:20%; background-color:#CF0">
+    <div id='ingredient_container', class = 'recipe-form'>
+        <div class="area">
             {% if user.is_authenticated %}
-                <p>{{request.user.username}}님은 현재 {{request.user.allergyinfo}} 대한 알러지가 있습니다 </p>
+                <h3>{{request.user.username}}<img class = per src="{% static 'per1.png' %}"></h3><br><p> <img class = alle src="{% static 'all1.png' %}"> <br><br> {{request.user.allergyinfo}}</p>
             {% else %}
                 <p> 로그인 해야 이용 가능합니다 </p>
             {% endif %}
         </div>
-
-        <div style="width:100%; height:20%; background-color:#BC0">
-            <p> yolov5를 통해 detect된 재료 : {{ user_data }}</p>        
+        <br>
+    <div class = 'recipe2-form'>
+        <div class="area2">
+            <p><img class = ing src="{% static 'ing1.png' %}"> <br><br> {{ user_data }}</p>        
         </div>
 
-        <div style="width:100%; height:20%; background-color:#AC0">
-            <p> 추천된 레시피 : {{ recommend }} <p>
-        </div>
-
-        <div id='ingredient_result' style="width:100%; height:100%; background-color:#DC0;"  >
+        <div class="area3" id='ingredient_result' >
             <p> 사용자 추가 식재료 </p>
             <ul id='ingredient_list'>
             </ul>
         </div>
 
-        <div id="button">
-            <button id="btn1" onclick="ingred_change();">재료 수정</button>
-            <button id="btn2" onclick="ingred_recipe();">레시피 추천</button>
+        <div id="button" >
+            <button id="btn1"class="w-btn w-btn-indigo2" onclick="ingred_change();">재료 수정</button>
+            <button id="btn2"class="w-btn w-btn-indigo" onclick="ingred_recipe();">레시피 추천</button>
         </div>
-        <form id="contents" name="contents" method="get" action="{% url 'mainpage:ingredient_recom' %}">
-            {% csrf_token %}
-            {% comment %} view.py로 어떤 정보를 넘길지 (스토리지, 알러지 ) {% endcomment %}
-            storage : <input name="storage" type="text">
-            user_allergy : 
-            <button type="button" onclick="send();">전송</button>
-        </form>
+
 
     </div>
+
+    
+</div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script>
