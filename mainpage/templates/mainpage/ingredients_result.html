@@ -49,14 +49,21 @@
         </nav>
     </div> {% endcomment %}
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> a2507cfe3f64051d87f7c4838ab5491e36e3d10e
     {% include "mainpage/header.html" %}
     
     <div id='ingredient_container', class = 'recipe-form'>
         <div class="area">
             {% if user.is_authenticated %}
+<<<<<<< HEAD
                 <h3>{{request.user.username}}<img class = per src="{% static 'per1.png' %}"></h3><br><p> <img class = alle src="{% static 'all1.png' %}"> <br><br> {{request.user.allergyinfo}}</p>
+=======
+                <p>{{request.user.username}}님은 현재 {{request.user.allergyinfo}} 대한 알러지가 있습니다 </p>
+>>>>>>> a2507cfe3f64051d87f7c4838ab5491e36e3d10e
             {% else %}
                 <p> 로그인 해야 이용 가능합니다 </p>
             {% endif %}
@@ -77,38 +84,28 @@
             <button id="btn1"class="w-btn w-btn-indigo2" onclick="ingred_change();">재료 수정</button>
             <button id="btn2"class="w-btn w-btn-indigo" onclick="ingred_recipe();">레시피 추천</button>
         </div>
+        <form id="contents" name="contents" method="get" action="{% url 'mainpage:ingredient_recom' %}">
+            {% csrf_token %}
+            {% comment %} view.py로 어떤 정보를 넘길지 (스토리지, 알러지 ) {% endcomment %}
+            storage : <input name="storage" type="text">
+            user_allergy : 
+            <button type="button" onclick="send();">전송</button>
+        </form>
+
     </div>
 
     
 </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="{% static 'main.js' %}"></script>
     <script>
-        /* 위치기반 현재 날씨 정보 */
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition((pos) => {
-                let lat = pos.coords.latitude;
-                let lon = pos.coords.longitude;
-                console.log(lat, lon);
-                $.getJSON(
-                    'https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&appid=7d5fba451f0f0e3d56dc8bfbd6263516&units=metric&lang=ko',
-                    function(result) {
-                    $('.temp').append(result.main.temp + '℃');
-                    var weathericon = '<img src="http://openweathermap.org/img/wn/' + result.weather[0].icon + '.png" alt="' + result.weather[0].description + '">';
-                    $('.icon').html(weathericon);
-                });
-            }), (err) => {
-                console.log('GPS를 사용할 수 없습니다.');
-            };
-        };
-
-        /* 레시피 검색 */
-        function search_recipe() {
-            var food_cate = document.getElementById('searchfield').value;
-            if (food_cate.length == 0) { return false;}
-            location.href = "{% url 'mainpage:search' %}";
+        /* post로 view.py로 전달 */
+        function send() {
+            alert("send"); 
+            document.getElementById("contents").submit(); 
         }
+
+
 
         /* 재료 베이스 레시피 추천 */
         function ingred_recipe() {

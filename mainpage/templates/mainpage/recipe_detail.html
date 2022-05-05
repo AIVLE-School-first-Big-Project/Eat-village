@@ -4,13 +4,95 @@
     <head>
         <meta charset="UTF-8">
         <title>EAT VILLAGE</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://code.jquery.com/jquery-latest.min.js"></script>
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" 
         integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"/>
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.sandbox.google.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <style>
+            .material-symbols-outlined {
+              font-variation-settings:
+              'FILL' 1,
+              'wght' 400,
+              'GRAD' 0,
+              'opsz' 48
+            }
+        </style>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- ajax : POST , csrf token 생성 및 주입-->
+        <script>
+            function getCookie(name) {
+                var cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    var cookies = document.cookie.split(';');
+                    for (var i = 0; i < cookies.length; i++) {
+                        var cookie = cookies[i].trim();
+                        // Does this cookie string begin with the name we want?
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
 
-        <link rel="stylesheet" type="text/css" href='{% static "recipe.css" %}'>   
+            var csrftoken = getCookie('csrftoken');
+
+            function csrfSafeMethod(method) {
+                // these HTTP methods do not require CSRF protection
+                return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+            }
+            $.ajaxSetup({
+                beforeSend: function(xhr, settings) {
+                    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    }
+                }
+            });
+            const icon = $("#bookmark_status")
+            function ajax_bookmark() {
+                console.log('북마크 이벤트 발생');
+                var status = $("#bookmark_status").attr('class');
+                if (status == 'fa-regular fa-bookmark'){
+                    status = "new mark";
+                }
+                else {
+                    status = "delete mark";
+                }
+                $.ajax({
+                    url: '{{recipe.recipe_id}}',
+                    type: "POST",
+                    dataType: "JSON",
+                    data : {
+                        // 아이콘에 따라 현재 상태를 전송해줌
+                        "bookmark_status":status,
+                        csrfmiddlewaretoken: '{{ csrf_token }}'
+                    },
+                    headers: { "X-CSRFToken": "{{ csrf_token }}" },
+                    success : function (data) {
+                        console.log(data);
+                        const bookmark_status = data.bookmark;
+                        if (bookmark_status){
+                            $("#bookmark_status").remove;
+                            $("#bookmark_add").prepend('<span class="material-symbols-outlined" id="bookmark_status" onclick="ajax_bookmark()">bookmark_remove</span>');
+                            
+                            // .prepend('<i class="fa-regular fa-bookmark" id="bookmark_status" onclick="ajax_bookmark()"></i>')
+                        }
+                        else {
+                            $("#bookmark_status").remove;
+                            $("#bookmark_add").prepend('<i class="fa-regular fa-bookmark" id="bookmark_status" onclick="ajax_bookmark()"></i>');
+                            // .prepend('<i class="fa-solid fa-bookmark-slash" id="bookmark_state" onclick="ajax_bookmark()"></i>')
+                        }
+                    },
+                    error: function (xhr, textStatus, thrownError) {
+                        alert("Could not send URL to Django. Error: " + xhr.status + ": " + xhr.responseText);
+                    }
+                });
+            }
+        </script>
+
+        <link rel="stylesheet" type="text/css" href='{% static "recipe.css" %}?after'>   
     </head>
     <body>
         <!-- 메뉴 삽입 -->
@@ -21,11 +103,13 @@
                     <div class="cont_title">
                         <h3>{{recipe.title}}</h3>
                         <div class="cont_icon_right">
-                            <a href="#">  <i class="material-icons">&#xE8E7;</i></a>
+                            <a id="bookmark_add">
+                                <!-- <i class="fa-regular fa-bookmark" id="bookmark_status" onclick="ajax_bookmark()"></i> -->
+                            </a>
                         </div>
                     </div>
                     
-                    <img id="foodImg" src="https://s-media-cache-ak0.pinimg.com/736x/57/98/9f/57989f2a2e186e38bf93429aa395120c.jpg" alt="" />
+                    <img id="foodImg" src="" alt="https://s-media-cache-ak0.pinimg.com/736x/57/98/9f/57989f2a2e186e38bf93429aa395120c.jpg" />
                 </div>
                 <div class="cont_mins">
                     <div class="sub_mins">
@@ -56,8 +140,10 @@
                 </div>                
             </div>
         </div>
-
         <script>
+            const src = "../../static/" + "{{recipe.num}}" + ".jpg";
+            console.log(src);
+            $('#foodImg').attr("src", src);
             // 빈 P태그 제거
             // .cont_info_preparation > p:nth-child(1)
             const del_p = document.getElementsByClassName("cont_info_preparation");
@@ -66,7 +152,17 @@
                 child[3].remove();
                 child[1].remove();         
             }
-
+            const bookmark_status = "{{bookmark}}";
+            if (bookmark_status){
+                $("#bookmark_add").prepend('<span class="material-symbols-outlined" id="bookmark_status" onclick="ajax_bookmark()">bookmark_remove</span>');
+                
+                // .prepend('<i class="fa-regular fa-bookmark" id="bookmark_status" onclick="ajax_bookmark()"></i>')
+            }
+            else {
+                $("#bookmark_status").remove;
+                $("#bookmark_add").prepend('<i class="fa-regular fa-bookmark" id="bookmark_status" onclick="ajax_bookmark()"></i>');
+                // .prepend('<i class="fa-solid fa-bookmark-slash" id="bookmark_state" onclick="ajax_bookmark()"></i>')
+            }
         </script>
     </body>
 </html>

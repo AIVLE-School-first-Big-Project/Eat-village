@@ -12,7 +12,7 @@
 
     <!-- custom CSS -->
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/style-index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style-index.css' %}?after">
     <script src="{% static 'mainpage/header.css' %}"></script>
 
     <!-- Font -->
@@ -87,9 +87,9 @@
                     {% comment %} <th scope="col" class="col">#</th> {% endcomment %}
                     <th scope="col" class="col-6" id="col0">제목</th>
                     <th scope="col" class="col-2" id="col1">작성자</th>
-                    <th scope="col" class="col-1" id="col1-1">날짜</th>
-                    <th scope="col" class="col-1" id="col1-1">조회</th>
-                    <th scope="col" class="col-1" id="col1-1">추천</th>
+                    <th scope="col" class="col-2" id="col1">게시일</th>
+                    <th scope="col" class="col-1" id="col1">조회</th>
+                    <th scope="col" class="col-1" id="col1">추천</th>
                 </tr>
             </thead>
             <tbody>

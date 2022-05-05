@@ -80,12 +80,41 @@
                     나머진 내가 알아서 할게!
                 </h3>
             </div>
+<<<<<<< HEAD
             <div id="popup_layer" onClick="close()">
                 <div id="popup">
                    <iframe src="http://127.0.0.1:8000/mainpage/video_feed" width=640 height=480> </iframe> 
+=======
+            <div class="cam_area">
+                <iframe id="video" src=""> </iframe>
+                    {% comment %} <video src="http://127.0.0.1:8000/mainpage/video_feed" style="width:82%; height:480px"></video> {% endcomment %}
+
+                    {% comment %} 
+                        <video id="video" width="320" height="240" autoplay></video>
+                        <canvas id="canvas" width="960" height="720"></canvas>
+                        <button type="button" id="webcamBtn">캡쳐하기</button>
+                        <script>
+                        if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                            navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+                                var video = document.getElementById('video');
+                                video.srcObject = stream;
+                                video.play();
+                            });
+                        }
+
+                        var canvas = document.getElementById('canvas');
+                        var context = canvas.getContext('2d');
+                        var video = document.getElementById('video');
+                        document.getElementById("webcamBtn").addEventListener("click",function() {
+                            context.drawImage(video,0,0,960,720);
+                        });
+                        </script>
+                    {% endcomment %}
+>>>>>>> a2507cfe3f64051d87f7c4838ab5491e36e3d10e
             </div> 
+
             <div id="button">
-                <button id="btn1" onclick="cameraAccess();">영상 촬영</button>
+                <button id="btn1" onclick="cameraAccess();">카메라 켜기/끄기</button>
                 <button id="btn2" onclick="find_ingred();">분석 시작</button>
             </div>
         </div>
@@ -95,34 +124,134 @@
         날씨 추천 레시피
         <div id="slideShow">
             <ul class="slider">
-                <li><img src="https://recipe1.ezmember.co.kr/cache/recipe/2020/08/18/32775e06923a4bef0cb6093ff84d28ef1.jpg" alt="" title="토스트"></li>
-                <li><img src="https://recipe1.ezmember.co.kr/cache/recipe/2020/08/18/32775e06923a4bef0cb6093ff84d28ef1.jpg" alt="" title="토스트"></li>
-                <li><img src="https://recipe1.ezmember.co.kr/cache/recipe/2020/08/18/32775e06923a4bef0cb6093ff84d28ef1.jpg" alt="" title="토스트"></li>
-                <li><img src="https://recipe1.ezmember.co.kr/cache/recipe/2020/08/18/32775e06923a4bef0cb6093ff84d28ef1.jpg" alt="" title="토스트"></li>
-                <li><img src="https://recipe1.ezmember.co.kr/cache/recipe/2020/08/18/32775e06923a4bef0cb6093ff84d28ef1.jpg" alt="" title="토스트"></li>
-                <li><img src="https://recipe1.ezmember.co.kr/cache/recipe/2020/08/18/32775e06923a4bef0cb6093ff84d28ef1.jpg" alt="" title="토스트"></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
             </ul>
         </div>
     </section>
     <script src="{% static 'main.js' %}"></script>
     <script>
         /* 위치기반 현재 날씨 정보 */
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition((pos) => {
-                let lat = pos.coords.latitude;
-                let lon = pos.coords.longitude;
-                console.log(lat, lon);
-                $.getJSON(
-                    'https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&appid=7d5fba451f0f0e3d56dc8bfbd6263516&units=metric&lang=ko',
-                    function(result) {
-                    $('.temp').append(result.main.temp + '℃');
-                    var weathericon = '<img src="http://openweathermap.org/img/wn/' + result.weather[0].icon + '.png" alt="' + result.weather[0].description + '">';
-                    $('.icon').html(weathericon);
-                });
-            }), (err) => {
-                console.log('GPS를 사용할 수 없습니다.');
+        $(document).ready(function() {
+            var recipes = JSON.parse("{{recipes|escapejs}}");
+            var ul = document.getElementsByClassName('slider');
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition((pos) => {
+                    let lat = pos.coords.latitude;
+                    let lon = pos.coords.longitude;
+                    console.log(lat, lon);
+                    $.getJSON(
+                        'https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&appid=7d5fba451f0f0e3d56dc8bfbd6263516&units=metric&lang=ko',
+                        function(result) {
+                        $('.temp').append(result.main.temp + '℃');
+                        var weathericon = '<img src="http://openweathermap.org/img/wn/' + result.weather[0].icon + '.png" alt="' + result.weather[0].description + '">';
+                        var weather = result.weather[0].main;
+                        $('.icon').html(weathericon);
+
+                        let cnt = 0;
+                        let li_cnt = 1;
+                        if (weather == 'Snow') {
+                            for (let i = 0; i < recipes.length; i++) {
+                                if (cnt==10) {
+                                    break;
+                                };
+                                if (recipes[i].category1 == '국/탕') {
+                                    const recipe_slide = ul.item(0).getElementsByTagName('li')[li_cnt];
+                                    const recipe_img = document.createElement('img');
+                                    const caption = document.createElement('div');
+                                    const numm = String(recipes[i].num);
+                                    recipe_img.src = "/static/" + numm + ".jpg";
+                                    recipe_img.title = recipes[i].name;
+                                    recipe_img.style = "object-fit: fill; height:100%;";
+                                    caption.innerText = recipes[i].name;
+                                    cnt++;
+                                    li_cnt++;
+                                    recipe_slide.appendChild(caption);
+                                    recipe_slide.appendChild(recipe_img);
+                                };
+                            };
+                        } else if (['Rain', 'Thunderstorm', 'Drizzle'].includes(weather)) {
+                            for (let i = 0; i < recipes.length; i++) {
+                                if (cnt==10) {
+                                    break;
+                                };
+                                if (recipes[i].category1 == '양식') {
+                                    const recipe_slide = ul.item(0).getElementsByTagName('li')[li_cnt];
+                                    const recipe_img = document.createElement('img');
+                                    const caption = document.createElement('div');
+                                    const numm = String(recipes[i].num);
+                                    recipe_img.src = "/static/" + numm + ".jpg";
+                                    recipe_img.title = recipes[i].name;
+                                    recipe_img.style = "object-fit: fill; height:100%;";
+                                    caption.innerText = recipes[i].name;
+                                    cnt++;
+                                    li_cnt++;
+                                    recipe_slide.appendChild(caption);
+                                    recipe_slide.appendChild(recipe_img);
+                                };
+                            };
+                        } else if (weather == 'Clear') {
+                            for (let i = 0; i < recipes.length; i++) {
+                                if (cnt==10) {
+                                    break;
+                                };
+                                if (recipes[i].category2 == '일상') {
+                                    const recipe_slide = ul.item(0).getElementsByTagName('li')[li_cnt];
+                                    const recipe_img = document.createElement('img');
+                                    const caption = document.createElement('div');
+                                    const numm = String(recipes[i].num);
+                                    recipe_img.src = "/static/" + numm + ".jpg";
+                                    recipe_img.title = recipes[i].name;
+                                    recipe_img.style = "object-fit: fill; height:100%;";
+                                    caption.innerText = recipes[i].name;
+                                    cnt++;
+                                    li_cnt++;
+                                    recipe_slide.appendChild(caption);
+                                    recipe_slide.appendChild(recipe_img);
+                                };
+                            };
+                        } else {
+                            const random_list = [];
+                            let num_cnt = 0;
+                            while (num_cnt < 10) {
+                                var number = Math.floor(Math.random() * (recipes.length-1));
+                                if (random_list.includes(number)) {
+                                    continue;
+                                }
+                            }
+                            random_list.forEach(function(ind) {
+                                const recipe_slide = ul.item(0).getElementsByTagName('li')[li_cnt];
+                                const recipe_img = document.createElement('img');
+                                const caption = document.createElement('div');
+                                const numm = String(recipes[ind].num);
+                                recipe_img.src = "/static/" + numm + ".jpg";
+                                recipe_img.title = recipes[ind].name;
+                                recipe_img.style = "object-fit: fill; height:100%;";
+                                caption.innerText = recipes[ind].name;
+                                cnt++;
+                                li_cnt++;
+                                recipe_slide.appendChild(caption);
+                                recipe_slide.appendChild(recipe_img);
+                            })
+                        }
+                    });
+                }), (err) => {
+                    console.log('GPS를 사용할 수 없습니다.');
+                };
             };
-        };
+            $('.slider').bxSlider({
+                captions: true,
+                slideWidth: 500
+            });
+        });
 
         /* 레시피 검색 */
         function search_recipe() {
@@ -136,19 +265,14 @@
             location.href = "{% url 'mainpage:ingredient_result' %}";
         }
 
-        //cameraAccess 카메라 접근 이벤트 
-
-
-
-    </script>
-    <script>
-        $(document).ready(function() {
-            $('.slider').bxSlider({
-                captions: true,
-                slideWidth: 500
-            });
-        });
-
+        /* 카메라 On & Off*/
+        function cameraAccess() {
+            if (document.getElementById('video').src == "http://127.0.0.1:8000/mainpage/video_feed") {
+                document.getElementById('video').src = "";
+            } else {
+                document.getElementById('video').src = "http://127.0.0.1:8000/mainpage/video_feed";
+            }
+        }
 
 
 
