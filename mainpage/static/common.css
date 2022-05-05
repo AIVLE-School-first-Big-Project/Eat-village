@@ -182,7 +182,7 @@ a {
     position: relative; 
     /* absolute는 부모가 relative일 때 부모를 따라간다. */
     width: 100%;
-    height: 500px;
+    height: 400px;
     /* padding-bottom: %; 16:9 비율 */
     /* text-align: center; */
   }
