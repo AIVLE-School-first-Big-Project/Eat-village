@@ -48,23 +48,20 @@
             </a>
         </nav>
     </div> {% endcomment %}
-
-
-
-    {% include "mainpage/header.html" %}
     
-    <div id='ingredient_container', class = 'recipe-form'>
+    <div id='ingredient_container' class = 'recipe-form'>
         <div class="area">
             {% if user.is_authenticated %}
-                <h3>{{request.user.username}}<img class = per src="{% static 'per1.png' %}"></h3><br><p> <img class = alle src="{% static 'all1.png' %}"> <br><br> {{request.user.allergyinfo}}</p>
+                <h3>{{request.user.username}}<img class = per src="{% static 'per1.png' %}"></h3>
+                <br>
+                <p> <img class = alle src="{% static 'all1.png' %}"> <br><br><br> {{request.user.allergyinfo}}</p>
             {% else %}
                 <p> 로그인 해야 이용 가능합니다 </p>
             {% endif %}
         </div>
-        <br>
     <div class = 'recipe2-form'>
         <div class="area2">
-            <p><img class = ing src="{% static 'ing1.png' %}"> <br><br> {{ user_data }}</p>        
+            <p><img class = ing src="{% static 'ing1.png' %}"> <br><br><br><br> {{ user_data }}</p>        
         </div>
 
         <div class="area3" id='ingredient_result' >
