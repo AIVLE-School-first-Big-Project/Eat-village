@@ -235,7 +235,7 @@ a {
     
     width: 50%;
     text-align: center;
-    margin-bottom: 20px;
+    margin: auto;
 }
 
 #ingredient_result {
@@ -244,8 +244,6 @@ a {
     background-color: red;
 }
 
-
-
 .ingred-f {
     position: relative; 
     top:42px;
@@ -253,6 +251,7 @@ a {
     border-radius: 20px;
     background-color: rgba(255, 252, 236, 0.3);
     border: solid #ffff 4px;
+    text-align: center;
 }
 
 /*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
@@ -263,9 +262,7 @@ a {
     height: 250px;
     width: 250px;
     position:relative;
-    left: 47px;
-    top:9px;
-
+    margin-top: 10px;
 }
 ul#ingredient_list li {
     padding: 5px 0px 5px 5px;
@@ -296,7 +293,7 @@ ul#ingredient_list li {
 .ingred-item {
     margin:5px;
     position:relative;
-    left:-42px;
+    left:-10px;
     display:flex;
     flex-wrap: nowrap;
     flex-direction: row;
@@ -305,9 +302,11 @@ ul#ingredient_list li {
     height: 3rem;
     z-index: 5; 
     border-radius: 20px;
-    width: 160px;
+    width: 200px;
     background-color: rgba(255, 252, 236, 0.3);
     border: solid #ffff 4px;
+    margin:auto;
+    min-width: 200px;
 }
 
 
@@ -468,6 +467,10 @@ ul.slider li {
         display: inline;
         /* width: 2rem;
         height: 2rem; */
+    }
+
+    .ingred-item {
+        width:50%;
     }
 }
 
