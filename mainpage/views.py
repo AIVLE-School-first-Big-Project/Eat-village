@@ -18,8 +18,16 @@ from django.contrib import messages
 user_ingre = []
 # Create your views here.
 
-def main(request):      
-    return render(request, 'mainpage/mainpage.html')
+def main(request):
+    recipes = recipe_data.objects.all()
+    recipe_list = []
+    for recipe in recipes:
+        temp = {'name': recipe.title, 'category1': recipe.category_1, 'category2': recipe.category_2, 'num': recipe.num}
+        recipe_list.append(temp)
+    
+    recipe_list_json = json.dumps(recipe_list)
+
+    return render(request, 'mainpage/mainpage.html', {'recipes': recipe_list_json})
 
 def ingred_recomm(request): # 레시피를 추천해주는 코드
     # local 추가한 데이터를 받아온다.
