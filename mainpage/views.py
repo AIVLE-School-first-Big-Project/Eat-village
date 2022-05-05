@@ -108,7 +108,7 @@ def ingred_recomm(request): # 레시피를 추천해주는 코드
     # 2. list2 = 알러지 not in DB
     # 3. view.py에서 recom_recipe = recommend(list,list2)
      
-    return render(request, 'mainpage/recipe_recom.html', {'recommend_data' :recommend_data, 'data' : user_ingre})
+    return render(request, 'mainpage/recipe_recom.html', {'recommend_data' :recommend_data})
     # return render(request, 'mainpage/recipe_recom.html', {'data' : user_ingre})
     # return render(request,'mainpage/ingredients_result.html',{'user_data' : user_data,'recommend' : recommend_data,})
 
@@ -205,9 +205,7 @@ def stream():
                     # print(label[1])
                     user_ingre.append(label[1]) # user_ingre 데이터에 인식된 값을 추가한다. 이걸로 추천시스템 구현
                     
-                    # user_ingre_set = list(set(user_ingre))
                     user_ingre = list(set(user_ingre))
-                    print(user_ingre)
         else:
             deepsort.increment_ages()
 
