@@ -12,6 +12,44 @@
 </head>
 <body>
     {% include "mainpage/header.html" %}
+
+    {% comment %} <div style="height:100px;">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+            <div class="navbar_logo">
+                <a href="{% url 'mainpage:mainpage' %}">
+                    <img src="{% static 'logo.png' %}">
+                </a>
+            </div>
+            {% if user.is_authenticated %}
+                <p>{{request.user.first_name}}님 환영합니다.</p>
+                <a href="{% url 'users:logout' %}"><button> 로그아웃 </button> </a>
+            {% else %}
+                <p> 로그인 해야 이용 가능합니다 </p>
+                <a href="{% url 'users:login' %}"><button> 로그인 </button> </a>
+            {% endif %}
+            <ul class="navbar_menu">
+                <li><a href="{% url 'mypage:main' %}">마이페이지</a></li>
+                <li><a href=''>나눔 게시판</a></li>
+                <li><a href="{% url 'recipeboard:recipeboard_index' %}">레시피 게시판</a></li>
+                <li><a href="{% url 'communityboard:communityboard_index' %}">커뮤니티 게시판</a></li>
+            </ul>
+            <div class="navbar_right">
+                <div class="search">
+                    <input id='searchfield' type='text' max_length=255 autocomplete='off'>
+                    <button class='searchbtn' onclick="search_recipe(); return false;">검색</button>
+                </div>
+                <a href="{% url 'mainpage:mainpage' %}#slideShow" class="weather">
+                    <div class="temp"></div>
+                    <div class="icon"></div>
+                </a>
+            </div>
+            <a href='#' class="navbar_togglebtn">
+                <i class="fas fa-bars"></i>
+            </a>
+        </nav>
+    </div> {% endcomment %}
+
+    {% include "mainpage/header.html" %}
     
     <div id='ingredient_container'>
         <div style="width:100%; height:20%; background-color:#CF0">

@@ -11,7 +11,7 @@
 
     <!-- custom CSS -->
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/style-cindex.css' %}?after">
+    <link rel="stylesheet" href="{% static 'css/style-cindex.css' %}">
 
     <!-- Font -->
     <link rel="stylesheet" type="text/css"
@@ -99,7 +99,7 @@
             </div>
             <div class="c1">
                 <div class="c1-1">
-                    <a class="title" href="{% url 'communityboard:communityboard_detail' board.boardid %}">{{board.title|truncatechars:25}}</a>
+                    <a class="ctitle" href="{% url 'communityboard:communityboard_detail' board.boardid %}">{{board.title|truncatechars:25}}</a>
                 </div>
                 <div class="c1-2">
                     <span><i class="fa-solid fa-location-dot"></i> {{board.userid.address}}</span>

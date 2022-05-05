@@ -2,7 +2,7 @@ div.container {
     width:100%;
     margin:0 auto;
 }
-a {
+#icon {
     text-decoration: none;
     color:#A4C454;
 }
@@ -20,7 +20,7 @@ button.mod {
     color: white;
     border: none;
 }
-div.title {
+div.ctitle {
     display:flex;
     align-items: center;
     font-size: 30;

@@ -41,12 +41,12 @@
 <hr>
 
     <div>
-        <a href="{% url 'recipeboard:recipeboard_index' %}"> <i class="fa-solid fa-arrow-left fa-2x"></i></a>
+        <a href="{% url 'recipeboard:recipeboard_index' %}"> <i id="icon" class="fa-solid fa-arrow-left fa-2x"></i></a>
     </div>
 
 <hr>
 
-    <div class="title">
+    <div class="ctitle">
         <span>{{board.title}}</span>
         <div class="info2">
             {% if likedata %}
@@ -95,7 +95,7 @@
         <span>재료</span>
     </div>
     <br>
-    <div>{{board.ingredient}}</div>
+    <div>{{board.ingredient|linebreaks}}</div>
 
     <br><br>
     <hr>
@@ -103,7 +103,7 @@
         <span>조리방법</span>
     </div>
     <br>
-    <div>{{board.detail}}</div>
+    <div>{{board.detail|linebreaks}}</div>
 
     <br><br><br>
     <hr>
@@ -117,16 +117,16 @@
                 {{comment.userid.nickname}}
             </div>
             <div class="comment1-2">
-                <span><a href="{% url 'recipeboard:recipeboard_comment' board.boardid comment.commentid %}"><i class="fa-solid fa-message"></i></a></span>
+                <span><a href="{% url 'recipeboard:recipeboard_comment' board.boardid comment.commentid %}"><i id="icon" class="fa-solid fa-message"></i></a></span>
                 {% if comment.userid == user and comment.detail != "삭제된 댓글입니다." %}
                     <span>|</span>
-                    <span><a href="{% url 'recipeboard:recipecomment_delete' comment.commentid %}"><i class="fa-solid fa-x"></i></a></span>
+                    <span><a href="{% url 'recipeboard:recipecomment_delete' comment.commentid %}"><i id="icon" class="fa-solid fa-x"></i></a></span>
                 {% endif %}
                 <span>&nbsp;&nbsp;&nbsp;</span>
             </div>
         </div>
         <div class="comment2">
-            {{comment.detail}}
+            {{comment.detail|linebreaks}}
         </div>
         <div class="comment3">
             {{comment.time|date:"Y-m-d H:i:s"}}
@@ -148,7 +148,7 @@
                 </div>
             </div>
             <div class="bcomment2">
-                <span>{{babycomment.detail}}</span>
+                <span>{{babycomment.detail|linebreaks}}</span>
             </div>
             <div class="bcomment3">
                 <span id>{{babycomment.time|date:"Y-m-d H:i:s"}}</span>
