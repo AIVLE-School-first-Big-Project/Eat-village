@@ -158,4 +158,7 @@ def login(request):
     else:
         return render(request, 'login.html')
 
-
+def logout(request):
+    if request.session.get('user'):
+        del(request.session['user'])
+    return redirect("users:login")

@@ -1,10 +1,9 @@
-
 import re
 from numpy import rec
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer
-from recipe.models import user_ingre
-
+# from recipe.models import user_ingre
+from users.models import *
 # import recipe.models as models
 # from .models import recipe_data, user_ingre
 
@@ -46,7 +45,7 @@ def recommend_recipe(user_model, recipe_model):
     # 유사도에 따라 레시피들을 정렬한다.
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
     # 가장 유사한 3개의 영화를 받아온다.
-    sim_scores = sim_scores[1:4]
+    sim_scores = sim_scores[1:5]
     
     # 가장 유사한 3개의 레시피의 인덱스를 얻는다.
     recipe_idx = [idx[0] for idx in sim_scores]
@@ -59,8 +58,7 @@ def recommend_recipe(user_model, recipe_model):
 
     # recommend_recipe_name.append(title_to_index[1])
     # return(feature_vect_simple.shape,similarity_simple_pair) : 코사인유사도 매트릭스 shape와 각 매트릭스 별 유사도
-    
-    # return(recommend_recipe_name) # #코사인유사도 결과 레시피
+
     return (recommend_recipe_name)
     
     
@@ -71,4 +69,3 @@ def recommend_recipe(user_model, recipe_model):
     # 4. 테이블의 id값을 바탕으로 그 DB의 내용을 찾아낸다.
     
     # return HttpResponse(docs)
-# find_recipe()
