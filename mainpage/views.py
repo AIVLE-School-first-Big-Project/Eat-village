@@ -18,8 +18,24 @@ from django.contrib import messages
 user_ingre = []
 # Create your views here.
 
-def main(request):      
-    return render(request, 'mainpage/mainpage.html')
+def main(request):
+    # 북마크 알림
+    id = request.session['id']
+    if request.method == "POST":
+        form = Userbookmarkrecipe.objects.get(
+            userid=id, 
+            recipeid=request.POST.get("update_recipeActive", None)
+        )
+        form.is_active = 1
+        form.save()
+
+    bookmark = Userbookmarkrecipe.objects.filter(userid=id, is_active=0)
+    context = {
+        "update":bookmark,
+    }
+
+
+    return render(request, 'mainpage/mainpage.html', context)
 
 def ingred_recomm(request): # 레시피를 추천해주는 코드
     # local 추가한 데이터를 받아온다.
@@ -191,6 +207,8 @@ def recipe_detail(request, recipe_id):
         bookmark = False
     # 북마크 기능
     # 0 : 알림 확인 안함 , 1 : 알림 확인
+    
+
     if request.method == "POST":
         uploaded = request.POST.get('bookmark_status', None)
         print("데이터 확인", request.POST)
@@ -198,6 +216,7 @@ def recipe_detail(request, recipe_id):
         result = ""
         user = User.objects.get(id=id)
         recipe_detail = recipe_data.objects.get(recipe_id=recipe_id)
+        
         # QQQQ : 데이터 생성하는 방법 찾기
         try:
             form = Userbookmarkrecipe.objects.get(recipeid=recipe_id)

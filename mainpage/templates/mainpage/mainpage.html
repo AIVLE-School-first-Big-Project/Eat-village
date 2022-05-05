@@ -57,12 +57,16 @@
                 </div> {% endcomment %}
             </div>
             <!-- 북마크 알림 -->
+            {% if update|length == 0 %}
             <div id="navbar-update" class="add_feed"><i class="fa-solid fa-bell"></i></div>
-            {% include "mainpage/bookmark_update.html" %}
+            {% else %}
+            <div id="navbar-update" class="add_feed"><i class="fa-solid fa-bell" style="padding: 2px; border: 2px solid red; border-radius: 50%;"></i></div>
+            {% endif %}
             <a href='#' class="navbar_togglebtn">
                 <i class="fas fa-bars"></i>
             </a>
         </nav>
+        {% include "mainpage/bookmark_update.html" %}
     </div>
 
     {% comment %} {% include "mainpage/header.html" %} {% endcomment %}
@@ -166,16 +170,6 @@
 
         
     </script>
-    <!-- <script>
-        // 알림 modal 열기
-        window.onload = function () {
-            const modalbtn = document.getElementById("add_feed");
-            const addModal = document.getElementById("model_add_feed");
-            modalbtn.addEventListener("click", e => {
-                addModal.style.display = 'flex';
-            });
-        }
-    </script> -->
     <script>
         $(document).ready(function() {
             $('.slider').bxSlider({

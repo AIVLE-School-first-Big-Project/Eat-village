@@ -11,6 +11,7 @@
     background: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(1.5px);
     -webkit-backdrop-filter: blur(1.5px);
+    z-index: 2022;
 }
 
 .modal_window {
@@ -19,27 +20,23 @@
     -webkit-backdrop-filter: blur(13.5px);
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.18);
-    width: 32rem;
+    width: 40rem;
     height: fit-content;
     position: absolute;
-    top: 37%;
-    left : 50%;
-    transform: translate(-50%, -50%);
 }
 
 .add_feed {
-    width:fit-content;
-    border-radius: 5px;
-    box-shadow: inset 5px 5px 10px var(--top-shadow),
-                inset -5px -5px 10px var(--bottom-shodow);
-    padding: 0.6rem;
+    position: absolute;
+    left: 17rem;
+    margin-top: 5px;
 }
 
-.card {
+.card-wrap {
     display: flex;
     flex-direction: column;
+    justify-items: center;
     height:fit-content;
-    padding: 0.5rem;
+    padding: 2rem 4rem;
     background-color: white;
 }
 .card-header {
@@ -48,16 +45,40 @@
     border-bottom: 3px solid #d3d3d3;
     background-color: #d3d3d3b3;
 }
+
+.content-wrap {
+    display:flex;
+    flex-direction:column;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    border-radius: 10px;
+    background: #ffffff;
+    box-shadow:  5px 5px 25px #e3e3e3,
+                 -5px -5px 25px #ffffff;
+}
+.content-title{
+    padding: 0;
+    font-size: 1.5rem;
+    font-weight: 900;
+}
+.content-ingre {
+    margin-bottom: 0.5rem;
+}
 @media screen and (max-width:560px) {
-    .card-body {
-        padding: 0 1.5rem 1.5rem;
-    }
-    .modal_overlay {
-        height: 66rem;
-    }
     .modal_window {
-        width: 70%;
+        width: 80%;
     }
+    .card-wrap {
+        padding: 1rem;
+    }
+    .content-wrap {
+        margin-bottom: 1rem;
+    }
+    .content-title{
+        padding: 0;
+        font-size: 1.3rem;
+        font-weight: 900;
+}
 }
 
 #back_btn {
