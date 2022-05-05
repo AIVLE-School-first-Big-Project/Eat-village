@@ -27,13 +27,3 @@ from django.db import models
 #     # recipe_id = models.AutoField(primary_key=True)
 #     ingre = models.TextField()
 
-
-# class Userbookmarkrecipe(models.Model):
-#     bookmarkid = models.IntegerField(primary_key=True)
-#     userid = models.ForeignKey(User, models.DO_NOTHING, db_column='userid', blank=True, null=True)
-#     recipeid = models.ForeignKey(recipe_data, models.DO_NOTHING, db_column='recipeid', blank=True, null=True)
-#     is_active = models.IntegerField(blank=True, null=True)
-
-#     class Meta:
-#         managed = True
-#         db_table = 'userbookmarkrecipe'

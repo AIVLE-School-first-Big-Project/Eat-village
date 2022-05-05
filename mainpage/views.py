@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from .models import *
 from mainpage import recommend_ml
 from glob import glob
@@ -18,8 +18,16 @@ from django.contrib import messages
 user_ingre = []
 # Create your views here.
 
-def main(request):      
-    return render(request, 'mainpage/mainpage.html')
+def main(request):
+    recipes = recipe_data.objects.all()
+    recipe_list = []
+    for recipe in recipes:
+        temp = {'name': recipe.title, 'category1': recipe.category_1, 'category2': recipe.category_2, 'num': recipe.num}
+        recipe_list.append(temp)
+    
+    recipe_list_json = json.dumps(recipe_list)
+
+    return render(request, 'mainpage/mainpage.html', {'recipes': recipe_list_json})
 
 def ingred_recomm(request): # 레시피를 추천해주는 코드
     # local 추가한 데이터를 받아온다.
@@ -170,8 +178,10 @@ def stream():
     
 def video_feed(request):
     return StreamingHttpResponse(stream(), content_type='multipart/x-mixed-replace; boundary=frame')
+
 # 레시피 상세페이지
 def recipe_detail(request, recipe_id):
+    # 조리 시간 전처리
     cookTime = {
         "1":"5",
         "2":"10",
@@ -181,22 +191,58 @@ def recipe_detail(request, recipe_id):
         "6":"60"
     }
     id = request.session['id']
+    bookmark = ''
+    try:
+        form = Userbookmarkrecipe.objects.get(recipeid=recipe_id)
+        bookmark = True
+    except:
+        bookmark = False
+    # 북마크 기능
+    # 0 : 알림 확인 안함 , 1 : 알림 확인
+    if request.method == "POST":
+        uploaded = request.POST.get('bookmark_status', None)
+        print("데이터 확인", request.POST)
+        print("북마크 상태 : ", uploaded)
+        result = ""
+        user = User.objects.get(id=id)
+        # QQQQ : 데이터 생성하는 방법 찾기
+        try:
+            form = Userbookmarkrecipe.objects.get(recipeid=recipe_id)
+        except:
+            Userbookmarkrecipe.objects.create(
+                userid = id,
+                recipeid = recipe_id
+            )
+            bookmark = True
+
+        if uploaded == "delete mark":
+            form.delete()
+            bookmark = False
+
+        result = {
+            'bookmark':bookmark,
+        }
+        return JsonResponse(result)
+            
     recipe = recipe_data.objects.filter(recipe_id=recipe_id)[0]
     cook_time = cookTime[recipe.cook_time]
+    # 요리 방법 전처리
     explain = []
     tmp = recipe.explan
-    tmp = tmp.strip('[]').split(',')
+    tmp = tmp.strip('[]').split("',")
     for x in tmp:
         x = x.rstrip("'")
         x = x.lstrip("'")
-        x = x.replace(".", "\n")
-        print(x)
+        x = x.replace(".", ".\n")
+    # print(x)
         explain.append(x)
+
 
     context = {
         "recipe":recipe,
         "cook_time":cook_time,
         'explain':explain,
+        'bookmark':bookmark,
     }
 
     return render(
