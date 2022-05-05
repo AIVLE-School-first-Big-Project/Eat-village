@@ -326,6 +326,14 @@ ul#ingredient_list li {
     font-size: 15px;
 }
 
+.bx-viewport {
+    height: 400px !important;
+}
+
+ul.slider li {
+    height:400px;
+}
+
 @media screen and (max-width: 850px) {
     .navbar {
         flex-direction: column;
