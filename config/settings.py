@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     'recipeboard',
     'communityboard',
     'users', # yeon
+    'stream',
+    'sslserver',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -87,6 +90,8 @@ MESSAGE_TAGS = {
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
+CSRF_COOKIE_SECURE = True # 지희
+SESSION_COOKIE_SECURE = True
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases

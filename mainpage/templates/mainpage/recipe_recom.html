@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href='{% static "common.css" %}?after'>
+    <link rel="stylesheet" type="text/css" href='{% static "common.css" %}'>
     <link rel="apple-touch-icon" href="/custom_icon.png"/>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,7 +41,6 @@
     <div>
         {{ data }}<br /> 
         storage : {{ data.storage }}<br /> 
-        {% include "mainpage/header.html" %}
 
         {% for item in re_data %}
         <h3>{{ item.title }} / {{ item.ingre }} </h3>
@@ -183,7 +182,7 @@
         </ul> {% endcomment %}
     </div>
         </ul>
-    </div> {% endcomment %}
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="{% static 'main.js' %}"></script>
