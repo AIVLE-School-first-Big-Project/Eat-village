@@ -25,23 +25,29 @@
 
 <div id="container">
     <img src="{% url 'video_feed' %}" alt="">yolov5 </img>
-    <video id="gum-local" autoplay playsinline></video>
-    <button id="showVideo">Open camera</button>
-
-    <div id="errorMsg"></div>
-
-    <p class="warning"><strong>Warning:</strong> if you're not using headphones, pressing play will cause feedback.</p>
-
-    <p>Display the video stream from <code>getUserMedia()</code> in a video element.</p>
-
-    <p>The <code>MediaStream</code> object <code>stream</code> passed to the <code>getUserMedia()</code> callback is in
-        global scope, so you can inspect it from the console.</p>
-
 </div>
+
+<video id="gum" playsinline autoplay muted></video>
+    <video id="recorded" playsinline loop></video>
+
+    <div>
+        <button id="start">Start camera</button>
+        <button id="record" disabled>Start Recording</button>
+        <button id="play" disabled>Play</button>
+        <button id="download" disabled>Download</button>
+    </div>
+
+    <div>
+        Recording format: <select id="codecPreferences" disabled></select>
+    </div>
+    
+    <div>
+        <span id="errorMsg"></span>
+    </div>
 
 <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
 
-<script src="{% static 'main.js' %}"></script>
+<script src="{% static 'stream_main.js' %}"></script>
 <script src="{% static 'ga.js' %}"></script>
 
 </body>

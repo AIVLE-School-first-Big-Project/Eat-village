@@ -68,20 +68,7 @@ body {
 .sblank {
     padding-bottom: 10%;
 }
-@media (min-width: 700px ) {
-    .list {
-        margin:0 auto;
-    }
-    .card {
-        width: 60%;
-        margin:0 auto;
-    }
-    img {
-        display:block;
-        margin:0 auto;
-        width:80%;
-    }
-}
+
 /* ul {
     list-style: none;
     padding: 0;
@@ -235,7 +222,7 @@ a {
     position: relative; 
     /* absolute는 부모가 relative일 때 부모를 따라간다. */
     width: 100%;
-    height: 500px;
+    height: 400px;
     /* padding-bottom: %; 16:9 비율 */
     /* text-align: center; */
   }
