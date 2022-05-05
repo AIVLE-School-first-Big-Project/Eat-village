@@ -58,6 +58,11 @@
   font-size: 30px;
   line-height: 4rem;
 }
+#bookmark_add > span {
+  text-align:center;
+  font-size: 30px;
+  line-height: 4rem;
+}
 
 #foodImg {
   height: 100%;
