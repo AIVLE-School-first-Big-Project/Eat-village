@@ -1,6 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
+
+
 body {
+    position: relative;
+    font-family: 'Poor Story', cursive;
     display:flex;
     flex-direction: column;
+    background-color: #FFB30E;
+    background-size: cover;
 }
 .list {
     margin:0 auto;
@@ -18,12 +25,39 @@ body {
     object-fit: cover;
 
 }
-img {
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    width:100%;
-    height:100%;
+
+/* 로그인 로그아웃 아이콘 */
+
+.out {
+    position: relative;
+    top: 9px;
+    height: 32px;
+    width: 32px;
+
 }
+.logout_1 {
+    margin-bottom: 10px;
+    border:0;
+    outline:0;
+    background-color: #ffffff;
+}
+.in {
+    position: relative;
+    top: 9px;
+    height: 32px;
+    width: 32px;
+
+}
+.login_1 {
+    margin-bottom: 10px;
+    border:0;
+    outline:0;
+    background-color: #ffffff;
+}
+
+
+/* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+
 .recipe-title {
     font-size:22px;
     font-weight:bold;
@@ -35,20 +69,7 @@ img {
 .sblank {
     padding-bottom: 10%;
 }
-@media (min-width: 700px ) {
-    .list {
-        margin:0 auto;
-    }
-    .card {
-        width: 60%;
-        margin:0 auto;
-    }
-    img {
-        display:block;
-        margin:0 auto;
-        width:80%;
-    }
-}
+
 /* ul {
     list-style: none;
     padding: 0;
@@ -64,12 +85,14 @@ img {
 a {
     text-decoration: none;
     color: black;
+    font-weight: bold;
 }
 
 *,
 *::before,
 *::after {
     box-sizing: border-box;
+    
 }
 
 .bg-light {
@@ -135,6 +158,13 @@ a {
     font-size: 24px;
     color: black;
 }
+.navbar-update {
+    display: none;
+    position: absolute;
+    right: 70px;
+    font-size: 24px;
+    color: black;
+}
 
 .searchbtn {
     width:50px;
@@ -143,8 +173,16 @@ a {
     font-size:10px;
 }
 
-#searchfield {
-    height:19px;
+
+
+.search1{
+    width: 100%;
+    text-align: center;
+    border-radius: 10px;
+    outline: none;
+    font-weight: bold;
+    background-color: #ffffff;
+    font-size: 1.3rem;
 }
 
 .weather {
@@ -155,7 +193,24 @@ a {
 .icon {
     display: inline-block;
     vertical-align:middle;
+    font-size: 20px;
+    text-shadow: 1px 1px 3px #f9d78c;
 }
+
+/*날씨 */
+.wea {
+    position: relative; 
+    z-index: 5; 
+    left : 80px;
+    border-radius: 20px;
+    width: 150px;
+    background-color: rgba(255, 252, 236, 0.3);
+    
+}
+
+
+
+
 
 #container {
     margin: auto;
@@ -172,7 +227,7 @@ a {
     position: relative; 
     /* absolute는 부모가 relative일 때 부모를 따라간다. */
     width: 100%;
-    height: 500px;
+    height: 400px;
     /* padding-bottom: %; 16:9 비율 */
     /* text-align: center; */
   }
@@ -235,11 +290,10 @@ a {
 }
 
 #ingredient_container {
-    margin: auto;
+    
     width: 50%;
-    height: 450px;
     text-align: center;
-    margin-bottom: 20px;
+    margin: auto;
 }
 
 #ingredient_result {
@@ -248,12 +302,38 @@ a {
     background-color: red;
 }
 
+.ingred-f {
+    position: relative; 
+    top:42px;
+    z-index: 5; 
+    border-radius: 20px;
+    background-color: rgba(255, 252, 236, 0.3);
+    border: solid #ffff 4px;
+    text-align: center;
+}
+
+/*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+
+/*식재료 아이콘 */
+.ing{
+    filter:drop-shadow(5px 5px 5px #686867);
+    height: 250px;
+    width: 250px;
+    position:relative;
+    margin-top: 10px;
+}
+ul#ingredient_list li {
+    padding: 5px 0px 5px 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #efefef;
+    font-size: 20px;
+    font-weight: bold;
+}
 .ingred-input-box {
     display:flex;
     flex-wrap:nowrap;
     flex-direction:row;
-    height: 5rem;
-    border-bottom: 1px solid #ddd;
+    height: 73px;
     justify-content: flex-start;
     align-items: center;
 }
@@ -261,39 +341,59 @@ a {
 .ingred-input {
     width:100%;
     text-align: center;
-    border: 1;
+    border-radius: 10px;
     outline: none;
+    font-weight: bold;
+    background-color: #ffffff;
     font-size: 1.3rem;
 }
 
 .ingred-item {
+    margin:5px;
     position:relative;
+    left:-10px;
     display:flex;
     flex-wrap: nowrap;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     height: 3rem;
-    border-bottom: 1px solid #ddd;
+    z-index: 5; 
+    border-radius: 20px;
+    width: 200px;
+    background-color: rgba(255, 252, 236, 0.3);
+    border: solid #ffff 4px;
+    margin:auto;
+    min-width: 200px;
 }
+
 
 .ingred-item:hover .delbtn {
     opacity: 1;
 }
 
 .ingred {
-    font-size: 1.3rem;
+    position: relative;
+    top: 0px;
+    left : 4px;
+    font-size: 1.5rem;
     padding: 0 1rem;
     width:100%;
+    font-weight: bold;
 }
-
+/* 재료수정 삭제버튼 */
 .delbtn {
-    opacity: 1;
-    width: 3rem;
-    height: 3rem;
+    position: relative;
+    left:-3px;
+    top:5px;
+    opacity: 2;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50px;
     font-size: 1.5rem;
-    font-weight: lighter;
+    font-weight: bold;
     cursor: pointer;
+    background-color: rgb(252, 242, 215);
 }
 #slideShow{
     width: 500px;
@@ -334,15 +434,23 @@ a {
 ul#ingredient_list li {
     padding: 5px 0px 5px 5px;
     margin-bottom: 5px;
-    border-bottom: 1px solid #efefef;
+    
     font-size: 15px;
+}
+
+.bx-viewport {
+    height: 400px !important;
+}
+
+ul.slider li {
+    height: 400px;
 }
 
 @media screen and (max-width: 850px) {
     .navbar {
         flex-direction: column;
-        align-items: flex-start;
         padding: 8px 24px;
+        outline:5px solid #F79604;
     }
     .navbar-expand-lg {
         flex-wrap: nowrap;
@@ -368,9 +476,12 @@ ul#ingredient_list li {
     .search {
         text-align: center;
     }
-    /* .my_info {
+    .my_info {
         text-align: center;
-    } */
+        font-size: 23px;
+        font-weight: bold;
+    }
+
     .weather {
         text-align: center;
         float:none;
@@ -380,6 +491,9 @@ ul#ingredient_list li {
     }
     .navbar_togglebtn:hover {
         color: orange;
+    }
+    .navbar-update {
+        display: block;
     }
     .navbar_menu.active {
         display: flex;
@@ -399,6 +513,7 @@ ul#ingredient_list li {
     #ingredient_container {
         align-self: center;
         text-align: center;
+        margin:auto;
     }
     #ingredient_result {
         width: 100%;
@@ -414,8 +529,13 @@ ul#ingredient_list li {
 
     .main_common{
         display: inline;
+        
         /* width: 2rem;
         height: 2rem; */
+    }
+
+    .ingred-item {
+        width:50%;
     }
 }
 
@@ -442,3 +562,331 @@ ul#ingredient_list li {
         width: calc(100% / 1);
     }
 }
+
+
+
+
+/*버트느느느느 */
+
+
+/* */
+
+
+/* body {
+    text-align: center;
+    padding: 100px;
+    background: whitesmoke;
+    display: table-cell;
+} */
+
+button {
+    margin-bottom: 10px;
+}
+
+.w-btn {
+    position: relative;
+    border: none;
+    display: inline-block;
+    padding: 15px 30px;
+    border-radius: 15px;
+    font-family: 'Poor Story', cursive;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+}
+
+.w-btn-outline {
+    position: relative;
+    padding: 15px 30px;
+    border-radius: 15px;
+    font-family: 'Poor Story', cursive;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+}
+
+.w-btn-indigo {
+    background-color: aliceblue;
+    color: #ff9b0e;
+}
+
+.w-btn-indigo-outline {
+    border: 3px solid aliceblue;
+    color: #ff9b0e;
+}
+
+.w-btn-indigo-outline:hover {
+    color: #ff9b0e;
+    background: aliceblue;
+}
+
+.w-btn-green {
+    background-color: #77af9c;
+    color: #d7fff1;
+}
+
+.w-btn-green2 {
+    background-color: #519d9e;
+    color: #9dc8c8;
+}
+
+.w-btn-green-outline {
+    border: 3px solid #77af9c;
+    color: darkgray;
+}
+
+.w-btn-green2-outline {
+    border: 3px solid #519d9e;
+    color: darkgray;
+}
+
+.w-btn-green-outline:hover {
+    background-color: #77af9c;
+    color: #d7fff1;
+}
+
+.w-btn-green2-outline:hover {
+    background-color: #519d9e;
+    color: #9dc8c8;
+}
+
+.w-btn-brown {
+    background-color: #ce6d39;
+    color: #ffeee4;
+}
+
+.w-btn-brown-outline {
+    border: 3px solid #ce6d39;
+    color: #b8b8b8;
+}
+
+.w-btn-brown-outline:hover {
+    background-color: #ce6d39;
+    color: #ffeee4;
+}
+
+.w-btn-blue {
+    background-color: #6aafe6;
+    color: #d4dfe6;
+}
+
+.w-btn-pink {
+    background-color: #f199bc;
+    color: #d4dfe6;
+}
+
+.w-btn-gray {
+    background-color: #a3a1a1;
+    color: #e3dede;
+}
+
+.w-btn-red {
+    background-color: #ff5f2e;
+    color: #e1eef6;
+}
+
+.w-btn-skin {
+    background-color: #f8e6e0;
+    color: #6e6e6e;
+}
+
+.w-btn-yellow {
+    background-color: #fce205;
+    color: #6e6e6e;
+}
+
+.w-btn-blue-outline {
+    border: 3px solid #6aafe6;
+    color: #6e6e6e;
+}
+
+.w-btn-pink-outline {
+    border: 3px solid #f199bc;
+    color: #6e6e6e;
+}
+
+.w-btn-gray-outline {
+    border: 3px solid #a3a1a1;
+    color: #6e6e6e;
+}
+
+.w-btn-red-outline {
+    border: 3px solid #ff5f2e;
+    color: #6e6e6e;
+}
+
+.w-btn-skin-outline {
+    border: 3px solid #f8e6e0;
+    color: #6e6e6e;
+}
+
+.w-btn-yellow-outline {
+    border: 3px solid #fce205;
+    color: #6e6e6e;
+}
+
+.w-btn-blue-outline:hover {
+    background-color: #6aafe6;
+    color: #d4dfe6;
+}
+
+.w-btn-pink-outline:hover {
+    background-color: #f199bc;
+    color: #d4dfe6;
+}
+
+.w-btn-gray-outline:hover {
+    background-color: #a3a1a1;
+    color: #e3dede;
+}
+
+.w-btn-red-outline:hover {
+    background-color: #ff5f2e;
+    color: #e1eef6;
+}
+
+.w-btn-skin-outline:hover {
+    background-color: #f8e6e0;
+    color: #6e6e6e;
+}
+
+.w-btn-yellow-outline:hover {
+    background-color: #fce205;
+    color: #6e6e6e;
+}
+
+.w-btn:hover {
+    letter-spacing: 2px;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.w-btn-outline:hover {
+    letter-spacing: 2px;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.w-btn:active {
+    transform: scale(1.5);
+}
+
+.w-btn-outline:active {
+    transform: scale(1.5);
+}
+
+.w-btn-gra1 {
+    background: linear-gradient(-45deg, #33ccff 0%, #ff99cc 100%);
+    color: white;
+}
+
+.w-btn-gra2 {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    color: white;
+}
+
+.w-btn-gra3 {
+    background: linear-gradient(
+        45deg,
+        #ff0000,
+        #ff7300,
+        #fffb00,
+        #48ff00,
+        #00ffd5,
+        #002bff,
+        #7a00ff,
+        #ff00c8,
+        #ff0000
+    );
+    color: white;
+}
+
+.w-btn-gra-anim {
+    background-size: 400% 400%;
+    animation: gradient1 5s ease infinite;
+}
+
+@keyframes gradient1 {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes gradient2 {
+    0% {
+        background-position: 100% 50%;
+    }
+    50% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+@keyframes ring {
+    0% {
+        width: 30px;
+        height: 30px;
+        opacity: 1;
+    }
+    100% {
+        width: 300px;
+        height: 300px;
+        opacity: 0;
+    }
+}
+
+.w-btn-neon2 {
+    position: relative;
+    border: none;
+    min-width: 200px;
+    min-height: 50px;
+    background: linear-gradient(
+        90deg,
+        rgba(129, 230, 217, 1) 0%,
+        rgba(79, 209, 197, 1) 100%
+    );
+    border-radius: 1000px;
+    color: darkslategray;
+    cursor: pointer;
+    box-shadow: 12px 12px 24px rgba(79, 209, 197, 0.64);
+    font-weight: 700;
+    transition: 0.3s;
+}
+
+.w-btn-neon2:hover {
+    transform: scale(1.2);
+}
+
+.w-btn-neon2:hover::after {
+    content: "";
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    border: 6px solid #00ffcb;
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: ring 1.5s infinite;
+}
+.btn btn-primary {
+    width:300px;
+    margin:auto;
+}
+
+
+
+
+
+

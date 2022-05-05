@@ -29,6 +29,7 @@ urlpatterns = [
     path('users/', include('users.urls')),
     path('communityboard/', include('communityboard.urls')),
     path('mainpage/', include('mainpage.urls')), 
+    path('stream/', include('stream.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

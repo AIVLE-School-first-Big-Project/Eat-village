@@ -2,11 +2,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href='{% static "common.css" %}?after'>
+    <link rel="stylesheet" type="text/css" href='{% static "common.css" %}? after'>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="apple-touch-icon" href="/custom_icon.png"/>
     <script src="https://kit.fontawesome.com/312926fc77.js" crossorigin="anonymous"></script>
+   
     <title>Ingredient Change Page</title>
 </head>
 <body>
@@ -38,21 +39,23 @@
             </a>
         </nav>
     </div>
-
+<div class=ingred-f> 
+    <div class=ingred-form>
+        <img class = ing src="{% static 'ing1.png' %}">
+    </div>
     <div id="ingredient_container">
         <div class="ingred-input-box">
-            <input type="text" class="ingred-input" placeholder="추가할 재료를 입력해주세요">
+            <input type="text" class="ingred-input" placeholder="Add ingredient">
         </div>
 
         <ul class="ingred-list">
         </ul>
 
         <div id="button">
-            <button id="btn1" onclick="ingred_change_comp();">재료 수정</button>
+            <button id="btn1" class="w-btn w-btn-indigo" onclick="ingred_change_comp();">재료 수정</button>
         </div>
-
-
-
+    </div>
+</div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script>
         /* 위치기반 현재 날씨 정보 */

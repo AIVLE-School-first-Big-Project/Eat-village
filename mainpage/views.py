@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from .models import *
 from mainpage import recommend_ml
 from glob import glob
@@ -13,15 +13,40 @@ from django.contrib.auth.decorators import login_required
 import json
 from django.contrib import auth
 from django.contrib import messages
-from .models import recipe_data
-import logging
-
+from django.db.models import Q
+import random
 
 user_ingre = ['짜왕','버섯','양파','스팸','옥수수']
 # Create your views here.
 
-def main(request):      
-    return render(request, 'mainpage/mainpage.html')
+def main(request):
+    # 북마크 알림 - 지희
+    id = request.session['id']
+    if request.method == "POST":
+        form = Userbookmarkrecipe.objects.get(
+            userid=id, 
+            recipeid=request.POST.get("update_recipeActive", None)
+        )
+        form.is_active = 1
+        form.save()
+
+    bookmark = Userbookmarkrecipe.objects.filter(userid=id, is_active=0)
+
+    # 찬호
+    recipes = recipe_data.objects.all()
+    recipe_list = []
+    for recipe in recipes:
+        temp = {'name': recipe.title, 'category1': recipe.category_1, 'category2': recipe.category_2, 'num': recipe.num}
+        recipe_list.append(temp)
+    
+    recipe_list_json = json.dumps(recipe_list)
+
+    context = {
+        "update":bookmark,
+        'recipes': recipe_list_json
+    }
+    return render(request, 'mainpage/mainpage.html', context)
+    
 
 def ingred_recomm(request): # 레시피를 추천해주는 코드
     # local 추가한 데이터를 받아온다.
@@ -113,7 +138,28 @@ def ingred_recomm(request): # 레시피를 추천해주는 코드
     # return render(request,'mainpage/ingredients_result.html',{'user_data' : user_data,'recommend' : recommend_data,})
 
 def recipe_search(request):
-    return render(request, 'mainpage/recipe_search.html')
+
+    kw = request.GET.get('kw')
+
+    board_list = list(recipe_data.objects.all().filter(
+        Q(title__contains=kw) |
+        Q(ingre__contains=kw) |
+        Q(explan__contains=kw) |
+        Q(tag__contains=kw) |
+        Q(category_1__contains=kw) |
+        Q(category_2__contains=kw) |
+        Q(method__contains=kw)
+    ))
+    if len(board_list) > 10:
+        random_board = random.sample(board_list, 10)
+    else:
+        random_board = random.sample(board_list, len(board_list))
+
+    context = {'board_list': random_board,
+               'kw' : kw
+               }
+
+    return render(request, 'mainpage/recipe_search.html', context)
 
 def ingred_result(request): # 여기가 추가 데이터 처리하는 페이지
     global user_ingre
@@ -217,8 +263,10 @@ def stream():
     
 def video_feed(request):
     return StreamingHttpResponse(stream(), content_type='multipart/x-mixed-replace; boundary=frame')
+
 # 레시피 상세페이지
 def recipe_detail(request, recipe_id):
+    # 조리 시간 전처리
     cookTime = {
         "1":"5",
         "2":"10",
@@ -228,22 +276,63 @@ def recipe_detail(request, recipe_id):
         "6":"60"
     }
     id = request.session['id']
+    bookmark = ''
+    try:
+        form = Userbookmarkrecipe.objects.get(recipeid=recipe_id)
+        bookmark = True
+    except:
+        bookmark = False
+    # 북마크 기능
+    # 0 : 알림 확인 안함 , 1 : 알림 확인
+    
+
+    if request.method == "POST":
+        uploaded = request.POST.get('bookmark_status', None)
+        print("데이터 확인", request.POST)
+        print("북마크 상태 : ", uploaded)
+        result = ""
+        user = User.objects.get(id=id)
+        recipe_detail = recipe_data.objects.get(recipe_id=recipe_id)
+        
+        # QQQQ : 데이터 생성하는 방법 찾기
+        try:
+            form = Userbookmarkrecipe.objects.get(recipeid=recipe_id)
+        except:
+            Userbookmarkrecipe.objects.create(
+                userid = user,
+                recipeid = recipe_detail,
+                is_active = 0,
+            )
+            bookmark = True
+
+        if uploaded == "delete mark":
+            form.delete()
+            bookmark = False
+
+        result = {
+            'bookmark':bookmark,
+        }
+        return JsonResponse(result)
+            
     recipe = recipe_data.objects.filter(recipe_id=recipe_id)[0]
     cook_time = cookTime[recipe.cook_time]
+    # 요리 방법 전처리
     explain = []
     tmp = recipe.explan
-    tmp = tmp.strip('[]').split(',')
+    tmp = tmp.strip('[]').split("',")
     for x in tmp:
         x = x.rstrip("'")
         x = x.lstrip("'")
-        x = x.replace(".", "\n")
-        print(x)
+        x = x.replace(".", ".\n")
+    # print(x)
         explain.append(x)
+
 
     context = {
         "recipe":recipe,
         "cook_time":cook_time,
         'explain':explain,
+        'bookmark':bookmark,
     }
 
     return render(
@@ -251,3 +340,11 @@ def recipe_detail(request, recipe_id):
         'mainpage/recipe_detail.html',
         context
     )
+
+
+
+
+
+
+def loading(request): #should be deleted
+    return render(request, 'mainpage/loading.html')
