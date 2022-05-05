@@ -13,7 +13,8 @@ from django.contrib.auth.decorators import login_required
 import json
 from django.contrib import auth
 from django.contrib import messages
-
+from django.db.models import Q
+import random
 
 user_ingre = []
 # Create your views here.
@@ -70,7 +71,28 @@ def ingred_recomm(request): # 레시피를 추천해주는 코드
     # return render(request,'mainpage/ingredients_result.html',{'user_data' : user_data,'recommend' : recommend_data,})
 
 def recipe_search(request):
-    return render(request, 'mainpage/recipe_search.html')
+
+    kw = request.GET.get('kw')
+
+    board_list = list(recipe_data.objects.all().filter(
+        Q(title__contains=kw) |
+        Q(ingre__contains=kw) |
+        Q(explan__contains=kw) |
+        Q(tag__contains=kw) |
+        Q(category_1__contains=kw) |
+        Q(category_2__contains=kw) |
+        Q(method__contains=kw)
+    ))
+    if len(board_list) > 10:
+        random_board = random.sample(board_list, 10)
+    else:
+        random_board = random.sample(board_list, len(board_list))
+
+    context = {'board_list': random_board,
+               'kw' : kw
+               }
+
+    return render(request, 'mainpage/recipe_search.html', context)
 
 def ingred_result(request): # 여기가 추가 데이터 처리하는 페이지
 
@@ -250,6 +272,9 @@ def recipe_detail(request, recipe_id):
         'mainpage/recipe_detail.html',
         context
     )
+
+
+
 
 
 

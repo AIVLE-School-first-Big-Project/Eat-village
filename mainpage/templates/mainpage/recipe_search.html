@@ -44,103 +44,21 @@
     </div>
     <div class="recomm_list">
         <ul class="recipe_list">
-            <li class="recipe">
-                <div class="recipe_img">
-                    <img src="https://recipe1.ezmember.co.kr/cache/recipe/2020/08/18/32775e06923a4bef0cb6093ff84d28ef1.jpg" alt="" onclick="recipe_detail();">
-                </div>
-                <div class="recipe_title">
-                    이름
-                </div>
-            </li>
-            <li class="recipe">
-                <div class="recipe_img">
-                    <img src="https://recipe1.ezmember.co.kr/cache/recipe/2020/08/18/32775e06923a4bef0cb6093ff84d28ef1.jpg" alt="">
-                </div>
-                <div class="recipe_title">
-                    이름
-                </div>
-            </li>
-            <li class="recipe">
-                <div class="recipe_img">
-                    <img src="https://recipe1.ezmember.co.kr/cache/recipe/2020/08/18/32775e06923a4bef0cb6093ff84d28ef1.jpg" alt="">
-                </div>
-                <div class="recipe_title">
-                    이름
-                </div>
-            </li>
-            <li class="recipe">
-                <div class="recipe_img">
-                    <img src="https://recipe1.ezmember.co.kr/cache/recipe/2020/08/18/32775e06923a4bef0cb6093ff84d28ef1.jpg" alt="">
-                </div>
-                <div class="recipe_title">
-                    이름
-                </div>
-            </li>
-            <li class="recipe">
-                <div class="recipe_img">
-                    <img src="https://recipe1.ezmember.co.kr/cache/recipe/2020/08/18/32775e06923a4bef0cb6093ff84d28ef1.jpg" alt="">
-                </div>
-                <div class="recipe_title">
-                    이름
-                </div>
-            </li>
-            <li class="recipe">
-                <div class="recipe_img">
-                    <img src="https://recipe1.ezmember.co.kr/cache/recipe/2020/08/18/32775e06923a4bef0cb6093ff84d28ef1.jpg" alt="">
-                </div>
-                <div class="recipe_title">
-                    이름
-                </div>
-            </li>
-            <li class="recipe">
-                <div class="recipe_img">
-                    <img src="https://recipe1.ezmember.co.kr/cache/recipe/2020/08/18/32775e06923a4bef0cb6093ff84d28ef1.jpg" alt="">
-                </div>
-                <div class="recipe_title">
-                    이름
-                </div>
-            </li>
-            <li class="recipe">
-                <div class="recipe_img">
-                    <img src="https://recipe1.ezmember.co.kr/cache/recipe/2020/08/18/32775e06923a4bef0cb6093ff84d28ef1.jpg" alt="">
-                </div>
-                <div class="recipe_title">
-                    이름
-                </div>
-            </li>
-            <li class="recipe">
-                <div class="recipe_img">
-                    <img src="https://recipe1.ezmember.co.kr/cache/recipe/2020/08/18/32775e06923a4bef0cb6093ff84d28ef1.jpg" alt="">
-                </div>
-                <div class="recipe_title">
-                    이름
-                </div>
-            </li>
-            <li class="recipe">
-                <div class="recipe_img">
-                    <img src="https://recipe1.ezmember.co.kr/cache/recipe/2020/08/18/32775e06923a4bef0cb6093ff84d28ef1.jpg" alt="">
-                </div>
-                <div class="recipe_title">
-                    이름
-                </div>
-            </li>
-            <li class="recipe">
-                <div class="recipe_img">
-                    <img src="https://recipe1.ezmember.co.kr/cache/recipe/2020/08/18/32775e06923a4bef0cb6093ff84d28ef1.jpg" alt="">
-                </div>
-                <div class="recipe_title">
-                    이름
-                </div>
-            </li>
-            <li class="recipe">
-                <div class="recipe_img">
-                    <img src="https://recipe1.ezmember.co.kr/cache/recipe/2020/08/18/32775e06923a4bef0cb6093ff84d28ef1.jpg" alt="">
-                </div>
-                <div class="recipe_title">
-                    이름
-                </div>
-            </li>
-        </ul>
+            {% if board_list %}
+                {% for board in board_list %}
+                    <li class="recipe">
+                        <div class="recipe_img">
+                            <img src="{% get_static_prefix %}{{board.num}}.jpg" alt="" onclick="recipe_detail();">
+                        </div>
+                        <div class="recipe_title">
+                            {{board.title}}
+                        </div>
+                    </li>
+                {% endfor %}
+            {% else %}
+                <div>검색 결과가 없습니다.</div>
+            {% endif %}
+        </ul>    
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
