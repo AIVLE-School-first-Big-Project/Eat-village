@@ -28,22 +28,24 @@
             </ul>
             <div class="navbar_right">
                 <div class="search">
-                    <input id='searchfield' type='text' max_length=255 autocomplete='off'>
+                    <input class='search1' id='searchfield' type='text' max_length=255 autocomplete='off'>
                     <button class='searchbtn' onclick="search_recipe(); return false;">검색</button>
                 </div>
+            <div class = "wea">    
                 <a href="{% url 'mainpage:mainpage' %}#slideShow" class="weather">
                     <div class="temp"></div>
                     <div class="icon"></div>
+            </div>        
                     <div class="my_info">
                         {% if user.is_authenticated %}
                             <div class="main_common">
-                                <p>{{request.user.username}}님 환영 합니다. </p>
-                                <a href="{% url 'users:logout' %}"><button> 로그아웃 </button> </a>
+                                {% comment %} <p>{{request.user.username}}님 환영 합니다. </p> {% endcomment %}
+                                <p>{{request.user.username}}<a href="{% url 'users:logout' %}"><button class = logout_1> <img class=out src="{% static 'logout.png' %}"> </button> </a></p>
                             </div>
                         {% else %}
                             <div class="main_common">
                                 <p> 로그인 해야 이용 가능합니다 </p>
-                                <a href="{% url 'users:login' %}"><button> 로그인 </button> </a>
+                                <a href="{% url 'users:login' %}"><button class = login_1> <img class=in src="{% static 'login.png' %}"> </button> </a>
                             </div>
                         {% endif %}   
                     </div>
@@ -80,11 +82,6 @@
                     나머진 내가 알아서 할게!
                 </h3>
             </div>
-<<<<<<< HEAD
-            <div id="popup_layer" onClick="close()">
-                <div id="popup">
-                   <iframe src="http://127.0.0.1:8000/mainpage/video_feed" width=640 height=480> </iframe> 
-=======
             <div class="cam_area">
                 <iframe id="video" src=""> </iframe>
                     {% comment %} <video src="http://127.0.0.1:8000/mainpage/video_feed" style="width:82%; height:480px"></video> {% endcomment %}
@@ -110,7 +107,6 @@
                         });
                         </script>
                     {% endcomment %}
->>>>>>> a2507cfe3f64051d87f7c4838ab5491e36e3d10e
             </div> 
 
             <div id="button">
@@ -139,6 +135,7 @@
     </section>
     <script src="{% static 'main.js' %}"></script>
     <script>
+   
         /* 위치기반 현재 날씨 정보 */
         $(document).ready(function() {
             var recipes = JSON.parse("{{recipes|escapejs}}");
