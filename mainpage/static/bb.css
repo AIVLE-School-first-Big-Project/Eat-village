@@ -1,0 +1,172 @@
+/* 레시피추천 */
+
+@import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
+
+* {margin: 0; padding:0; box-sizing: border-box;}
+body {
+    font-family: 'Poor Story', cursive;
+    display: flex;
+    background-color: #FFB30E;
+    /* background: url("bgg.jpg") no-repeat center; */
+    background-size: cover;
+
+}
+
+#ingredient_container {
+    align-self: center;
+    text-align: center;
+    width: 70%;
+    top: 150px;
+    margin-top: -20px;
+    margin-left: -9px;
+    
+}
+
+.area h3{
+    font-size: 25px; color: rgb(255, 255, 255); 
+    text-align: center;
+    margin-top: 18px;
+    font-weight : bold;
+    border-radius: 20px;
+    text-shadow: 3px 2px #ce8c12;
+    background-color: #FFB30E;
+}
+
+.area p{
+    font-size: 20px; 
+    color: rgb(0, 0, 0); 
+    text-align: center;
+    font-weight : bold;
+    
+}
+
+.area2 p{
+    font-size: 20px; 
+    color: rgb(0, 0, 0); 
+    text-align: center;
+    font-weight : bold;
+    
+}
+.area1{
+    position: relative; 
+    z-index: 5; 
+    border-radius: 20px;
+    width: 100px;
+    background-color: rgba(169, 72, 7, 0.889);
+}
+
+/*흰색 폼 안*/
+.recipe-form {
+    position: relative; 
+    z-index: 5; 
+    border-radius: 20px;
+    width: 400px;
+    background-color: rgba(255, 252, 236, 0.3);
+    border: solid #ffff 4px;
+}
+
+/* .recipe2-form {
+    position: relative; z-index: 2; 
+    border-radius: 20px;
+    width: 350px;
+    background-color: rgba(169, 72, 7, 0.889);
+} */
+
+.ingredient_list {
+    font-family: 'Poor Story', cursive;
+    font-size : 18px;
+    font-weight: bold;
+    color :rgb(255, 255, 255);
+}
+
+.login-form p {
+    font-size: 18px; color: rgb(255, 255, 255);
+    text-align: center;
+    margin-top: 20px;
+}
+
+.area3 p{
+    font-size: 22px; color: rgb(255, 255, 255); 
+    text-align: center;
+    margin-top: 18px;
+    font-weight : bold;
+    border-radius: 20px;
+    
+    background-color: #FFB30E;
+}
+
+/* 사람 아이콘 */
+.per{
+    height: 32px;
+    width: 32px;
+    position: absolute;
+    left: 202px;
+    top:19px;
+
+
+}
+
+/*알레르기 아이콘 */
+.alle{
+    filter:drop-shadow(5px 5px 5px #686867);
+    height: 44px;
+    width: 44px;
+    position: absolute;
+    left: 115px;
+    top:63px;
+    
+
+}
+/*식재료 아이콘 */
+.ing{
+    filter:drop-shadow(5px 5px 5px #686867);
+    height: 44px;
+    width: 44px;
+    position: absolute;
+    left: 115px;
+    top:157px;
+
+
+}
+.int-area {
+
+    position: relative;
+    margin-top : 20px;
+}
+.int-area:first-child {margin-top: 0;}
+.int-area input {
+    width: 100%;
+    padding:20px 10px 10px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #999;
+    font-size: 18px; color: #fff;
+    outline: none;
+}
+.int-area2 input {
+    width: 100%;
+    padding:20px 10px 10px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #999;
+    font-size: 18px; color: #fff;
+    outline: none;
+}
+
+
+
+
+
+.caption{
+    margin-top : 20px;
+    text-align: center;
+}
+.caption a {
+    font-size : 18px; color : #999;
+    text-decoration: none;
+}
+
+#messages .error {
+    color:red;
+}
+

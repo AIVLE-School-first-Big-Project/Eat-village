@@ -171,17 +171,19 @@ a {
 }
 
 #ingredient_container {
-    margin: auto;
-    width: 50%;
-    height: 450px;
+    align-self: center;
     text-align: center;
+    top: 250px;
+    left:50px;
     margin-bottom: 20px;
+    width:280px;
 }
 
 #ingredient_result {
-    width: 100%;
+    width: 80%;
     height: auto;
-    background-color: red;
+    align-self: center;
+
 }
 
 .ingred-input-box {
@@ -271,7 +273,8 @@ ul#ingredient_list li {
     padding: 5px 0px 5px 5px;
     margin-bottom: 5px;
     border-bottom: 1px solid #efefef;
-    font-size: 15px;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 @media screen and (max-width: 850px) {
@@ -335,6 +338,9 @@ ul#ingredient_list li {
     #ingredient_container {
         align-self: center;
         text-align: center;
+        margin-top: -20px;
+        margin-left: -3px;
+        
     }
     #ingredient_result {
         width: 100%;
