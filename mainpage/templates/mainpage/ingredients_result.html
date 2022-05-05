@@ -76,14 +76,12 @@
 
         <div id="button">
             <button id="btn1" onclick="ingred_change();">재료 수정</button>
-            <button id="btn2" onclick="ingred_recipe();">레시피 추천</button>
+            <button id="btn2" onclick="send();">레시피 추천</button>
         </div>
         <form id="contents" name="contents" method="get" action="{% url 'mainpage:ingredient_recom' %}">
             {% csrf_token %}
             {% comment %} view.py로 어떤 정보를 넘길지 (스토리지, 알러지 ) {% endcomment %}
-            storage : <input name="storage" type="text">
-            user_allergy : 
-            <button type="button" onclick="send();">전송</button>
+            <input id="storage" name="storage" value="" style="display:none;">
         </form>
 
     </div>
@@ -97,20 +95,9 @@
         }
 
 
-
-        /* 재료 베이스 레시피 추천 */
-        function ingred_recipe() {
-            location.href = "{% url 'mainpage:ingredient_recom' %}";
-        }
-
         /* 재료 수정 페이지 이동 */
         function ingred_change() {
-            const ingred_list = document.getElementById('ingredient_list');
-            const list_a = ingred_list.getElementsByTagName('li');
-            for (let i = 0; i < list_a.length; i++) {
-                const ing = list_a[i].innerText;
-                window.localStorage.setItem(ing, 1);
-            };
+            window.localStorage.clear();
             location.href = '{% url "mainpage:ingredient_change" %}';
         }
 
@@ -118,12 +105,17 @@
         if (window.localStorage.length > 0) {
             const revised_ingred_list = document.getElementById('ingredient_list');
             revised_ingred_list.innerHTML = null;
+            const ingred_added = [];
             for (let i = 0; i < window.localStorage.length; i++) {
                 const ingredItem = document.createElement('li');
                 ingredItem.innerText = window.localStorage.key(i);
 
+                ingred_added.push(window.localStorage.key(i));
+
                 revised_ingred_list.appendChild(ingredItem);
             };
+            const inp = document.getElementById('storage');
+            inp.value = ingred_added;
             window.localStorage.clear();
         };
 
