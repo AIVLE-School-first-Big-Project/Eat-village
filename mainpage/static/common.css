@@ -2,6 +2,7 @@
 
 
 body {
+    position: relative;
     font-family: 'Poor Story', cursive;
     display:flex;
     flex-direction: column;
@@ -260,7 +261,7 @@ a {
 
 .ingred-f {
     position: relative; 
-    top:50px;
+    top:42px;
     z-index: 5; 
     border-radius: 20px;
     background-color: rgba(255, 252, 236, 0.3);
