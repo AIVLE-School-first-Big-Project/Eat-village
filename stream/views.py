@@ -9,10 +9,14 @@ from deep_sort.utils.parser import get_config
 from deep_sort.deep_sort import DeepSort
 import cv2
 from PIL import Image as im
-
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
 def index(request):
+    print(request)
+    if request.method == 'POST':
+        print("ajax 전송 확인")
+        print(request.POST)
     return render(request, 'stream/index.html')
 
 
@@ -37,7 +41,8 @@ names = model.module.names if hasattr(model, 'module') else model.names
 def stream():
     #cap = cv2.VideoCapture(0)
     #cap = cv2.imdecode()
-    cap = cv2.VideoCapture(0)
+    
+    cap = cv2.VideoCapture("stream/test (29).webm")
     #cap = request.files['image']
 
     while True:
@@ -60,5 +65,9 @@ def stream():
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + open('demo.jpg','rb').read() + b'\r\n')
 
+@csrf_exempt
 def video_feed(request):
+    if request.method == 'POST':
+        print("ajax 전송 확인")
+        print(request.POST)
     return StreamingHttpResponse(stream(), content_type='multipart/x-mixed-replace; boundary=frame')
