@@ -37,19 +37,6 @@
     </table>
 
     <script type="text/javascript">
-        function close_cam(){  // 끄는거
-            var cam_ori = document.getElementById("cam_ori")
-            var cam_img = document.getElementById("cam_img")
-                
-            if(cam_ori.style.display=='block'){
-                cam_ori.style.display = 'none';
-                cam_img.style.display = 'block';
-            }
-            else{// if(cam_ori.style.display=='none'){
-                cam_ori.style.display = 'block';
-                cam_img.style.display = 'none';
-            }
-        }
         function find_ingred() {
             location.href = "{% url 'test' %}";
         }

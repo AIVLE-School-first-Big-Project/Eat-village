@@ -11,7 +11,7 @@
 
     <!-- custom CSS -->
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style-create.css' %}?after">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style-create.css' %}">
 
     <!-- Font -->
     <link rel="stylesheet" type="text/css"
@@ -25,7 +25,8 @@
 </head>
 
 <main>
-
+<body>
+    {% include "mainpage/header.html" %} 
 <br>
 
 <div class="container">
@@ -56,5 +57,5 @@
         <input type="submit" value="작성완료">
     </form>
 </div>
-
+</body>
 </main>

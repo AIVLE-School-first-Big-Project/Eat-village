@@ -160,7 +160,7 @@ import users.my_setting as my_setting
 import os
 #yeon
 
-import my_setting
+import users.my_setting as my_setting
 
 EMAIL_HOST = my_setting.EMAIL['EMAIL_HOST']
 EMAIL_PORT = my_setting.EMAIL['EMAIL_PORT']

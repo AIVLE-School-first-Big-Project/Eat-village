@@ -4,13 +4,30 @@ div.container {
 }
 a {
     text-decoration: none;
-    color:none;
+    color:#A4C454;
+}
+hr {
+    border-radius:5pt;
+    border-top: solid 4px #4e5227;
+}
+hr.level1 {
+    border-top: solid 2px #4e5227;
+}
+button.mod {
+    border-radius: 5pt;
+    background-color: #A4C454;
+    height:30px;
+    color: white;
+    border: none;
 }
 div.title {
     display:flex;
     align-items: center;
     font-size: 30;
     height:80px;
+}
+#recommend {
+    color:rgb(224, 15, 50);
 }
 #time{
     font-size:5;
@@ -47,7 +64,7 @@ div.comment3 {
 }
 div.bcomment1{
     display:flex;
-    margin-left:10%;
+    margin-left:5%;
 }
 div.bcomment1-1{
     float:left;
@@ -57,9 +74,9 @@ div.bcomment1-2{
     margin-left:auto;
 }
 div.bcomment2{
-    margin-left:10%;
+    margin-left:5%;
 }
 div.bcomment3 {
     font-size:4;
-    margin-left:10%;
+    margin-left:5%;
 }

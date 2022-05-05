@@ -1,4 +1,4 @@
-/* íšŒì›ê°€ìž… */
+
 /* bbbbdd */
 @import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
 
@@ -8,15 +8,14 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
-    background-color: #e4c9fb; 
-    /*background: url("bg.jpg") no-repeat center;*/
+    /*height: 100%;*/ 
+    background: url("bgg.jpg") no-repeat center;
     background-size: cover;
 }
 
 body::before{
     content: "";
-    position: absolute; z-index:1;
+    position: fixed; z-index:1;
     top:0; right: 0; bottom:0; left: 0;
     background-color: rgba(0,0,0,.5);
 
@@ -24,8 +23,9 @@ body::before{
 
 .login-form {
     position: relative; z-index: 2;
-    height: 100%;
     
+    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0.);
 }
 .login-form h1 {
     font-size: 30px; color: rgb(255, 255, 255);
@@ -49,7 +49,7 @@ body::before{
     background-color: transparent;
     border: none;
     border-bottom: 1px solid #999;
-    font-size: 18px; color: #fff;
+    font-size: 18px; color: #dcaa13;
     outline: none;
 }
 
@@ -72,20 +72,19 @@ body::before{
 .int-area input:focus + label,
 .int-area input:valid + label {
     top: -2px;
-    font-size: 13px; color : #166cea;
+    font-size: 13px; color : #eaa316;
 }
 
-.btn-area {margin-top : 5px;}
+.btn-area {margin-top : 10px;}
 .btn-area button {
-    width: 100%; height: 50px;
-    background: #166cea;
+    width: 100%; height: 40px;
+    background: #eaa316;
     color: #fff;
     font-size: 20px;
     border: none;
     border-radius: 25px;
     cursor:pointer;
 }
-
 .caption{
     margin-top : 20px;
     text-align: center;

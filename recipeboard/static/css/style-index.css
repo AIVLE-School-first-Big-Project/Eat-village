@@ -1,19 +1,69 @@
 body{
     display:flex;
     flex-direction: column;
+    background-color: #F9E1A3;
 }
 a {
     text-decoration: none;
     color:black;
 }
+#bar {
+    width:100%;
+    margin:0 auto;
+}
+.container {
+    width:100%;
+    margin:0 auto;
+    height:auto;
+}
 
+select {
+    border-radius: 0.3125em;
+    width:5em;
+    height:2.1875em;
+    text-align: center;
+    font-weight: bold;
+}
+#selector {
+    float:left;
+    position:relative;
+    top:0.625em;
+}
+#searchbox {
+    float: right;
+    position:relative;
+    top:0.8125em;
+}
+#searchbox1 {
+    border-radius:0.625em;
+}
+#searchbox2 {
+    border-radius: 0.625em;
+    background-color: white;
+}
+#write {
+    float:right;
+    position:relative;
+    top:0.3125em;
+}
+#writeicon {
+    /* border: 5px solid #A4C454; */
+    color: green;
+}
+tr {
+    height:70px;
+    vertical-align: middle;
+}
+#colcontent {
+    background-color: white;
+}
 #colcontent:hover {
-    background-color: aquamarine;
+    background-color: #A4C454;
     color:white;
     font-weight: bold;
 }
 #colname {
-    font-size: 4;
+    font-size: 20px;
 }
 
 #col0 {
@@ -28,26 +78,15 @@ a {
     text-align: left;
     font-size: 20;
 }
+#col2-1 {
+    color:orange;
+}
 
 #col3 {
     text-align:center;
     font-size: 15;
 }
 
-#bar {
-    width:100%;
-    margin:0 auto;
-}
-.container {
-    width:100%;
-    margin:0 auto;
-}
-#selector {
-    float:left;
-}
-#searchbox {
-    float: right;
-}
 
 #pcontain{
     width:100%;
@@ -58,7 +97,9 @@ a {
     justify-content: center;
 }
 
-
+#link{
+    color:#A4C454;
+}
 #nolink {
     color:gray;
 }
@@ -69,8 +110,8 @@ a {
     color:white;
     text-align:center;
     border-radius:10px;
-    background-color: aquamarine;
-    border:3px solid aquamarine;
+    background-color: #A4C454;
+    border:3px solid #A4C454;
 }
 #num {
     width:40px;
@@ -84,6 +125,6 @@ a {
 }
 #num:hover {
     color:white;
-    background-color: aquamarine;
-    border:3px solid aquamarine;
+    background-color: #A4C454;
+    border:3px solid #A4C454;
 }

@@ -7,8 +7,9 @@ from django.core.paginator import Paginator
 from django.db.models import Q, Count, F
 from recipeboard.forms import Recipeboardform, Recipecommentform, Recipeboardimageform
 from django.utils import timezone
-from datetime import date
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def recipeboard_index(request): #레시피게시글 목록
 
     kw = request.GET.get('kw', '') #키워드 검색기능
@@ -46,7 +47,7 @@ def recipeboard_index(request): #레시피게시글 목록
 
     return render(request, 'recipeboard/recipeboard_index.html', context)
 
-
+@login_required
 def recipeboard_detail(request, boardid): # 게시글 내용, 댓글생성
     
     user = request.user
@@ -56,8 +57,8 @@ def recipeboard_detail(request, boardid): # 게시글 내용, 댓글생성
     if request.method == "GET":
         recipecommentform = Recipecommentform()
 
-    board.view += 1 ## 조회수증가
-    board.save()
+    # board.view += 1 ## 조회수증가
+    # board.save()
 
     comment = Recipecomment.objects.filter(
         boardid = boardid,
@@ -92,8 +93,29 @@ def recipeboard_detail(request, boardid): # 게시글 내용, 댓글생성
         'images' : images,
         'likedata' : likedata,
     }
+
+    response = render(request, 'communityboard/communityboard_detail.html', context)
+    if board.userid != user:
+        cookie_name = f'view:{request.user.id}'
+        tomorrow = timezone.now().replace(hour=23, minute=59, second=0)
+        expires = tomorrow
+        if request.COOKIES.get(cookie_name) is not None:
+            cookies = request.COOKIES.get(cookie_name)
+            cookies_list = cookies.split('|')
+            if str(boardid) not in cookies_list:
+                response.set_cookie(cookie_name, cookies + f'|{boardid}', expires =expires)
+                board.view += 1
+                board.save()
+                return response
+        else:
+            response.set_cookie(cookie_name, boardid, expires =expires)
+            board.view += 1
+            board.save()
+            return response
+
     return render(request, 'recipeboard/recipeboard_detail.html', context)
 
+@login_required
 def recipeboard_recommend(request, boardid):
     user = request.user
     board = get_object_or_404(Recipeboard, pk=boardid)
@@ -103,6 +125,7 @@ def recipeboard_recommend(request, boardid):
         board.save()
     return redirect('recipeboard:recipeboard_detail', boardid=boardid)
 
+@login_required
 def recipeboard_recommendcancel(request, boardid):
     user = request.user
     board = get_object_or_404(Recipeboard, pk=boardid)
@@ -113,6 +136,7 @@ def recipeboard_recommendcancel(request, boardid):
         board.save()
     return redirect('recipeboard:recipeboard_detail', boardid=boardid)
 
+@login_required
 def recipeboard_comment(request, boardid, commentid): #댓글자세히보기, 대댓글 내용과 생성
     
     comment = get_object_or_404(Recipecomment, pk=commentid)
@@ -146,6 +170,7 @@ def recipeboard_comment(request, boardid, commentid): #댓글자세히보기, �
     
     return render(request, 'recipeboard/recipeboard_comment.html', context)
 
+@login_required
 def recipecomment_delete(request, commentid):
 
     # current_user_id = request.session['userid']
@@ -163,7 +188,7 @@ def recipecomment_delete(request, commentid):
 
     return redirect('recipeboard:recipeboard_detail', boardid=comment.boardid.boardid)
 
-# from .forms import Imageformset
+@login_required
 def recipeboard_create(request): #게시물생성
 
     Imageformset = modelformset_factory(Recipeboardimage, form=Recipeboardimageform, extra=3)
@@ -196,7 +221,7 @@ def recipeboard_create(request): #게시물생성
 
     return render(request, 'recipeboard/recipeboard_create.html', context)
 
-
+@login_required
 def recipeboard_update(request, boardid): #게시물수정
 
     board = get_object_or_404(Recipeboard, pk=boardid)
@@ -229,7 +254,7 @@ def recipeboard_update(request, boardid): #게시물수정
 
     return render(request, 'recipeboard/recipeboard_create.html', context)
 
-
+@login_required
 def recipeboard_delete(request, boardid): #게시물삭제
 
     board = get_object_or_404(Recipeboard, pk=boardid)
@@ -241,17 +266,6 @@ def recipeboard_delete(request, boardid): #게시물삭제
     board.delete()
 
     return redirect('recipeboard:recipeboard_index')
-
-# def upload_recipe_img(request, boardid): #이미지 업로드
-
-#     board = Recipeboard.objects.filter(boardid=boardid)
-#     if request.method == 'POST':
-#         image = request.FILES.get('img-file')
-#         time = timezone.now()
-
-#         Recipeboard.objects.create(boardid=board, image=image, time=time)
-    
-
 
 
 

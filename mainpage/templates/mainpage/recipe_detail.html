@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <title>EAT VILLAGE</title>
+        <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" 
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"/>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" type="text/css" href='{% static "recipe.css" %}'>   
+    </head>
+    <body>
+        <!-- 메뉴 삽입 -->
+        {% include "mainpage/header.html" %}
+        <div class="wrap">
+            <div class="cont_photo">
+                <div class="cont_img_back">
+                    <div class="cont_title">
+                        <h3>{{recipe.title}}</h3>
+                        <div class="cont_icon_right">
+                            <a href="#">  <i class="material-icons">&#xE8E7;</i></a>
+                        </div>
+                    </div>
+                    
+                    <img id="foodImg" src="https://s-media-cache-ak0.pinimg.com/736x/57/98/9f/57989f2a2e186e38bf93429aa395120c.jpg" alt="" />
+                </div>
+                <div class="cont_mins">
+                    <div class="sub_mins">
+                        <h3>{{cook_time}}</h3>
+                        <span>MINS</span>
+                    </div>
+                </div>
+                <div class="cont_servings">
+                    <h3>1</h3>
+                    <span>SERVINGS</span>
+                </div>
+            </div>
+            <div class="cont_detalles">
+                <h3>INGREDIENTS</h3>
+                <p>{{recipe.ingre}}</p>
+            </div>
+            <div class="cont_text_ingredients">
+                <div class="cont_text_det_preparation">
+                    {% for content in explain %}
+                    <div class="cont_title_preparation">
+                        <p>STEP {{forloop.counter}}</p>
+                    </div>
+                    <div class="cont_info_preparation">
+                        <p>{{content|linebreaks}}</p>
+                    </div>
+                    <br>
+                    {% endfor %}
+                </div>                
+            </div>
+        </div>
+
+        <script>
+            // 빈 P태그 제거
+            // .cont_info_preparation > p:nth-child(1)
+            const del_p = document.getElementsByClassName("cont_info_preparation");
+            for (let i = 0; i < del_p.length; i++) {
+                const child = del_p[i].childNodes;
+                child[3].remove();
+                child[1].remove();         
+            }
+
+        </script>
+    </body>
+</html>

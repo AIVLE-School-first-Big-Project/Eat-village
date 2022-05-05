@@ -2,17 +2,30 @@ div.container {
     width:100%;
     margin:0 auto;
 }
-a {
+#icon {
     text-decoration: none;
-    color:none;
+    color:#F2D99E;
 }
-
+hr {
+    border-radius:5pt;
+    border-top: solid 4px #4e5227;
+}
+hr.level1 {
+    border-top: solid 2px #4e5227;
+}
+button.mod {
+    border-radius: 5pt;
+    background-color: #F2D99E;
+    height:30px;
+    color: white;
+    border: none;
+}
 div#header{
     font-size:15;
     display:flex;
     align-items: center;
 }
-div.title {
+div.ctitle {
     font-size: 30;
     display:flex;
     align-items: center;
@@ -56,7 +69,7 @@ div.comment3 {
 }
 div.bcomment1{
     display:flex;
-    margin-left:10%;
+    margin-left:5%;
 }
 div.bcomment1-1{
     float:left;
@@ -66,9 +79,9 @@ div.bcomment1-2{
     margin-left:auto;
 }
 div.bcomment2{
-    margin-left:10%;
+    margin-left:5%;
 }
 div.bcomment3 {
     font-size:4;
-    margin-left:10%;
+    margin-left:5%;
 }

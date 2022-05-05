@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href='{% static "common.css" %}?after'>
+    <link rel="stylesheet" type="text/css" href='{% static "common.css" %}'>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -21,26 +21,48 @@
                 </a>
             </div>
             <ul class="navbar_menu">
-                <li><a href=''>마이페이지</a></li>
-                <li><a href=''>나눔 게시판</a></li>
-                <li><a href=''>레시피 게시판</a></li>
-                <li><a href=''>자유 게시판</a></li>
+                <li><a href="{% url 'mypage:main' %}">마이페이지</a></li>
+                {% comment %} <li><a href=''>나눔 게시판</a></li> {% endcomment %}
+                <li><a href="{% url 'recipeboard:recipeboard_index' %}">레시피 게시판</a></li>
+                <li><a href="{% url 'communityboard:communityboard_index' %}">커뮤니티 게시판</a></li>
             </ul>
             <div class="navbar_right">
                 <div class="search">
                     <input id='searchfield' type='text' max_length=255 autocomplete='off'>
-                    <button class='searchbtn' onclick="search_recipe(); return false;"">검색</button>
+                    <button class='searchbtn' onclick="search_recipe(); return false;">검색</button>
                 </div>
-                <a href="{% url 'mainpage:weather' %}" class="weather">
+                <a href="{% url 'mainpage:mainpage' %}#slideShow" class="weather">
                     <div class="temp"></div>
                     <div class="icon"></div>
+                    <div class="my_info">
+                        {% if user.is_authenticated %}
+                            <div class="main_common">
+                                <p>{{request.user.username}}님 환영 합니다. </p>
+                                <a href="{% url 'users:logout' %}"><button> 로그아웃 </button> </a>
+                            </div>
+                        {% else %}
+                            <div class="main_common">
+                                <p> 로그인 해야 이용 가능합니다 </p>
+                                <a href="{% url 'users:login' %}"><button> 로그인 </button> </a>
+                            </div>
+                        {% endif %}   
+                    </div>
                 </a>
+                {% comment %} <div class="my_info">
+                    {% if user.is_authenticated %}
+                        <p>{{request.user.first_name}}님은 현재 {{request.user.allergyinfo}} 대한 알러지가 있습니다 </p>
+                    {% else %}
+                        <p> 로그인 해야 이용 가능합니다 </p>
+                    {% endif %}
+                </div> {% endcomment %}
             </div>
             <a href='#' class="navbar_togglebtn">
                 <i class="fas fa-bars"></i>
             </a>
         </nav>
     </div>
+
+    {% comment %} {% include "mainpage/header.html" %} {% endcomment %}
     <section class="bg-primary py-5">
         <div id="container">
             <div class="fridge-img">
@@ -58,8 +80,10 @@
                     나머진 내가 알아서 할게!
                 </h3>
             </div>
-            <video autoplay="true" id="videoElement">
-            </video>
+            <div id="popup_layer" onClick="close()">
+                <div id="popup">
+                    {% comment %} <iframe src="http://127.0.0.1:8000/mainpage/video_feed" width=640 height=480> </iframe> {% endcomment %}
+            </div> 
             <div id="button">
                 <button id="btn1" onclick="cameraAccess();">영상 촬영</button>
                 <button id="btn2" onclick="find_ingred();">분석 시작</button>
@@ -107,10 +131,15 @@
             location.href = "{% url 'mainpage:search' %}";
         }
 
-        /* 재료 분석 후 레시피 추천 */
+        /* 재료 분석 후 레시피 추천 */ //분석 시작 버튼 (이동)
         function find_ingred() {
             location.href = "{% url 'mainpage:ingredient_result' %}";
         }
+
+        //cameraAccess 카메라 접근 이벤트 
+
+
+
     </script>
     <script>
         $(document).ready(function() {
@@ -119,6 +148,10 @@
                 slideWidth: 500
             });
         });
+
+
+
+
     </script>
 
 </body>
