@@ -24,12 +24,39 @@ body {
     height:100%;
     overflow:hidden;
 }
-img {
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    width:100%;
-    height:100%;
+
+/* 로그인 로그아웃 아이콘 */
+
+.out {
+    position: relative;
+    top: 9px;
+    height: 32px;
+    width: 32px;
+
 }
+.logout_1 {
+    margin-bottom: 10px;
+    border:0;
+    outline:0;
+    background-color: #ffffff;
+}
+.in {
+    position: relative;
+    top: 9px;
+    height: 32px;
+    width: 32px;
+
+}
+.login_1 {
+    margin-bottom: 10px;
+    border:0;
+    outline:0;
+    background-color: #ffffff;
+}
+
+
+/* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+
 .recipe-title {
     font-size:30px;
     font-weight:bold;
@@ -57,6 +84,7 @@ img {
 a {
     text-decoration: none;
     color: black;
+    font-weight: bold;
 }
 
 *,
@@ -140,8 +168,16 @@ a {
     font-size:10px;
 }
 
-#searchfield {
-    height:19px;
+
+
+.search1{
+    width: 100%;
+    text-align: center;
+    border-radius: 10px;
+    outline: none;
+    font-weight: bold;
+    background-color: #ffffff;
+    font-size: 1.3rem;
 }
 
 .weather {
@@ -152,7 +188,24 @@ a {
 .icon {
     display: inline-block;
     vertical-align:middle;
+    font-size: 20px;
+    text-shadow: 1px 1px 3px #f9d78c;
 }
+
+/*날씨 */
+.wea {
+    position: relative; 
+    z-index: 5; 
+    left : 80px;
+    border-radius: 20px;
+    width: 150px;
+    background-color: rgba(255, 252, 236, 0.3);
+    
+}
+
+
+
+
 
 #container {
     margin: auto;
@@ -235,7 +288,7 @@ a {
     
     width: 50%;
     text-align: center;
-    margin-bottom: 20px;
+    margin: auto;
 }
 
 #ingredient_result {
@@ -244,8 +297,6 @@ a {
     background-color: red;
 }
 
-
-
 .ingred-f {
     position: relative; 
     top:42px;
@@ -253,6 +304,7 @@ a {
     border-radius: 20px;
     background-color: rgba(255, 252, 236, 0.3);
     border: solid #ffff 4px;
+    text-align: center;
 }
 
 /*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
@@ -263,9 +315,7 @@ a {
     height: 250px;
     width: 250px;
     position:relative;
-    left: 47px;
-    top:9px;
-
+    margin-top: 10px;
 }
 ul#ingredient_list li {
     padding: 5px 0px 5px 5px;
@@ -296,7 +346,7 @@ ul#ingredient_list li {
 .ingred-item {
     margin:5px;
     position:relative;
-    left:-42px;
+    left:-10px;
     display:flex;
     flex-wrap: nowrap;
     flex-direction: row;
@@ -305,9 +355,11 @@ ul#ingredient_list li {
     height: 3rem;
     z-index: 5; 
     border-radius: 20px;
-    width: 160px;
+    width: 200px;
     background-color: rgba(255, 252, 236, 0.3);
     border: solid #ffff 4px;
+    margin:auto;
+    min-width: 200px;
 }
 
 
@@ -392,8 +444,8 @@ ul.slider li {
 @media screen and (max-width: 850px) {
     .navbar {
         flex-direction: column;
-        align-items: flex-start;
         padding: 8px 24px;
+        outline:5px solid #F79604;
     }
     .navbar-expand-lg {
         flex-wrap: nowrap;
@@ -419,9 +471,12 @@ ul.slider li {
     .search {
         text-align: center;
     }
-    /* .my_info {
+    .my_info {
         text-align: center;
-    } */
+        font-size: 23px;
+        font-weight: bold;
+    }
+
     .weather {
         text-align: center;
         float:none;
@@ -466,8 +521,13 @@ ul.slider li {
 
     .main_common{
         display: inline;
+        
         /* width: 2rem;
         height: 2rem; */
+    }
+
+    .ingred-item {
+        width:50%;
     }
 }
 
@@ -816,3 +876,9 @@ button {
     width:300px;
     margin:auto;
 }
+
+
+
+
+
+

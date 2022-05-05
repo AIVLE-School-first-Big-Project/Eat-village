@@ -42,3 +42,7 @@ yolov5
 # db
 pymysql
 mysql
+
+# https
+django-sslserver
+django_extensions
