@@ -82,7 +82,7 @@
             {% endfor %}
         </div>
         <br>
-        {{board.detail}}
+        {{board.detail|linebreaks}}
     </div>
     <br><br><br>
     <hr>
@@ -105,7 +105,7 @@
             </div>
         </div>
         <div class="comment2">
-            {{comment.detail}}
+            {{comment.detail|linebreaks}}
         </div>
         <div class="comment3">
             {{comment.time|date:"Y-m-d H:i:s"}}
@@ -126,7 +126,7 @@
                 </div>
             </div>
             <div class="bcomment2">
-                <span>{{babycomment.detail}}</span>
+                <span>{{babycomment.detail|linebreaks}}</span>
             </div>
             <div class="bcomment3">
                 <span id>{{babycomment.time|date:"Y-m-d H:i:s"}}</span>
