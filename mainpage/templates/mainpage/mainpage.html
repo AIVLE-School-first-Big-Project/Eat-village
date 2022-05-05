@@ -80,10 +80,33 @@
                     나머진 내가 알아서 할게!
                 </h3>
             </div>
-            <div id="popup_layer" onClick="close()">
-                <div id="popup">
-                    {% comment %} <iframe src="http://127.0.0.1:8000/mainpage/video_feed" width=640 height=480> </iframe> {% endcomment %}
+            <div class="cam_area">
+                <iframe id="video" src="http://127.0.0.1:8000/mainpage/video_feed"> </iframe>
+                    {% comment %} <video src="http://127.0.0.1:8000/mainpage/video_feed" style="width:82%; height:480px"></video> {% endcomment %}
+
+                    {% comment %} 
+                        <video id="video" width="320" height="240" autoplay></video>
+                        <canvas id="canvas" width="960" height="720"></canvas>
+                        <button type="button" id="webcamBtn">캡쳐하기</button>
+                        <script>
+                        if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                            navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+                                var video = document.getElementById('video');
+                                video.srcObject = stream;
+                                video.play();
+                            });
+                        }
+
+                        var canvas = document.getElementById('canvas');
+                        var context = canvas.getContext('2d');
+                        var video = document.getElementById('video');
+                        document.getElementById("webcamBtn").addEventListener("click",function() {
+                            context.drawImage(video,0,0,960,720);
+                        });
+                        </script>
+                    {% endcomment %}
             </div> 
+
             <div id="button">
                 <button id="btn1" onclick="cameraAccess();">영상 촬영</button>
                 <button id="btn2" onclick="find_ingred();">분석 시작</button>

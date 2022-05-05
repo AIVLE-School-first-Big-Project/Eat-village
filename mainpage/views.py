@@ -7,7 +7,7 @@ import re
 from numpy import rec
 # Create your views here.
 # import recommend_ml as rc
-from recipe.models import *
+# from recipe.models import *
 from users.models import *
 from django.contrib.auth.decorators import login_required
 import json
@@ -21,12 +21,45 @@ user_ingre = []
 def main(request):      
     return render(request, 'mainpage/mainpage.html')
 
-def ingred_recomm(request):
-        
+def ingred_recomm(request): # 레시피를 추천해주는 코드
+    # local 추가한 데이터를 받아온다.
+    if request.method == 'GET': 
+        print("get")
+        storage = request.GET['storage'] 
+        data = { 'storage': storage } 
+        # return render(request, 'mainpage/recipe_recom.html', data)
+    elif request.method == 'POST': 
+        print("post")
+        storage = request.POST['storage'] 
+        data = { 'storage': storage }
+        # return render(request, 'mainpage/recipe_recom.html', data)
+    
+    print("abc")
+    # 세션의 유저 알러지 데이터를 가져온다. 
+    id = request.session['id']
+    user_get = User.objects.get(id=id)
+    
+    print(user_get.allergyinfo)
+    # detect한 식재료를 가져온다.
+    print(user_ingre)
+    
+    # mainpage.model의 recipe_data
+    re_data = recipe_data.objects.exclude(ingre='비빔면,김치,참기름')
+
+    
+    # 전처리 한다.
+    # detect : user_ingre , storge : 해야함 
+    # allergy : user_get.allergyinfo, db : recipe_data
+    
+    
+    # 1. list = detect 값 + 스토리지 값
+    # 2. list2 = 알러지 not in DB
+    # 3. view.py에서 recom_recipe = recommend(list,list2)
+     
+    return render(request, 'mainpage/recipe_recom.html', {'re_data' :re_data, 'data' : data})
     # recommend_data = recommend_ml.recommend_recipe(user_data,recipe_data)
     # return render(request, 'mainpage/recipe_recom.html', {'recommend' : recommend_data})
-    
-    return render(request, 'mainpage/recipe_recom.html')
+    # return render(request,'mainpage/ingredients_result.html',{'user_data' : user_data,'recommend' : recommend_data,})
 
 def recipe_search(request):
     return render(request, 'mainpage/recipe_search.html')
@@ -40,28 +73,15 @@ def ingred_result(request): # 여기가 추가 데이터 처리하는 페이지
     user_data.append('오이')
     user_data.append('양파')
     # re_data = recipe_data.objects.all()
-    recommend_data = recommend_ml.recommend_recipe(user_data,recipe_data)
+    # recommend_data = recommend_ml.recommend_recipe(user_data,recipe_data)
     
-    # return render(request,'mainpage/ingredients_result.html',{'user' : user_data, 'recommend' : recommend_data})
-    return render(request,'mainpage/ingredients_result.html',{'user_data' : user_data,'recommend' : recommend_data,})
+    return render(request,'mainpage/ingredients_result.html',{'user_data' : user_data})
+    # return render(request,'mainpage/ingredients_result.html',{'user_data' : user_data,'recommend' : recommend_data,})
     # return render(request, 'mainpage/ingredients_result.html')
 
 def ingred_change(request):
     return render(request, 'mainpage/ingredients_change.html')
-
-
-# def test(request):
-#     user_data = list(set(user_ingre))
-#     # 당근,사과,오이,양파
-#     user_data.append('당근')
-#     user_data.append('사과')
-#     user_data.append('오이')
-#     user_data.append('양파')
-#     re_data = recipe_data.objects.all()
-#     recommend_data = recommend_ml.recommend_recipe(user_data,recipe_data)
-    
-#     # return render(request,'recipe/test.html',{'data' : re_data, 'user' : user_data, 'recommend' : recommend_data})
-#     return render(request,'mainpage/ingred_result.html',{'data' : re_data, 'user' : user_data, 'recommend' : recommend_data, 'user_ingre' : user_ingre})     
+ 
 # ------------------------------------------------------------------------------
 from django.shortcuts import render
 from django.http import StreamingHttpResponse
