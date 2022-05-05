@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'communityboard',
     'users', # yeon
     'stream',
+    'sslserver',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [

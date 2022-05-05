@@ -1,4 +1,4 @@
-from django.http import StreamingHttpResponse
+from django.http import StreamingHttpResponse,JsonResponse
 from django.shortcuts import render
 import yolov5, torch
 from yolov5.utils.general import (check_img_size, non_max_suppression, scale_coords,
@@ -9,14 +9,17 @@ from deep_sort.utils.parser import get_config
 from deep_sort.deep_sort import DeepSort
 import cv2
 from PIL import Image as im
+
 # Create your views here.
 
 def index(request):
     return render(request, 'stream/index.html')
+
+
 print(torch.cuda.is_available())
 # load model
-#model = yolov5.load('yolov5s.pt')
-model = torch.hub.load('ultralytics/yolov5','yolov5s')
+model = yolov5.load('yolov5s.pt')
+# model = torch.hub.load('ultralytics/yolov5','yolov5s')
 device = select_device('') # gpu 0 only use cpu
 
 cfg = get_config()
@@ -30,10 +33,12 @@ deepsort = DeepSort('osnet_x0_25',
 names = model.module.names if hasattr(model, 'module') else model.names
 
 
+
 def stream():
     #cap = cv2.VideoCapture(0)
     #cap = cv2.imdecode()
-    cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+    cap = cv2.VideoCapture(0)
+    #cap = request.files['image']
 
     while True:
         ret, frame = cap.read()
