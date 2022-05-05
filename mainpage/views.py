@@ -197,13 +197,15 @@ def recipe_detail(request, recipe_id):
         print("북마크 상태 : ", uploaded)
         result = ""
         user = User.objects.get(id=id)
+        recipe = recipe_data.objects.get(recipe_id=recipe_id)
         # QQQQ : 데이터 생성하는 방법 찾기
         try:
             form = Userbookmarkrecipe.objects.get(recipeid=recipe_id)
         except:
             Userbookmarkrecipe.objects.create(
-                userid = id,
-                recipeid = recipe_id
+                userid = user,
+                recipeid = recipe,
+                is_active = 0,
             )
             bookmark = True
 
