@@ -100,7 +100,7 @@ def signup(request):
             mail_to = request.POST["email"]
             email = EmailMessage(mail_title, message, to=[mail_to])
             email.send()
-            return render(request,"mainpage/mainpage.html")
+            return render(request,"login.html")
         else:
             messages.warning(request, 'Password do not match.')
             return redirect("users:signup")
@@ -159,6 +159,8 @@ def login(request):
         return render(request, 'login.html')
 
 def logout(request):
-    if request.session.get('user'):
-        del(request.session['user'])
+    # if request.session.get('id'):
+    #     del(request.session['id'])
+    
+    request.session.flush()
     return redirect("users:login")

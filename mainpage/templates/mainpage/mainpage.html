@@ -151,7 +151,7 @@
         /* 위치기반 현재 날씨 정보 */
         $(document).ready(function() {
             var recipes = JSON.parse("{{recipes|escapejs}}");
-            var ul = document.getElementsByClassName('');
+            var ul = document.getElementsByClassName('slider');
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition((pos) => {
                     let lat = pos.coords.latitude;
