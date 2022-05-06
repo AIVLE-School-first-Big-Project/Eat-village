@@ -38,7 +38,6 @@
                 <a href="{% url 'mainpage:mainpage' %}#slideShow" class="weather">
                     <div class="temp"></div>
                     <div class="icon"></div>
-                </a>
                     <div class="my_info">
                         {% if user.is_authenticated %}
                             <div class="main_common">
@@ -147,7 +146,7 @@
     <script src="{% static 'main.js' %}"></script>
     <script>
    
-        /* 위치기반 현재 날씨 정보 */
+        /* 위치기반 현재 날씨 정보 
         $(document).ready(function() {
             var recipes = JSON.parse("{{recipes|escapejs}}");
             var ul = document.getElementsByClassName('slider');
