@@ -20,6 +20,7 @@
     </div>
     <div class="list">
         {% for item in recommend_data %}
+        <a href="{% url 'mainpage:recipe_detail' item.recipe_id %}">
         <div class ="card">
             <div class="image_div">
                 <img class= "image_card" src="{% get_static_prefix %}{{item.num}}.jpg" alt="" onclick="recipe_detail();">
@@ -30,6 +31,7 @@
             </div>
             <div class = "sblank"></div>
         </div>
+        </a>
         <div class="blank"></div>
         {% endfor %}
     </div>  
@@ -42,10 +44,6 @@
             var food_cate = document.getElementById('searchfield').value;
             if (food_cate.length == 0) { return false;}
             location.href = "{% url 'mainpage:search' %}";
-        }
-        /* 레시피 페이지 이동 */
-        function recipe_detail() {
-            location.href = "https://www.10000recipe.com/recipe/6939543";
         }
     </script>
 </body>
