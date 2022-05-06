@@ -36,7 +36,7 @@ def main(request):
     recipes = recipe_data.objects.all()
     recipe_list = []
     for recipe in recipes:
-        temp = {'name': recipe.title, 'category1': recipe.category_1, 'category2': recipe.category_2, 'num': recipe.num}
+        temp = {'name': recipe.title, 'category1': recipe.category_1, 'category2': recipe.category_2, 'num': recipe.num, 'recipe_id': recipe.recipe_id}
         recipe_list.append(temp)
     
     recipe_list_json = json.dumps(recipe_list)

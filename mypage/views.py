@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from users.models import *
+from mainpage.models import *
 from .forms import *
 from django.contrib.auth.decorators import login_required
 import json
@@ -120,4 +121,17 @@ def show_likeList(request):
         'mypage/like_page.html',
         context
     )
-    
+
+@login_required   
+def show_bookmark(request):
+    id = request.session['id']
+    mark = Userbookmarkrecipe.objects.filter(userid=id)
+    print(request.user.first_name)
+    context = {
+        "mark":mark,
+    }
+    return render(
+        request,
+        'mypage/bookmark.html',
+        context
+    )

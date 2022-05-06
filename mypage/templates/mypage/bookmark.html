@@ -9,7 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" 
         integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"/>
-        <link rel="stylesheet" type="text/css" href='{% static "write.css" %}'>
+        <link rel="stylesheet" type="text/css" href='{% static "write.css" %}?after'>
         <script src="https://code.jquery.com/jquery-latest.min.js"></script>       
         <title>EAT VILLAGE</title>
         <script>
@@ -35,13 +35,13 @@
     <body>  
         <a id="btn_back" href="{% url 'mypage:main' %}"><i class="fa fa-reply"></i>&nbsp; 돌아가기</a>
         <div class="grid">
-            {% for content in like %}
+            {% for content in mark %}
             <div class="grid__item">
-                <a class="card" href="/recipeboard/{{content.boardid.boardid}}">
-                    <img class="card__img" src="{{content.boardid.recipeboardimage_set.all.0.image}}" alt="이미지" id="{{forloop.counter0}}"
+                <a class="card" href="/mainpage/recipeDetail/{{content.recipeid.recipe_id}}">
+                    <img class="card__img" src="../../../static/{{content.recipeid.num}}.jpg" alt="이미지" id="{{content.recipeid.recipe_id}}"
                     onerror="this.src='https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=2250&amp;q=80'">
                     <div class="card__content">
-                        <h1 class="card__header">{{content.boardid.title}}</h1>
+                        <h1 class="card__header">{{content.recipeid.title}}</h1>
                         <!-- <p class="card__text">{{content.detail}}</p> -->
                         <!-- <button class="card__btn">Explore</button> -->
                     </div>
@@ -49,6 +49,22 @@
             </div>
             {% endfor %}
         </div>
+        <script>
+            // 레시피 사진 연결
+            const image = document.getElementsByClassName('card__img');
+            // const src = "../../static/" + "{{recipe.num}}" + ".jpg";
+            // console.log(src);
+            // 레시피 주소 연결
+            const link = document.getElementsByClassName("grid__item");
+            for (let i = 0; i < link.length; i++) {
+                var recipeID = link[i].id;
+                link[i].href = "/mainpage/recipeDetail/"+recipeID;
+
+                // var srcid = image[i].src;
+                // image[i].src = srcid + ".jpg";
+                // console.log(image[i].src);
+            }
+        </script>
     </body>
 
 </html>

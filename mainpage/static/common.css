@@ -127,14 +127,6 @@ img {
     z-index: 1030;
 }
 
-.fixed-top {
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    z-index: 1030;
-}
-
 
 .navbar {
     display:flex;
@@ -436,6 +428,7 @@ ul#ingredient_list li {
 
 .fridge-img {
     text-align: center;
+    margin-top: 10px;
 }
 .asdfg{
     width: 340px;
@@ -558,6 +551,11 @@ ul.slider li {
 
     .ingred-item {
         width:50%;
+    }
+
+    .wea {
+        left: 0px;
+        margin:auto;
     }
 }
 

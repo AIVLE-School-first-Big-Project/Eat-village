@@ -155,6 +155,10 @@ body {
     margin:1.5rem;
     padding: 0;
   }
+  #btn_back{
+    overflow:hidden;
+    width: 4rem;
+  }
   
 }
 .card__btn:hover, .card__btn:active {

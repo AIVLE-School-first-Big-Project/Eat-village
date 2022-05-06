@@ -255,7 +255,7 @@ input:focus {
 
 #add_feed {
     width:fit-content;
-    margin: 1rem 0 0.8rem 1rem;
+    margin: 0.5rem 0 0.8rem 1rem;
     border-radius: 5px;
     box-shadow: inset 5px 5px 10px var(--top-shadow),
                 inset -5px -5px 10px var(--bottom-shodow);
