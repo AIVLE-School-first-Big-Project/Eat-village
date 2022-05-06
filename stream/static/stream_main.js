@@ -21,6 +21,7 @@ recordButton.addEventListener('click', () => {
     downloadButton.disabled = false;
     codecPreferences.disabled = false;
   }
+  ///////여기서 form으로 동영상 보냄
   const formData = new FormData();
   const mimeType = codecPreferences.options[codecPreferences.selectedIndex].value.split(';', 1)[0];
   const myBlob = new Blob(recordedBlobs, {type : mimeType});
@@ -152,7 +153,7 @@ function startRecording() {
   };
   mediaRecorder.ondataavailable = handleDataAvailable;
   mediaRecorder.start();
-  console.log('MediaRecorder started', mediaRecorder0);
+  console.log('MediaRecorder started', mediaRecorder);
 
 }
 
