@@ -440,10 +440,13 @@ ul#ingredient_list li {
 
 .title {
     color: #F9FAFD !important;
+    text-shadow: 1px 1px 1px #000000;
 }
 
 .subtitle {
     color: #616161 !important;
+    font-weight: bold;
+    text-shadow: 3px 3px 5px #f0b66b;
 }
 
 ul#ingredient_list li {
