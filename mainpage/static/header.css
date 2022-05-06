@@ -60,6 +60,8 @@ a {
 }
 .navbar_logo img {
     display:block;
+    height: 57px;
+    width: 70px;
 }
 .navbar_menu {
     display: flex;
