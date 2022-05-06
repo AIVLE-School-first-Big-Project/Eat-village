@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href='{% static "common.css" %}'>
+    <link rel="stylesheet" type="text/css" href='{% static "common.css" %}?after'>
     <link rel="apple-touch-icon" href="/custom_icon.png"/>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,8 +21,8 @@
     <div class="list">
         {% for item in recommend_data %}
         <div class ="card">
-            <div class ="image">
-                <img src="{% get_static_prefix %}{{item.num}}.jpg" alt="" onclick="recipe_detail();">
+            <div class="image_div">
+                <img class= "image_card" src="{% get_static_prefix %}{{item.num}}.jpg" alt="" onclick="recipe_detail();">
             </div>
             <div class = "sblank"></div>
             <div class="recipe-title" onclick="recipe_detail();">

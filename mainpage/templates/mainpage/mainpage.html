@@ -38,7 +38,7 @@
                     <a href="{% url 'mainpage:mainpage' %}#slideShow" class="weather">
                         <div class="temp"></div>
                         <div class="icon"></div>
-                    </a>
+                    
                 </div>        
                 <div class="my_info">
                     {% if user.is_authenticated %}
@@ -51,7 +51,8 @@
                             <p> 로그인 해야 이용 가능합니다 </p>
                             <a href="{% url 'users:login' %}"><button class = login_1> <img class=in src="{% static 'login.png' %}"> </button> </a>
                         </div>
-                    {% endif %}   
+                    {% endif %}
+                    </a>
                 </div>
                 {% comment %} <div class="my_info">
                     {% if user.is_authenticated %}
