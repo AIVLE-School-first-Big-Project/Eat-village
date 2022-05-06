@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href='{% static "aa.css" %}? after'>
+    <link rel="stylesheet" type="text/css" href='{% static "aa.css" %}'>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="apple-touch-icon" href="/custom_icon.png"/>
@@ -61,11 +61,11 @@
         </div>
     <div class = 'recipe2-form'>
         <div class="area2">
-            <p><img class = ing src="{% static 'ing1.png' %}"> <br><br><br><br> {{ user_data }}</p>        
+            <p><img class = ing src="{% static 'u.png' %}"> <br><br><br><br> {{ user_data }}</p>        
         </div>
 
         <div class="area3" id='ingredient_result' >
-            <p> 사용자 추가 식재료 </p>
+            <p> <img class = add src="{% static 'ing1.png' %}"> </p>
             <ul id='ingredient_list'>
             </ul>
         </div>
@@ -75,6 +75,13 @@
             <button id="btn2"class="w-btn w-btn-indigo" onclick="send();">레시피 추천</button>
         </div>
 
+        {% comment %} <form id="contents" name="contents" method="get" action="{% url 'mainpage:ingredient_recom' %}">
+            {% csrf_token %}
+            view.py로 어떤 정보를 넘길지 (스토리지, 알러지 )
+            storage : <input name="storage" type="text">
+            data : <input id="data" value="list">
+            <button type="button" onclick="send();">전송</button>
+        </form>     {% endcomment %}
         <form id="contents" name="contents" method="get" action="{%url 'mainpage:ingredient_recom' %}">
             {% csrf_token %}
             <input id="storage" name="storage" value="" style="display:none;">
@@ -122,6 +129,7 @@
             const inp = document.getElementById('storage');
             inp.value = ingred_added;
             window.localStorage.clear();
+
         };
 
 
