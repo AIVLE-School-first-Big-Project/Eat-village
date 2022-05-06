@@ -85,23 +85,14 @@ body {
     margin-top: 20px;
 }
 
-.area3 p{
-    font-size: 22px; color: rgb(255, 255, 255); 
-    text-align: center;
-    margin-top: 18px;
-    font-weight : bold;
-    border-radius: 20px;
-    
-    background-color: #FFB30E;
-}
 
 /* 사람 아이콘 */
 .per{
     height: 32px;
     width: 32px;
     position: absolute;
-    left: 202px;
-    top:19px;
+    left: 228px;
+    top:17px;
 
 
 }
@@ -112,7 +103,7 @@ body {
     height: 44px;
     width: 44px;
     position: absolute;
-    left: 115px;
+    left: 145px;
     top:63px;
     
 
@@ -123,11 +114,22 @@ body {
     height: 44px;
     width: 44px;
     position: absolute;
-    left: 115px;
+    left: 145px;
     top:157px;
-
-
 }
+
+/*추가 아이콘 */
+.add{
+    filter:drop-shadow(5px 5px 5px #686867);
+    height: 44px;
+    width: 44px;
+    position: absolute;
+    left: 145px;
+    top:240px;
+}
+
+
+
 .int-area {
 
     position: relative;

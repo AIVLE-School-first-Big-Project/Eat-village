@@ -5,7 +5,7 @@
   <b>수도권 4반 2조(9조) : 우리는 모두 친9조</b>
  </p>
  <p align="center">
-  KT AIVLE-School-first-Big-Project : 2022-04-11 ~ 2022-05-12 </p><br><br>
+  KT AIVLE-School-first-Big-Project : 2022-04-11 ~ 2022-05-11 </p><br><br>
   
  <p align="center"> 
   모두의 레시피에서 크롤링한 데이터를 활용하여 yolov5에서 얻은 사용자들의 냉장고 속 재료를 추출하여 <br>

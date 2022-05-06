@@ -1,7 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
+
+
+
+
 body{
     display:flex;
+    font-family: 'Poor Story';
     flex-direction: column;
-    background-color: #F2D99E;
+    background-color: #FFB30F;
 }
 a {
     text-decoration: none;
@@ -16,15 +22,17 @@ a {
 }
 .container {
     width:100%;
-    margin:0 auto;
+    margin:-8px auto;
     height:auto;
 }
 
 select {
     border-radius: 5px;
-    height:35pt;
+    height:25pt;
     text-align: center;
     font-weight: bold;
+    position: relative;
+    top:1px;
 }  
 #selector {
     float:left;
@@ -60,10 +68,11 @@ select {
 
 div.c0 {
     border-radius:10px;
-    background-color: #F6D5BB;
+    background-color: #FFC851; /*#F6D5BB */
     border: 5px solid transparent;
-    box-shadow: 1px 1px 1px 1px gray;
+    box-shadow: 1px 1px 1px 3px  #ffdb8d;
     color:#4e5227;
+    border: 2px solid white;
 }
 div.c0-1 {
     width:95%;
@@ -89,6 +98,7 @@ div.c2-1 {
     float:left;
     font-size: 16px;
     text-align: center;
+    font-weight: bold;
 }
 div.c2-2 {
     margin-left: auto;
@@ -108,6 +118,7 @@ div.c3-1 {
 }
 div.c3-2 {
     margin-left:auto;
+    font-weight: bold;
 }
 
 
@@ -138,4 +149,106 @@ div.c3-2 {
     color:white;
     background-color: #F7713A;
     border:3px solid #F7713A;
+}
+
+
+.searchbox1{
+    font-size: 1em;
+    width: 150px;
+    height: 35px;
+    border-radius: 8px;
+    box-shadow: 1px 1px 2px #ffdb8d ;
+    position: relative;
+    top:-1px;
+    left: 0px;
+}
+
+/*검색버튼 */
+
+
+  
+.searchbox2 {
+    font-family: 'Poor Story', cursive;
+    display: inline-block;
+    font-size: 20px;
+    margin-top: -13px;
+    font-weight: bold;
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: #ffffff;
+    color: #F6AA66;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    top:-1px;
+    left: 1px;
+    height: 40px;
+    width: 50px;
+    transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
+    box-shadow: 0 2px 25px rgba(255, 168, 69, 0.5);
+}
+.searchbox2:focus {
+    outline: 0;
+}
+.searchbox2:before, .searchbox2:after {
+    position: absolute;
+    content: "";
+    display: block;
+    width: 140%;
+    height: 100%;
+    left: -20%;
+    z-index: -1000;
+    transition: all ease-in-out 0.5s;
+    background-repeat: no-repeat;
+}
+.searchbox2:before {
+    display: none;
+    top: -75%;
+    background-image: radial-gradient(circle, #ffd447 20%, transparent 20%), radial-gradient(circle, transparent 20%, #ff0081 20%, transparent 30%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, transparent 10%, #ff0081 15%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%);
+    background-size: 10% 10%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%, 15% 15%, 10% 10%, 18% 18%;
+}
+.searchbox2:after {
+    display: none;
+    bottom: -75%;
+    background-image: radial-gradient(circle, #ffd447 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, transparent 10%, #ff0081 15%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%);
+    background-size: 15% 15%, 20% 20%, 18% 18%, 20% 20%, 15% 15%, 10% 10%, 20% 20%;
+}
+.searchbox2:active {
+    transform: scale(0.9);
+    background-color: #fabb0d;
+    box-shadow: 0 2px 25px rgba(255, 0, 130, 0.2);
+}
+.searchbox2.animate:before {
+    display: block;
+    animation: topBubbles ease-in-out 0.75s forwards;
+}
+.searchbox2.animate:after {
+    display: block;
+    animation: bottomBubbles ease-in-out 0.75s forwards;
+}
+  
+@keyframes topBubbles {
+    0% {
+      background-position: 5% 90%, 10% 90%, 10% 90%, 15% 90%, 25% 90%, 25% 90%, 40% 90%, 55% 90%, 70% 90%;
+    }
+    50% {
+      background-position: 0% 80%, 0% 20%, 10% 40%, 20% 0%, 30% 30%, 22% 50%, 50% 50%, 65% 20%, 90% 30%;
+    }
+    100% {
+      background-position: 0% 70%, 0% 10%, 10% 30%, 20% -10%, 30% 20%, 22% 40%, 50% 40%, 65% 10%, 90% 20%;
+      background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+    }
+}
+@keyframes bottomBubbles {
+    0% {
+      background-position: 10% -10%, 30% 10%, 55% -10%, 70% -10%, 85% -10%, 70% -10%, 70% 0%;
+    }
+    50% {
+      background-position: 0% 80%, 20% 80%, 45% 60%, 60% 100%, 75% 70%, 95% 60%, 105% 0%;
+    }
+    100% {
+      background-position: 0% 90%, 20% 90%, 45% 70%, 60% 110%, 75% 80%, 95% 70%, 110% 10%;
+      background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+    }
 }

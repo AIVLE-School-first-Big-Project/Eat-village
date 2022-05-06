@@ -45,7 +45,7 @@ body::before{
 }
 .int-area:first-child {margin-top: 0;}
 .int-area input {
-    width: 100%;
+    width: 87%;
     padding:20px 10px 10px;
     background-color: transparent;
     border: none;
