@@ -72,6 +72,7 @@ div.c0 {
     border: 5px solid transparent;
     box-shadow: 1px 1px 1px 3px  #ffdb8d;
     color:#4e5227;
+    border: 2px solid white;
 }
 div.c0-1 {
     width:95%;
