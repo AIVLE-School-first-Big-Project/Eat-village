@@ -35,11 +35,10 @@
                     {% comment %} <input id='searchfield' type='text' max_length=255 autocomplete='off'>
                     <button class='searchbtn' onclick="search_recipe(); return false;">검색</button> {% endcomment %}
                 </div>
-            <div class = "wea">    
                 <a href="{% url 'mainpage:mainpage' %}#slideShow" class="weather">
                     <div class="temp"></div>
                     <div class="icon"></div>
-            </div>        
+                </a>
                     <div class="my_info">
                         {% if user.is_authenticated %}
                             <div class="main_common">
@@ -252,7 +251,7 @@
                 captions: true,
                 slideWidth: 500
             });
-        });
+        }); 
 
         /* 레시피 검색 
         function search_recipe() {
