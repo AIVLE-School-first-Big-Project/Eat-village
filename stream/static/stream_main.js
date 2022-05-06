@@ -16,12 +16,13 @@ recordButton.addEventListener('click', () => {
     startRecording();
   } else {
     stopRecording();
+
     ///////여기서 form으로 동영상 보냄
-    const formData = new FormData();
-    const mimeType = codecPreferences.options[codecPreferences.selectedIndex].value.split(';', 1)[0];
-    const myBlob = new Blob(recordedBlobs, {type : mimeType});
-    formData.append('video', myBlob);
-    request.send(formData);
+    // const formData = new FormData();
+    // const mimeType = codecPreferences.options[codecPreferences.selectedIndex].value.split(';', 1)[0];
+    // const myBlob = new Blob(recordedBlobs, {type : mimeType});
+    // formData.append('video', myBlob);
+    // request.send(formData);
 
     recordButton.textContent = 'Start Recording';
     playButton.disabled = false;
@@ -43,57 +44,6 @@ playButton.addEventListener('click', () => {
 
 
 });
-
-// function getCookie(name) {
-//   var cookieValue = null;
-//   if (document.cookie && document.cookie !== '') {
-//       var cookies = document.cookie.split(';');
-//       for (var i = 0; i < cookies.length; i++) {
-//           var cookie = cookies[i].trim();
-//           // Does this cookie string begin with the name we want?
-//           if (cookie.substring(0, name.length + 1) === (name + '=')) {
-//               cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-//               break;
-//           }
-//       }
-//   }
-//   return cookieValue;
-// }
-
-// var csrftoken = getCookie('csrftoken');
-
-// function csrfSafeMethod(method) {
-//   // these HTTP methods do not require CSRF protection
-//   return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-// }
-// $.ajaxSetup({
-//   beforeSend: function(xhr, settings) {
-//       if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-//           xhr.setRequestHeader("X-CSRFToken", csrftoken);
-//       }
-//   }
-// });
-// function ajax_request() {
-//   console.log(recordedVideo.src)
-//   // var form = new FormData(recordedVideo.src);
-//   $.ajax({
-//     url: '/stream/',
-//     type: "POST",
-//     dataType: 'JSON',
-//     data: {
-//       "file":recordedVideo.src,
-//     },
-//     contentType: false,
-//     headers: { "X-CSRFToken": csrftoken },
-//     success : function (data) {
-//       console.log("전송 성공");
-//       console.log(data);
-//     },
-//     // error: function (xhr, textStatus, thrownError) {
-//     //   alert("Could not send URL to Django. Error: " + xhr.status + ": " + xhr.responseText);
-//     // }
-//   });
-// }
 
 const downloadButton = document.querySelector('button#download');
 downloadButton.addEventListener('click', () => {
@@ -155,8 +105,10 @@ function startRecording() {
 
     var fd = new FormData();
     const blob = new Blob(recordedBlobs, {type: 'video/webm'});
-    fd.append('fname', 'test.wepm');
-    fd.append('data', blob);
+    const file = new File([blob], "JH_Test.webm");
+
+    // fd.append('fname', 'test.wepm');
+    fd.append('data', file);
     $.ajax({
       url: '/stream/',
       type: "POST",
