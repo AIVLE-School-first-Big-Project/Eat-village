@@ -8,7 +8,7 @@ body {
     justify-content: center;
     align-items: center;
     /*background-color: #F9E1A3;*/ /*bbbbdd */
-    background: url("bgg.jpg") no-repeat center;
+    background: url("bg11.png") no-repeat center; 
     background-size: cover;
 }
 
@@ -45,7 +45,7 @@ body::before{
 }
 .int-area:first-child {margin-top: 0;}
 .int-area input {
-    width: 100%;
+    width: 87%;
     padding:20px 10px 10px;
     background-color: transparent;
     border: none;
