@@ -80,7 +80,7 @@
         <div id="container">
             <div class="fridge-img">
                 <a>
-                    <img class="asdfg" src="{% static 'asdfg.png' %}">
+                    <img src="{% static 'fridge.png' %}">
                 </a>
             </div>
             <div class="to-do-text">
@@ -148,11 +148,10 @@
     </section>
     <script src="{% static 'main.js' %}"></script>
     <script>
-   
         /* 위치기반 현재 날씨 정보 */
         $(document).ready(function() {
             var recipes = JSON.parse("{{recipes|escapejs}}");
-            var ul = document.getElementsByClassName('slider');
+            var ul = document.getElementsByClassName('');
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition((pos) => {
                     let lat = pos.coords.latitude;
