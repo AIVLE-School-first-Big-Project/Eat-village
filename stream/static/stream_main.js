@@ -6,10 +6,11 @@ let mediaRecorder;
 let recordedBlobs;
 
 const codecPreferences = document.querySelector('#codecPreferences');
-
 const errorMsgElement = document.querySelector('span#errorMsg');
 const recordedVideo = document.querySelector('video#recorded');
 const recordButton = document.querySelector('button#record');
+
+
 recordButton.addEventListener('click', () => {
   if (recordButton.textContent === 'Start Recording') {
     startRecording();
@@ -20,6 +21,11 @@ recordButton.addEventListener('click', () => {
     downloadButton.disabled = false;
     codecPreferences.disabled = false;
   }
+  const formData = new FormData();
+  const mimeType = codecPreferences.options[codecPreferences.selectedIndex].value.split(';', 1)[0];
+  const myBlob = new Blob(recordedBlobs, {type : mimeType});
+  formData.append('video', myBlob);
+  request.send(formData);
 });
 
 const playButton = document.querySelector('button#play');
@@ -31,7 +37,8 @@ playButton.addEventListener('click', () => {
   recordedVideo.srcObject = null;
   recordedVideo.src = window.URL.createObjectURL(superBuffer);
   recordedVideo.controls = true;
-  recordedVideo.play();
+
+
 });
 
 function getCookie(name) {
@@ -50,40 +57,40 @@ function getCookie(name) {
   return cookieValue;
 }
 
-var csrftoken = getCookie('csrftoken');
+// var csrftoken = getCookie('csrftoken');
 
-function csrfSafeMethod(method) {
-  // these HTTP methods do not require CSRF protection
-  return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-}
-$.ajaxSetup({
-  beforeSend: function(xhr, settings) {
-      if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-          xhr.setRequestHeader("X-CSRFToken", csrftoken);
-      }
-  }
-});
-function ajax_request() {
-  console.log(recordedVideo.src)
-  // var form = new FormData(recordedVideo.src);
-  $.ajax({
-    url: '/stream/',
-    type: "POST",
-    dataType: 'JSON',
-    data: {
-      "file":recordedVideo.src,
-    },
-    contentType: false,
-    headers: { "X-CSRFToken": csrftoken },
-    success : function (data) {
-      console.log("전송 성공");
-      console.log(data);
-    },
-    // error: function (xhr, textStatus, thrownError) {
-    //   alert("Could not send URL to Django. Error: " + xhr.status + ": " + xhr.responseText);
-    // }
-  });
-}
+// function csrfSafeMethod(method) {
+//   // these HTTP methods do not require CSRF protection
+//   return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+// }
+// $.ajaxSetup({
+//   beforeSend: function(xhr, settings) {
+//       if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+//           xhr.setRequestHeader("X-CSRFToken", csrftoken);
+//       }
+//   }
+// });
+// function ajax_request() {
+//   console.log(recordedVideo.src)
+//   // var form = new FormData(recordedVideo.src);
+//   $.ajax({
+//     url: '/stream/',
+//     type: "POST",
+//     dataType: 'JSON',
+//     data: {
+//       "file":recordedVideo.src,
+//     },
+//     contentType: false,
+//     headers: { "X-CSRFToken": csrftoken },
+//     success : function (data) {
+//       console.log("전송 성공");
+//       console.log(data);
+//     },
+//     // error: function (xhr, textStatus, thrownError) {
+//     //   alert("Could not send URL to Django. Error: " + xhr.status + ": " + xhr.responseText);
+//     // }
+//   });
+// }
 
 const downloadButton = document.querySelector('button#download');
 downloadButton.addEventListener('click', () => {
@@ -99,7 +106,6 @@ downloadButton.addEventListener('click', () => {
     document.body.removeChild(a);
     window.URL.revokeObjectURL(url);
   }, 100);
-
 
 });
 
@@ -146,7 +152,8 @@ function startRecording() {
   };
   mediaRecorder.ondataavailable = handleDataAvailable;
   mediaRecorder.start();
-  console.log('MediaRecorder started', mediaRecorder);
+  console.log('MediaRecorder started', mediaRecorder0);
+
 }
 
 function stopRecording() {
