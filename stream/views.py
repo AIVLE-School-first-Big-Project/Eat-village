@@ -11,12 +11,27 @@ import cv2
 from PIL import Image as im
 from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
+from django.core.files.storage import FileSystemStorage
 
 def index(request):
     print(request)
     if request.method == 'POST':
         print("ajax 전송 확인")
         print(request.POST)
+        print(request.FILES["data"].size)
+        file = request.FILES["data"]
+        fs = FileSystemStorage()
+        filename = fs.save("test.webm", file)
+        print("저장 확인: ", filename)
+        # video_stream = request.FILES["data"]
+        
+        # with open('file.webm', 'wb') as f_vid:
+        #     f_vid.write(base64.b64encode(video_stream))
+
+        # with open('file.webm', 'rb') as f_vid:
+        #     video_stream = base64.b64decode(f_vid.read())
+
+        # print(video_stream)
     return render(request, 'stream/index.html')
 
 
