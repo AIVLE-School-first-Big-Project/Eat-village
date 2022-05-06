@@ -1,0 +1,63 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href='{% static "bookmark_update.css"%}'>
+<div id="model_add_feed" class="modal_overlay">
+    <div class="modal_window">
+        <div id="back_btn" class="card-header">
+            <i class="fa-solid fa-arrow-left-long"></i>
+        </div>
+        <div class="card-wrap">
+            <div class="card-body">
+                {% for content in update %}
+                <a class="content-wrap" href="{% url 'communityboard:communityboard_create' %}" id={{content.recipeid.recipe_id}} onclick="checking_recipe(this.id)">
+                    <div class="content-title">{{content.recipeid.title}}</div>
+                    <div class="content-ingre">{{content.recipeid.ingre}}</div>
+                    <div class="content-tag">{{content.recipeid.tag}}</div>
+                </a>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+    // 모달 조절
+    const scroll_block = document.getElementsByTagName('body');
+    const btn = document.getElementsByClassName("add_feed");
+    const addModal = document.getElementById("model_add_feed");
+    btn[0].addEventListener("click", e => {
+        addModal.style.display = 'flex';
+    });
+
+    const closeBtn = document.getElementById("back_btn");
+    closeBtn.addEventListener("click", e => {
+        addModal.style.display = "none";
+    });
+    // 레시피 주소 연결
+    // const link = document.getElementsByClassName("content-wrap");
+    // for (let i = 0; i < link.length; i++) {
+    //     var recipeID = link[i].id;
+    //     link[i].href = "/mainpage/recipeDetail/"+recipeID;
+    // }
+    
+    // is_active 변경
+    function checking_recipe(recipe) {
+        $.ajax({
+            url: "",
+            type: "POST",
+            dataType: "JSON",
+            data : {
+                "update_recipeActive":recipe,
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            headers: { "X-CSRFToken": "{{ csrf_token }}" },
+            // success : function (data) {
+            //     console.log(data);
+
+            // },
+            error: function (xhr, textStatus, thrownError) {
+                alert("Could not send URL to Django. Error: " + xhr.status + ": " + xhr.responseText);
+            }
+        });
+    }
+    
+</script>

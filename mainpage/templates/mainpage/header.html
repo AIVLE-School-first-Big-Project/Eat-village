@@ -1,5 +1,5 @@
 {% load static %}
-<link rel="stylesheet" type="text/css" href='{% static "header.css" %}'>
+<link rel="stylesheet" type="text/css" href='{% static "header.css" %}? after'>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 {% comment %} <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css"> {% endcomment %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -16,31 +16,30 @@
     }
 </script>
 
-<body>
-    <div style="height: 6.25em; background-color: #FFB10E;">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-            <div class="navbar_logo">
-                <a href="{% url 'mainpage:mainpage' %}">
-                    <img src="{% static 'logo.png' %}">
-                </a>
-            </div>
-            <ul class="navbar_menu">
-                <li><a href="{% url 'mypage:main' %}">마이페이지</a></li>
-                {% comment %} <li><a href=''>나눔 게시판</a></li> {% endcomment %}
-                <li><a href="{% url 'recipeboard:recipeboard_index' %}">레시피 게시판</a></li>
-                <li><a href="{% url 'communityboard:communityboard_index' %}">커뮤니티 게시판</a></li>
-            </ul>
-            {% comment %} <div class="navbar_right">
-                <div class="search">
-                    <input id='searchfield' type='text' max_length=255 autocomplete='off'>
-                    <button class='searchbtn' onclick="search_recipe(); return false;">검색</button>
-                </div>
-            </div> {% endcomment %}
-            <a href='#' class="navbar_togglebtn">
-                <i class="fas fa-bars"></i>
+<div id="header-wrap" style="height: 6.25em;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="navbar_logo">
+            <a href="{% url 'mainpage:mainpage' %}">
+                <img src="{% static 'logo.png' %}">
             </a>
-        </nav>
-    </div>
+        </div>
+        <ul class="navbar_menu">
+            <li><a href="{% url 'mypage:main' %}">마이페이지</a></li>
+            {% comment %} <li><a href=''>나눔 게시판</a></li> {% endcomment %}
+            <li><a href="{% url 'recipeboard:recipeboard_index' %}">레시피 게시판</a></li>
+            <li><a href="{% url 'communityboard:communityboard_index' %}">커뮤니티 게시판</a></li>
+        </ul>
+        {% comment %} <div class="navbar_right">
+            <div class="search">
+                <input id='searchfield' type='text' max_length=255 autocomplete='off'>
+                <button class='searchbtn' onclick="search_recipe(); return false;">검색</button>
+            </div>
+        </div> {% endcomment %}
+        <a href='#' class="navbar_togglebtn">
+            <i class="fas fa-bars"></i>
+        </a>
+    </nav>
+</div>
 
 
 

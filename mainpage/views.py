@@ -16,10 +16,23 @@ from django.contrib import messages
 from django.db.models import Q
 import random
 
-user_ingre = []
+user_ingre = ['짜왕','버섯','양파','스팸','옥수수']
 # Create your views here.
 
 def main(request):
+    # 북마크 알림 - 지희
+    id = request.session['id']
+    if request.method == "POST":
+        form = Userbookmarkrecipe.objects.get(
+            userid=id, 
+            recipeid=request.POST.get("update_recipeActive", None)
+        )
+        form.is_active = 1
+        form.save()
+
+    bookmark = Userbookmarkrecipe.objects.filter(userid=id, is_active=0)
+
+    # 찬호
     recipes = recipe_data.objects.all()
     recipe_list = []
     for recipe in recipes:
@@ -28,7 +41,12 @@ def main(request):
     
     recipe_list_json = json.dumps(recipe_list)
 
-    return render(request, 'mainpage/mainpage.html', {'recipes': recipe_list_json})
+    context = {
+        "update":bookmark,
+        'recipes': recipe_list_json
+    }
+    return render(request, 'mainpage/mainpage.html', context)
+    
 
 def ingred_recomm(request): # 레시피를 추천해주는 코드
     # local 추가한 데이터를 받아온다.
@@ -42,20 +60,70 @@ def ingred_recomm(request): # 레시피를 추천해주는 코드
         storage = request.POST['storage'] 
         data = { 'storage': storage }
         # return render(request, 'mainpage/recipe_recom.html', data)
-    
+        
     print("abc")
+    
     # 세션의 유저 알러지 데이터를 가져온다. 
     id = request.session['id']
     user_get = User.objects.get(id=id)
     
-    print(user_get.allergyinfo)
-    # detect한 식재료를 가져온다.
-    print(user_ingre)
+    # print(user_get.allergyinfo)
     
-    # mainpage.model의 recipe_data
-    re_data = recipe_data.objects.exclude(ingre='비빔면,김치,참기름')
+    
+    
+    # detect한 식재료를 가져온다.    
+    tmp = json.loads(user_get.allergyinfo)
 
+    # form_allergy = []
+    # for i in tmp:
+    #     allergy_list.append(i)
+    #     print(i)
+    # print(allergy_list)
     
+    
+    
+    # mainpage.model의 recipe_data에서 알러지 처리해주고 그 쿼리셋의 인덱스를 받는다
+    
+    
+    # 알러지 데이터를 받아서 DB에서 제외시킨다.
+    allergy_recipe_idx = [] # 
+    
+    
+    # a_list = [list for list in recipe_data.object.all()[:10] for t in tmp if t in list.ingre]
+    # print(a_list)   
+    
+    # ---------------------------------------------------------------
+    re_data_list = recipe_data.objects.all()
+    # global user_ingre
+    for a in re_data_list:
+        for t in tmp:
+            if t in a.ingre: 
+                # print(a.ingre)
+                allergy_recipe_idx.append(a)
+
+                # print(a.title)
+    
+    # re_data10 = list(re_data10)
+    re_data_list = list(re_data_list)
+    
+    allergy_recipe_idx = list(set(allergy_recipe_idx))
+    # print(allergy_recipe_idx)
+    a_sub_b = [x for x in re_data_list if x not in allergy_recipe_idx]
+    # print(a_sub_b)
+    # print(len(re_data_list))
+    # print(len(allergy_recipe_idx))
+    # print(len(a_sub_b))
+    
+    recommend_data = recommend_ml.recommend_recipe(user_ingre,re_data_list)
+    
+    # ---------------------------------------------------------------
+        #   {% for item in re_data %}
+        # <h3>{{ item.title }} / {{ item.ingre }} </h3>
+        # --------------------------------------------------------------------------------------------------
+        # {% endfor %}  
+    
+    # re_data = recipe_data.objects.exclude(ingre='방울토마토')
+
     # 전처리 한다.
     # detect : user_ingre , storge : 해야함 
     # allergy : user_get.allergyinfo, db : recipe_data
@@ -65,9 +133,8 @@ def ingred_recomm(request): # 레시피를 추천해주는 코드
     # 2. list2 = 알러지 not in DB
     # 3. view.py에서 recom_recipe = recommend(list,list2)
      
-    return render(request, 'mainpage/recipe_recom.html', {'re_data' :re_data, 'data' : data})
-    # recommend_data = recommend_ml.recommend_recipe(user_data,recipe_data)
-    # return render(request, 'mainpage/recipe_recom.html', {'recommend' : recommend_data})
+    return render(request, 'mainpage/recipe_recom.html', {'recommend_data' :recommend_data})
+    # return render(request, 'mainpage/recipe_recom.html', {'data' : user_ingre})
     # return render(request,'mainpage/ingredients_result.html',{'user_data' : user_data,'recommend' : recommend_data,})
 
 def recipe_search(request):
@@ -95,17 +162,15 @@ def recipe_search(request):
     return render(request, 'mainpage/recipe_search.html', context)
 
 def ingred_result(request): # 여기가 추가 데이터 처리하는 페이지
-
-    user_data = list(set(user_ingre))
+    global user_ingre
     # 당근,사과,오이,양파
-    user_data.append('당근')
-    user_data.append('사과')
-    user_data.append('오이')
-    user_data.append('양파')
+
+    
+    user_ingre = list(set(user_ingre))
     # re_data = recipe_data.objects.all()
     # recommend_data = recommend_ml.recommend_recipe(user_data,recipe_data)
     
-    return render(request,'mainpage/ingredients_result.html',{'user_data' : user_data})
+    return render(request,'mainpage/ingredients_result.html',{'user_data' : user_ingre})
     # return render(request,'mainpage/ingredients_result.html',{'user_data' : user_data,'recommend' : recommend_data,})
     # return render(request, 'mainpage/ingredients_result.html')
 
@@ -186,9 +251,7 @@ def stream():
                     # print(label[1])
                     user_ingre.append(label[1]) # user_ingre 데이터에 인식된 값을 추가한다. 이걸로 추천시스템 구현
                     
-                    # user_ingre_set = list(set(user_ingre))
                     user_ingre = list(set(user_ingre))
-                    print(user_ingre)
         else:
             deepsort.increment_ages()
 
@@ -221,19 +284,24 @@ def recipe_detail(request, recipe_id):
         bookmark = False
     # 북마크 기능
     # 0 : 알림 확인 안함 , 1 : 알림 확인
+    
+
     if request.method == "POST":
         uploaded = request.POST.get('bookmark_status', None)
         print("데이터 확인", request.POST)
         print("북마크 상태 : ", uploaded)
         result = ""
         user = User.objects.get(id=id)
+        recipe_detail = recipe_data.objects.get(recipe_id=recipe_id)
+        
         # QQQQ : 데이터 생성하는 방법 찾기
         try:
             form = Userbookmarkrecipe.objects.get(recipeid=recipe_id)
         except:
             Userbookmarkrecipe.objects.create(
-                userid = id,
-                recipeid = recipe_id
+                userid = user,
+                recipeid = recipe_detail,
+                is_active = 0,
             )
             bookmark = True
 

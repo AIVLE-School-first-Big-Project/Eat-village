@@ -3,63 +3,71 @@ from numpy import rec
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer
 # from recipe.models import user_ingre
-from users.models import *
 # import recipe.models as models
 # from .models import recipe_data, user_ingre
 
 def recommend_recipe(user_model, recipe_model):
     # 매개변수를 통한 데이터 모델.
     # user_data = user_model.objects.all()
-    re_data = recipe_model.objects.all()
+    # re_data = recipe_model.objects.all()
+    re_data = recipe_model
     
-    # 당근,사과,오이,양파
     # 1. 유저 id와 재료를 받는다.
     # user_ids = list(user.id for user in user_data)
     # user_ingres = list(user.ingre for user in user_data)
-    
+     
     user_ingres = user_model
+    user_ingres = ','.join(user_ingres)
+     
+    user_list = []
+    user_list.append(user_ingres)
     
-    # 2. 레시피 id 값과 재료를 받는다.
-    recipe_ids = list(recipe.recipe_id - 1 for recipe in re_data) # id -1 이 index
-    recipe_names = list(recipe.title for recipe in re_data)
-    recipe_igds = list(recipe.ingre for recipe in re_data)
     
+    # 2. 레시피 id 값과 재료를 받는다. 레시피 데이터 인덱스 처리를 해야한다. 제외되었기 때문에.
+    recipe_ids = list((recipe.recipe_id-1) for recipe in re_data)  # recipe_ids : 레시피_id
+    recipe_names = list(recipe.title for recipe in re_data) # recipe_names : 레시피 제목
+    recipe_igds = list(recipe.ingre for recipe in re_data) # recipe_igds : 레시피 재료
+    
+    recipe_igds = recipe_igds + user_list
     # 3. 유저 재료와 레시피 재료를 코사인 유사도 검사 후 정렬 테이블 생성
     # 유저의 재료 데이터를 레시피 리스트 마지막에 추가
-    result = ','.join(s for s in user_ingres)
-    
-    recipe_igds.insert(len(recipe_igds),result)
+    # result = ','.join(s for s in user_ingres)
     
     tfidf_vect_simple = TfidfVectorizer()
     feature_vect_simple = tfidf_vect_simple.fit_transform(recipe_igds)
     
-    similarity_simple_pair = cosine_similarity(feature_vect_simple[len(recipe_igds)-1] , feature_vect_simple)
+    # similarity_simple_pair = cosine_similarity(feature_vect_simple[len(recipe_igds)-1] , feature_vect_simple)
     # 딕셔너리로 만들어서 관리 / 매트릭스 만들어서 유사도 비교
-    title_to_index = dict(zip(recipe_ids,recipe_names))
+    title_to_index = dict(zip(recipe_ids,recipe_names)) # 레시피_id / 레시피 제목
     
     
-    idx = len(recipe_igds)-1# 유저의 재료를 가리키는 인덱스 
+    length = len(recipe_igds)
+    idx = len(recipe_igds)-1 # 유저의 재료를 가리키는 인덱스
+    hi = recipe_igds[idx]
+    
     cosine_sim = cosine_similarity(feature_vect_simple, feature_vect_simple)
     # 유저 재료와 모든 레시피의 재료와의 유사도를 가져온다.
     sim_scores = list(enumerate(cosine_sim[idx]))
     # 유사도에 따라 레시피들을 정렬한다.
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
     # 가장 유사한 4개의 영화를 받아온다.
-    sim_scores = sim_scores[1:5]
+    sim_scores = sim_scores[0:5]
+    
     
     # 가장 유사한 4개의 레시피의 인덱스를 얻는다.
     recipe_idx = [idx[0] for idx in sim_scores]
     # 가장 유사한 10개의 영화의 제목을 리턴한다.
-    # title_to_index[recipe_idx]
-    recommend_recipe_name = []
+    # print(len)
     
-    for i in recipe_idx: # [1,0,2]
-        recommend_recipe_name.append(title_to_index[i])
+    # title_to_index[recipe_idx]
+    recommend_recipe = []
+    for i in recipe_idx[1:]: # [1,0,2]
+        recommend_recipe.append(recipe_model[i])
 
     # recommend_recipe_name.append(title_to_index[1])
     # return(feature_vect_simple.shape,similarity_simple_pair) : 코사인유사도 매트릭스 shape와 각 매트릭스 별 유사도
 
-    return (recommend_recipe_name)
+    return (recommend_recipe)
     
     
     
