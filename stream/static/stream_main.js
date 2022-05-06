@@ -16,17 +16,19 @@ recordButton.addEventListener('click', () => {
     startRecording();
   } else {
     stopRecording();
+    ///////여기서 form으로 동영상 보냄
+    const formData = new FormData();
+    const mimeType = codecPreferences.options[codecPreferences.selectedIndex].value.split(';', 1)[0];
+    const myBlob = new Blob(recordedBlobs, {type : mimeType});
+    formData.append('video', myBlob);
+    request.send(formData);
+
     recordButton.textContent = 'Start Recording';
     playButton.disabled = false;
     downloadButton.disabled = false;
     codecPreferences.disabled = false;
   }
-  ///////여기서 form으로 동영상 보냄
-  const formData = new FormData();
-  const mimeType = codecPreferences.options[codecPreferences.selectedIndex].value.split(';', 1)[0];
-  const myBlob = new Blob(recordedBlobs, {type : mimeType});
-  formData.append('video', myBlob);
-  request.send(formData);
+  
 });
 
 const playButton = document.querySelector('button#play');
@@ -42,21 +44,21 @@ playButton.addEventListener('click', () => {
 
 });
 
-function getCookie(name) {
-  var cookieValue = null;
-  if (document.cookie && document.cookie !== '') {
-      var cookies = document.cookie.split(';');
-      for (var i = 0; i < cookies.length; i++) {
-          var cookie = cookies[i].trim();
-          // Does this cookie string begin with the name we want?
-          if (cookie.substring(0, name.length + 1) === (name + '=')) {
-              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-              break;
-          }
-      }
-  }
-  return cookieValue;
-}
+// function getCookie(name) {
+//   var cookieValue = null;
+//   if (document.cookie && document.cookie !== '') {
+//       var cookies = document.cookie.split(';');
+//       for (var i = 0; i < cookies.length; i++) {
+//           var cookie = cookies[i].trim();
+//           // Does this cookie string begin with the name we want?
+//           if (cookie.substring(0, name.length + 1) === (name + '=')) {
+//               cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+//               break;
+//           }
+//       }
+//   }
+//   return cookieValue;
+// }
 
 // var csrftoken = getCookie('csrftoken');
 
@@ -159,6 +161,12 @@ function startRecording() {
 
 function stopRecording() {
   mediaRecorder.stop();
+  // ///////여기서 form으로 동영상 보냄
+  // const formData = new FormData();
+  // const mimeType = codecPreferences.options[codecPreferences.selectedIndex].value.split(';', 1)[0];
+  // const myBlob = new Blob(recordedBlobs, {type : mimeType});
+  // formData.append('video', myBlob);
+  // request.send(formData);
 }
 
 function handleSuccess(stream) {
