@@ -7,7 +7,7 @@ body{
     display:flex;
     font-family: 'Poor Story';
     flex-direction: column;
-    background-color: #FFB30F;
+    background-color: #FBECAD;
 }
 a {
     text-decoration: none;
@@ -134,6 +134,7 @@ div.c3-2 {
     border-radius:10px;
     background-color: #F7713A;
     border:3px solid #F7713A;
+    font-weight: bold;
 }
 #num {
     width:40px;
@@ -144,6 +145,8 @@ div.c3-2 {
     border-radius:10px;
     background-color: none;
     border:3px solid #4e5227;
+    background-color: #fbdcac;
+    font-weight:bold ;
 }
 #num:hover {
     color:white;

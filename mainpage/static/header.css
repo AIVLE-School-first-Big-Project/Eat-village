@@ -248,7 +248,7 @@ a {
 }
 
 .bg-primary {
-    background-color: #FFB30E !important;
+    background-color: #fce484 !important;
 }
 
 .py-5 {
@@ -286,7 +286,7 @@ ul#ingredient_list li {
         flex-direction: column;
         align-items: flex-start;
         padding: 8px 24px;
-        outline: 5px solid #F79604;
+        outline: 5px solid #FFC851;
     }
     .navbar-expand-lg {
         flex-wrap: nowrap;
