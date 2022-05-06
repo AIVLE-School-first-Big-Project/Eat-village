@@ -437,7 +437,10 @@ ul#ingredient_list li {
 .fridge-img {
     text-align: center;
 }
-
+.asdfg{
+    width: 340px;
+    height: 300px;
+}
 .to-do-text {
     text-align: center;
 }
