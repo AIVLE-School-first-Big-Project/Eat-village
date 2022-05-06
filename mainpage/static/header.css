@@ -343,8 +343,9 @@ ul#ingredient_list li {
         align-self: center;
         text-align: center;
         margin: auto;
+        width: 342px;
         position: relative;
-        top:141px;
+        top:149px;
         
     }
     #ingredient_result {
