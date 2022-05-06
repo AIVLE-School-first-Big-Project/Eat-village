@@ -67,7 +67,7 @@
             <div id="whole">
                 <div class="contents">          
                         {% csrf_token %}
-                        <div id="none_edit" class="info">{{form.first_name.value}}</div>
+                        <div id="none_edit" class="info">{{form.username.value}}</div>
                         <div id="none_edit" class="info">{{form.email.value}}</div>
                         <!-- 비밀번호 -->
                         <div id="edit" class="info">
@@ -92,7 +92,7 @@
                         <a href="{% url 'mypage:show_bookmark' %}" class="list-icon">
                             <i class="bi bi-bookmark-check-fill"></i>
                         </a>
-                        <a href="{% url 'mypage:write' %}" class="list-icon">
+                        <a href="{% url 'mypage:write_list' %}" class="list-icon">
                             <i class="bi bi-pencil-fill"></i>
                         </a>
                     </div>

@@ -6,7 +6,7 @@
 body {
     font-family: 'Poor Story', cursive;
     display: flex;
-    background-color: #FFB30E;
+    background-color: #FBECAD;
     /* background: url("bgg.jpg") no-repeat center; */
     background-size: cover;
 
@@ -29,7 +29,7 @@ body {
     font-weight : bold;
     border-radius: 20px;
     text-shadow: 3px 2px #ce8c12;
-    background-color: #FFB30E;
+    background-color: #fdc242;
 }
 
 .area p{
@@ -61,7 +61,7 @@ body {
     z-index: 5; 
     border-radius: 20px;
     width: 400px;
-    background-color: rgba(255, 252, 236, 0.3);
+    background-color: #fce484;
     border: solid #ffff 4px;
 }
 

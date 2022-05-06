@@ -6,7 +6,7 @@ body {
     font-family: 'Poor Story', cursive;
     display:flex;
     flex-direction: column;
-    background-color: #FFB30E;
+    background-color: #FBECAD;
     background-size: cover;
 }
 .list {
@@ -17,7 +17,7 @@ body {
     width: 80%;
     height: 20%;
     margin:0 auto;
-    background-color: #EEB541;
+    background-color: #FBECAD;
 }
 
 .image_div {
@@ -319,7 +319,7 @@ img {
     top:42px;
     z-index: 5; 
     border-radius: 20px;
-    background-color: rgba(255, 252, 236, 0.3);
+    background-color:#fce484  ;
     border: solid #ffff 4px;
     text-align: center;
 }
@@ -418,7 +418,7 @@ ul#ingredient_list li {
 }
 
 .bg-primary {
-    background-color: #FFB30E !important;
+    background-color: #fce484 !important;
 }
 
 .py-5 {
@@ -465,7 +465,7 @@ ul.slider li {
     .navbar {
         flex-direction: column;
         padding: 8px 24px;
-        outline:5px solid #F79604;
+        outline:5px solid #FFC851;
     }
     .navbar-expand-lg {
         flex-wrap: nowrap;

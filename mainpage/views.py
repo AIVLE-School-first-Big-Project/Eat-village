@@ -19,9 +19,12 @@ import random
 user_ingre = ['짜왕','버섯','양파','스팸','옥수수']
 # Create your views here.
 
+@login_required
 def main(request):
     # 북마크 알림 - 지희
+
     id = request.session['id']
+    
     if request.method == "POST":
         form = Userbookmarkrecipe.objects.get(
             userid=id, 
@@ -46,8 +49,8 @@ def main(request):
         'recipes': recipe_list_json
     }
     return render(request, 'mainpage/mainpage.html', context)
-    
 
+@login_required    
 def ingred_recomm(request): # 레시피를 추천해주는 코드
     # local 추가한 데이터를 받아온다.
     if request.method == 'GET': 
@@ -136,7 +139,7 @@ def ingred_recomm(request): # 레시피를 추천해주는 코드
     return render(request, 'mainpage/recipe_recom.html', {'recommend_data' :recommend_data})
     # return render(request, 'mainpage/recipe_recom.html', {'data' : user_ingre})
     # return render(request,'mainpage/ingredients_result.html',{'user_data' : user_data,'recommend' : recommend_data,})
-
+@login_required
 def recipe_search(request):
 
     kw = request.GET.get('kw')
@@ -161,6 +164,7 @@ def recipe_search(request):
 
     return render(request, 'mainpage/recipe_search.html', context)
 
+@login_required
 def ingred_result(request): # 여기가 추가 데이터 처리하는 페이지
     global user_ingre
     # 당근,사과,오이,양파
@@ -174,6 +178,7 @@ def ingred_result(request): # 여기가 추가 데이터 처리하는 페이지
     # return render(request,'mainpage/ingredients_result.html',{'user_data' : user_data,'recommend' : recommend_data,})
     # return render(request, 'mainpage/ingredients_result.html')
 
+@login_required
 def ingred_change(request):
     return render(request, 'mainpage/ingredients_change.html')
  
@@ -209,7 +214,7 @@ deepsort = DeepSort('osnet_x0_25',
                     )
 # Get names and colors
 names = model.module.names if hasattr(model, 'module') else model.names
-
+@login_required
 def stream():
     global user_ingre
     
@@ -260,10 +265,10 @@ def stream():
         image_bytes = cv2.imencode('.jpg', im0)[1].tobytes()
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + image_bytes + b'\r\n')
-    
+@login_required    
 def video_feed(request):
     return StreamingHttpResponse(stream(), content_type='multipart/x-mixed-replace; boundary=frame')
-
+@login_required
 # 레시피 상세페이지
 def recipe_detail(request, recipe_id):
     # 조리 시간 전처리
