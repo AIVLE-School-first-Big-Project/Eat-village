@@ -34,6 +34,29 @@ def index(request):
         # print(video_stream)
     return render(request, 'stream/index.html')
 
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
+from .forms import UploadFileForm
+from django.views.decorators.csrf import csrf_exempt, csrf_protect
+
+# Imaginary function to handle an uploaded file.
+#from somewhere import handle_uploaded_file
+
+@csrf_exempt
+def upload_file(request):
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            handle_uploaded_file(request.FILES['file'])
+            #return HttpResponseRedirect('/success/url/')
+    else:
+        form = UploadFileForm()
+    #return render(request, 'upload.html', {'form': form})
+
+def handle_uploaded_file(f):
+    with open('stream/media/ReceivedVideo.webm', 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
 
 print(torch.cuda.is_available())
 # load model
@@ -50,7 +73,6 @@ deepsort = DeepSort('osnet_x0_25',
                     max_age=cfg.DEEPSORT.MAX_AGE, n_init=cfg.DEEPSORT.N_INIT, nn_budget=cfg.DEEPSORT.NN_BUDGET,
                     )
 names = model.module.names if hasattr(model, 'module') else model.names
-
 
 
 def stream():
