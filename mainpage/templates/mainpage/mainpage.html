@@ -2,7 +2,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href='{% static "common.css" %}? after'>
+    <link rel="stylesheet" type="text/css" href='{% static "common.css" %}'>
+    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -90,6 +91,7 @@
                     나머진 내가 알아서 할게!
                 </h3>
             </div>
+
             <div class="cam_area">
                 <!-- <iframe id="video" src="http://127.0.0.1:8000/mainpage/video_feed"> </iframe> -->
                 <!-- <iframe id="video" src=""> </iframe> -->
@@ -117,11 +119,11 @@
                         </script>
                     {% endcomment %}
             </div> 
-
             <div id="button">
                 <button id="btn1" onclick="cameraAccess();">카메라 켜기/끄기</button>
                 <button id="btn2" onclick="find_ingred();">분석 시작</button>
             </div>
+
         </div>
     </section>
 
