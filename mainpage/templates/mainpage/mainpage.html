@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href='{% static "common.css" %}'>
+    <link rel="stylesheet" type="text/css" href='{% static "common.css" %}? after'>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -17,14 +17,13 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
             <div class="navbar_logo">
                 <a href="{% url 'mainpage:mainpage' %}">
-                    <img src="{% static 'logo.png' %}">
+                    <img src="{% static 'lglg.png' %}">
                 </a>
             </div>
             <ul class="navbar_menu">
-                <li><a href="{% url 'mypage:main' %}">마이페이지</a></li>
-                {% comment %} <li><a href=''>나눔 게시판</a></li> {% endcomment %}
-                <li><a href="{% url 'recipeboard:recipeboard_index' %}">레시피 게시판</a></li>
-                <li><a href="{% url 'communityboard:communityboard_index' %}">커뮤니티 게시판</a></li>
+                <li><a href="{% url 'mypage:main' %}"><img class ="my" src="{% static 'mypa.png' %}"></a></li>
+                <li><a href="{% url 'recipeboard:recipeboard_index' %}"><img class ="reci"src="{% static 'reci.png' %}"></a></li>
+                <li><a href="{% url 'communityboard:communityboard_index' %}"><img class ="commu" src="{% static 'commu.png' %}"></a></li>
             </ul>
             <div class="navbar_right">
                 <div class="search">
@@ -262,7 +261,7 @@
                 captions: true,
                 slideWidth: 500
             });
-        });
+        }); 
 
         /* 레시피 검색 
         function search_recipe() {

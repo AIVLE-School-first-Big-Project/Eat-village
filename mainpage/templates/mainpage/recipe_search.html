@@ -25,8 +25,12 @@
             </ul>
             <div class="navbar_right">
                 <div class="search">
-                    <input id='searchfield' type='text' max_length=255 autocomplete='off'>
-                    <button class='searchbtn' onclick="search_recipe(); return false;"">검색</button>
+                    <form action="{% url 'mainpage:search' %}" method="get">
+                        <input class="searchbox1" type="text" name="kw">
+                        <input class="searchbox2" type="submit" value="검색">
+                    </form>
+                    {% comment %} <input id='searchfield' type='text' max_length=255 autocomplete='off'>
+                    <button class='searchbtn' onclick="search_recipe(); return false;"">검색</button> {% endcomment %}
                 </div>
                 <a href="{% url 'mainpage:mainpage' %}#slideShow" class="weather">
                     <div class="temp"></div>
