@@ -17,6 +17,7 @@
     <meta itemprop="image" content="../../../images/webrtc-icon-192x192.png">
     <meta itemprop="name" content="WebRTC code samples">
     <meta name="mobile-web-app-capable" content="yes">
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 
     <base target="_blank">
 </head>
@@ -33,7 +34,7 @@
     <div>
         <button id="start">Start camera</button>
         <button id="record" disabled>Start Recording</button>
-        <button id="play" disabled>Play</button>
+        <button id="play" onclick="ajax_request()" disabled>Play</button>
         <button id="download" disabled>Download</button>
     </div>
 
@@ -44,7 +45,7 @@
     <div>
         <span id="errorMsg"></span>
     </div>
-
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
 
 <script src="{% static 'stream_main.js' %}"></script>

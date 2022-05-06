@@ -28,8 +28,12 @@
             </ul>
             <div class="navbar_right">
                 <div class="search">
-                    <input class='search1' id='searchfield' type='text' max_length=255 autocomplete='off' required/>
-                    <button class='searchbtn' onclick="search_recipe(); return false;">검색</button>
+                    <form action="{% url 'mainpage:search' %}" method="get">
+                        <input class="searchbox1" type="text" name="kw">
+                        <input class="searchbox2" type="submit" value="검색">
+                    </form>
+                    {% comment %} <input id='searchfield' type='text' max_length=255 autocomplete='off'>
+                    <button class='searchbtn' onclick="search_recipe(); return false;">검색</button> {% endcomment %}
                 </div>
             <div class = "wea">    
                 <a href="{% url 'mainpage:mainpage' %}#slideShow" class="weather">
@@ -58,10 +62,17 @@
                     {% endif %}
                 </div> {% endcomment %}
             </div>
+            <!-- 북마크 알림 -->
+            {% if update|length == 0 %}
+            <div id="navbar-update" class="add_feed"><i class="fa-solid fa-bell"></i></div>
+            {% else %}
+            <div id="navbar-update" class="add_feed"><i class="fa-solid fa-bell" style="padding: 2px; border: 2px solid red; border-radius: 50%;"></i></div>
+            {% endif %}
             <a href='#' class="navbar_togglebtn">
                 <i class="fas fa-bars"></i>
             </a>
         </nav>
+        {% include "mainpage/bookmark_update.html" %}
     </div>
 
     {% comment %} {% include "mainpage/header.html" %} {% endcomment %}
@@ -83,7 +94,8 @@
                 </h3>
             </div>
             <div class="cam_area">
-                <iframe id="video" src=""> </iframe>
+                <!-- <iframe id="video" src="http://127.0.0.1:8000/mainpage/video_feed"> </iframe> -->
+                <!-- <iframe id="video" src=""> </iframe> -->
                     {% comment %} <video src="http://127.0.0.1:8000/mainpage/video_feed" style="width:82%; height:480px"></video> {% endcomment %}
 
                     {% comment %} 
@@ -250,17 +262,29 @@
             });
         });
 
-        /* 레시피 검색 */
+        /* 레시피 검색 
         function search_recipe() {
-            var food_cate = document.getElementById('searchfield').value;
-            if (food_cate.length == 0) { return false;}
-            location.href = "{% url 'mainpage:search' %}";
-        }
+            var kw = document.getElementById('searchfield').value;
+            if (kw.length == 0) { return false;}
+            location.href = "{% url 'mainpage:search' %}?kw={{kw|urlencode}}";
+        } */
 
         /* 재료 분석 후 레시피 추천 */ //분석 시작 버튼 (이동)
         function find_ingred() {
             location.href = "{% url 'mainpage:ingredient_result' %}";
         }
+
+        //cameraAccess 카메라 접근 이벤트
+
+        
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('.slider').bxSlider({
+                captions: true,
+                slideWidth: 500
+            });
+        });
 
         /* 카메라 On & Off*/
         function cameraAccess() {
