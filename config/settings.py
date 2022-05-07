@@ -28,7 +28,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-
+FILE_UPLOAD_HANDLERS = [
+    "django.core.files.uploadhandler.MemoryFileUploadHandler",
+    "django.core.files.uploadhandler.TemporaryFileUploadHandler",
+    ]
 # Application definition
 
 INSTALLED_APPS = [
