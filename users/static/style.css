@@ -1,5 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
+/* 로그인 */
 
+@import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
 
 * {margin: 0; padding:0; box-sizing: border-box;}
 body {
@@ -9,7 +10,7 @@ body {
     align-items: center;
     /*background-color: #F9E1A3;*/ /*bbbbdd */
     background: url("bg11.png") no-repeat center; 
-    background-size: cover;
+    background-size: 1360px;
 }
 
 body::before{
@@ -29,6 +30,7 @@ body::before{
 .login-form {
     position: relative; z-index: 2; 
     border-radius: 20px;
+    left: 20px;
     width: 350px;
     background-color: rgba(0, 0, 0, 0.3);
 }
