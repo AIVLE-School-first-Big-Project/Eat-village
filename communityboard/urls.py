@@ -6,6 +6,7 @@ urlpatterns = [
     path('', communityboard_index, name='communityboard_index'),
     path('<int:boardid>', communityboard_detail, name='communityboard_detail'),
     path('create', communityboard_create, name='communityboard_create'),
+    path('createreview', communityboard_create_review, name='communityboard_create_review'),
     path('update/<int:boardid>', communityboard_update, name='communityboard_update'),
     path('delete/<int:boardid>', communityboard_delete, name='communityboard_delete'),
     path('<int:boardid>/<int:commentid>', communityboard_comment, name='communityboard_comment'),

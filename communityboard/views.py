@@ -201,13 +201,48 @@ def communityboard_create(request): #게시물생성
         else:
             messages.warning(request, '필수 항목을 모두 작성해주세요!')
     else:
-        form = Communityboardform()
+        form = Communityboardform
         formset = Imageformset(queryset=Communityboardimage.objects.none())
     
     context = {'form': form,
                'formset': formset}
 
     return render(request, 'communityboard/communityboard_create.html', context)
+
+
+@login_required
+def communityboard_create_review(request):
+    Imageformset = modelformset_factory(Communityboardimage, form=Communityboardimageform, extra=1)
+
+    if request.method == "POST":
+        form = Communityboardform(request.POST)
+        formset = Imageformset(request.POST, request.FILES)
+        if form.is_valid() and formset.is_valid():
+            board = Communityboard(**form.cleaned_data)
+            if request.user.is_authenticated:
+                board.userid = request.user
+            board.recommended = 0
+            board.view = 0
+            board.time = timezone.now()
+            board.save()
+            for form in formset:
+                image = Communityboardimage(**form.cleaned_data)
+                image.boardid = board
+                image.time = timezone.now()
+                image.save()
+                # messages.success(request, "작성완료!")            
+            return redirect('communityboard:communityboard_index')
+        else:
+            messages.warning(request, '필수 항목을 모두 작성해주세요!')
+    else:
+        form = Communityboardform(initial={'header':'리뷰게시판'})
+        formset = Imageformset(queryset=Communityboardimage.objects.none())
+    
+    context = {'form': form,
+               'formset': formset}
+
+    return render(request, 'communityboard/communityboard_create.html', context)
+
 
 @login_required
 def communityboard_update(request, boardid): #게시물수정

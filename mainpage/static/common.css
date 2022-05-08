@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
 
+.aclasstitle {
+    text-decoration: none;
+    color:black;
+}
 
 body {
     position: relative;
@@ -13,6 +17,8 @@ body {
     margin:0 auto;
 }
 .card {
+    border: 3px solid white;
+    box-shadow: 1px 1px 1px 1px gray;
     border-radius: 20px;
     width: 80%;
     height: 20%;
@@ -48,6 +54,7 @@ body {
     border:0;
     outline:0;
     background-color: #ffffff;
+    cursor: pointer;
 }
 .in {
     position: relative;
@@ -181,8 +188,6 @@ img {
     font-size: 24px;
     color: black;
 }
-
-
 
 
 .search1{
@@ -492,17 +497,17 @@ ul.slider li {
         justify-content: center;
         width: 100%;
     }
-    .search {
+    /* .search {
         text-align: center;
-    }
+    } */
     .my_info {
         text-align: center;
         font-size: 23px;
         font-weight: bold;
     }
-    .add_feed {
+    /* .add_feed {
         display:none;
-    }
+    } */
 
     .weather {
         text-align: center;
@@ -523,10 +528,10 @@ ul.slider li {
     .navbar_right.active {
         display: block;
     }
-    .add_feed.active {
+    /* .add_feed.active {
         display:block;
         margin: auto;
-    }
+    } */
     #container {
         width: 100%;
     }
