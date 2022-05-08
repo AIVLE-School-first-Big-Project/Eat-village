@@ -9,7 +9,7 @@
     display: none;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
+    /* justify-content: space-evenly; */
     background: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(1.5px);
     -webkit-backdrop-filter: blur(1.5px);
@@ -17,6 +17,7 @@
 }
 
 .modal_window {
+    margin-top: 7rem;
     background: white;
     backdrop-filter: blur(13.5px);
     -webkit-backdrop-filter: blur(13.5px);
