@@ -70,21 +70,9 @@ def ingred_recomm(request): # 레시피를 추천해주는 코드
     id = request.session['id']
     user_get = User.objects.get(id=id)
     
-    # print(user_get.allergyinfo)
-    
-    
-    
     # detect한 식재료를 가져온다.    
     tmp = json.loads(user_get.allergyinfo)
-
-    # form_allergy = []
-    # for i in tmp:
-    #     allergy_list.append(i)
-    #     print(i)
-    # print(allergy_list)
-    
-    
-    
+ 
     # mainpage.model의 recipe_data에서 알러지 처리해주고 그 쿼리셋의 인덱스를 받는다
     
     
@@ -110,14 +98,11 @@ def ingred_recomm(request): # 레시피를 추천해주는 코드
     re_data_list = list(re_data_list)
     
     allergy_recipe_idx = list(set(allergy_recipe_idx))
-    # print(allergy_recipe_idx)
+
     a_sub_b = [x for x in re_data_list if x not in allergy_recipe_idx]
-    # print(a_sub_b)
-    # print(len(re_data_list))
-    # print(len(allergy_recipe_idx))
-    # print(len(a_sub_b))
+
     
-    recommend_data = recommend_ml.recommend_recipe(user_ingre,re_data_list)
+    recommend_data = recommend_ml.recommend_recipe(user_ingre,a_sub_b)
     
     # ---------------------------------------------------------------
         #   {% for item in re_data %}
@@ -170,11 +155,22 @@ def ingred_result(request): # 여기가 추가 데이터 처리하는 페이지
     # 당근,사과,오이,양파
 
     
+    # 유저 알러지 정보
+    id = request.session['id']
+    user_get = User.objects.get(id=id)
+    tmp = json.loads(user_get.allergyinfo)
+    
+    tmp = ', '.join(tmp)
+    
+    user_ingre_str =""
     user_ingre = list(set(user_ingre))
+    
+    user_ingre_str = ', '.join(user_ingre)
+        
     # re_data = recipe_data.objects.all()
     # recommend_data = recommend_ml.recommend_recipe(user_data,recipe_data)
     
-    return render(request,'mainpage/ingredients_result.html',{'user_data' : user_ingre})
+    return render(request,'mainpage/ingredients_result.html',{'user_data' : user_ingre_str, 'test' : tmp})
     # return render(request,'mainpage/ingredients_result.html',{'user_data' : user_data,'recommend' : recommend_data,})
     # return render(request, 'mainpage/ingredients_result.html')
 
@@ -218,7 +214,7 @@ names = model.module.names if hasattr(model, 'module') else model.names
 def stream():
     global user_ingre
     
-    cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+    cap = cv2.VideoCapture('C:/django/Eat-village/media/test.webm')
     # cap = cv2.VideoCapture(1)
     # model.conf = 0.65
     # model.iou = 0.5
@@ -257,6 +253,8 @@ def stream():
                     user_ingre.append(label[1]) # user_ingre 데이터에 인식된 값을 추가한다. 이걸로 추천시스템 구현
                     
                     user_ingre = list(set(user_ingre))
+                    print(user_ingre)
+
         else:
             deepsort.increment_ages()
 

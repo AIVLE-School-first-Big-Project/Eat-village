@@ -17,6 +17,8 @@ body {
     margin:0 auto;
 }
 .card {
+    border: 3px solid white;
+    box-shadow: 1px 1px 1px 1px gray;
     border-radius: 20px;
     width: 80%;
     height: 20%;
@@ -187,8 +189,6 @@ img {
 }
 
 
-
-
 .search1{
     width: 40%;
     text-align: center;
@@ -234,7 +234,7 @@ img {
     height: auto;
     margin-bottom: 20px;
 }
-#videoElement {
+#gum {
     width: 100%;
     height: auto;
     background-color: #666;
