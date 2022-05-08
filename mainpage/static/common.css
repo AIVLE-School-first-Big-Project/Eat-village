@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
 
+.aclasstitle {
+    text-decoration: none;
+    color:black;
+}
 
 body {
     position: relative;
@@ -230,7 +234,7 @@ img {
     height: auto;
     margin-bottom: 20px;
 }
-#videoElement {
+#gum {
     width: 100%;
     height: auto;
     background-color: #666;
@@ -253,7 +257,7 @@ img {
     margin-top: 20px;
     text-align: center;
 }
-#btn1 {
+#record {
     display: inline-block;
 }
 #btn2 {
