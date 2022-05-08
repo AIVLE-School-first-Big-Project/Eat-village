@@ -24,6 +24,11 @@
 </div>
 
 <!-- partial -->
-  
+<script>
+  function next() {
+    location.href = '{% url "mainpage:ingredient_result" %}';
+  }
+  setTimeout(next, 5000);
+</script>
 </body>
 </html>

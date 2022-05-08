@@ -279,7 +279,8 @@
 
         /* 재료 분석 후 레시피 추천 */ //분석 시작 버튼 (이동)
         function find_ingred() {
-            location.href = "{% url 'mainpage:ingredient_result' %}";
+            // location.href = "{% url 'mainpage:ingredient_result' %}";
+            location.href = "{% url 'mainpage:loading' %}";
         }
 
         //cameraAccess 카메라 접근 이벤트
