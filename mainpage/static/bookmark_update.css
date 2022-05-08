@@ -25,10 +25,10 @@
     position: absolute;
 }
 
-.add_feed {
+/* .add_feed {
     margin-right: 5rem; 
     cursor: pointer;
-}
+} */
 
 .card-wrap {
     display: flex;
