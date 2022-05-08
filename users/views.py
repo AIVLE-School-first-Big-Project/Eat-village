@@ -36,35 +36,10 @@ def back(request):
 
 from django.views.generic import View
 
-# 회원가입 약관동의
 
-# class AgreementView(View):
-#     def get(self, request, *args, **kwargs):
-#         request.session['agreement'] = False
-#         return render(request, 'users/agreement.html')
 
-#     def post(self, request, *args, **kwarg):
-#         if request.POST.get('agreement1', False) and request.POST.get('agreement2', False):
-#             request.session['agreement'] = True
-#             if request.POST.get('register') == 'register':       
-#                 return redirect("users:signup")
-#         else:
-#             messages.info(request, "약관에 모두 동의해주세요.")
-#             return render(request, 'users/agreement.html')   
 
-class AgreementView(View):
-    def get(self, request, *args, **kwargs):
-        request.POST['agreement'] = False
-        return render(request, 'users/agreement.html')
    
-    # def post(self, request, *args, **kwarg):
-    #     if request.POST['agreement1'] ==request.POST['agreement2']:   
-    #         request.POST['agreement'] = True
-    #         if request.POST.get('register') == 'register':       
-    #             return redirect("users:signup")
-    #     else:
-    #         messages.info(request, "약관에 모두 동의해주세요.")
-    #         return render(request, 'users/agreement.html')   
 
 
 #회원가입#
