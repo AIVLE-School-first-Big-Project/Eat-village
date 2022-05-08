@@ -56,12 +56,14 @@ def signup(request):
             email=request.POST["email"] #이메일
             allergyinfo=request.POST.getlist("test_list","allergy") #알레르기 test_list
             address = request.POST["address"] # 주소
+            first_name = request.POST.getlist("agree")
 
             users_user=User.objects.create_user(username,email,password) 
             users_user.allergyinfo = json.dumps(allergyinfo, ensure_ascii = False)
             users_user.address = address
             users_user.is_active = False
             users_user.nickname = username
+            users_user.first_name = first_name
             users_user.save()
 
             current_site = get_current_site(request) 
