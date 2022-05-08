@@ -1,5 +1,5 @@
 {% load static %}
-<link rel="stylesheet" type="text/css" href='{% static "header.css" %}'>
+<link rel="stylesheet" type="text/css" href='{% static "header.css" %}? after'>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 {% comment %} <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css"> {% endcomment %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -24,9 +24,9 @@
             </a>
         </div>
         <ul class="navbar_menu">
-            <li><a href="{% url 'mypage:main' %}"><img class ="my" src="{% static 'mypa.png' %}"></a></li>
-            <li><a href="{% url 'recipeboard:recipeboard_index' %}"><img class ="reci"src="{% static 'reci.png' %}"></a></li>
-            <li><a href="{% url 'communityboard:communityboard_index' %}"><img class ="commu" src="{% static 'commu.png' %}"></a></li>
+            <li><a href="{% url 'mypage:main' %}">MYPAGE</a></li>
+            <li><a href="{% url 'recipeboard:recipeboard_index' %}">LECIPE</a></li>
+            <li><a href="{% url 'communityboard:communityboard_index' %}">COMMUNITY</a></li>
         </ul>
         {% comment %} <div class="navbar_right">
             <div class="search">

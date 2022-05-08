@@ -102,23 +102,22 @@ img {
 
 .my {
     filter:drop-shadow(5px 5px 5px #ffdb9d);
-    height: 44px;
-    width: 44px;
+    color: #000000;
+    
 }
 .reci {
     filter:drop-shadow(5px 5px 5px #ffdb9d);
-    height: 44px;
-    width: 44px;
+    color: #000000;
 }
 .commu {
     filter:drop-shadow(5px 5px 5px #ffdb9d);
-    height: 44px;
-    width: 44px;
+    color: #000000;
 }
 *,
 *::before,
 *::after {
     box-sizing: border-box;
+    text-decoration-line : none;
     
 }
 
@@ -191,13 +190,15 @@ img {
 
 
 .search1{
-    width: 40%;
+    width: 38%;
     text-align: center;
+    position: relative;
+    left: 55px;
     border-radius: 10px;
     outline: none;
     font-weight: bold;
     background-color: #ffffff;
-    font-size: 1.3rem;
+    font-size: 20px;
 }
 
 .weather {
@@ -488,6 +489,8 @@ ul.slider li {
         width: 100%;
     }
     .navbar_menu li {
+        font-size: 25px ;
+        font-weight: bold;
         width: 100%;
         text-align: center;
     }
@@ -932,11 +935,12 @@ button {
 
   font-family: 'Poor Story', cursive;
   display: inline-block;
-  width: 20%;
+  width: 18%;
   font-size: 1em;
   position: relative;
   top: -2px;
-  padding: 7.2px;
+  left:55px;
+  padding: 5.2px;
   -webkit-appearance: none;
   appearance: none;
   background-color: #f79604;

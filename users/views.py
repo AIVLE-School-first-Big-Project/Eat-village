@@ -36,35 +36,10 @@ def back(request):
 
 from django.views.generic import View
 
-# 회원가입 약관동의
 
-# class AgreementView(View):
-#     def get(self, request, *args, **kwargs):
-#         request.session['agreement'] = False
-#         return render(request, 'users/agreement.html')
 
-#     def post(self, request, *args, **kwarg):
-#         if request.POST.get('agreement1', False) and request.POST.get('agreement2', False):
-#             request.session['agreement'] = True
-#             if request.POST.get('register') == 'register':       
-#                 return redirect("users:signup")
-#         else:
-#             messages.info(request, "약관에 모두 동의해주세요.")
-#             return render(request, 'users/agreement.html')   
 
-class AgreementView(View):
-    def get(self, request, *args, **kwargs):
-        request.POST['agreement'] = False
-        return render(request, 'users/agreement.html')
    
-    # def post(self, request, *args, **kwarg):
-    #     if request.POST['agreement1'] ==request.POST['agreement2']:   
-    #         request.POST['agreement'] = True
-    #         if request.POST.get('register') == 'register':       
-    #             return redirect("users:signup")
-    #     else:
-    #         messages.info(request, "약관에 모두 동의해주세요.")
-    #         return render(request, 'users/agreement.html')   
 
 
 #회원가입#
@@ -81,12 +56,14 @@ def signup(request):
             email=request.POST["email"] #이메일
             allergyinfo=request.POST.getlist("test_list","allergy") #알레르기 test_list
             address = request.POST["address"] # 주소
+            first_name = request.POST.getlist("agree")
 
             users_user=User.objects.create_user(username,email,password) 
             users_user.allergyinfo = json.dumps(allergyinfo, ensure_ascii = False)
             users_user.address = address
             users_user.is_active = False
             users_user.nickname = username
+            users_user.first_name = first_name
             users_user.save()
 
             current_site = get_current_site(request) 
