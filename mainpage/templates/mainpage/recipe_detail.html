@@ -74,13 +74,13 @@
                         console.log(data);
                         const bookmark_status = data.bookmark;
                         if (bookmark_status){
-                            $("#bookmark_status").remove;
+                            $("#bookmark_add").empty();
                             $("#bookmark_add").prepend('<span class="material-symbols-outlined" id="bookmark_status" onclick="ajax_bookmark()">bookmark_remove</span>');
                             
                             // .prepend('<i class="fa-regular fa-bookmark" id="bookmark_status" onclick="ajax_bookmark()"></i>')
                         }
                         else {
-                            $("#bookmark_status").remove;
+                            $("#bookmark_add").empty();
                             $("#bookmark_add").prepend('<i class="fa-regular fa-bookmark" id="bookmark_status" onclick="ajax_bookmark()"></i>');
                             // .prepend('<i class="fa-solid fa-bookmark-slash" id="bookmark_state" onclick="ajax_bookmark()"></i>')
                         }
@@ -156,13 +156,13 @@
             console.log("북마크 상태 : ", bookmark_status)
             if (bookmark_status == "True"){
                 console.log("북마크 되어 있는 상태")
-                $("#bookmark_status").remove;
+                $("#bookmark_add").empty();
                 $("#bookmark_add").prepend('<span class="material-symbols-outlined" id="bookmark_status" onclick="ajax_bookmark()">bookmark_remove</span>');
                 
                 // .prepend('<i class="fa-regular fa-bookmark" id="bookmark_status" onclick="ajax_bookmark()"></i>')
             }
             else {
-                $("#bookmark_status").remove;
+                $("#bookmark_add").empty();
                 $("#bookmark_add").prepend('<i class="fa-regular fa-bookmark" id="bookmark_status" onclick="ajax_bookmark()"></i>');
                 // .prepend('<i class="fa-solid fa-bookmark-slash" id="bookmark_state" onclick="ajax_bookmark()"></i>')
             }

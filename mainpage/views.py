@@ -295,13 +295,11 @@ def recipe_detail(request, recipe_id):
 
     if request.method == "POST":
         uploaded = request.POST.get('bookmark_status', None)
-        print("데이터 확인", request.POST)
         print("북마크 상태 : ", uploaded)
         result = ""
         user = User.objects.get(id=id)
         recipe_detail = recipe_data.objects.get(recipe_id=recipe_id)
         
-        # QQQQ : 데이터 생성하는 방법 찾기
         try:
             form = Userbookmarkrecipe.objects.get(recipeid=recipe_id)
         except:

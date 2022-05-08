@@ -22,13 +22,14 @@
 <div class="loading wave">
   분석중...
 </div>
-<iframe src="http://127.0.0.1:8000/mainpage/video_feed" style="display: none;"></iframe>
+<video id="video_" src="http://127.0.0.1:8000/mainpage/video_feed" style="display: none;"></video>
 <!-- partial -->
 <script>
   function next() {
     location.href = '{% url "mainpage:ingredient_result" %}';
   }
   setTimeout(next, 5000);
+  
 </script>
 </body>
 </html>
