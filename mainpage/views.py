@@ -218,7 +218,7 @@ names = model.module.names if hasattr(model, 'module') else model.names
 def stream():
     global user_ingre
     
-    cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+    cap = cv2.VideoCapture('C:/django/Eat-village/media/test.webm')
     # cap = cv2.VideoCapture(1)
     # model.conf = 0.65
     # model.iou = 0.5
@@ -257,6 +257,8 @@ def stream():
                     user_ingre.append(label[1]) # user_ingre 데이터에 인식된 값을 추가한다. 이걸로 추천시스템 구현
                     
                     user_ingre = list(set(user_ingre))
+                    print(user_ingre)
+
         else:
             deepsort.increment_ages()
 
