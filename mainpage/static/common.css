@@ -253,7 +253,7 @@ img {
     margin-top: 20px;
     text-align: center;
 }
-#btn1 {
+#record {
     display: inline-block;
 }
 #btn2 {
@@ -361,9 +361,9 @@ ul#ingredient_list li {
 }
 
 .ingred-item {
-    margin:5px;
+    margin:auto;
     position:relative;
-    left:-59px;
+    left:-12px;
     display:flex;
     flex-wrap: nowrap;
     flex-direction: row;
@@ -376,6 +376,7 @@ ul#ingredient_list li {
     background-color: rgba(255, 252, 236, 0.3);
     border: solid #ffff 4px;
     min-width: 200px;
+    margin-bottom: 5px;
 }
 
 
@@ -440,10 +441,13 @@ ul#ingredient_list li {
 
 .title {
     color: #F9FAFD !important;
+    text-shadow: 1px 1px 1px #000000;
 }
 
 .subtitle {
     color: #616161 !important;
+    font-weight: bold;
+    text-shadow: 3px 3px 5px #f0b66b;
 }
 
 ul#ingredient_list li {
@@ -496,6 +500,9 @@ ul.slider li {
         font-size: 23px;
         font-weight: bold;
     }
+    .add_feed {
+        display:none;
+    }
 
     .weather {
         text-align: center;
@@ -515,6 +522,10 @@ ul.slider li {
     }
     .navbar_right.active {
         display: block;
+    }
+    .add_feed.active {
+        display:block;
+        margin: auto;
     }
     #container {
         width: 100%;

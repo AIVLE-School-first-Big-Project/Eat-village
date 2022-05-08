@@ -37,7 +37,7 @@ body {
     color: rgb(0, 0, 0); 
     text-align: center;
     font-weight : bold;
-    
+    margin-bottom: 10px;
 }
 
 .area2 p{
@@ -102,20 +102,14 @@ body {
     filter:drop-shadow(5px 5px 5px #686867);
     height: 44px;
     width: 44px;
-    position: absolute;
-    left: 145px;
-    top:63px;
-    
-
+    margin: auto;
 }
 /*식재료 아이콘 */
 .ing{
     filter:drop-shadow(5px 5px 5px #686867);
     height: 44px;
     width: 44px;
-    position: absolute;
-    left: 145px;
-    top:157px;
+    margin: auto;
 }
 
 /*추가 아이콘 */
@@ -123,9 +117,7 @@ body {
     filter:drop-shadow(5px 5px 5px #686867);
     height: 44px;
     width: 44px;
-    position: absolute;
-    left: 145px;
-    top:240px;
+    margin: auto;
 }
 
 

@@ -29,27 +29,26 @@
 </div>
 
 <video id="gum" playsinline autoplay muted></video>
-    <video id="recorded" playsinline loop></video>
+<video id="recorded" playsinline loop></video>
 
-    <div>
-        <button id="start">Start camera</button>
-        <button id="record" disabled>Start Recording</button>
-        <button id="play" disabled>Play</button>
-        <button id="download" disabled>Download</button>
-    </div>
-    <form action='/stream/media" method="post">
-    <div>
-        Recording format: <select id="codecPreferences" disabled></select>
-    </div>
-    
-    <div>
-        <span id="errorMsg"></span>
-    </div>
+<div>
+    <button id="start">Start camera</button>
+    <button id="record" disabled>Start Recording</button>
+    <button id="play" disabled>Play</button>
+    <button id="download" disabled>Download</button>
+</div>
+<form action="/stream/media" method="post">
+<div>
+    Recording format: <select id="codecPreferences" disabled></select>
+</div>
+
+<div>
+    <span id="errorMsg"></span>
+</div>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
 
-<script src="{% static 'stream_main.js' %}"></script>
-<script src="{% static 'ga.js' %}"></script>
+
 
 </body>
 </html>

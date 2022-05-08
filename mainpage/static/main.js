@@ -2,10 +2,12 @@
 const togglebtn = document.querySelector('.navbar_togglebtn');
 const menu = document.querySelector('.navbar_menu');
 const search = document.querySelector('.navbar_right');
+const update = document.querySelector('.add_feed');
 
 togglebtn.addEventListener('click', () => {
     menu.classList.toggle('active');
     search.classList.toggle('active');
+    update.classList.toggle('active');
 });
 
 /* 버튼 클릭 시 카메라 접근 후 영상 촬영 */

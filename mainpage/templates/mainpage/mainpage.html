@@ -11,9 +11,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/312926fc77.js" crossorigin="anonymous"></script>
+    <!-- 카메라 -->
+    <meta name="description" content="WebRTC code samples">
+    <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1, maximum-scale=1">
+    <meta itemprop="description" content="Client-side WebRTC code samples">
+    <meta itemprop="image" content="../../../images/webrtc-icon-192x192.png">
+    <meta itemprop="name" content="WebRTC code samples">
+    <meta name="mobile-web-app-capable" content="yes">
+    <base target="_blank">
+    <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+
     <title>Main Page</title>
 </head>
 <body>
+    <!-- 메뉴 -->
     <div style="height: 100px; ">
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
             <div class="navbar_logo">
@@ -68,7 +79,7 @@
             {% else %}
             <div id="navbar-update" class="add_feed"><i class="fa-solid fa-bell" style="padding: 2px; border: 2px solid red; border-radius: 50%;"></i></div>
             {% endif %}
-            <a href='#' class="navbar_togglebtn">
+            <a class="navbar_togglebtn">
                 <i class="fas fa-bars"></i>
             </a>
         </nav>
@@ -76,6 +87,7 @@
     </div>
 
     {% comment %} {% include "mainpage/header.html" %} {% endcomment %}
+    <!-- 메인페이지 -->
     <section class="bg-primary py-5">
         <div id="container">
             <div class="fridge-img">
@@ -96,7 +108,6 @@
 
             <div class="cam_area">
                 <!-- <iframe id="video" src="http://127.0.0.1:8000/mainpage/video_feed"> </iframe> -->
-                <!-- <iframe id="video" src=""> </iframe> -->
                     {% comment %} <video src="http://127.0.0.1:8000/mainpage/video_feed" style="width:82%; height:480px"></video> {% endcomment %}
 
                     {% comment %} 
@@ -121,9 +132,17 @@
                         </script>
                     {% endcomment %}
             </div> 
-            <div id="button">
+            <!-- <div id="button">
                 <button id="btn1" onclick="cameraAccess();">카메라 켜기/끄기</button>
                 <button id="btn2" onclick="find_ingred();">분석 시작</button>
+            </div> -->
+
+            <video id="gum" playsinline autoplay muted></video>
+            <div>
+                <button id="record">Start Recording</button>
+                <!-- <button id="play" disabled>Play</button> -->
+                <button id="btn2" onclick="find_ingred();">분석 시작</button>
+
             </div>
 
         </div>
@@ -147,6 +166,8 @@
         </div>
     </section>
     <script src="{% static 'main.js' %}"></script>
+    <script src="{% static 'stream_main.js' %}?after"></script>
+    <script src="{% static 'ga.js' %}"></script>
     <script>
         /* 위치기반 현재 날씨 정보 */
         $(document).ready(function() {
@@ -174,6 +195,8 @@
                                 };
                                 if (recipes[i].category1 == '국/탕') {
                                     const recipe_slide = ul.item(0).getElementsByTagName('li')[li_cnt];
+                                    const a = document.createElement('a');
+                                    a.href = "/mainpage/recipeDetail/" + recipes[i].recipe_id;
                                     const recipe_img = document.createElement('img');
                                     const caption = document.createElement('div');
                                     const numm = String(recipes[i].num);
@@ -183,8 +206,9 @@
                                     caption.innerText = recipes[i].name;
                                     cnt++;
                                     li_cnt++;
+                                    a.appendChild(recipe_img);
                                     recipe_slide.appendChild(caption);
-                                    recipe_slide.appendChild(recipe_img);
+                                    recipe_slide.appendChild(a);
                                 };
                             };
                         } else if (['Rain', 'Thunderstorm', 'Drizzle'].includes(weather)) {
@@ -194,6 +218,8 @@
                                 };
                                 if (recipes[i].category1 == '양식') {
                                     const recipe_slide = ul.item(0).getElementsByTagName('li')[li_cnt];
+                                    const a = document.createElement('a');
+                                    a.href = "/mainpage/recipeDetail/" + recipes[i].recipe_id;
                                     const recipe_img = document.createElement('img');
                                     const caption = document.createElement('div');
                                     const numm = String(recipes[i].num);
@@ -203,8 +229,9 @@
                                     caption.innerText = recipes[i].name;
                                     cnt++;
                                     li_cnt++;
+                                    a.appendChild(recipe_img);
                                     recipe_slide.appendChild(caption);
-                                    recipe_slide.appendChild(recipe_img);
+                                    recipe_slide.appendChild(a);
                                 };
                             };
                         } else if (weather == 'Clear') {
@@ -214,6 +241,8 @@
                                 };
                                 if (recipes[i].category2 == '일상') {
                                     const recipe_slide = ul.item(0).getElementsByTagName('li')[li_cnt];
+                                    const a = document.createElement('a');
+                                    a.href = "/mainpage/recipeDetail/" + recipes[i].recipe_id;
                                     const recipe_img = document.createElement('img');
                                     const caption = document.createElement('div');
                                     const numm = String(recipes[i].num);
@@ -223,8 +252,9 @@
                                     caption.innerText = recipes[i].name;
                                     cnt++;
                                     li_cnt++;
+                                    a.appendChild(recipe_img);
                                     recipe_slide.appendChild(caption);
-                                    recipe_slide.appendChild(recipe_img);
+                                    recipe_slide.appendChild(a);
                                 };
                             };
                         } else {
@@ -240,6 +270,8 @@
                             };
                             random_list.forEach(function(ind) {
                                 const recipe_slide = ul.item(0).getElementsByTagName('li')[li_cnt];
+                                const a = document.createElement('a');
+                                a.href = "/mainpage/recipeDetail/" + recipes[ind].recipe_id;
                                 const recipe_img = document.createElement('img');
                                 const caption = document.createElement('div');
                                 const numm = String(recipes[ind].num);
@@ -249,8 +281,9 @@
                                 caption.innerText = recipes[ind].name;
                                 cnt++;
                                 li_cnt++;
+                                a.appendChild(recipe_img);
                                 recipe_slide.appendChild(caption);
-                                recipe_slide.appendChild(recipe_img);
+                                recipe_slide.appendChild(a);
                             });
                         };
                     });
@@ -259,6 +292,7 @@
                 };
             };
             $('.slider').bxSlider({
+                touchEnabled: (navigator.maxTouchPoints > 0),
                 captions: true,
                 slideWidth: 500
             });
@@ -281,12 +315,6 @@
         
     </script>
     <script>
-        $(document).ready(function() {
-            $('.slider').bxSlider({
-                captions: true,
-                slideWidth: 500
-            });
-        });
 
         /* 카메라 On & Off*/
         function cameraAccess() {

@@ -24,10 +24,9 @@
             </a>
         </div>
         <ul class="navbar_menu">
-            <li><a href="{% url 'mypage:main' %}">마이페이지</a></li>
-            {% comment %} <li><a href=''>나눔 게시판</a></li> {% endcomment %}
-            <li><a href="{% url 'recipeboard:recipeboard_index' %}">레시피 게시판</a></li>
-            <li><a href="{% url 'communityboard:communityboard_index' %}">커뮤니티 게시판</a></li>
+            <li><a href="{% url 'mypage:main' %}"><img class ="my" src="{% static 'mypa.png' %}"></a></li>
+            <li><a href="{% url 'recipeboard:recipeboard_index' %}"><img class ="reci"src="{% static 'reci.png' %}"></a></li>
+            <li><a href="{% url 'communityboard:communityboard_index' %}"><img class ="commu" src="{% static 'commu.png' %}"></a></li>
         </ul>
         {% comment %} <div class="navbar_right">
             <div class="search">
