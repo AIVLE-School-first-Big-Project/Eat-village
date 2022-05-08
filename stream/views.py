@@ -12,7 +12,8 @@ from PIL import Image as im
 from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 from django.core.files.storage import FileSystemStorage
-
+import os
+from django.conf import settings 
 def index(request):
     print(request)
     if request.method == 'POST':
@@ -21,6 +22,9 @@ def index(request):
         print(request.FILES["data"].size)
         file = request.FILES["data"]
         fs = FileSystemStorage()
+        if fs.exists('test.webm'):
+            os.remove(os.path.join(settings.MEDIA_ROOT, 'test.webm'))
+        
         filename = fs.save("test.webm", file)
         print("저장 확인: ", filename)
         # video_stream = request.FILES["data"]
@@ -54,7 +58,7 @@ def upload_file(request):
     #return render(request, 'upload.html', {'form': form})
 
 def handle_uploaded_file(f):
-    with open('stream/media/ReceivedVideo.webm', 'wb+') as destination:
+    with open('stream/media/test.webm', 'wb+') as destination:
         for chunk in f.chunks():
             destination.write(chunk)
 
@@ -79,7 +83,7 @@ def stream():
     #cap = cv2.VideoCapture(0)
     #cap = cv2.imdecode()
     
-    cap = cv2.VideoCapture("stream/test (29).webm")
+    cap = cv2.VideoCapture()
     #cap = request.files['image']
 
     while True:
