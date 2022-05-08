@@ -174,6 +174,8 @@
                                 };
                                 if (recipes[i].category1 == '국/탕') {
                                     const recipe_slide = ul.item(0).getElementsByTagName('li')[li_cnt];
+                                    const a = document.createElement('a');
+                                    a.href = "/mainpage/recipeDetail/" + recipes[i].recipe_id;
                                     const recipe_img = document.createElement('img');
                                     const caption = document.createElement('div');
                                     const numm = String(recipes[i].num);
@@ -183,8 +185,9 @@
                                     caption.innerText = recipes[i].name;
                                     cnt++;
                                     li_cnt++;
+                                    a.appendChild(recipe_img);
                                     recipe_slide.appendChild(caption);
-                                    recipe_slide.appendChild(recipe_img);
+                                    recipe_slide.appendChild(a);
                                 };
                             };
                         } else if (['Rain', 'Thunderstorm', 'Drizzle'].includes(weather)) {
@@ -194,6 +197,8 @@
                                 };
                                 if (recipes[i].category1 == '양식') {
                                     const recipe_slide = ul.item(0).getElementsByTagName('li')[li_cnt];
+                                    const a = document.createElement('a');
+                                    a.href = "/mainpage/recipeDetail/" + recipes[i].recipe_id;
                                     const recipe_img = document.createElement('img');
                                     const caption = document.createElement('div');
                                     const numm = String(recipes[i].num);
@@ -203,8 +208,9 @@
                                     caption.innerText = recipes[i].name;
                                     cnt++;
                                     li_cnt++;
+                                    a.appendChild(recipe_img);
                                     recipe_slide.appendChild(caption);
-                                    recipe_slide.appendChild(recipe_img);
+                                    recipe_slide.appendChild(a);
                                 };
                             };
                         } else if (weather == 'Clear') {
@@ -214,6 +220,8 @@
                                 };
                                 if (recipes[i].category2 == '일상') {
                                     const recipe_slide = ul.item(0).getElementsByTagName('li')[li_cnt];
+                                    const a = document.createElement('a');
+                                    a.href = "/mainpage/recipeDetail/" + recipes[i].recipe_id;
                                     const recipe_img = document.createElement('img');
                                     const caption = document.createElement('div');
                                     const numm = String(recipes[i].num);
@@ -223,8 +231,9 @@
                                     caption.innerText = recipes[i].name;
                                     cnt++;
                                     li_cnt++;
+                                    a.appendChild(recipe_img);
                                     recipe_slide.appendChild(caption);
-                                    recipe_slide.appendChild(recipe_img);
+                                    recipe_slide.appendChild(a);
                                 };
                             };
                         } else {
@@ -240,6 +249,8 @@
                             };
                             random_list.forEach(function(ind) {
                                 const recipe_slide = ul.item(0).getElementsByTagName('li')[li_cnt];
+                                const a = document.createElement('a');
+                                a.href = "/mainpage/recipeDetail/" + recipes[ind].recipe_id;
                                 const recipe_img = document.createElement('img');
                                 const caption = document.createElement('div');
                                 const numm = String(recipes[ind].num);
@@ -249,8 +260,9 @@
                                 caption.innerText = recipes[ind].name;
                                 cnt++;
                                 li_cnt++;
+                                a.appendChild(recipe_img);
                                 recipe_slide.appendChild(caption);
-                                recipe_slide.appendChild(recipe_img);
+                                recipe_slide.appendChild(a);
                             });
                         };
                     });
@@ -259,6 +271,7 @@
                 };
             };
             $('.slider').bxSlider({
+                touchEnabled: (navigator.maxTouchPoints > 0),
                 captions: true,
                 slideWidth: 500
             });
@@ -281,12 +294,6 @@
         
     </script>
     <script>
-        $(document).ready(function() {
-            $('.slider').bxSlider({
-                captions: true,
-                slideWidth: 500
-            });
-        });
 
         /* 카메라 On & Off*/
         function cameraAccess() {

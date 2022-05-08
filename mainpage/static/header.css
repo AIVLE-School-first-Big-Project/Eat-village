@@ -13,6 +13,22 @@ a {
     color: black;
 }
 
+.my {
+    filter:drop-shadow(5px 5px 5px #ffdb9d);
+    height: 44px;
+    width: 44px;
+}
+.reci {
+    filter:drop-shadow(5px 5px 5px #ffdb9d);
+    height: 44px;
+    width: 44px;
+}
+.commu {
+    filter:drop-shadow(5px 5px 5px #ffdb9d);
+    height: 44px;
+    width: 44px;
+}
+
 *,
 *::before,
 *::after {
@@ -122,7 +138,6 @@ a {
 }
 #button {
     position: relative;
-    margin-top: 97px;
     text-align: center;
 }
 #btn1 {
@@ -276,7 +291,6 @@ ul#ingredient_list li {
     padding: 5px 0px 5px 5px;
     margin-bottom: 5px;
     position: relative;
-    top:48px;
     font-size: 20px;
     font-weight: bold;
 }

@@ -28,10 +28,9 @@
                 <a href="{% url 'users:login' %}"><button> 로그인 </button> </a>
             {% endif %}
             <ul class="navbar_menu">
-                <li><a href="{% url 'mypage:main' %}">마이페이지</a></li>
-                <li><a href=''>나눔 게시판</a></li>
-                <li><a href="{% url 'recipeboard:recipeboard_index' %}">레시피 게시판</a></li>
-                <li><a href="{% url 'communityboard:communityboard_index' %}">커뮤니티 게시판</a></li>
+                <li><a href="{% url 'mypage:main' %}"><img class ="my" src="{% static 'mypa.png' %}"></a></li>
+                <li><a href="{% url 'recipeboard:recipeboard_index' %}"><img class ="reci"src="{% static 'reci.png' %}"></a></li>
+                <li><a href="{% url 'communityboard:communityboard_index' %}"><img class ="commu" src="{% static 'commu.png' %}"></a></li>
             </ul>
             <div class="navbar_right">
                 <div class="search">
@@ -54,14 +53,14 @@
             {% if user.is_authenticated %}
                 <h3>{{request.user.username}}<img class = per src="{% static 'per1.png' %}"></h3>
                 <br>
-                <p> <img class = alle src="{% static 'all1.png' %}"> <br><br><br> {{request.user.allergyinfo}}</p>
+                <p> <img class = alle src="{% static 'all1.png' %}"> <br><br> {{request.user.allergyinfo}}</p>
             {% else %}
                 <p> 로그인 해야 이용 가능합니다 </p>
             {% endif %}
         </div>
     <div class = 'recipe2-form'>
         <div class="area2">
-            <p><img class = ing src="{% static 'u.png' %}"> <br><br><br><br> {{ user_data }}</p>        
+            <p><img class = ing src="{% static 'u.png' %}"> <br><br> {{ user_data }}</p>        
         </div>
 
         <div class="area3" id='ingredient_result' >

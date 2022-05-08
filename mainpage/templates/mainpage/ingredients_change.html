@@ -15,16 +15,15 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
             <div class="navbar_logo">
                 <a href="{% url 'mainpage:mainpage' %}">
-                    <img src="{% static 'logo.png' %}">
+                    <img src="{% static 'lglg.png' %}">
                 </a>
             </div>
             <ul class="navbar_menu">
-                <li><a href="{% url 'mypage:main' %}">마이페이지</a></li>
-                {% comment %} <li><a href=''>나눔 게시판</a></li> {% endcomment %}
-                <li><a href="{% url 'recipeboard:recipeboard_index' %}">레시피 게시판</a></li>
-                <li><a href="{% url 'communityboard:communityboard_index' %}">커뮤니티 게시판</a></li>
+                <li><a href="{% url 'mypage:main' %}"><img class ="my" src="{% static 'mypa.png' %}"></a></li>
+                <li><a href="{% url 'recipeboard:recipeboard_index' %}"><img class ="reci"src="{% static 'reci.png' %}"></a></li>
+                <li><a href="{% url 'communityboard:communityboard_index' %}"><img class ="commu" src="{% static 'commu.png' %}"></a></li>
             </ul>
-            <div class="navbar_right">
+            <!-- <div class="navbar_right">
                 <div class="search">
                     <input id='searchfield' type='text' max_length=255 autocomplete='off'>
                     <button class='searchbtn' onclick="search_recipe(); return false;"">검색</button>
@@ -33,7 +32,7 @@
                     <div class="temp"></div>
                     <div class="icon"></div>
                 </a>
-            </div>
+            </div> -->
             <a href='#' class="navbar_togglebtn">
                 <i class="fas fa-bars"></i>
             </a>
@@ -59,29 +58,29 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script>
         /* 위치기반 현재 날씨 정보 */
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition((pos) => {
-                let lat = pos.coords.latitude;
-                let lon = pos.coords.longitude;
-                console.log(lat, lon);
-                $.getJSON(
-                    'https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&appid=7d5fba451f0f0e3d56dc8bfbd6263516&units=metric&lang=ko',
-                    function(result) {
-                    $('.temp').append(result.main.temp + '℃');
-                    var weathericon = '<img src="http://openweathermap.org/img/wn/' + result.weather[0].icon + '.png" alt="' + result.weather[0].description + '">';
-                    $('.icon').html(weathericon);
-                });
-            }), (err) => {
-                console.log('GPS를 사용할 수 없습니다.');
-            };
-        };
+        // if (navigator.geolocation) {
+        //     navigator.geolocation.getCurrentPosition((pos) => {
+        //         let lat = pos.coords.latitude;
+        //         let lon = pos.coords.longitude;
+        //         console.log(lat, lon);
+        //         $.getJSON(
+        //             'https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&appid=7d5fba451f0f0e3d56dc8bfbd6263516&units=metric&lang=ko',
+        //             function(result) {
+        //             $('.temp').append(result.main.temp + '℃');
+        //             var weathericon = '<img src="http://openweathermap.org/img/wn/' + result.weather[0].icon + '.png" alt="' + result.weather[0].description + '">';
+        //             $('.icon').html(weathericon);
+        //         });
+        //     }), (err) => {
+        //         console.log('GPS를 사용할 수 없습니다.');
+        //     };
+        // };
 
         /* 레시피 검색 */
-        function search_recipe() {
-            var food_cate = document.getElementById('searchfield').value;
-            if (food_cate.length == 0) { return false;}
-            location.href = "{% url 'mainpage:search' %}";
-        }
+        // function search_recipe() {
+        //     var food_cate = document.getElementById('searchfield').value;
+        //     if (food_cate.length == 0) { return false;}
+        //     location.href = "{% url 'mainpage:search' %}";
+        // }
 
         /* 재료 수정 완료 후 다시 재료 페이지로 이동 */
         function ingred_change_comp() {
