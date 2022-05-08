@@ -54,6 +54,7 @@ body {
     border:0;
     outline:0;
     background-color: #ffffff;
+    cursor: pointer;
 }
 .in {
     position: relative;
