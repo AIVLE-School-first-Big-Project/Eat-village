@@ -5,7 +5,7 @@
 let mediaRecorder;
 let recordedBlobs;
 
-const codecPreferences = document.querySelector('#codecPreferences');
+const codecPreferences = 'video/webm;codecs=vp9,opus';
 const errorMsgElement = document.querySelector('span#errorMsg');
 const recordedVideo = document.querySelector('video#recorded');
 const recordButton = document.querySelector('button#record');
@@ -32,35 +32,35 @@ recordButton.addEventListener('click', () => {
   
 });
 
-const playButton = document.querySelector('button#play');
-const superBuffer = '';
-playButton.addEventListener('click', () => {
-  const mimeType = codecPreferences.options[codecPreferences.selectedIndex].value.split(';', 1)[0];
-  const superBuffer = new Blob(recordedBlobs, {type : mimeType});
-  recordedVideo.src = null;
-  recordedVideo.srcObject = null;
-  recordedVideo.src = window.URL.createObjectURL(superBuffer);
-  recordedVideo.controls = true;
+// const playButton = document.querySelector('button#play');
+// const superBuffer = '';
+// playButton.addEventListener('click', () => {
+//   const mimeType = codecPreferences.options[codecPreferences.selectedIndex].value.split(';', 1)[0];
+//   const superBuffer = new Blob(recordedBlobs, {type : mimeType});
+//   recordedVideo.src = null;
+//   recordedVideo.srcObject = null;
+//   recordedVideo.src = window.URL.createObjectURL(superBuffer);
+//   recordedVideo.controls = true;
 
 
-});
+// });
 
-const downloadButton = document.querySelector('button#download');
-downloadButton.addEventListener('click', () => {
-  const blob = new Blob(recordedBlobs, {type: 'video/webm'});
-  const url = window.URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.style.display = 'none';
-  a.href = url;
-  a.download = 'test.webm';
-  document.body.appendChild(a);
-  a.click();
-  setTimeout(() => {
-    document.body.removeChild(a);
-    window.URL.revokeObjectURL(url);
-  }, 100);
+// const downloadButton = document.querySelector('button#download');
+// downloadButton.addEventListener('click', () => {
+//   const blob = new Blob(recordedBlobs, {type: 'video/webm'});
+//   const url = window.URL.createObjectURL(blob);
+//   const a = document.createElement('a');
+//   a.style.display = 'none';
+//   a.href = url;
+//   a.download = 'test.webm';
+//   document.body.appendChild(a);
+//   a.click();
+//   setTimeout(() => {
+//     document.body.removeChild(a);
+//     window.URL.revokeObjectURL(url);
+//   }, 100);
 
-});
+// });
 
 function handleDataAvailable(event) {
   console.log('handleDataAvailable', event);
@@ -161,39 +161,8 @@ $.ajaxSetup({
   }
 });
 
-// var fd = new FormData();
-// const blob = new Blob(recordedBlobs, {type: 'video/webm'});
-// fd.append('fname', 'test.wepm');
-// fd.append('data', blob);
-// function ajax_request() {
-//   console.log(recordedVideo.src)
-//   console.log(blob);
-//   // var form = new FormData(recordedVideo.src);
-//   $.ajax({
-//     url: '/stream/',
-//     type: "POST",
-//     data: fd,
-//     contentType: false,
-//     processData: false,
-//     headers: { "X-CSRFToken": csrftoken },
-//     success : function (data) {
-//       console.log("전송 성공");
-//       // console.log(data);
-//     },
-//     // error: function (xhr, textStatus, thrownError) {
-//     //   alert("Could not send URL to Django. Error: " + xhr.status + ": " + xhr.responseText);
-//     // }
-//   });
-// }
-
 function stopRecording() {
   mediaRecorder.stop();
-  // ///////여기서 form으로 동영상 보냄
-  // const formData = new FormData();
-  // const mimeType = codecPreferences.options[codecPreferences.selectedIndex].value.split(';', 1)[0];
-  // const myBlob = new Blob(recordedBlobs, {type : mimeType});
-  // formData.append('video', myBlob);
-  // request.send(formData);
 }
 
 function handleSuccess(stream) {
