@@ -13,6 +13,8 @@ body {
     margin:0 auto;
 }
 .card {
+    border: 3px solid white;
+    box-shadow: 1px 1px 1px 1px gray;
     border-radius: 20px;
     width: 80%;
     height: 20%;
@@ -181,8 +183,6 @@ img {
     font-size: 24px;
     color: black;
 }
-
-
 
 
 .search1{

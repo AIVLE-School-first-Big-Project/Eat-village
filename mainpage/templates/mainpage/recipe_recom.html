@@ -20,8 +20,8 @@
     </div>
     <div class="list">
         {% for item in recommend_data %}
-        <a href="{% url 'mainpage:recipe_detail' item.recipe_id %}">
         <div class ="card">
+        <a href="{% url 'mainpage:recipe_detail' item.recipe_id %}">
             <div class="image_div">
                 <img class= "image_card" src="{% get_static_prefix %}{{item.num}}.jpg" alt="" onclick="recipe_detail();">
             </div>
@@ -30,8 +30,8 @@
                 {{item.title}}
             </div>
             <div class = "sblank"></div>
-        </div>
         </a>
+        </div>
         <div class="blank"></div>
         {% endfor %}
     </div>  
