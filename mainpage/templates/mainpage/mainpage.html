@@ -107,37 +107,12 @@
             </div>
 
             <div class="cam_area">
-                <!-- <iframe id="video" src="http://127.0.0.1:8000/mainpage/video_feed"> </iframe> -->
-                    {% comment %} <video src="http://127.0.0.1:8000/mainpage/video_feed" style="width:82%; height:480px"></video> {% endcomment %}
-
-                    {% comment %} 
-                        <video id="video" width="320" height="240" autoplay></video>
-                        <canvas id="canvas" width="960" height="720"></canvas>
-                        <button type="button" id="webcamBtn">캡쳐하기</button>
-                        <script>
-                        if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-                            navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
-                                var video = document.getElementById('video');
-                                video.srcObject = stream;
-                                video.play();
-                            });
-                        }
-
-                        var canvas = document.getElementById('canvas');
-                        var context = canvas.getContext('2d');
-                        var video = document.getElementById('video');
-                        document.getElementById("webcamBtn").addEventListener("click",function() {
-                            context.drawImage(video,0,0,960,720);
-                        });
-                        </script>
-                    {% endcomment %}
+                    <video id="gum" poster="" playsinline autoplay muted></video>
             </div> 
             <!-- <div id="button">
                 <button id="btn1" onclick="cameraAccess();">카메라 켜기/끄기</button>
                 <button id="btn2" onclick="find_ingred();">분석 시작</button>
             </div> -->
-
-            <video id="gum" poster="" playsinline autoplay muted></video>
             <div>
                 <button id="record">Start Recording</button>
                 <!-- <button id="play" disabled>Play</button> -->
