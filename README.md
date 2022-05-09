@@ -39,9 +39,11 @@
   - 회원가입 후 token 발급
   - 회원가입 인증 메일을 수락해야함
 - cmd 설정
+ ``` bash
   1. ngrok.exe가 다운로드되어 있는 위치로 이동
   2. ngrok config add-authtoken 토큰코드
   3. ngrok http 8000
+  ```
 - 접속 주소
 ![ngrok](https://user-images.githubusercontent.com/58163606/167326887-1784dabf-21bc-4731-a622-676cb706ac60.png)
 - config/settings.py ALLOWED_HOSTS에 접속 주소에서 https://를 뺸 나머지를 입력
