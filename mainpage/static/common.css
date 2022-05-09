@@ -199,7 +199,7 @@ img {
     width: 38%;
     text-align: center;
     position: relative;
-    left: 55px;
+    left: 64px;
     border-radius: 10px;
     outline: none;
     font-weight: bold;
@@ -963,7 +963,7 @@ button {
   font-size: 1em;
   position: relative;
   top: -2px;
-  left:55px;
+  left:62px;
   padding: 5.2px;
   -webkit-appearance: none;
   appearance: none;
