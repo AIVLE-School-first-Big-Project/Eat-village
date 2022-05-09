@@ -35,6 +35,9 @@
                 <form action="{% url 'mainpage:search' %}" method="get">
                     <input class="search1" type="text" name="kw">
                     <input class="searchbtn" type="submit" value="검색">
+                    <div class = "logo-img">
+                        <a href="{% url 'mypage:main' %}"><img class=logo src="{% static 'e.png' %}"> </a></li>
+                    </div>
                 </form>
             </div>
             <ul class="navbar_menu">
@@ -48,19 +51,20 @@
                         <div class="temp"></div>
                         <div class="icon"></div>
                 </div>        
+            </a> 
             <div class="my_info">
                 {% if user.is_authenticated %}
                     <div class="main_common">
                         {% comment %} <p>{{request.user.username}}님 환영 합니다. </p> {% endcomment %}
                         <p class="userid">{{request.user.username}}<a href="{% url 'users:logout' %}"><button class = "logout_1"> <img class=out src="{% static 'logout.png' %}"> </button> </a></p>
-                    </div>
+                    </div> 
                 {% else %}
                     <div class="main_common">
                         <p> 로그인 해야 이용 가능합니다 </p>
                         <a href="{% url 'users:login' %}"><button class ="login_1"> <img class=in src="{% static 'login.png' %}"> </button> </a>
                     </div>
                 {% endif %}  
-                </a> 
+                
             </div>
                 {% comment %} <div class="my_info">
                     {% if user.is_authenticated %}

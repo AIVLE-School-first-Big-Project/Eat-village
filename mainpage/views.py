@@ -51,20 +51,25 @@ def main(request):
 
 @login_required    
 def ingred_recomm(request): # 레시피를 추천해주는 코드
-    # local 추가한 데이터를 받아온다.
-    # if request.method == 'GET': 
-    #     print("get")
-    #     storage = request.GET['storage'] 
-    #     data = { 'storage': storage } 
-    # return render(request, 'mainpage/recipe_recom.html', data)
-    # elif request.method == 'POST': 
-    #     print("post")
-    #     storage = request.POST['storage'] 
-    #     data = { 'storage': storage }
-    # return render(request, 'mainpage/recipe_recom.html', data)
-        
-    print("abc")
+    global user_ingre
     
+    # local 추가한 데이터를 받아온다.
+    if request.method == 'GET': 
+        print("get")
+        storage = request.GET['storage'] 
+    elif request.method == 'POST': 
+        print("post")
+        storage = request.POST['storage'] 
+    
+    # 추가 재료를 유저 재료의 추가
+    add_ingre = storage.split(',')
+
+    
+    for i in add_ingre:
+        user_ingre.append(i)
+        
+    user_ingre = list(set(user_ingre))
+
     # 세션의 유저 알러지 데이터를 가져온다. 
     id = request.session['id']
     user_get = User.objects.get(id=id)
