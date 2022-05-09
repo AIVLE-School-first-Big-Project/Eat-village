@@ -20,13 +20,21 @@
 
 ## 1. 개발 배경 및 목적
 <pre>
+1️⃣. 최근 1인 가구는 증가하고 있고 ‘직접 요리’ 비율은 확 줄었다. 이는 팬더믹의 영향을 무시할 수 없지만, 설문조사 결과에 ‘조리하기가 번거롭고 귀찮아서’가 랭크되었다. 우리는 1인 가구가 느끼는 ‘직접 요리’에 대한 허들을 낮추어 신체적, 정서적 건강을 도모할 것을 기대한다.
+: <a href='https://www.khan.co.kr/national/national-general/article/202111141025001'>10명 중 4명은 '1인 가구'···‘직접 요리’ 비율 확 줄어든 까닭</a>
+: <a href='http://www.research-paper.co.kr/news/articleView.html?idxno=304066'>집에서 하는 요리 귀찮아하면 안 되는 이유</a>
+
+2️⃣. 배달비와 외식비 상승에 부담을 느끼는 시민들이 외식보다는 ‘집밥’을 선택하면서 ‘집에서 요리해 먹기 쉬운 품목’에 대한 수요가 증가하고 있다. 우리는 이러한 수요에 발 맞춰 ‘집밥’에 대한 접근성을 높일 것이다.
+<img src='https://user-images.githubusercontent.com/58163606/167345170-2e6b482a-6114-46c0-95bf-6869f5111651.png' style="height: 200px;"/>
+: <a href='https://www.sedaily.com/NewsVIew/264LO712H9'>"차라리 집에서 직접 해먹겠다"…치솟는 외식비에 장보기 는다</a>
+: <a href='https://www.chosun.com/economy/market_trend/2021/01/07/MJFHEDVXTFGCNNOW34W7BIOFWA/'>[NOW] 코로나 1년, 밥상은 가난해졌다</a>
 
 </pre>
 
 ## 2. 기능 및 UI/UX
 - Adobe XD
 ## 3. 서비스 FLOW
-- draw.io
+- ![user_flow_ffff](https://user-images.githubusercontent.com/58163606/167354603-582cccff-bae4-4497-a9c3-6ebf364fdf0a.png)
 ## 4. Architecture (2-Tier or 3-Tier)
 -![architecture](https://user-images.githubusercontent.com/92066565/164602627-a2691519-a7b0-4a5e-8281-81bfcd189bbd.png)
 ## 5. DB 설계
