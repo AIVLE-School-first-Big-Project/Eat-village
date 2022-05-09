@@ -335,5 +335,5 @@ def recipe_detail(request, recipe_id):
 
 
 
-# def loading(request): #should be deleted
-#     return render(request, 'mainpage/loading.html')
+def loading(request): #should be deleted
+    return render(request, 'mainpage/loading.html')
