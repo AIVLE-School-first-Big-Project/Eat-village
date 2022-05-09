@@ -53,7 +53,7 @@ body {
     margin-bottom: 10px;
     border:0;
     outline:0;
-    background-color: #ffffff;
+    background-color: transparent;
     cursor: pointer;
 }
 .in {
@@ -127,7 +127,8 @@ img {
 }
 
 .bg-light {
-    background-color: white !important;
+    /* background-color: white !important; */
+    background: url("bar3.jpg") no-repeat center;  
 }
 
 .fixed-top {
@@ -227,7 +228,8 @@ img {
     left : 80px;
     border-radius: 20px;
     width: 150px;
-    background-color: rgba(255, 252, 236, 0.3);
+    /* background-color: rgba(255, 252, 236, 0.3); */
+    background-color: #fbe3bf;
     
 }
 
@@ -499,8 +501,11 @@ ul.slider li {
     .navbar_menu li {
         font-size: 25px ;
         font-weight: bold;
-        width: 100%;
+        width: 49%;
         text-align: center;
+        margin:3px;
+        background-color: #fbe3bf;
+        border-radius: 15px;
     }
     .navbar_right {
         display: none;
