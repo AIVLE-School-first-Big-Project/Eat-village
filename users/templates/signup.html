@@ -110,17 +110,18 @@
                     <br>
                     <div>
                         Enter an allergy that is not in the checkbox.
-                        <br> (If not, please enter none)
                                 
                     </div>
                     <div class="int-area">
                         <input name='test_list' 
                         type="text" 
                         check_result="fail" 
-                        autocomplate = "off" required/>
+                        autocomplate = "off"/>
                         <label for = "test_list">ALLERGY</label>
                     </div>
-
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Privacy usage agreement &nbsp;<input type="checkbox" style="text-align:center" name="agree" value = "1" required> 
+    
                     <div class="btn-area">
                         <button id="btn" 
                         value="Submit"
@@ -132,4 +133,17 @@
             </form>
         </div>     
     </body>
+    
 </html>
+
+<script>
+    function chk() {
+        var f = document.thisForm;
+        if(f.pv_agree.checked!==true) {
+            alert('필수항목에 체크해 주세요.');
+        } else {
+            alert('통과');
+            f.submit();
+        }
+    }
+  </script>

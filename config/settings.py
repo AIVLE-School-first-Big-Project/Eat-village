@@ -181,7 +181,7 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 AUTH_USER_MODEL = 'users.User'
 
-LOGIN_URL = '/users/login/' # 지희
+LOGIN_URL = '/' # 지희
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
