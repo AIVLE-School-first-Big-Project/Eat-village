@@ -37,7 +37,7 @@
 
 <div class="container">
 <hr>
-    <a href="{% url 'recipeboard:recipeboard_detail' boardid %}"><i class="fa-solid fa-arrow-left fa-2x"></i></a>
+    <a href="{% url 'recipeboard:recipeboard_detail' boardid %}"><i id="icon" class="fa-solid fa-arrow-left fa-2x"></i></a>
 <hr>
 
     <div class="comment1">
@@ -48,9 +48,10 @@
             {% comment %} <span><a href="{% url 'recipeboard:recipeboard_comment' board.boardid comment.commentid %}"><i class="fa-solid fa-message"></i></a></span> {% endcomment %}
             <span>
             {% if comment.userid == user and comment.detail != "삭제된 댓글입니다." %}
-                <a href="{% url 'recipeboard:recipecomment_delete' comment.commentid %}"><i class="fa-solid fa-x"></i></a>
+                <a href="{% url 'recipeboard:recipecomment_delete' comment.commentid %}"><i id="icon" class="fa-solid fa-x"></i></a>
             {% endif %}
             </span>
+            <span>&nbsp;&nbsp;&nbsp;</span>
         </div>
     </div>
     <div class="comment2">
@@ -69,8 +70,9 @@
             <div class="bcomment1-2">
                 <span>
                     {% if babycomment.userid == user and babycomment.detail != "삭제된 댓글입니다." %}
-                    <a href="{% url 'recipeboard:recipecomment_delete' comment.commentid %}"><i class="fa-solid fa-x"></i></a>
+                    <a href="{% url 'recipeboard:recipecomment_delete' comment.commentid %}"><i id="icon" class="fa-solid fa-x"></i></a>
                     {% endif %}
+                    <span>&nbsp;&nbsp;&nbsp;</span>
                 </span>
             </div>
         </div>

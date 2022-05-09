@@ -43,6 +43,7 @@
 ![architecture](https://user-images.githubusercontent.com/92066565/164602627-a2691519-a7b0-4a5e-8281-81bfcd189bbd.png)
 ## 5. DB 설계
 - ERD 모델 (EXERD)
+![0509erd](https://user-images.githubusercontent.com/58163606/167395199-1c13b56a-c54e-49e6-9e10-8bfc561bfd6d.png)
 ## 6. 개발 환경
 - FRONT-END : HTML, CSS, JS, Bootstrap
 - BACK-END : Django, GoogleCloud, MySQL
