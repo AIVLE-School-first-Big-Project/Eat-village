@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href='{% static "common.css" %}?after'>
+    <link rel="stylesheet" type="text/css" href='{% static "common.css" %}? after'>
     <link rel="apple-touch-icon" href="/custom_icon.png"/>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,27 +14,25 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
             <div class="navbar_logo">
                 <a href="{% url 'mainpage:mainpage' %}">
-                    <img src="{% static 'logo.png' %}">
+                    <img src="{% static 'e2.png' %}">
                 </a>
             </div>
+
             <ul class="navbar_menu">
-                <li><a href="{% url 'mypage:main' %}"><img class ="my" src="{% static 'mypa.png' %}"></a></li>
-                <li><a href="{% url 'recipeboard:recipeboard_index' %}"><img class ="reci"src="{% static 'reci.png' %}"></a></li>
-                <li><a href="{% url 'communityboard:communityboard_index' %}"><img class ="commu" src="{% static 'commu.png' %}"></a></li>
+                <li><a href="{% url 'mypage:main' %}">MYPAGE</a></li>
+                <li><a href="{% url 'recipeboard:recipeboard_index' %}">RECIPE</a></li>
+                <li><a href="{% url 'communityboard:communityboard_index' %}">COMMUNITY</a></li>
             </ul>
             <div class="navbar_right">
                 <div class="search">
                     <form action="{% url 'mainpage:search' %}" method="get">
-                        <input class="searchbox1" type="text" name="kw">
-                        <input class="searchbox2" type="submit" value="검색">
+                        <input class="search2" type="text" name="kw">
+                        <input class="searchbtn2" type="submit" value="검색">
                     </form>
                     {% comment %} <input id='searchfield' type='text' max_length=255 autocomplete='off'>
                     <button class='searchbtn' onclick="search_recipe(); return false;"">검색</button> {% endcomment %}
                 </div>
-                <a href="{% url 'mainpage:mainpage' %}#slideShow" class="weather">
-                    <div class="temp"></div>
-                    <div class="icon"></div>
-                </a>
+
             </div>
             <a href='#' class="navbar_togglebtn">
                 <i class="fas fa-bars"></i>

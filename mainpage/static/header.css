@@ -76,11 +76,25 @@ a {
 .navbar_logo {
     font-size:24px;
     color: white;
+
+}
+.navbar_logo2 img {
+    display:block;
+    height: 65px;
+    width: 75px;
+    margin: 12px;
+    position: relative;
+    left: -11px;
+
 }
 .navbar_logo img {
     display:block;
-    height: 57px;
-    width: 70px;
+    height: 65px;
+    width: 75px;
+    margin: 12px;
+    position: relative;
+    left: -11px;
+
 }
 .navbar_menu {
     display: flex;
@@ -302,8 +316,10 @@ ul#ingredient_list li {
     .navbar {
         flex-direction: column;
         align-items: flex-start;
-        padding: 8px 24px;
+        padding: 3px 24px;
         outline: 5px solid #FFC851;
+        background: url("bar9.jpg") no-repeat center;
+   
     }
     .navbar-expand-lg {
         flex-wrap: nowrap;
@@ -316,11 +332,16 @@ ul#ingredient_list li {
         align-items: center;
         width: 100%;
     }
+
     .navbar_menu li {
-        width: 100%;
-        text-align: center;
-        font-size: 20px;
+        font-size: 20px ; /*25px */
         font-weight: bold;
+        width: 49%;
+        text-align: center;
+        margin:3px;
+        background-color: #fbe3bf;
+        border-radius: 15px;
+        box-shadow: 2px 2px 4px #fdc36d;
     }
     .navbar_right {
         display: none;
@@ -409,4 +430,10 @@ ul#ingredient_list li {
     .recomm_list > ul > li {
         width: calc(100% / 1);
     }
+}
+
+
+.fa-bars {
+    position: relative;
+    top:30px;
 }
