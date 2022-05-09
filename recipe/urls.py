@@ -7,5 +7,5 @@ urlpatterns = [
     # path('show/',views.show, name='show' ),
     path('recommend/',views.recommend, name='recommend'),
     path('video_feed/',views.video_feed, name='video_feed'),
-    path('test/',views.test, name='test'),
+    # path('test/',views.test, name='test'),
 ]
