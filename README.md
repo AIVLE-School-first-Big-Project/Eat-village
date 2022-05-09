@@ -1,5 +1,5 @@
 <div align="center">
- <h1 align="center">Eat-village</h1>
+ <div style='text-align:center; font-size: 40px'>Eat-village</div>
  </p>
  <p align="center">
   <b>수도권 4반 2조(9조) : 우리는 모두 친9조</b>
@@ -7,20 +7,21 @@
  <p align="center">
   KT AIVLE-School-first-Big-Project : 2022-04-11 ~ 2022-05-11 </p><br><br>
   
- <p align="center"> 
-  모두의 레시피에서 크롤링한 데이터를 활용하여 yolov5에서 얻은 사용자들의 냉장고 속 재료를 추출하여 <br>
- 사용자 데이터를 바탕으로 레시피를 추천해주는 모델을 제작하였습니다.<br>
- </p>
+ <pre align="center"> 
+ yolov5 모델로 사용자들의 냉장고 속 재료를 분석하여 
+ 만개의 레시피에서 크롤링한 데이터를 바탕으로 레시피를 추천해주는 모델을 제작하였습니다.
+ </pre>
 </div>
 
-# Eat-village : Yolov5를 이용한 냉장고 재료 분석 및 레시피 추천
-> KT AIVLE 수도권 4반 2조 (9조) <br>
-
+# : Yolov5를 이용한 냉장고 재료 분석 및 레시피 추천
 ## 조원 소개
 - `수도권 4반 2조 (9조)`
 > 안지희(조장), 김연우, 안승훈, 정찬호, 최수진, 한인규
 
 ## 1. 개발 배경 및 목적
+<pre>
+
+</pre>
 
 ## 2. 기능 및 UI/UX
 - Adobe XD
@@ -56,9 +57,10 @@
 1. git clone https://github.com/AIVLE-School-first-Big-Project/Eat-village.git
 2. cd Eat-village
 3. python install -r requirements.txt
-4. python manage.py runsever [본인 외부 ip 주소]:8000
+4. GCP에서 사용하려는 기기의 IP 등록
+5. python manage.py runsever [본인 외부 ip 주소]:8000
   (localhost나 127.0.0.1로 서버 돌리면 타 기기에서 접근 안 됨, DEBUG 가 False이므로 settings- allowed host에 본인 ip 추가)
-5. Connect http://[본인외부ip]:8000
+6. Connect http://[본인외부ip]:8000
 ```
 ## 9. 팀원 정보
 | Name | Github | Email |
