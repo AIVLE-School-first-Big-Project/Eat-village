@@ -123,7 +123,6 @@ img {
 *::after {
     box-sizing: border-box;
     text-decoration-line : none;
-    
 }
 
 .bg-light {
@@ -468,9 +467,10 @@ ul#ingredient_list li {
 }
 
 .title {
-    color: #F9FAFD !important;
-    text-shadow: 1px 1px 1px #000000;
+    color: #413576 !important;
+    text-shadow: 2px 2px 2px #f7cfa8;
     font-size: 30px;
+    font-weight: bold;
 }
 
 .subtitle {
@@ -499,7 +499,7 @@ ul.slider li {
 @media screen and (max-width: 850px) {
     .navbar {
         flex-direction: column;
-        padding: 8px 24px;
+        padding: 5px 24px;
         outline:5px solid #FFC851;
     }
     .navbar-expand-lg {
@@ -1696,8 +1696,10 @@ button {
 
 
   .logo{
-      width: 75px;
-      height: 65px;
+      width: 68px;
+      height: 57px;
+      position: relative;
+      top: 4px;
       
   }
  
@@ -1712,3 +1714,32 @@ button {
   }
 
 
+
+
+  .wea-reci {
+      font-size: 25px;
+      font-weight: bold;
+      text-align: center;
+  }
+
+
+.s-show {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+.bx-viewport {
+    background-color: #FCE484;
+}
+
+
+.navbar_logo2 img {
+    display:block;
+    height: 65px;
+    width: 75px;
+    margin: 12px;
+    position: relative;
+    left: -20px;
+
+}
