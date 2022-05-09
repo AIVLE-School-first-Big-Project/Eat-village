@@ -453,6 +453,7 @@ ul#ingredient_list li {
 .title {
     color: #F9FAFD !important;
     text-shadow: 1px 1px 1px #000000;
+    font-size: 30px;
 }
 
 .subtitle {
@@ -460,6 +461,7 @@ ul#ingredient_list li {
     font-weight: bold;
     text-shadow: 3px 3px 5px #f0b66b;
     margin: 53px;
+    font-size: 24px;
 }
 
 ul#ingredient_list li {
