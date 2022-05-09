@@ -120,9 +120,10 @@
                 <div class="bcomment1-2">
                     <span>
                         {% if babycomment.userid == user and babycomment.detail != "삭제된 댓글입니다." %}
-                        <a href="{% url 'communityboard:communitycomment_delete' comment.commentid %}"><i class="fa-solid fa-x"></i></a>
+                        <a href="{% url 'communityboard:communitycomment_delete' comment.commentid %}"><i id="icon" class="fa-solid fa-x"></i></a>
                         {% endif %}
                     </span>
+                    <span>&nbsp;&nbsp;&nbsp;</span>
                 </div>
             </div>
             <div class="bcomment2">
