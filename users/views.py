@@ -1,11 +1,8 @@
 from django.forms import ValidationError
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from requests import request
 from users.models import *
 from django.contrib import auth
-from django.utils import timezone
-from django.contrib.auth import get_user_model
 import json
 
 # SMTP 관련 인증
@@ -19,8 +16,6 @@ from .token import users_activation_token
 
 #messages 출력하기위해
 from django.contrib import messages
-from tkinter import Button, messagebox
-
 
 # 홈 #
 
@@ -28,33 +23,22 @@ def home(request):
     return HttpResponse('<u>Home</u>')
 
 
-
 def back(request):
     return HttpResponse('<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><font size ="10"><p><hi><center><b><u>아래 사이트를 클릭 후 재로그인해주세요.</u><br> -Petdada- <br> <font size ="15"><a href="/member/login/">LOGIN</a>')   
 
-
-
-from django.views.generic import View
-
-
-
-
-   
-
-
-#회원가입#
+# 회원가입 #
 
 def signup(request):
     user_db = User.objects.all()
     if request.method=="POST":
-        if user_db.filter(username=request.POST['username']).exists(): #아이디 중복 체크
+        if user_db.filter(username=request.POST['username']).exists(): # 아이디 중복 체크
             messages.warning(request, "ID already exists")
             return redirect("users:signup")
         if request.POST['confirm_password'] ==request.POST['password']:   
-            username=request.POST["username"] #아이디
-            password=request.POST["password"] #비밀번호
-            email=request.POST["email"] #이메일
-            allergyinfo=request.POST.getlist("test_list","allergy") #알레르기 test_list
+            username=request.POST["username"] # 아이디
+            password=request.POST["password"] # 비밀번호
+            email=request.POST["email"] # 이메일
+            allergyinfo=request.POST.getlist("test_list","allergy") # 알레르기 test_list
             address = request.POST["address"] # 주소
             first_name = request.POST.getlist("agree")
 
@@ -87,7 +71,7 @@ def signup(request):
 
 
 def validate_email(email):
-    if not '@' in email or not '.' in email:
+    if '@' not in email or '.' not in email:
         raise ValidationError(("Invalid Email"), code = 'invalid')
 
 # 이메일 인증 ( 계정 활성화 )

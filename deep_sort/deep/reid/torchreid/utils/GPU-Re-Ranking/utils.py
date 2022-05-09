@@ -16,7 +16,7 @@
     with limited time cost.
 """
 
-import os
+# import os
 import numpy as np
 import pickle
 import torch
@@ -87,7 +87,7 @@ def evaluate_ranking_list(
         ap += ap_tmp
 
     CMC = CMC.astype(np.float32)
-    CMC = CMC / len(query_label) #average CMC
+    CMC = CMC / len(query_label) # average CMC
     print(
         'Rank@1:%f Rank@5:%f Rank@10:%f mAP:%f' %
         (CMC[0], CMC[4], CMC[9], ap / len(query_label))
@@ -101,7 +101,7 @@ def evaluate(index, ql, qc, gl, gc):
     good_index = np.setdiff1d(query_index, camera_index, assume_unique=True)
     junk_index1 = np.argwhere(gl == -1)
     junk_index2 = np.intersect1d(query_index, camera_index)
-    junk_index = np.append(junk_index2, junk_index1) #.flatten())
+    junk_index = np.append(junk_index2, junk_index1) # .flatten())
 
     CMC_tmp = compute_mAP(index, good_index, junk_index)
     return CMC_tmp

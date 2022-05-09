@@ -7,9 +7,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
-
 from pathlib import Path
-import os
 import pymysql
 pymysql.install_as_MySQLdb()
 
@@ -31,7 +29,7 @@ ALLOWED_HOSTS = ['*']
 FILE_UPLOAD_HANDLERS = [
     "django.core.files.uploadhandler.MemoryFileUploadHandler",
     "django.core.files.uploadhandler.TemporaryFileUploadHandler",
-    ]
+]
 # Application definition
 
 INSTALLED_APPS = [
@@ -164,11 +162,6 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-#yeon
-
-import users.my_setting as my_setting
-import os
-#yeon
 
 import users.my_setting as my_setting
 

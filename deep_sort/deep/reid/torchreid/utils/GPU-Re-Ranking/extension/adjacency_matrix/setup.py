@@ -16,10 +16,11 @@
     with limited time cost.
 """
 
-from setuptools import Extension, setup
-import torch
-import torch.nn as nn
-from torch.autograd import Function
+from setuptools import setup
+# from setuptools import Extension
+# import torch
+# import torch.nn as nn
+# from torch.autograd import Function
 from torch.utils.cpp_extension import CUDAExtension, BuildExtension
 
 setup(

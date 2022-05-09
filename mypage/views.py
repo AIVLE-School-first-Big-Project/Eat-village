@@ -1,14 +1,10 @@
-from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from users.models import *
 from mainpage.models import *
 from .forms import *
 from django.contrib.auth.decorators import login_required
 import json
-from django.contrib import auth
-from django.contrib import messages
 
-# Create your views here.
 def test(request):
     tmp = {
         'tmp':'탈퇴'
@@ -58,7 +54,7 @@ def user_info(request):
             allergy_list = request.POST.getlist('allergyinfo')
             try:
                 allergy_list.remove('None')
-            except:
+            except Exception:
                 pass
             print('알레르기: ', allergy_list)
 
