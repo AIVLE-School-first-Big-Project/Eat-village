@@ -319,6 +319,7 @@ ul#ingredient_list li {
         padding: 3px 24px;
         outline: 5px solid #FFC851;
         background: url("bar9.jpg") no-repeat center;
+   
     }
     .navbar-expand-lg {
         flex-wrap: nowrap;
@@ -434,5 +435,5 @@ ul#ingredient_list li {
 
 .fa-bars {
     position: relative;
-    top:13px;
+    top:30px;
 }
