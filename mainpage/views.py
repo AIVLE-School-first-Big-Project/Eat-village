@@ -204,6 +204,7 @@ deepsort = DeepSort('osnet_x0_25',
 names = model.module.names if hasattr(model, 'module') else model.names
 
 def stream():   
+    global user_ingre
     print("시작") 
     cap = cv2.VideoCapture('media/test.webm')
     # cap = cv2.VideoCapture(1)
@@ -211,8 +212,8 @@ def stream():
     # model.iou = 0.5
     # model.classes = [1,2,3,4,6,7,8,10,11]
     print("영상 로드")
-    global user_ingre
     
+       
     while True:
         ret, frame = cap.read()
         if not ret:
@@ -247,7 +248,6 @@ def stream():
                     
                     user_ingre = list(set(user_ingre))
                     print(user_ingre)
-
         else:
             deepsort.increment_ages()
 
