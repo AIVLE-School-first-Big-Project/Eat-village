@@ -35,6 +35,9 @@
                 <form action="{% url 'mainpage:search' %}" method="get">
                     <input class="search1" type="text" name="kw">
                     <input class="searchbtn" type="submit" value="검색">
+                    <div class = "logo-img">
+                        <a href="{% url 'mypage:main' %}"><img class=logo src="{% static 'e.png' %}"> </a></li>
+                    </div>
                 </form>
             </div>
             <ul class="navbar_menu">

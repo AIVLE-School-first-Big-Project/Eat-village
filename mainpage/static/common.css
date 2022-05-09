@@ -128,7 +128,7 @@ img {
 
 .bg-light {
     /* background-color: white !important; */
-    background: url("bar3.jpg") no-repeat center;  
+    background: url("bar9.jpg") no-repeat center;  
 }
 
 .fixed-top {
@@ -230,7 +230,7 @@ img {
     width: 150px;
     /* background-color: rgba(255, 252, 236, 0.3); */
     background-color: #fbe3bf;
-    
+    box-shadow: 2px 2px 4px #fdc36d;
 }
 
 
@@ -506,6 +506,7 @@ ul.slider li {
         margin:3px;
         background-color: #fbe3bf;
         border-radius: 15px;
+        box-shadow: 2px 2px 4px #fdc36d;
     }
     .navbar_right {
         display: none;
@@ -518,8 +519,16 @@ ul.slider li {
     } */
     .my_info {
         text-align: center;
-        font-size: 23px;
+        font-size: 30px;
+        position: relative;
+        left: 81px;
         font-weight: bold;
+        border-radius: 15px;
+        background-color: #fbe3bf;
+        color:#000000;
+        width: 48%;
+        box-shadow: 2px 2px 4px #fdc36d;
+
     }
     /* .add_feed {
         display:none;
@@ -1453,3 +1462,19 @@ button {
       }
   }
   
+
+
+  .logo{
+      width: 75px;
+      height: 75px;
+      
+  }
+ 
+  .logo-img{
+      width: 50px;
+      height: 3px;
+      position: relative;
+      top:-53px;
+      left: -22px;
+
+  }
