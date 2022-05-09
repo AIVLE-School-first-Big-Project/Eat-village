@@ -1,19 +1,18 @@
-from django.http import StreamingHttpResponse,JsonResponse
+from django.http import StreamingHttpResponse
 from django.shortcuts import render
-import yolov5, torch
-from yolov5.utils.general import (check_img_size, non_max_suppression, scale_coords,
-                                  check_imshow, xyxy2xywh, increment_path, strip_optimizer, colorstr)
-from yolov5.utils.torch_utils import select_device, time_sync
-from yolov5.utils.plots import Annotator, colors, save_one_box
+import yolov5
+import torch
+from yolov5.utils.torch_utils import select_device
 from deep_sort.utils.parser import get_config
 from deep_sort.deep_sort import DeepSort
 import cv2
 from PIL import Image as im
 from django.views.decorators.csrf import csrf_exempt
-# Create your views here.
 from django.core.files.storage import FileSystemStorage
 import os
 from django.conf import settings 
+from .forms import UploadFileForm
+
 def index(request):
     print(request)
     if request.method == 'POST':
@@ -38,10 +37,7 @@ def index(request):
         # print(video_stream)
     return render(request, 'stream/index.html')
 
-from django.http import HttpResponseRedirect
-from django.shortcuts import render
-from .forms import UploadFileForm
-from django.views.decorators.csrf import csrf_exempt, csrf_protect
+
 
 # Imaginary function to handle an uploaded file.
 #from somewhere import handle_uploaded_file

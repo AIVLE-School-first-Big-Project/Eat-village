@@ -1,18 +1,17 @@
 from django.contrib import messages
 from django.forms import modelformset_factory
 from django.shortcuts import get_object_or_404, redirect, render
-from django.http import HttpResponseRedirect
 from users.models import Recipeboard, Recipeboardimage, Recipecomment, Userrecommendedcommunity
 from django.core.paginator import Paginator
-from django.db.models import Q, Count, F
+from django.db.models import Q
 from recipeboard.forms import Recipeboardform, Recipecommentform, Recipeboardimageform
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 
 @login_required
-def recipeboard_index(request): #레시피게시글 목록
+def recipeboard_index(request): # 레시피게시글 목록
 
-    kw = request.GET.get('kw', '') #키워드 검색기능
+    kw = request.GET.get('kw', '') # 키워드 검색기능
     so = request.GET.get('so', '')
     page = request.GET.get('page', '1')
 
@@ -25,20 +24,18 @@ def recipeboard_index(request): #레시피게시글 목록
     else:
         board_list = Recipeboard.objects.all()
  
-    if so == 'view': #조회순 정렬
+    if so == 'view': # 조회순 정렬
         board_list = board_list.order_by('-view', '-boardid')
-    elif so == 'recommended': #추천순 정렬
+    elif so == 'recommended': # 추천순 정렬
         board_list = board_list.order_by('-recommended', '-boardid')
     else:
         board_list = board_list.order_by('-boardid')
 
-    paginator = Paginator(board_list,10) #페이징기준
+    paginator = Paginator(board_list,10) # 페이징기준
     page_obj = paginator.get_page(page)
-    # last_page = page_obj.paginator.page_range[-1]
 
     today = timezone.now().date
     context = {'board_list' : page_obj,
-            #    'last_page':last_page,
                'kw':kw,
                'page':page,
                'so':so,
@@ -57,9 +54,6 @@ def recipeboard_detail(request, boardid): # 게시글 내용, 댓글생성
     if request.method == "GET":
         recipecommentform = Recipecommentform()
 
-    # board.view += 1 ## 조회수증가
-    # board.save()
-
     comment = Recipecomment.objects.filter(
         boardid = boardid,
         parentcommentid__isnull = True
@@ -73,7 +67,7 @@ def recipeboard_detail(request, boardid): # 게시글 내용, 댓글생성
     likedata = Userrecommendedcommunity.objects.filter(userid=user, boardid=board).first()
 
     if request.method == 'POST':
-        # if request.POST.get('comment'): #댓글달기
+        # if request.POST.get('comment'): # 댓글달기
         recipecommentform = Recipecommentform(request.POST)
         if recipecommentform.is_valid():
             newcomment = Recipecomment(**recipecommentform.cleaned_data)
@@ -137,7 +131,7 @@ def recipeboard_recommendcancel(request, boardid):
     return redirect('recipeboard:recipeboard_detail', boardid=boardid)
 
 @login_required
-def recipeboard_comment(request, boardid, commentid): #댓글자세히보기, 대댓글 내용과 생성
+def recipeboard_comment(request, boardid, commentid): # 댓글자세히보기, 대댓글 내용과 생성
     
     comment = get_object_or_404(Recipecomment, pk=commentid)
     board = get_object_or_404(Recipeboard, pk=boardid)
@@ -181,7 +175,7 @@ def recipecomment_delete(request, commentid):
     deletedcommentmessage = '삭제된 댓글입니다.'
 
     if request.user != comment.userid:
-       messages.warning(request, '권한없음')
+        messages.warning(request, '권한없음')
     else: 
         comment.detail = deletedcommentmessage
         comment.save()
@@ -189,7 +183,7 @@ def recipecomment_delete(request, commentid):
     return redirect('recipeboard:recipeboard_detail', boardid=comment.boardid.boardid)
 
 @login_required
-def recipeboard_create(request): #게시물생성
+def recipeboard_create(request): # 게시물생성
 
     Imageformset = modelformset_factory(Recipeboardimage, form=Recipeboardimageform, extra=3)
 
@@ -203,8 +197,6 @@ def recipeboard_create(request): #게시물생성
             board.view = 0
             board.time = timezone.now()
             board.save()
-            # formset.instance = board
-            # formset.save()
             for form in formset:
                 image = Recipeboardimage(**form.cleaned_data)
                 image.boardid = board
@@ -222,7 +214,7 @@ def recipeboard_create(request): #게시물생성
     return render(request, 'recipeboard/recipeboard_create.html', context)
 
 @login_required
-def recipeboard_update(request, boardid): #게시물수정
+def recipeboard_update(request, boardid): # 게시물수정
 
     board = get_object_or_404(Recipeboard, pk=boardid)
     Imageformset = modelformset_factory(Recipeboardimage, form=Recipeboardimageform, extra=0)
@@ -235,16 +227,11 @@ def recipeboard_update(request, boardid): #게시물수정
         form = Recipeboardform(request.POST, instance=board)
         formset = Imageformset(request.POST, request.FILES)
         if form.is_valid():
-        # and formset.is_valid():
             board.title = form.cleaned_data['title']
             board.ingredient = form.cleaned_data['ingredient']
             board.detail = form.cleaned_data['detail']
             board.save()
             formset.save()
-            # for form in formset:
-            #     image = Recipeboardimage(**form.cleaned_data)
-            #     image.time = timezone.now()
-            #     image.save()
             return redirect('recipeboard:recipeboard_detail', boardid=boardid)
     else:
         form = Recipeboardform(instance=board)
@@ -255,7 +242,7 @@ def recipeboard_update(request, boardid): #게시물수정
     return render(request, 'recipeboard/recipeboard_create.html', context)
 
 @login_required
-def recipeboard_delete(request, boardid): #게시물삭제
+def recipeboard_delete(request, boardid): # 게시물삭제
 
     board = get_object_or_404(Recipeboard, pk=boardid)
 

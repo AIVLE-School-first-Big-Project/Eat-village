@@ -246,7 +246,7 @@ class Dataset(object):
             tar = tarfile.open(fpath)
             tar.extractall(path=dataset_dir)
             tar.close()
-        except:
+        except Exception:
             zip_ref = zipfile.ZipFile(fpath, 'r')
             zip_ref.extractall(dataset_dir)
             zip_ref.close()

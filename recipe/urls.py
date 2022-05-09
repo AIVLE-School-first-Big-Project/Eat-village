@@ -1,7 +1,5 @@
-from xml.etree.ElementInclude import include
-from django.contrib import admin
 from recipe import views
-from django.urls import path,include
+from django.urls import path
 
 urlpatterns = [
     # path('main/',views.main),
@@ -9,5 +7,5 @@ urlpatterns = [
     # path('show/',views.show, name='show' ),
     path('recommend/',views.recommend, name='recommend'),
     path('video_feed/',views.video_feed, name='video_feed'),
-    path('test/',views.test, name='test'),
+    # path('test/',views.test, name='test'),
 ]

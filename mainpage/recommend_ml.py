@@ -1,5 +1,3 @@
-import re
-from numpy import rec
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer
 # from recipe.models import user_ingre
@@ -24,8 +22,8 @@ def recommend_recipe(user_model, recipe_model):
     
     
     # 2. 레시피 id 값과 재료를 받는다. 레시피 데이터 인덱스 처리를 해야한다. 제외되었기 때문에.
-    recipe_ids = list((recipe.recipe_id-1) for recipe in re_data)  # recipe_ids : 레시피_id
-    recipe_names = list(recipe.title for recipe in re_data) # recipe_names : 레시피 제목
+    # recipe_ids = list((recipe.recipe_id-1) for recipe in re_data)  # recipe_ids : 레시피_id
+    # recipe_names = list(recipe.title for recipe in re_data) # recipe_names : 레시피 제목
     recipe_igds = list(recipe.ingre for recipe in re_data) # recipe_igds : 레시피 재료
     
     recipe_igds = recipe_igds + user_list
@@ -38,12 +36,12 @@ def recommend_recipe(user_model, recipe_model):
     
     # similarity_simple_pair = cosine_similarity(feature_vect_simple[len(recipe_igds)-1] , feature_vect_simple)
     # 딕셔너리로 만들어서 관리 / 매트릭스 만들어서 유사도 비교
-    title_to_index = dict(zip(recipe_ids,recipe_names)) # 레시피_id / 레시피 제목
+    # title_to_index = dict(zip(recipe_ids,recipe_names)) # 레시피_id / 레시피 제목
     
     
-    length = len(recipe_igds)
+    # length = len(recipe_igds)
     idx = len(recipe_igds)-1 # 유저의 재료를 가리키는 인덱스
-    hi = recipe_igds[idx]
+    # hi = recipe_igds[idx]
     
     cosine_sim = cosine_similarity(feature_vect_simple, feature_vect_simple)
     # 유저 재료와 모든 레시피의 재료와의 유사도를 가져온다.
