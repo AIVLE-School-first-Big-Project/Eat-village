@@ -310,15 +310,22 @@ input:focus {
     .content2-wrap{
         justify-content: center;
     }
+    .list-icon {
+        width: 5em;
+        height: 5em;
+        margin-bottom: 2em;
+        line-height: 5em;
+    }
     .allergy{
         width: 95%;
     }
     .allergy > ul {
         justify-content: space-between;
+        
     }
     .allergy li label .icon-box {
-        width: 55px;
-        height: 55px;
+        width: 3.1rem;
+        height: 3.1rem;
     }
     #al-etc {
         width:100%;
