@@ -40,7 +40,7 @@ body {
     
 }
 
-/* 로그인 로그아웃 아이콘 */
+/* ë¡œê·¸ì¸ ë¡œê·¸ì•„ì›ƒ ì•„ì´ì½˜ */
 
 .out {
     position: relative;
@@ -103,15 +103,20 @@ img {
 .my {
     filter:drop-shadow(5px 5px 5px #ffdb9d);
     color: #000000;
-    
+    width: 44px;
+    height: 44px;
 }
 .reci {
     filter:drop-shadow(5px 5px 5px #ffdb9d);
     color: #000000;
+    width: 44px;
+    height: 44px;
 }
 .commu {
     filter:drop-shadow(5px 5px 5px #ffdb9d);
     color: #000000;
+    width: 44px;
+    height: 44px;
 }
 *,
 *::before,
@@ -215,7 +220,7 @@ img {
    
 }
 
-/*날씨 */
+/*ë‚ ì”¨ */
 .wea {
     position: relative; 
     z-index: 5; 
@@ -243,15 +248,15 @@ img {
 }
 .cam_area {
     position: relative; 
-    /* absolute는 부모가 relative일 때 부모를 따라간다. */
+    /* absoluteëŠ” ë¶€ëª¨ê°€ relativeì¼ ë•Œ ë¶€ëª¨ë¥¼ ë”°ë¼ê°„ë‹¤. */
     width: 100%;
-    height: 400px;
-    /* padding-bottom: %; 16:9 비율 */
+    height: fit-content;
+    /* padding-bottom: %; 16:9 ë¹„ìœ¨ */
     /* text-align: center; */
   }
 #video {
     /* position: absolute; */
-    width: 100%; /* 부모에 맞게 꽉 채운다. */
+    width: 100%; /* ë¶€ëª¨ì— ë§žê²Œ ê½‰ ì±„ìš´ë‹¤. */
     height: 380px;
 }
 
@@ -332,7 +337,7 @@ img {
 
 /*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
 
-/*식재료 아이콘 */
+/*ì‹ìž¬ë£Œ ì•„ì´ì½˜ */
 .ing{
     filter:drop-shadow(5px 5px 5px #686867);
     height: 250px;
@@ -399,7 +404,7 @@ ul#ingredient_list li {
     width:100%;
     font-weight: bold;
 }
-/* 재료수정 삭제버튼 */
+/* ìž¬ë£Œìˆ˜ì • ì‚­ì œë²„íŠ¼ */
 .delbtn {
     position: relative;
     left:-3px;
@@ -605,7 +610,7 @@ ul.slider li {
 
 
 
-/*버트느느느느 */
+/*ë²„íŠ¸ëŠëŠëŠëŠ */
 
 
 /* */

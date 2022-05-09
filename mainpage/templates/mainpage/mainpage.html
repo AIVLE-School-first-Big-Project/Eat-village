@@ -138,7 +138,7 @@
         </div>
     </section>
     <script src="{% static 'main.js' %}"></script>
-    <script src="{% static 'stream_main.js' %}?after"></script>
+    <script src="{% static 'stream_main.js' %}"></script>
     <script src="{% static 'ga.js' %}"></script>
     <script>
         /* 위치기반 현재 날씨 정보 */
@@ -279,7 +279,8 @@
 
         /* 재료 분석 후 레시피 추천 */ //분석 시작 버튼 (이동)
         function find_ingred() {
-            location.href = "{% url 'mainpage:ingredient_result' %}";
+            // location.href = "{% url 'mainpage:ingredient_result' %}";
+            location.href = "{% url 'mainpage:loading' %}";
         }
 
         //cameraAccess 카메라 접근 이벤트

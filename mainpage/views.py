@@ -16,7 +16,7 @@ from django.contrib import messages
 from django.db.models import Q
 import random
 
-user_ingre = ['짜왕','버섯','양파','스팸','옥수수']
+user_ingre = []
 # Create your views here.
 
 @login_required
@@ -210,16 +210,16 @@ deepsort = DeepSort('osnet_x0_25',
                     )
 # Get names and colors
 names = model.module.names if hasattr(model, 'module') else model.names
-@login_required
-def stream():
-    global user_ingre
-    
-    cap = cv2.VideoCapture('C:/django/Eat-village/media/test.webm')
+
+def stream():   
+    print("시작") 
+    cap = cv2.VideoCapture('media/test.webm')
     # cap = cv2.VideoCapture(1)
     # model.conf = 0.65
     # model.iou = 0.5
     # model.classes = [1,2,3,4,6,7,8,10,11]
-    
+    print("영상 로드")
+    global user_ingre
     
     while True:
         ret, frame = cap.read()
@@ -231,6 +231,7 @@ def stream():
         # proccess
         annotator = Annotator(frame, line_width=2, pil=not ascii) 
         det = results.pred[0]
+
         if det is not None and len(det):   
             xywhs = xyxy2xywh(det[:, 0:4])
             confs = det[:, 4]
@@ -263,9 +264,12 @@ def stream():
         image_bytes = cv2.imencode('.jpg', im0)[1].tobytes()
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + image_bytes + b'\r\n')
+
+
 @login_required    
 def video_feed(request):
     return StreamingHttpResponse(stream(), content_type='multipart/x-mixed-replace; boundary=frame')
+
 @login_required
 # 레시피 상세페이지
 def recipe_detail(request, recipe_id):
@@ -291,13 +295,11 @@ def recipe_detail(request, recipe_id):
 
     if request.method == "POST":
         uploaded = request.POST.get('bookmark_status', None)
-        print("데이터 확인", request.POST)
         print("북마크 상태 : ", uploaded)
         result = ""
         user = User.objects.get(id=id)
         recipe_detail = recipe_data.objects.get(recipe_id=recipe_id)
         
-        # QQQQ : 데이터 생성하는 방법 찾기
         try:
             form = Userbookmarkrecipe.objects.get(recipeid=recipe_id)
         except:
@@ -343,9 +345,6 @@ def recipe_detail(request, recipe_id):
         'mainpage/recipe_detail.html',
         context
     )
-
-
-
 
 
 

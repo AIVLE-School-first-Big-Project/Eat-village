@@ -33,8 +33,24 @@
 ## 6. 개발 환경
 - FRONT-END : HTML, CSS, JS, Bootstrap
 - BACK-END : Django, GoogleCloud, MySQL
-## 7. 개발 일정
-- 
+## 7. 모바일 연결 설정 : ngrok
+- 환경에 맞춰 다운로드 : https://ngrok.com/download
+- https://dashboard.ngrok.com/get-started/your-authtoken
+  - 회원가입 후 token 발급
+  - 회원가입 인증 메일을 수락해야함
+- cmd 설정
+ ``` bash
+  1. ngrok.exe가 다운로드되어 있는 위치로 이동
+  2. ngrok config add-authtoken 토큰코드
+  3. ngrok http 8000
+  ```
+- 접속 주소
+![ngrok](https://user-images.githubusercontent.com/58163606/167326887-1784dabf-21bc-4731-a622-676cb706ac60.png)
+- config/settings.py ALLOWED_HOSTS에 접속 주소에서 https://를 뺸 나머지를 입력
+  - 본 프로젝트는 모든 호스트가 접속이 가능하도록 설정됨
+![ngrok2](https://user-images.githubusercontent.com/58163606/167327178-dab13f4a-c39a-43f0-923c-a23bbc1c91b0.png)
+- 장고 서버 실행
+- 모바일에서 접속주소로 접속하면 로그인 페이지로 접속됨
 ## 8. 실행 방법
 ``` bash
 1. git clone https://github.com/AIVLE-School-first-Big-Project/Eat-village.git
