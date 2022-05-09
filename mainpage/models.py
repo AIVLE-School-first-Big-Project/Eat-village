@@ -1,12 +1,9 @@
-import re
 from users.models import *
 from django.db import models
 
-# Create your models here.
-
 class recipe_data(models.Model):
     recipe_id = models.AutoField(primary_key=True)
-    num =  models.BigIntegerField()
+    num = models.BigIntegerField()
     explan = models.TextField(null=True) # 레시피 조리순서
     title = models.CharField(max_length=255) # 레시피 이름
     ingre = models.TextField() # 식재료

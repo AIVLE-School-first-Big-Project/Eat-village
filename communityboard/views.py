@@ -3,16 +3,16 @@ from django.forms import modelformset_factory
 from django.shortcuts import get_object_or_404, redirect, render
 from users.models import Communityboard, Communitycomment, Communityboardimage
 from django.core.paginator import Paginator
-from django.db.models import Q, Count, F
+from django.db.models import Q
 from communityboard.forms import Communityboardform, Communitycommentform, Communityboardimageform
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 
 @login_required
-def communityboard_index(request): #레시피게시글 목록
+def communityboard_index(request): # 레시피게시글 목록
     user = request.user
 
-    kw = request.GET.get('kw', '') #키워드 검색기능
+    kw = request.GET.get('kw', '') # 키워드 검색기능
     so = request.GET.get('so', '')
     page = request.GET.get('page', '1')
     header = request.GET.get('header', '')
@@ -26,7 +26,7 @@ def communityboard_index(request): #레시피게시글 목록
     else:
         board_list = Communityboard.objects.all()
  
-    if so == 'view': #조회순 정렬
+    if so == 'view': # 조회순 정렬
         board_list = board_list.order_by('-view', '-boardid')
     else: 
         board_list = board_list.order_by('-boardid')
@@ -49,7 +49,7 @@ def communityboard_index(request): #레시피게시글 목록
         board_list = board_list.order_by('-boardid')
 
     
-    paginator = Paginator(board_list, 10) #페이징기준
+    paginator = Paginator(board_list, 10) # 페이징기준
     page_obj = paginator.get_page(page)
 
     context = {'user':user,
@@ -85,7 +85,7 @@ def communityboard_detail(request, boardid): # 게시글 내용, 댓글생성
     commentcount = Communitycomment.objects.filter(boardid=boardid).count()
 
     if request.method == 'POST':
-        # if request.POST.get('comment'): #댓글달기
+        # if request.POST.get('comment'): # 댓글달기
         communitycommentform = Communitycommentform(request.POST)
         if communitycommentform.is_valid():
             newcomment = Communitycomment(**communitycommentform.cleaned_data)
@@ -127,7 +127,7 @@ def communityboard_detail(request, boardid): # 게시글 내용, 댓글생성
     return render(request, 'communityboard/communityboard_detail.html', context)
 
 @login_required
-def communityboard_comment(request, boardid, commentid): #댓글자세히보기, 대댓글 내용과 생성
+def communityboard_comment(request, boardid, commentid): # 댓글자세히보기, 대댓글 내용과 생성
     
     comment = get_object_or_404(Communitycomment, pk=commentid)
     board = get_object_or_404(Communityboard, pk=boardid)
@@ -168,7 +168,7 @@ def communitycomment_delete(request, commentid):
     deletedcommentmessage = '삭제된 댓글입니다.'
 
     if request.user != comment.userid:
-       messages.warning(request, '권한없음')
+        messages.warning(request, '권한없음')
     else: 
         comment.detail = deletedcommentmessage
         comment.save()
@@ -176,7 +176,7 @@ def communitycomment_delete(request, commentid):
     return redirect('communityboard:communityboard_detail', boardid=comment.boardid.boardid)
 
 @login_required
-def communityboard_create(request): #게시물생성
+def communityboard_create(request): # 게시물생성
 
     Imageformset = modelformset_factory(Communityboardimage, form=Communityboardimageform, extra=1)
 
@@ -245,7 +245,7 @@ def communityboard_create_review(request):
 
 
 @login_required
-def communityboard_update(request, boardid): #게시물수정
+def communityboard_update(request, boardid): # 게시물수정
 
     board = get_object_or_404(Communityboard, pk=boardid)
     Imageformset = modelformset_factory(Communityboardimage, form=Communityboardimageform, extra=0)
@@ -272,7 +272,7 @@ def communityboard_update(request, boardid): #게시물수정
     return render(request, 'communityboard/communityboard_create.html', context)
 
 @login_required
-def communityboard_delete(request, boardid): #게시물삭제
+def communityboard_delete(request, boardid): # 게시물삭제
 
     board = get_object_or_404(Communityboard, pk=boardid)
 

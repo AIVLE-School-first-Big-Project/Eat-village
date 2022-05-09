@@ -11,17 +11,17 @@ sys.path.insert(0, './yolov5')
 
 import argparse
 import os
-import platform
+# import platform
 import shutil
-import time
+# import time
 from pathlib import Path
-import numpy as np
+# import numpy as np
 import cv2
 import torch
 import torch.backends.cudnn as cudnn
 
-from yolov5.models.experimental import attempt_load
-from yolov5.utils.downloads import attempt_download
+# from yolov5.models.experimental import attempt_load
+# from yolov5.utils.downloads import attempt_download
 from yolov5.models.common import DetectMultiBackend
 from yolov5.utils.datasets import LoadImages, LoadStreams, VID_FORMATS
 from yolov5.utils.general import (LOGGER, check_img_size, non_max_suppression, scale_coords,

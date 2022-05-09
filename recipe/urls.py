@@ -1,7 +1,5 @@
-from xml.etree.ElementInclude import include
-from django.contrib import admin
 from recipe import views
-from django.urls import path,include
+from django.urls import path
 
 urlpatterns = [
     # path('main/',views.main),

@@ -1,23 +1,22 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse, JsonResponse
+from django.shortcuts import render
+from django.http import JsonResponse
 from .models import *
 from mainpage import recommend_ml
-from glob import glob
-import re
-from numpy import rec
-# Create your views here.
-# import recommend_ml as rc
-# from recipe.models import *
 from users.models import *
 from django.contrib.auth.decorators import login_required
 import json
-from django.contrib import auth
-from django.contrib import messages
 from django.db.models import Q
 import random
+from django.http import StreamingHttpResponse
+import yolov5
+import torch
+from yolov5.utils.general import xyxy2xywh
+from yolov5.utils.torch_utils import select_device
+from yolov5.utils.plots import Annotator, colors
+from deep_sort.deep_sort import DeepSort
+from deep_sort.utils.parser import get_config
 
 user_ingre = []
-# Create your views here.
 
 @login_required
 def main(request):
@@ -53,16 +52,16 @@ def main(request):
 @login_required    
 def ingred_recomm(request): # 레시피를 추천해주는 코드
     # local 추가한 데이터를 받아온다.
-    if request.method == 'GET': 
-        print("get")
-        storage = request.GET['storage'] 
-        data = { 'storage': storage } 
-        # return render(request, 'mainpage/recipe_recom.html', data)
-    elif request.method == 'POST': 
-        print("post")
-        storage = request.POST['storage'] 
-        data = { 'storage': storage }
-        # return render(request, 'mainpage/recipe_recom.html', data)
+    # if request.method == 'GET': 
+    #     print("get")
+    #     storage = request.GET['storage'] 
+    #     data = { 'storage': storage } 
+    # return render(request, 'mainpage/recipe_recom.html', data)
+    # elif request.method == 'POST': 
+    #     print("post")
+    #     storage = request.POST['storage'] 
+    #     data = { 'storage': storage }
+    # return render(request, 'mainpage/recipe_recom.html', data)
         
     print("abc")
     
@@ -105,10 +104,10 @@ def ingred_recomm(request): # 레시피를 추천해주는 코드
     recommend_data = recommend_ml.recommend_recipe(user_ingre,a_sub_b)
     
     # ---------------------------------------------------------------
-        #   {% for item in re_data %}
-        # <h3>{{ item.title }} / {{ item.ingre }} </h3>
-        # --------------------------------------------------------------------------------------------------
-        # {% endfor %}  
+    #   {% for item in re_data %}
+    # <h3>{{ item.title }} / {{ item.ingre }} </h3>
+    # --------------------------------------------------------------------------------------------------
+    # {% endfor %}  
     
     # re_data = recipe_data.objects.exclude(ingre='방울토마토')
 
@@ -178,21 +177,9 @@ def ingred_result(request): # 여기가 추가 데이터 처리하는 페이지
 def ingred_change(request):
     return render(request, 'mainpage/ingredients_change.html')
  
-# ------------------------------------------------------------------------------
-from django.shortcuts import render
-from django.http import StreamingHttpResponse
-import yolov5,torch
-from yolov5.utils.general import (check_img_size, non_max_suppression, scale_coords, 
-                                  check_imshow, xyxy2xywh, increment_path)
-from yolov5.utils.torch_utils import select_device, time_sync
-from yolov5.utils.plots import Annotator, colors
-from deep_sort.deep_sort import DeepSort
-from deep_sort.utils.parser import get_config
-from time import time
+
 
 import cv2
-from PIL import Image as im
-# Create your views here.
 
 print(torch.cuda.is_available())
 #load model
@@ -287,7 +274,7 @@ def recipe_detail(request, recipe_id):
     try:
         form = Userbookmarkrecipe.objects.get(recipeid=recipe_id)
         bookmark = True
-    except:
+    except Exception:
         bookmark = False
     # 북마크 기능
     # 0 : 알림 확인 안함 , 1 : 알림 확인
@@ -302,7 +289,7 @@ def recipe_detail(request, recipe_id):
         
         try:
             form = Userbookmarkrecipe.objects.get(recipeid=recipe_id)
-        except:
+        except Exception:
             Userbookmarkrecipe.objects.create(
                 userid = user,
                 recipeid = recipe_detail,
@@ -348,5 +335,5 @@ def recipe_detail(request, recipe_id):
 
 
 
-def loading(request): #should be deleted
-    return render(request, 'mainpage/loading.html')
+# def loading(request): #should be deleted
+#     return render(request, 'mainpage/loading.html')

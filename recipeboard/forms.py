@@ -15,16 +15,16 @@ class Recipeboardform(forms.ModelForm):
         widgets = {
             'title' : forms.TextInput(
                 attrs={'placeholder':'제목을 입력해주세요!',
-                    'class':'form-control'}
-                ),
+                       'class':'form-control'}
+            ),
             'ingredient' : forms.Textarea(
                 attrs={'placeholder':'요리에 필요한 재료를 입력해주세요!',
-                    'class':'form-control', 'rows':5}
-                ),
+                       'class':'form-control', 'rows':5}
+            ),
             'detail' : forms.Textarea(
                 attrs={'placeholder':'요리 과정을 자세하게 입력해주세요!',
-                    'class':'form-control', 'rows':10}
-                ),
+                       'class':'form-control', 'rows':10}
+            ),
         }
 
 class Recipeboardimageform(forms.ModelForm):

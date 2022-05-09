@@ -1,9 +1,6 @@
-import re
-from numpy import rec
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer
 # from recipe.models import user_ingre
-from users.models import *
 # import recipe.models as models
 # from .models import recipe_data, user_ingre
 
@@ -33,7 +30,7 @@ def recommend_recipe(user_model, recipe_model):
     tfidf_vect_simple = TfidfVectorizer()
     feature_vect_simple = tfidf_vect_simple.fit_transform(recipe_igds)
     
-    similarity_simple_pair = cosine_similarity(feature_vect_simple[len(recipe_igds)-1] , feature_vect_simple)
+    # similarity_simple_pair = cosine_similarity(feature_vect_simple[len(recipe_igds)-1] , feature_vect_simple)
     # 딕셔너리로 만들어서 관리 / 매트릭스 만들어서 유사도 비교
     title_to_index = dict(zip(recipe_ids,recipe_names))
     
