@@ -53,7 +53,7 @@ body {
     margin-bottom: 10px;
     border:0;
     outline:0;
-    background-color: #ffffff;
+    background-color: transparent;
     cursor: pointer;
 }
 .in {
@@ -127,7 +127,8 @@ img {
 }
 
 .bg-light {
-    background-color: white !important;
+    /* background-color: white !important; */
+    background: url("bar9.jpg") no-repeat center;  
 }
 
 .fixed-top {
@@ -198,7 +199,7 @@ img {
     width: 38%;
     text-align: center;
     position: relative;
-    left: 55px;
+    left: 64px;
     border-radius: 10px;
     outline: none;
     font-weight: bold;
@@ -227,8 +228,9 @@ img {
     left : 80px;
     border-radius: 20px;
     width: 150px;
-    background-color: rgba(255, 252, 236, 0.3);
-    
+    /* background-color: rgba(255, 252, 236, 0.3); */
+    background-color: #fbe3bf;
+    box-shadow: 2px 2px 4px #fdc36d;
 }
 
 
@@ -453,6 +455,7 @@ ul#ingredient_list li {
 .title {
     color: #F9FAFD !important;
     text-shadow: 1px 1px 1px #000000;
+    font-size: 30px;
 }
 
 .subtitle {
@@ -460,6 +463,7 @@ ul#ingredient_list li {
     font-weight: bold;
     text-shadow: 3px 3px 5px #f0b66b;
     margin: 53px;
+    font-size: 24px;
 }
 
 ul#ingredient_list li {
@@ -497,8 +501,12 @@ ul.slider li {
     .navbar_menu li {
         font-size: 25px ;
         font-weight: bold;
-        width: 100%;
+        width: 49%;
         text-align: center;
+        margin:3px;
+        background-color: #fbe3bf;
+        border-radius: 15px;
+        box-shadow: 2px 2px 4px #fdc36d;
     }
     .navbar_right {
         display: none;
@@ -511,8 +519,16 @@ ul.slider li {
     } */
     .my_info {
         text-align: center;
-        font-size: 23px;
+        font-size: 30px;
+        position: relative;
+        left: 81px;
         font-weight: bold;
+        border-radius: 15px;
+        background-color: #fbe3bf;
+        color:#000000;
+        width: 48%;
+        box-shadow: 2px 2px 4px #fdc36d;
+
     }
     /* .add_feed {
         display:none;
@@ -947,7 +963,7 @@ button {
   font-size: 1em;
   position: relative;
   top: -2px;
-  left:55px;
+  left:62px;
   padding: 5.2px;
   -webkit-appearance: none;
   appearance: none;
@@ -1446,3 +1462,19 @@ button {
       }
   }
   
+
+
+  .logo{
+      width: 75px;
+      height: 75px;
+      
+  }
+ 
+  .logo-img{
+      width: 50px;
+      height: 3px;
+      position: relative;
+      top:-53px;
+      left: -22px;
+
+  }
