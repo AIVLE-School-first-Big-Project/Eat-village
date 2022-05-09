@@ -11,7 +11,7 @@
 
     <!-- custom CSS -->
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style-ccreate.css' %}?after">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style-ccreate.css' %}? after">
 
     <!-- Font -->
     <link rel="stylesheet" type="text/css"
@@ -35,6 +35,11 @@
     {% endfor %}
 <br>
 <body>
+<style>
+    body{
+        background-color : black;
+    }
+</style>
 <div class="container">
     <a href="{% url 'communityboard:communityboard_index' %}"><i class="fa-solid fa-arrow-left fa-2x"></i></a>
 </div>
