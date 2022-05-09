@@ -7,7 +7,7 @@ import errno
 import numpy as np
 import random
 import os.path as osp
-import warnings
+# import warnings
 import PIL
 import torch
 from PIL import Image
@@ -38,7 +38,7 @@ def check_isfile(fpath):
     Returns:
        bool
     """
-    isfile = osp.isfile(fpath)
+    # isfile = osp.isfile(fpath)
     # if not isfile:
     #     warnings.warn('No file found at "{}"'.format(fpath))
     # return isfile

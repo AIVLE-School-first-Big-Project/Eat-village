@@ -76,7 +76,7 @@ __trained_urls = {
     'osnet_x0_25_msmt17':
     'https://drive.google.com/uc?id=1sSwXSUlj4_tHZequ_iZ8w_Jh0VaRQMqF',
 
-    ####### market1501 models ##################################################
+    # market1501 models ##################################################
     'resnet50_MSMT17':
     'https://drive.google.com/uc?id=1yiBteqgIZoOeywE8AhGmEQl7FTVwrQmf',
     'osnet_x1_0_MSMT17':
