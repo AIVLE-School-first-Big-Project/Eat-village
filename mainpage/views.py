@@ -8,7 +8,6 @@ import json
 from django.db.models import Q
 import random
 from django.http import StreamingHttpResponse
-import yolov5
 import torch
 from yolov5.utils.general import xyxy2xywh
 from yolov5.utils.torch_utils import select_device
@@ -152,10 +151,34 @@ def recipe_search(request):
                }
 
     return render(request, 'mainpage/recipe_search.html', context)
-
+ingre_dic = {
+    '0':"당근",
+    '1':"오이",
+    '2':"달걀",
+    '3':"마늘",
+    '4':"우유",
+    '5':"양파",
+    '6':"고추",
+    '7':"피망",
+    '8':"감자",
+    '9':"대파",
+}
 @login_required
 def ingred_result(request): # 여기가 추가 데이터 처리하는 페이지
-    global user_ingre
+    global user_ingre, ingre_dic
+    dir_path = "yolov5\\runs\\detect\\exp\\labels"
+    for (root, directories, files) in os.walk(dir_path):
+        print("경로")
+        for file in files:
+            file_path = os.path.join(root, file)
+            print("경로",file_path)
+            f = open(file_path, 'r')
+            tmp = f.read().split()
+            print("file", tmp)
+            user_ingre.append(tmp[0])
+    user_ingre = list(set(user_ingre))
+    user_ingre = [ingre_dic[x] for x in user_ingre]
+    print("확인",user_ingre)
     # 당근,사과,오이,양파
 
     
@@ -188,8 +211,14 @@ import cv2
 
 print(torch.cuda.is_available())
 #load model
-model = yolov5.load('yolov5s.pt')
-# model = torch.hub.load('ultralytics/yolov5', 'yolov5s')
+#model = yolov5.load('64_100.pt')
+#path = '/some/local/path/pytorch/vision'
+path_hubconfig  = "C:\django\Eat-village\yolov5"
+path_weightfile  = "C:\django\Eat-village\\64_100.pt"
+#model = torch.hub.load(path, 'resnet50', pretrained=True)
+# model = torch.hub.load(path, '64_100', pretrained=False, source='local')
+model = torch.hub.load(path_hubconfig, 'custom',
+                        path=path_weightfile, source='local')
 device = select_device('') # 0 for gpu, '' for cpu
 # initialize deepsort
 cfg = get_config()
@@ -203,64 +232,21 @@ deepsort = DeepSort('osnet_x0_25',
 # Get names and colors
 names = model.module.names if hasattr(model, 'module') else model.names
 
+cl = 0
+conf = 0
+import os
 def stream():   
     global user_ingre
     print("시작") 
-    cap = cv2.VideoCapture('media/test.webm')
-    # cap = cv2.VideoCapture(1)
-    # model.conf = 0.65
-    # model.iou = 0.5
-    # model.classes = [1,2,3,4,6,7,8,10,11]
-    print("영상 로드")
-    
-       
-    while True:
-        ret, frame = cap.read()
-        if not ret:
-            print("Error: failed to capture image")
-            break
-        
-        results = model(frame, augment=True)
-        # proccess
-        annotator = Annotator(frame, line_width=2, pil=not ascii) 
-        det = results.pred[0]
 
-        if det is not None and len(det):   
-            xywhs = xyxy2xywh(det[:, 0:4])
-            confs = det[:, 4]
-            clss = det[:, 5]
-            outputs = deepsort.update(xywhs.cpu(), confs.cpu(), clss.cpu(), frame)
-            if len(outputs) > 0:
-                for j, (output, conf) in enumerate(zip(outputs, confs)):
-
-                    bboxes = output[0:4]
-                    id = output[4]
-                    cls = output[5]
-
-                    c = int(cls)  # integer class
-                    label = f'{id} {names[c]} {conf:.2f}'
-                    annotator.box_label(bboxes, label, color=colors(c, True))
-                    # print(c,label) # set 형식으로 받아야한다. 그래야 중복데이터가 안들어 오기 때문이다.
-                    
-                    label = label.split(' ')
-                    # print(label[1])
-                    user_ingre.append(label[1]) # user_ingre 데이터에 인식된 값을 추가한다. 이걸로 추천시스템 구현
-                    
-                    user_ingre = list(set(user_ingre))
-                    print(user_ingre)
-        else:
-            deepsort.increment_ages()
-
-        # print(det)
-        im0 = annotator.result()    
-        image_bytes = cv2.imencode('.jpg', im0)[1].tobytes()
-        yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + image_bytes + b'\r\n')
-
+    os.popen("python C:\django\Eat-village\yolov5\detect.py --weights l_64_50_best.pt --data data.yaml --source C:\django\Eat-village\media\\test.mp4 --conf-thres 0.7 --save-txt --save-conf")
+    return 0
 
 @login_required    
 def video_feed(request):
-    return StreamingHttpResponse(stream(), content_type='multipart/x-mixed-replace; boundary=frame')
+    flag = stream()
+    print(flag)
+
 
 @login_required
 # 레시피 상세페이지

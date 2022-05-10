@@ -1,0 +1,5 @@
+train: ../train/images
+val: ../valid/images
+
+nc: 10
+names: ['carrot', 'cucumber', 'egg', 'garlic', 'milk', 'onion', 'pepper', 'piment', 'potato', 'spring_onion']

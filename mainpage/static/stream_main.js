@@ -5,7 +5,8 @@
 let mediaRecorder;
 let recordedBlobs;
 
-const codecPreferences = 'video/webm;codecs=vp9,opus';
+//const codecPreferences = 'video/webm;codecs=vp9,opus';
+const codecPreferences ='video/webm;codecs=h264'
 const errorMsgElement = document.querySelector('span#errorMsg');
 const recordButton = document.querySelector('button#record');
 
