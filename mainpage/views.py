@@ -238,7 +238,7 @@ import os
 def stream():   
     print("시작") 
 
-    os.popen("python C:\django\Eat-village\yolov5\detect.py --weights l_64_50_best.pt --data data.yaml --source C:\django\Eat-village\media\\test.mp4 --conf-thres 0.7 --save-txt --save-conf")
+    os.popen("python C:\django\Eat-village\yolov5\detect.py --weights l_64_50_best.pt --data data.yaml --source C:\django\Eat-village\media\\video.mp4 --conf-thres 0.7 --save-txt --save-conf")
     return 0
 
 @login_required    
