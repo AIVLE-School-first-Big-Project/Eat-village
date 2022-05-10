@@ -152,9 +152,34 @@ def recipe_search(request):
 
     return render(request, 'mainpage/recipe_search.html', context)
 
+ingre_dict = {
+    '0':"당근",
+    '1':"오이",
+    '2':"달걀",
+    '3':"마늘",
+    '4':"우유",
+    '5':"양파",
+    '6':"고추",
+    '7':"피망",
+    '8':"감자",
+    '9':"대파",
+}
 @login_required
 def ingred_result(request): # 여기가 추가 데이터 처리하는 페이지
-    global user_ingre, ingre_dic
+    global user_ingre, ingre_dict
+    dir_path = "yolov5\\runs\\detect\\exp\\labels"
+    for (root, directories, files) in os.walk(dir_path):
+        print("경로")
+        for file in files:
+            file_path = os.path.join(root, file)
+            print("경로",file_path)
+            f = open(file_path, 'r')
+            tmp = f.read().split()
+            print("file", tmp)
+            user_ingre.append(tmp[0])
+    user_ingre = list(set(user_ingre))
+    user_ingre = [ingre_dict[x] for x in user_ingre]
+    print("확인",user_ingre)
     
     # 당근,사과,오이,양파
 
