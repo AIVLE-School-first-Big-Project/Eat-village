@@ -108,7 +108,9 @@
             </div>
 
             <div class="cam_area">
+                <div style="width:100%;height:619px;">
                     <video id="gum" poster="" playsinline autoplay muted></video>
+                </div>
             </div> 
             <!-- <div id="button">
                 <button id="btn1" onclick="cameraAccess();">카메라 켜기/끄기</button>
@@ -295,13 +297,13 @@
     <script>
 
         /* 카메라 On & Off*/
-        //function cameraAccess() {
-        //    if (document.getElementById('video').src == "http://127.0.0.1:8000/mainpage/video_feed") {
-        //        document.getElementById('video').src = "";
-        //    } else {
-        //        document.getElementById('video').src = "http://127.0.0.1:8000/mainpage/video_feed";
-        //    }
-        //}
+        function cameraAccess() {
+           if (document.getElementById('video').src == "http://127.0.0.1:8000/mainpage/video_feed") {
+               document.getElementById('video').src = "";
+           } else {
+               document.getElementById('video').src = "http://127.0.0.1:8000/mainpage/video_feed";
+           }
+        }
 
 
 

@@ -28,17 +28,8 @@
   function next() {
     location.href = '{% url "mainpage:ingredient_result" %}';
   }
-  setTimeout(next, 310000);
+  setTimeout(next, 30000);
 
-  {% comment %} function analyze(params) {
-    const input = document.createElement("iframe");
-    input.id = "video_";
-    input.src = "{% url 'mainpage:video_feed' %}";
-    input.style = "display: none;";
-    const body = document.getElementsByTagName("body");
-    body.append(input);
-  }
-  setTimeout(analyze, 5000); {% endcomment %}
   
 </script>
 </body>
