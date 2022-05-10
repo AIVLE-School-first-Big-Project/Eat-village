@@ -1,3 +1,4 @@
+from http.server import executable
 from django.http import StreamingHttpResponse
 from django.shortcuts import render
 import yolov5
@@ -12,6 +13,8 @@ from django.core.files.storage import FileSystemStorage
 import os
 from django.conf import settings 
 from .forms import UploadFileForm
+import ffmpeg
+import sys
 
 def index(request):
     print(request)
@@ -26,6 +29,11 @@ def index(request):
         
         filename = fs.save("test.webm", file)
         print("저장 확인: ", filename)
+
+        # ffmpeg "-i media\test.webm -c copy -strict -2 media\video.mp4"
+        # os.system("ffmpeg -i test.webm output.mp3") 
+        sys("sudo ffmpeg -i media\test.webm -c copy -strict -2 media\output.mp4")
+        # os.system("ffmpeg -i media\test.webm -c -copy \123123.mp4")
         # video_stream = request.FILES["data"]
         
         # with open('file.webm', 'wb') as f_vid:
