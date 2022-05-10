@@ -22,13 +22,23 @@
 <div class="loading wave">
   분석중...
 </div>
-<iframe id="video_" src="{% url 'mainpage:video_feed' %}" style="display: none;"></iframe>
+<!-- <iframe id="video_" src="{% url 'mainpage:video_feed' %}" style="display: none;"></iframe> -->
 <!-- partial -->
 <script>
   function next() {
     location.href = '{% url "mainpage:ingredient_result" %}';
   }
-  setTimeout(next, 300000);
+  setTimeout(next, 310000);
+
+  {% comment %} function analyze(params) {
+    const input = document.createElement("iframe");
+    input.id = "video_";
+    input.src = "{% url 'mainpage:video_feed' %}";
+    input.style = "display: none;";
+    const body = document.getElementsByTagName("body");
+    body.append(input);
+  }
+  setTimeout(analyze, 30000); {% endcomment %}
   
 </script>
 </body>
