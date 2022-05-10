@@ -25,11 +25,12 @@ def index(request):
         print(request.FILES["data"].size)
         file = request.FILES["data"]
         fs = FileSystemStorage()
-        if fs.exists('test.webm'):
-            os.remove(os.path.join(settings.MEDIA_ROOT, 'test.webm'))
+        # if fs.exists('test.webm'):
+        #     os.remove(os.path.join(settings.MEDIA_ROOT, 'test.webm'))
         
         filename = fs.save("test.webm", file)
         print("저장 확인: ", filename)
+        os.system("ffmpeg -i ./media/test.webm ./media/video.mp4")
         # ffmpeg -i input.mkv -codec copy output.mp4
         #os.system("ffmpeg -i /media/test.webm /video.mp4")
         # os.system("ffmpeg -i input.mp4 output.mp3") 

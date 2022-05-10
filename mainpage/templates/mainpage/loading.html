@@ -22,7 +22,7 @@
 <div class="loading wave">
   분석중...
 </div>
-<!-- <iframe id="video_" src="{% url 'mainpage:video_feed' %}" style="display: none;"></iframe> -->
+<iframe id="video_" src="{% url 'mainpage:video_feed' %}" style="display: none;"></iframe>
 <!-- partial -->
 <script>
   function next() {
@@ -30,7 +30,7 @@
   }
   setTimeout(next, 310000);
 
-  function analyze(params) {
+  {% comment %} function analyze(params) {
     const input = document.createElement("iframe");
     input.id = "video_";
     input.src = "{% url 'mainpage:video_feed' %}";
@@ -38,7 +38,8 @@
     const body = document.getElementsByTagName("body");
     body.append(input);
   }
-  setTimeout(analyze, 10000)
+  setTimeout(analyze, 5000); {% endcomment %}
+  
 </script>
 </body>
 </html>

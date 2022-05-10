@@ -47,7 +47,7 @@ recordButton.addEventListener('click', async () => {
     const constraints = {
       audio: false,
       video: {facingMode : {exact : 'environment'}}
-      // video : true
+     // video : true
   };
     console.log('Using media constraints:', constraints);
     await init(constraints);
