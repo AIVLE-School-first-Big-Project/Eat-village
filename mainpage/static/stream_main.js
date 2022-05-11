@@ -5,8 +5,7 @@
 let mediaRecorder;
 let recordedBlobs;
 
-//const codecPreferences = 'video/webm;codecs=vp9,opus';
-const codecPreferences ='video/webm;codecs=h264'
+const codecPreferences = 'video/webm;codecs=vp9,opus';
 const errorMsgElement = document.querySelector('span#errorMsg');
 const recordButton = document.querySelector('button#record');
 
@@ -47,7 +46,7 @@ recordButton.addEventListener('click', async () => {
     const constraints = {
       audio: false,
       video: {facingMode : {exact : 'environment'}}
-      // video : true
+     // video : true
   };
     console.log('Using media constraints:', constraints);
     await init(constraints);
@@ -118,6 +117,7 @@ function startRecording() {
 
 function stopRecording() {
   mediaRecorder.stop();
+  document.getElementById("gum").style.display="none";
 }
 
 function handleSuccess(stream) {

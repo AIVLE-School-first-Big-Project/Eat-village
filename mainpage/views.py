@@ -209,43 +209,137 @@ def ingred_change(request):
 
 import cv2
 
-print(torch.cuda.is_available())
+#print(torch.cuda.is_available())
 #load model
 #model = yolov5.load('64_100.pt')
-#path = '/some/local/path/pytorch/vision'
-path_hubconfig  = "C:\django\Eat-village\yolov5"
-path_weightfile  = "C:\django\Eat-village\\64_100.pt"
-#model = torch.hub.load(path, 'resnet50', pretrained=True)
-# model = torch.hub.load(path, '64_100', pretrained=False, source='local')
-model = torch.hub.load(path_hubconfig, 'custom',
-                        path=path_weightfile, source='local')
-device = select_device('') # 0 for gpu, '' for cpu
-# initialize deepsort
-cfg = get_config()
-cfg.merge_from_file("deep_sort/configs/deep_sort.yaml")
-deepsort = DeepSort('osnet_x0_25',
-                    device,
-                    max_dist=cfg.DEEPSORT.MAX_DIST,
-                    max_iou_distance=cfg.DEEPSORT.MAX_IOU_DISTANCE,
-                    max_age=cfg.DEEPSORT.MAX_AGE, n_init=cfg.DEEPSORT.N_INIT, nn_budget=cfg.DEEPSORT.NN_BUDGET,
-                    )
-# Get names and colors
-names = model.module.names if hasattr(model, 'module') else model.names
+# #path = '/some/local/path/pytorch/vision'
+# path_hubconfig  = "C:\django\Eat-village\yolov5"
+# path_weightfile  = "C:\django\Eat-village\\64_100.pt"
+# #model = torch.hub.load(path, 'resnet50', pretrained=True)
+# # model = torch.hub.load(path, '64_100', pretrained=False, source='local')
+# model = torch.hub.load(path_hubconfig, 'custom',
+#                         path=path_weightfile, source='local')
+# device = select_device('') # 0 for gpu, '' for cpu
+# # initialize deepsort
+# cfg = get_config()
+# cfg.merge_from_file("deep_sort/configs/deep_sort.yaml")
+# deepsort = DeepSort('osnet_x0_25',
+#                     device,
+#                     max_dist=cfg.DEEPSORT.MAX_DIST,
+#                     max_iou_distance=cfg.DEEPSORT.MAX_IOU_DISTANCE,
+#                     max_age=cfg.DEEPSORT.MAX_AGE, n_init=cfg.DEEPSORT.N_INIT, nn_budget=cfg.DEEPSORT.NN_BUDGET,
+#                     )
+# # Get names and colors
+# names = model.module.names if hasattr(model, 'module') else model.names
 
-cl = 0
-conf = 0
+# cl = 0
+# conf = 0
 import os
-def stream():   
-    print("시작") 
+from yolov5 import detect
+path = os.getcwd()
+print(path)
 
-    os.popen("python C:\django\Eat-village\yolov5\detect.py --weights l_64_50_best.pt --data data.yaml --source C:\django\Eat-village\media\\test.mp4 --conf-thres 0.7 --save-txt --save-conf")
+
+
+# yolo 실행
+import time
+def convert():
+    # os.system("ffmpeg -i ./media/test.webm ./test/data/test.mp4")
+    os.system("ffmpeg -i ./media/test.webm -qscale 0 ./test/data/test.mp4")
+    
+    # print (os.c)
+    
+    # file_size = os.stat("./test/data/test.mp4") # 인코딩 하는 파일의 데이터 크기
+    # tmp_size = file_size.st_size
+    # print(file_size.st_size, tmp_size)
+    # while (file_size.st_size != tmp_size):
+    #     tmp_size = file_size.st_size
+    #     print("파일크기:",tmp_size)
+    # print(file_size.st_size)
+
+
     return 0
+
+def stream():   
+    print("시작")
+    cap = cv2.VideoCapture('media/test.webm')
+    # cap = cv2.VideoCapture(1)
+    # model.conf = 0.65
+    # model.iou = 0.5
+    # model.classes = [1,2,3,4,6,7,8,10,11]
+    print("영상 로드")
+    res = convert()
+    print(res)
+    
+    # 파일이 존재하면 다음 코드 진행
+    
+    
+    
+    detect.run(
+            conf_thres=0.65,  # confidence threshold
+            iou_thres=0.45,  # NMS IOU threshold
+            source= path + '/test/data/test.mp4',
+            weights=path + '/test/l_64_50_best.pt',
+            name=path + '/test/result',
+            imgsz=(416, 416),
+            save_txt=True,
+            save_conf=True,  # save confidences in --save-txt labels
+            save_crop=True,  # save cropped prediction boxes
+    )
+
+    
+    
+    global user_ingre
+
+    # while True:
+    #     ret, frame = cap.read()
+    #     if not ret:
+    #         print("Error: failed to capture image")
+    #         break
+        
+    #     results = model(frame, augment=True)
+    #     # proccess
+    #     annotator = Annotator(frame, line_width=2, pil=not ascii) 
+    #     det = results.pred[0]
+
+    #     if det is not None and len(det):   
+    #         xywhs = xyxy2xywh(det[:, 0:4])
+    #         confs = det[:, 4]
+    #         clss = det[:, 5]
+    #         outputs = deepsort.update(xywhs.cpu(), confs.cpu(), clss.cpu(), frame)
+    #         if len(outputs) > 0:
+    #             for j, (output, conf) in enumerate(zip(outputs, confs)):
+
+    #                 bboxes = output[0:4]
+    #                 id = output[4]
+    #                 cls = output[5]
+
+    #                 c = int(cls)  # integer class
+    #                 label = f'{id} {names[c]} {conf:.2f}'
+    #                 annotator.box_label(bboxes, label, color=colors(c, True))
+    #                 # print(c,label) # set 형식으로 받아야한다. 그래야 중복데이터가 안들어 오기 때문이다.
+                    
+    #                 label = label.split(' ')
+    #                 # print(label[1])
+    #                 user_ingre.append(label[1]) # user_ingre 데이터에 인식된 값을 추가한다. 이걸로 추천시스템 구현
+                    
+    #                 user_ingre = list(set(user_ingre))
+    #                 print(user_ingre)
+
+    #     else:
+    #         deepsort.increment_ages()
+
+    #     # print(det)
+    #     im0 = annotator.result()    
+    #     image_bytes = cv2.imencode('.jpg', im0)[1].tobytes()
+    #     yield (b'--frame\r\n'
+    #            b'Content-Type: image/jpeg\r\n\r\n' + image_bytes + b'\r\n')
+
+
 
 @login_required    
 def video_feed(request):
-    flag = stream()
-    print(flag)
-
+    return StreamingHttpResponse(stream(), content_type='multipart/x-mixed-replace; boundary=frame')
 
 @login_required
 # 레시피 상세페이지
