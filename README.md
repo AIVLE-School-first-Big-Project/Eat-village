@@ -1,5 +1,5 @@
 <div align="center">
- <div style='text-align:center; font-size: 40px'>Eat-village</div>
+ <div style='text-align:center; font-size: 60px'>Eat-village</div>
  </p>
  <p align="center">
   <b>수도권 4반 2조(9조) : 우리는 모두 친9조</b>
@@ -65,7 +65,9 @@
 ![ngrok2](https://user-images.githubusercontent.com/58163606/167327178-dab13f4a-c39a-43f0-923c-a23bbc1c91b0.png)
 - 장고 서버 실행
 - 모바일에서 접속주소로 접속하면 로그인 페이지로 접속됨
-## 8. 실행 방법
+## 8. FFmpeg 설치
+- webm를 mp4로 변환하는 과정이 필요
+## 9. 실행 방법
 ``` bash
 1. git clone https://github.com/AIVLE-School-first-Big-Project/Eat-village.git
 2. cd Eat-village
@@ -75,7 +77,7 @@
   (localhost나 127.0.0.1로 서버 돌리면 타 기기에서 접근 안 됨, DEBUG 가 False이므로 settings- allowed host에 본인 ip 추가)
 6. Connect http://[본인외부ip]:8000
 ```
-## 9. 팀원 정보
+## 10. 팀원 정보
 | Name | Github | Email |
 |:---:|:---:|:---:|
 |안지희|[@Jinnny-An](https://github.com/Jinnny-An)|syos7462@gamail.com|
