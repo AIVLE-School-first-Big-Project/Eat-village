@@ -16,7 +16,18 @@ from deep_sort.deep_sort import DeepSort
 from deep_sort.utils.parser import get_config
 
 user_ingre = []
-
+ingre_dict = {
+    '0':"당근",
+    '1':"오이",
+    '2':"달걀",
+    '3':"마늘",
+    '4':"우유",
+    '5':"양파",
+    '6':"고추",
+    '7':"피망",
+    '8':"감자",
+    '9':"대파",
+}
 @login_required
 def main(request):
     # 북마크 알림 - 지희
@@ -152,22 +163,13 @@ def recipe_search(request):
 
     return render(request, 'mainpage/recipe_search.html', context)
 
-ingre_dict = {
-    '0':"당근",
-    '1':"오이",
-    '2':"달걀",
-    '3':"마늘",
-    '4':"우유",
-    '5':"양파",
-    '6':"고추",
-    '7':"피망",
-    '8':"감자",
-    '9':"대파",
-}
+
 @login_required
+
 def ingred_result(request): # 여기가 추가 데이터 처리하는 페이지
     global user_ingre, ingre_dict
-    dir_path = "yolov5\\runs\\detect\\exp\\labels"
+    dir_path = "./test/result2/labels"
+    # dir_path = "yolov5\\runs\\detect\\exp\\labels"
     for (root, directories, files) in os.walk(dir_path):
         print("경로")
         for file in files:
@@ -196,12 +198,9 @@ def ingred_result(request): # 여기가 추가 데이터 처리하는 페이지
     
     user_ingre_str = ', '.join(user_ingre)
         
-    # re_data = recipe_data.objects.all()
-    # recommend_data = recommend_ml.recommend_recipe(user_data,recipe_data)
     
     return render(request,'mainpage/ingredients_result.html',{'user_data' : user_ingre_str, 'test' : tmp})
-    # return render(request,'mainpage/ingredients_result.html',{'user_data' : user_data,'recommend' : recommend_data,})
-    # return render(request, 'mainpage/ingredients_result.html')
+
 
 @login_required
 def ingred_change(request):
@@ -211,31 +210,6 @@ def ingred_change(request):
 
 import cv2
 
-#print(torch.cuda.is_available())
-#load model
-#model = yolov5.load('64_100.pt')
-# #path = '/some/local/path/pytorch/vision'
-# path_hubconfig  = "C:\django\Eat-village\yolov5"
-# path_weightfile  = "C:\django\Eat-village\\64_100.pt"
-# #model = torch.hub.load(path, 'resnet50', pretrained=True)
-# # model = torch.hub.load(path, '64_100', pretrained=False, source='local')
-# model = torch.hub.load(path_hubconfig, 'custom',
-#                         path=path_weightfile, source='local')
-# device = select_device('') # 0 for gpu, '' for cpu
-# # initialize deepsort
-# cfg = get_config()
-# cfg.merge_from_file("deep_sort/configs/deep_sort.yaml")
-# deepsort = DeepSort('osnet_x0_25',
-#                     device,
-#                     max_dist=cfg.DEEPSORT.MAX_DIST,
-#                     max_iou_distance=cfg.DEEPSORT.MAX_IOU_DISTANCE,
-#                     max_age=cfg.DEEPSORT.MAX_AGE, n_init=cfg.DEEPSORT.N_INIT, nn_budget=cfg.DEEPSORT.NN_BUDGET,
-#                     )
-# # Get names and colors
-# names = model.module.names if hasattr(model, 'module') else model.names
-
-# cl = 0
-# conf = 0
 import os
 from yolov5 import detect
 path = os.getcwd()
@@ -248,23 +222,12 @@ import time
 def convert():
     # os.system("ffmpeg -i ./media/test.webm ./test/data/test.mp4")
     os.system("ffmpeg -i ./media/test.webm -qscale 0 ./test/data/test.mp4")
-    
-    # print (os.c)
-    
-    # file_size = os.stat("./test/data/test.mp4") # 인코딩 하는 파일의 데이터 크기
-    # tmp_size = file_size.st_size
-    # print(file_size.st_size, tmp_size)
-    # while (file_size.st_size != tmp_size):
-    #     tmp_size = file_size.st_size
-    #     print("파일크기:",tmp_size)
-    # print(file_size.st_size)
-
 
     return 0
 
 def stream():   
     print("시작")
-    cap = cv2.VideoCapture('media/test.webm')
+    # cap = cv2.VideoCapture('media/test.webm')
     # cap = cv2.VideoCapture(1)
     # model.conf = 0.65
     # model.iou = 0.5
@@ -278,11 +241,13 @@ def stream():
     
     
     detect.run(
-            conf_thres=0.65,  # confidence threshold
+            classes=[0,1,2,3,4,5,6,7,8],
+            conf_thres=0.8,  # confidence threshold
             iou_thres=0.45,  # NMS IOU threshold
             source= path + '/test/data/test.mp4',
-            weights=path + '/test/l_64_50_best.pt',
+            weights=path + '/test/l_16_50_best.pt',
             name=path + '/test/result',
+            nosave=False,  # do not save images/videos
             imgsz=(416, 416),
             save_txt=True,
             save_conf=True,  # save confidences in --save-txt labels
@@ -291,52 +256,7 @@ def stream():
 
     
     
-    global user_ingre
-
-    # while True:
-    #     ret, frame = cap.read()
-    #     if not ret:
-    #         print("Error: failed to capture image")
-    #         break
-        
-    #     results = model(frame, augment=True)
-    #     # proccess
-    #     annotator = Annotator(frame, line_width=2, pil=not ascii) 
-    #     det = results.pred[0]
-
-    #     if det is not None and len(det):   
-    #         xywhs = xyxy2xywh(det[:, 0:4])
-    #         confs = det[:, 4]
-    #         clss = det[:, 5]
-    #         outputs = deepsort.update(xywhs.cpu(), confs.cpu(), clss.cpu(), frame)
-    #         if len(outputs) > 0:
-    #             for j, (output, conf) in enumerate(zip(outputs, confs)):
-
-    #                 bboxes = output[0:4]
-    #                 id = output[4]
-    #                 cls = output[5]
-
-    #                 c = int(cls)  # integer class
-    #                 label = f'{id} {names[c]} {conf:.2f}'
-    #                 annotator.box_label(bboxes, label, color=colors(c, True))
-    #                 # print(c,label) # set 형식으로 받아야한다. 그래야 중복데이터가 안들어 오기 때문이다.
-                    
-    #                 label = label.split(' ')
-    #                 # print(label[1])
-    #                 user_ingre.append(label[1]) # user_ingre 데이터에 인식된 값을 추가한다. 이걸로 추천시스템 구현
-                    
-    #                 user_ingre = list(set(user_ingre))
-    #                 print(user_ingre)
-
-    #     else:
-    #         deepsort.increment_ages()
-
-    #     # print(det)
-    #     im0 = annotator.result()    
-    #     image_bytes = cv2.imencode('.jpg', im0)[1].tobytes()
-    #     yield (b'--frame\r\n'
-    #            b'Content-Type: image/jpeg\r\n\r\n' + image_bytes + b'\r\n')
-
+    # global user_ingre
 
 
 @login_required    
