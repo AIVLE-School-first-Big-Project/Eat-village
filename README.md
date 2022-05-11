@@ -1,5 +1,5 @@
 <div align="center">
- <div style='text-align:center; font-size: 60px'>Eat-village</div>
+ <h1>Eat-village</h1>
  </p>
  <p align="center">
   <b>수도권 4반 2조(9조) : 우리는 모두 친9조</b>
